@@ -1,0 +1,56 @@
+.adapt(@columns, @width) {
+  @media (min-width: (@columns * 2.5em)) {
+    section > * { width: (@width / @columns) * 100%; }
+  }
+}
+
+.adapt(9, 8.75);
+.adapt(10, 9.5);
+.adapt(11, 10.25);
+.adapt(12, 11);
+.adapt(13, 11.75);
+.adapt(14, 12.5);
+.adapt(15, 13.25);
+
+.adapt(16, 14);
+
+.adapt(17, 14.5);
+.adapt(18, 15);
+.adapt(19, 15.5);
+.adapt(20, 16);
+.adapt(21, 16.5);
+.adapt(22, 17);
+.adapt(23, 17.5);
+.adapt(24, 18);
+.adapt(25, 18.5);
+.adapt(26, 19);
+.adapt(27, 19.5);
+
+.adapt(28, 20);
+
+/*
+.adapt(9, 8.5);
+.adapt(10, 9);
+.adapt(11, 9.5);
+.adapt(12, 10);
+.adapt(13, 10.5);
+.adapt(14, 11);
+.adapt(15, 11.5);
+.adapt(16, 12);
+.adapt(17, 12.5);
+.adapt(18, 13);
+.adapt(19, 13.5);
+.adapt(20, 14);
+.adapt(21, 14.5);
+.adapt(22, 15);
+.adapt(23, 15.5);
+.adapt(24, 16);
+.adapt(25, 16.5);
+.adapt(26, 17);
+.adapt(27, 17.5);
+.adapt(28, 18);
+.adapt(29, 18.5);
+.adapt(30, 19);
+.adapt(31, 19.5);
+.adapt(32, 20);
+*/
