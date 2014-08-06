@@ -1,0 +1,23 @@
+section
+  .heading
+    h1
+      | Create Your Free Account!
+  .content(ng-controller="CreateUser")
+    form(name="form")
+      .error(ng-show="error")!="{{error}}"
+      .field
+        label
+          | Email Address
+        br
+        input(type="email", ng-model="user.email", ng-required="true")
+      .field
+        label
+          | Create Password
+        br
+        input(type="password", ng-model="user.password", ng-required="true")
+      .field
+        button(ng-click="createUser(user.email, user.password)", ng-disabled="form.$invalid")!="Create My Account"
+
+    .tac
+      .ib.tal.p1em.w100.mxw20em
+        button.w100(ui-sref="login({ b: $stateParams.b })")!="Login to your Account"

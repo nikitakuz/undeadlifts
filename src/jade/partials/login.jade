@@ -1,0 +1,19 @@
+.content
+  .tac
+    form.ib.tal.p1em.bcw.w100.mxw20em(name="form")
+      .error(ng-show="error")!="{{error}}"
+      .field
+        label
+          | Email Address
+        br
+        input.w100(type="email", ng-model="email", ng-required="true")
+      .field
+        label
+          | Password
+        br
+        input.w100(type="password", ng-model="password", ng-required="true")
+      .field
+        button(ng-click="login()", ng-disabled="form.$invalid")!="Sign In"
+  .tac
+    .ib.tal.p1em.w100.mxw20em
+      button.w100(ui-sref="signup({ b: $stateParams.b })")!="Create a new account!"
