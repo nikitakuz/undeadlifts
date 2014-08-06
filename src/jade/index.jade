@@ -1,7 +1,12 @@
 extends base
 
 block body
-  section
+  nav
+    .left
+      a(ui-sref="index")!="CLEANLIFTS"
+    .right
+      a(ng-if="user", ng-click="auth.logout()")!="Logout"
+  section(ui-view="")
     .heading
       .tac
         .ib.tal.p1em.w100.mxw20em

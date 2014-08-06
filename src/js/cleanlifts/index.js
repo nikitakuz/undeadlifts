@@ -5,10 +5,7 @@ cleanlifts.config(
         {
           url: '/',
           templateUrl: 'partials/index.html',
-          controller: 'indexController',
-          resolve: {
-            auth: ['auth', function(auth) { return auth; }]
-          }
+          controller: 'indexController'
         }
       );
     }
@@ -16,12 +13,8 @@ cleanlifts.config(
 );
 
 cleanlifts.controller('indexController',
-  [         '$rootScope', '$scope', '$state', 'auth',
-    function($rootScope,   $scope,   $state,   auth) {
-      $scope.auth = auth;
-      if (!auth.user) {
-        $state.transitionTo('login', { b: 'index' }, {location: 'replace'});
-      }
+  [         '$rootScope', '$scope', '$state', '$stateParams', 'auth', 'replaceState',
+    function($rootScope,   $scope,   $state,   $stateParams,   auth,   replaceState) {
     }
   ]
 );

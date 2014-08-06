@@ -16,10 +16,11 @@ cleanlifts.config(
 );
 
 cleanlifts.controller('LoginController',
-  [         '$scope', '$state', '$stateParams', 'logger', 'auth',
-    function($scope,   $state,   $stateParams,   logger,   auth) {
+  [         '$rootScope', '$scope', '$state', '$stateParams', 'replaceState', 'logger', 'auth',
+    function($rootScope,   $scope,   $state,   $stateParams,   replaceState,   logger,   auth) {
       $scope.auth = auth;
-      if (auth.user) {
+
+      if ($rootScope.user) {
         replaceState($stateParams.b || 'index');
       }
 
@@ -31,10 +32,6 @@ cleanlifts.controller('LoginController',
       $scope.$on('auth.login', function() {
         replaceState($stateParams.b || 'index');
       });
-
-      function replaceState(state) {
-        $state.transitionTo($stateParams.b || 'index', {}, {location: 'replace'});
-      }
     }
   ]
 );
