@@ -1,16 +1,34 @@
 var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
 
 (function() {
-  var fb = new Firebase('https://cleanlifts.firebaseio.com');
-  var fbsl = new FirebaseSimpleLogin(fb, function(error, user) {
+  var log = function(msg) { console.log(msg); };
+  var fref = new Firebase('https://cleanlifts.firebaseio.com');
+  cleanlifts.constant('log', log );
+  cleanlifts.constant('fref', fref);
+
+  var fbsl = new FirebaseSimpleLogin(fref, loginCallback);
+
+  function loginCallback(error, user) {
     if (error) {
-      console.log(error);
+      log(error);
     } else if (user) {
-      console.log('User logged in. Bootstrapping application...');
-      cleanlifts.constant('firebase', new Firebase('https://cleanlifts.firebaseio.com'));
-      cleanlifts.constant('user', user);
-      angular.element(document).ready(function() {
-        angular.bootstrap(document, ['cleanlifts']);
+      log('User logged in.');
+      cleanlifts.constant('user_id', user.uid);
+      getUserData(user.uid, function(data) {
+        if (!data) {
+          log('No user data.');
+          setUserData(user, function() {
+            bootstrapApplication();
+          });
+        } else if (user.email !== data.email || user.provider !== data.provider || user.id !== data.provider_id) {
+          log('Data exists but incorrect.');
+          setUserData(user, function() {
+            bootstrapApplication();
+          });
+        } else {
+          log('User data exists and appears to be correct.');
+          bootstrapApplication();
+        }
       });
     } else {
       console.log('No user found. Redirecting to login page...');
@@ -21,14 +39,45 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
         location.href = loginUrl;
       }
     }
-  });
+  }
+
+  function getUserData(uid, callback) {
+    log('Fetching user data...');
+    var userRef = fref.child('users').child(uid);
+    userRef.once('value', function(snapshot) {
+      callback(snapshot.val());
+    });
+  }
+
+  function setUserData(user, callback) {
+    log('Creating user data...');
+    var userRef = fref.child('users').child(user.uid);
+    userRef.set({
+      email: user.email,
+      provider: user.provider,
+      provider_id: user.id
+    }, callback);
+  }
+
+  function bootstrapApplication() {
+    log('Bootstrapping application...');
+    angular.element(document).ready(function() {
+      angular.bootstrap(document, ['cleanlifts']);
+    });
+  }
 
   cleanlifts.constant('logout', function() {
     fbsl.logout();
-  })
+  });
 })();
 
-
+cleanlifts.service('user',
+  [         'fref', 'user_id',
+    function(fref, user_id) {
+      debugger;
+    }
+  ]
+);
 
 cleanlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
@@ -38,9 +87,15 @@ cleanlifts.config(
       $stateProvider.state('user',
         {
           abstract: true,
-          template: '<ui-view/>'
+          template: '<ui-view/>',
+          resolve: {
+            user: ['UserService', function(UserService) {
+              return UserService.getUser();
+            }]
+          }
         }
       );
+
     }
   ]
 );
@@ -55,15 +110,6 @@ cleanlifts.run(
   ]
 );
 
-cleanlifts.service('log',
-  [
-    function() {
-      return function(msg) {
-        console.log(msg);
-      };
-    }
-  ]
-);
 
 cleanlifts.service('replaceState',
   [         '$state',

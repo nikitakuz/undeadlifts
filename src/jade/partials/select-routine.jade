@@ -5,4 +5,4 @@ section
   .content
     ul
       li(ng-repeat="routine in routines")
-        button(ng-click="choose(workout)")!="{{workout.name}}"
+        button(ng-click="selectRoutine(routine)")!="{{routine.name}}"

@@ -1,0 +1,13 @@
+section
+  .heading
+    h1
+      | Work it!
+  .content
+    h2
+      | {{ routine.name }}
+    .routine
+      .exercise(ng-repeat="exercise in routine.exercises")
+        h3
+          | {{ exercise.name }}
+        .set.ib.p1em(ng-repeat="reps in exercise.sets track by $index")
+          | {{ reps }}
