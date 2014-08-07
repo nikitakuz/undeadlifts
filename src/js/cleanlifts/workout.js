@@ -1,7 +1,7 @@
 cleanlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
-      $stateProvider.state('choose-workout',
+      $stateProvider.state('user.choose-workout',
         {
           url: '/choose-workout',
           templateUrl: 'partials/choose-workout.html',
@@ -16,9 +16,9 @@ cleanlifts.config(
 );
 
 cleanlifts.controller('ChooseWorkoutController',
-  [
-    function() {
-      debugger;
+  [         '$scope', 'firebase',
+    function($scope,   firebase) {
+      var workout = firebase.child('workout');
     }
   ]
 );

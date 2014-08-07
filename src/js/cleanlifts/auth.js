@@ -9,15 +9,19 @@ cleanlifts.config(
 cleanlifts.service('auth',
   [         '$q', '$rootScope', '$state', '$stateParams', 'firebase',
     function($q, $rootScope,   $state,   $stateParams,   firebase) {
+      var deferred = $q.defer();
+
+      var user = {};
+
       var fsl = new FirebaseSimpleLogin(firebase, function(error, user) {
         if (error) {
           console.log(error);
         } else {
-          handleUser(user);
+          handleLoginSuccess(user);
         }
       });
 
-      function handleUser(user) {
+      function handleLoginSuccess(user) {
         $rootScope.$apply(function() {
           $rootScope.user = user;
         });
@@ -29,9 +33,11 @@ cleanlifts.service('auth',
             provider_id: user.id
           });
           $rootScope.$broadcast('auth.login');
+          deferred.resolve(user);
         } else {
           console.log('user is logged out');
           $rootScope.$broadcast('auth.logout');
+          deferred.resolve(user);
         }
       }
 
@@ -44,6 +50,9 @@ cleanlifts.service('auth',
         },
         createUser: function(email, password, callback) {
           fsl.createUser(email, password, callback);
+        },
+        getUserPromise: function() {
+          return deferred.promise;
         }
       };
     }

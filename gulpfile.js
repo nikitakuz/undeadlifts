@@ -13,6 +13,9 @@ var paths = {
   less: SRC + 'less/*.less',
   jade: SRC + 'jade/**/*.jade',
   scripts: [SRC + 'js/**/*.js', '!' + SRC + 'js/lib/**/*.js'],
+  app: [SRC + 'js/cleanlifts.js', SRC + 'js/cleanlifts/**/*.js'],
+  login: [SRC + 'js/login.js'],
+  signup: [SRC + 'js/signup.js'],
   lib: SRC + 'js/lib/**/*.js'
 };
 
@@ -34,11 +37,25 @@ gulp.task('lint', function() {
       .pipe(jshint.reporter('default'));
 });
 
-gulp.task('scripts', ['lint'], function() {
-    return gulp.src(paths.scripts)
+gulp.task('app', ['lint'], function() {
+    return gulp.src(paths.app)
       .pipe(concat('cleanlifts.js'))
 //      .pipe(uglify())
       .pipe(gulp.dest(BUILD + 'js'))
+});
+
+gulp.task('login', ['lint'], function() {
+  return gulp.src(paths.login)
+    .pipe(concat('login.js'))
+//      .pipe(uglify())
+    .pipe(gulp.dest(BUILD + 'js'))
+});
+
+gulp.task('signup', ['lint'], function() {
+  return gulp.src(paths.signup)
+    .pipe(concat('signup.js'))
+//      .pipe(uglify())
+    .pipe(gulp.dest(BUILD + 'js'))
 });
 
 gulp.task('lib', function() {
@@ -47,8 +64,10 @@ gulp.task('lib', function() {
     .pipe(gulp.dest(BUILD + 'js/lib'))
 });
 
-gulp.task('watch', ['jade', 'less', 'scripts', 'lib'], function() {
-    gulp.watch('**/*.less', ['less']);
-    gulp.watch(paths.jade, ['jade']);
-    gulp.watch(paths.scripts, ['scripts']);
+gulp.task('watch', ['jade', 'less', 'app', 'login', 'signup', 'lib'], function() {
+  gulp.watch('**/*.less', ['less']);
+  gulp.watch(paths.jade, ['jade']);
+  gulp.watch(paths.app, ['app']);
+  gulp.watch(paths.login, ['login']);
+  gulp.watch(paths.signup, ['signup']);
 });

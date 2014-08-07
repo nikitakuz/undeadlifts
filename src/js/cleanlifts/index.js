@@ -1,11 +1,12 @@
 cleanlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
-      $stateProvider.state('index',
+      $stateProvider.state('user.index',
         {
           url: '/',
           templateUrl: 'partials/index.html',
-          controller: 'indexController'
+          controller: 'indexController',
+          authRequired: true
         }
       );
     }
@@ -13,8 +14,8 @@ cleanlifts.config(
 );
 
 cleanlifts.controller('indexController',
-  [         '$rootScope', '$scope', '$state', '$stateParams', 'auth', 'replaceState',
-    function($rootScope,   $scope,   $state,   $stateParams,   auth,   replaceState) {
+  [         'user',
+    function(user) {
     }
   ]
 );

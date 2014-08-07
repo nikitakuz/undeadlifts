@@ -1,13 +1,13 @@
-html(ng-app="cleanlifts")
+html
   head
     block head
       meta(name="viewport", content="width=device-width, initial-scale=1.0")
       link(rel="stylesheet", type="text/css", href="css/cleanlifts.css")
-      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js")
-      script(src="https://cdn.firebase.com/js/client/1.0.18/firebase.js")
-      script(src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js")
-      script(src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js")
-      script(src="js/lib/angular-ui-router-0.2.10.js")
-      script(src="js/cleanlifts.js")
+      block scripts
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js")
+        script(src="https://cdn.firebase.com/js/client/1.0.18/firebase.js")
+        script(src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js")
+        script(src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js")
+        script(src="js/lib/angular-ui-router-0.2.10.js")
   body
     block body

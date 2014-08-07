@@ -1,11 +1,50 @@
 var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
 
-cleanlifts.constant('firebase', new Firebase('https://cleanlifts.firebaseio.com'));
+(function() {
+  var fb = new Firebase('https://cleanlifts.firebaseio.com');
+  var fbsl = new FirebaseSimpleLogin(fb, function(error, user) {
+    if (error) {
+      console.log(error);
+    } else if (user) {
+      console.log('User logged in. Bootstrapping application...');
+      cleanlifts.constant('firebase', new Firebase('https://cleanlifts.firebaseio.com'));
+      cleanlifts.constant('user', user);
+      angular.element(document).ready(function() {
+        angular.bootstrap(document, ['cleanlifts']);
+      });
+    } else {
+      console.log('No user found. Redirecting to login page...');
+      var loginUrl = 'login.html?b=' + location.pathname + location.hash;
+      if (location.replace) {
+        location.replace(loginUrl);
+      } else {
+        location.href = loginUrl;
+      }
+    }
+  });
+})();
+
+
 
 cleanlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
       $urlRouterProvider.otherwise('/');
+
+      $stateProvider.state('user',
+        {
+          abstract: true,
+          template: '<ui-view/>',
+          resolve: {
+            user: [
+                      'auth',
+              function(auth) {
+                return auth.getUserPromise();
+              }
+            ]
+          }
+        }
+      );
     }
   ]
 );
@@ -16,24 +55,6 @@ cleanlifts.run(
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
       $rootScope.auth = auth;
-
-      $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (!$rootScope.user && toState.name !== 'login' && toState.name !== 'signup') {
-          event.preventDefault();
-        }
-      });
-
-      $rootScope.$on('auth.logout', function() {
-        // Give state a chance to populate.
-        setTimeout(function() {
-          var current = $state.current.name;
-          if (current !== 'login' && current !== 'signup') {
-            $rootScope.$apply(function() {
-              $state.transitionTo('login', { b: current }, { location: 'replace' });
-            });
-          }
-        }, 0)
-      })
     }
   ]
 );
@@ -57,7 +78,7 @@ cleanlifts.service('replaceState',
     function($state) {
       return function(state, params) {
         $state.transitionTo(state, params || {}, {location: 'replace'});
-      }
+      };
     }
   ]
-)
+);
