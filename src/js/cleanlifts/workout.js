@@ -1,24 +1,25 @@
 cleanlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
-      $stateProvider.state('user.choose-workout',
+      $stateProvider.state('user.select-routine',
         {
-          url: '/choose-workout',
-          templateUrl: 'partials/choose-workout.html',
-          controller: 'ChooseWorkoutController',
-          resolve: {
-            auth: ['auth', function(auth) { return auth; }]
-          }
+          url: '/select-routine',
+          templateUrl: 'partials/select-routine.html',
+          controller: 'SelectRoutineController'
         }
       );
     }
   ]
 );
 
-cleanlifts.controller('ChooseWorkoutController',
-  [         '$scope', 'firebase',
-    function($scope,   firebase) {
+cleanlifts.controller('SelectRoutineController',
+  [         '$scope', 'log', 'firebase',
+    function($scope,   log,   firebase) {
+      log('Loading routines...');
       var workout = firebase.child('workout');
+      $scope.routines = [
+        '1', '2', '3'
+      ];
     }
   ]
 );

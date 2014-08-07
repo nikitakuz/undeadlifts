@@ -11,14 +11,14 @@
         location.href = '/';
       }
     } else {
-      console.log('No user found. Bootstrapping signup module...')
+      console.log('No user found. Bootstrapping signup module...');
       angular.element(document).ready(function() {
         angular.bootstrap(document, ['signup']);
       });
     }
   });
 
-  var signup = angular.module('signup', ['firebase'])
+  var signup = angular.module('signup', ['firebase']);
   signup.controller('SignUpController',
     [         '$scope',
       function($scope) {

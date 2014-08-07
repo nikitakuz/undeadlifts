@@ -11,21 +11,21 @@
         location.href = '/';
       }
     } else {
-      console.log('No user found. Bootstrapping login module...')
+      console.log('No user found. Bootstrapping login module...');
       angular.element(document).ready(function() {
         angular.bootstrap(document, ['login']);
       });
     }
   });
 
-  var login = angular.module('login', ['firebase'])
+  var login = angular.module('login', ['firebase']);
   login.controller('LoginController',
     [         '$scope',
       function($scope) {
         $scope.login = function() {
           fbsl.login('password', { email: $scope.email, password: $scope.password, rememberMe: true });
           $scope.password = '';
-        }
+        };
       }
     ]
   );

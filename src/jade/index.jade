@@ -6,9 +6,9 @@ block append scripts
 block body
   nav
     .left
-      a(ui-sref="index")!="CLEANLIFTS"
+      a(ui-sref="index")!="UNDEADLIFTS"
     .right
-      a(ng-if="user", ng-click="auth.logout()")!="Logout"
+      a(ng-if="user", ng-click="logout()")!="Logout"
   section(ui-view="")
     .heading
       .tac

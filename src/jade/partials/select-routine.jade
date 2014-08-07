@@ -1,8 +1,8 @@
 section
   .heading
     h1
-      | Choose a Workout
+      | Select a Routine
   .content
     ul
-      li(ng-repeat="workout in workouts")
+      li(ng-repeat="routine in routines")
         button(ng-click="choose(workout)")!="{{workout.name}}"

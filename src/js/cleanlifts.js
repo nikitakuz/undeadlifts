@@ -22,6 +22,10 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
       }
     }
   });
+
+  cleanlifts.constant('logout', function() {
+    fbsl.logout();
+  })
 })();
 
 
@@ -34,15 +38,7 @@ cleanlifts.config(
       $stateProvider.state('user',
         {
           abstract: true,
-          template: '<ui-view/>',
-          resolve: {
-            user: [
-                      'auth',
-              function(auth) {
-                return auth.getUserPromise();
-              }
-            ]
-          }
+          template: '<ui-view/>'
         }
       );
     }
@@ -50,24 +46,20 @@ cleanlifts.config(
 );
 
 cleanlifts.run(
-  [         '$rootScope', '$state', '$stateParams', 'auth',
-    function($rootScope,   $state,   $stateParams,   auth) {
+  [         '$rootScope', '$state', '$stateParams', 'logout',
+    function($rootScope,   $state,   $stateParams,   logout) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
-      $rootScope.auth = auth;
+      $rootScope.logout = logout;
     }
   ]
 );
 
-cleanlifts.service('logger',
+cleanlifts.service('log',
   [
     function() {
-      function log(msg) {
+      return function(msg) {
         console.log(msg);
-      }
-
-      return {
-        log: log
       };
     }
   ]

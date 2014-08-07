@@ -14,8 +14,8 @@ cleanlifts.config(
 );
 
 cleanlifts.controller('indexController',
-  [         'user',
-    function(user) {
+  [         '$scope',
+    function($scope) {
     }
   ]
 );
