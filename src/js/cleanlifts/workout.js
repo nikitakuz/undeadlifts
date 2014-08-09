@@ -39,7 +39,7 @@ cleanlifts.controller('SelectRoutineController',
       $scope.selectRoutine = function(routine) {
         log('User selected a routine.');
         log('Routine chosen: ' + routine.name);
-        user.current_workout = { routine: { name: routine.name, exercises: routine.exercises }};
+        user.current_routine = { name: routine.name, lifts: routine.lifts };
         user.$save();
         $state.transitionTo('user.workout', {}, {});
       };
@@ -49,10 +49,14 @@ cleanlifts.controller('SelectRoutineController',
 cleanlifts.controller('WorkoutController',
   [         '$scope', '$state', 'log', 'user', 'history',
     function($scope,   $state,   log,   user,   history) {
-      $scope.routine = user.current_workout.routine;
+      if (!user.current_routine) {
+        $state.transitionTo('user.select-routine', {}, { location: 'replace' });
+        return;
+      }
+      $scope.routine = user.routine;
       $scope.weight_unit = user.weight_unit;
 
-      $scope.exercises = $scope.routine.exercises.map(function(val, i, array) {
+      $scope.lifts = $scope.routine.lifts.map(function(val, i, array) {
         var split = val.sets.split('x');
         var num_sets = split[0];
         var num_reps = split[1];
@@ -62,24 +66,28 @@ cleanlifts.controller('WorkoutController',
         return { name: val.name, weight: weight, classname: pluralized, sets: num_sets, reps: num_reps, completed: completed };
       });
 
-      $scope.updateSet = function(exercise, si) {
-        if (exercise.completed[si] > -1) {
-          exercise.completed[si]--;
+      $scope.updateSet = function(lift, si) {
+        if (lift.completed[si] > -1) {
+          lift.completed[si]--;
         } else {
-          exercise.completed[si] = exercise.reps;
+          lift.completed[si] = lift.reps;
         }
       };
 
       $scope.finishWorkout = function() {
-        var exercises = $scope.exercises.map(function(e, i) {
+        var lifts = $scope.lifts.map(function(e, i) {
           return { name: e.name, sets: e.sets, reps: e.reps, completed: e.completed, weight: e.weight };
         });
         var workout = {
           routine_name: $scope.routine.name,
-          exercises: exercises
+          lifts: lifts
         };
-        history.$add(workout);
-        debugger;
+        history.$add(workout).then(function(ref) {
+          user.current_routine = null;
+          user.$save().then(function(ref) {
+            $state.transitionTo('user.history', {}, { location: 'replace' });
+          });
+        });
       };
 
       function createArrayFilledWithNumber(length, number) {

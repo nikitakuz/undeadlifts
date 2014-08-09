@@ -1,26 +1,26 @@
 [ {
-    "exercises" : [
+    "lifts" : [
       { "name" : "Squat", "sets" : "5x5" },
       { "name" : "Bench Press", "sets" : "5x5" },
       { "name" : "Barbell Row", "sets" : "5x5"}
     ],
     "name" : "StrongLifts 5x5 A"
   }, {
-    "exercises" : [
+    "lifts" : [
       { "name" : "Squat", "sets" : "5x5" },
       { "name" : "Overhead Press", "sets" : "5x5" },
       { "name" : "Deadlift", "sets" : "1x5" }
     ],
     "name" : "StrongLifts 5x5 B"
   }, {
-    "exercises" : [
+    "lifts" : [
       { "name" : "Squat", "sets" : "3x8" },
       { "name" : "Bench Press", "sets" : "3x8" },
       { "name" : "Barbell Row", "sets" : "3x8" }
     ],
     "name" : "UndeadLifts 3x8 A"
   }, {
-    "exercises" : [
+    "lifts" : [
       { "name" : "Squat", "sets" : "3x8" },
       { "name" : "Overhead Press", "sets" : "3x8" },
       { "name" : "Deadlift", "sets" : "1x5" }

@@ -1,5 +1,6 @@
 section
   .content
-    button(ui-sref="user.select-routine")!="New Workout"
+    button(ng-if="!user.current_routine", ui-sref="user.select-routine")!="New Workout"
+    button(ng-if="user.current_routine", ui-sref="user.workout")!="Continue Workout"
     br
     button(ui-sref="user.history")!="History"

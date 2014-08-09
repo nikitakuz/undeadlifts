@@ -6,12 +6,12 @@ section
     h2
       | {{ routine.name }}
     .routine
-      .exercise(ng-repeat="exercise in exercises", ng-class="[exercise.classname]")
+      .lift(ng-repeat="lift in lifts", ng-class="[lifts.classname]")
         .name-and-weight
-          .name!="{{ exercise.name }}"
-          .weight!="{{ exercise.weight }} {{ weight_unit }}"
-        .set.ib.p1em(ng-repeat="set in getNumber(exercise.sets) track by $index", ng-click="updateSet(exercise, $index)", ng-class="{completed: exercise.completed[$index] > -1}")
+          .name!="{{ lift.name }}"
+          .weight!="{{ lift.weight }} {{ weight_unit }}"
+        .set.ib.p1em(ng-repeat="set in getNumber(lift.sets) track by $index", ng-click="updateSet(lift, $index)", ng-class="{completed: lift.completed[$index] > -1}")
           .reps
-            | {{ exercise.completed[$index] > -1 ? exercise.completed[$index] : exercise.reps }}
+            | {{ lift.completed[$index] > -1 ? lift.completed[$index] : lift.reps }}
     .finish-workout
       button(ng-click="finishWorkout()")!="Finish Workout"
