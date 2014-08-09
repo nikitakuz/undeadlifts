@@ -39,7 +39,7 @@ cleanlifts.controller('SelectRoutineController',
       $scope.selectRoutine = function(routine) {
         log('User selected a routine.');
         log('Routine chosen: ' + routine.name);
-        user.current_routine = { name: routine.name, lifts: routine.lifts };
+        user.current_routine = { name: routine.name, lifts: routine.lifts, date: new Date().getTime() };
         user.$save();
         $state.transitionTo('user.workout', {}, {});
       };
