@@ -11,7 +11,10 @@
 }
 
 // workout sets
-.set { display: inline-block; text-align: center; }
+.set {
+  display: inline-block; box-sizing: border-box;
+  padding: 0.5em; text-align: center;
+}
 .one-set .set { width: 100%; }
 .two-sets .set { width: 50%; }
 .three-sets .set { width: 33.3%; }
@@ -19,7 +22,7 @@
 .five-sets .set { width: 20%; }
 
 .set .reps {
-  display: inline-block; width: 1em; line-height: 1em; padding:1em;
+  display: inline-block; width: 1.25em; line-height: 1.25em; padding:0.5em;
   border: 1px solid #d0d0d0; border-radius: 100%;
   color: #d0d0d0;
 }

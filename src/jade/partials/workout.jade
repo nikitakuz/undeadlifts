@@ -1,17 +1,17 @@
 section
   .heading
     h1
-      | Work it!
-  .content
-    h2
       | {{ routine.name }}
+  .content
     .routine
-      .lift(ng-repeat="lift in lifts", ng-class="[lifts.classname]")
+      .lift(ng-repeat="lift in lifts", ng-class="[lift.classname]")
         .name-and-weight
           .name!="{{ lift.name }}"
           .weight!="{{ lift.weight }} {{ weight_unit }}"
-        .set.ib.p1em(ng-repeat="set in getNumber(lift.sets) track by $index", ng-click="updateSet(lift, $index)", ng-class="{completed: lift.completed[$index] > -1}")
+        .set(ng-repeat="set in getNumber(lift.sets) track by $index", ng-click="updateSet(lift, $index)", ng-class="{completed: lift.completed[$index] > -1}")
           .reps
             | {{ lift.completed[$index] > -1 ? lift.completed[$index] : lift.reps }}
-    .finish-workout
-      button(ng-click="finishWorkout()")!="Finish Workout"
+    br
+    br
+    .finish-workout.tac
+      button.p1em(ng-click="finishWorkout()")!="Finish Workout"

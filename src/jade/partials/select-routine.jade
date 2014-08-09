@@ -1,8 +1,10 @@
 section
   .heading
-    h1
+    h1.tac
       | Select a Routine
   .content
-    ul
-      li(ng-repeat="routine in routines")
-        button(ng-click="selectRoutine(routine)")!="{{routine.name}}"
+    .tac
+      .routine(ng-repeat="routine in routines")
+        button.p1em(ng-click="selectRoutine(routine)")!="{{routine.name}}"
+        br
+        br
