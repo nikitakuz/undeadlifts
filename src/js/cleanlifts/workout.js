@@ -53,7 +53,7 @@ cleanlifts.controller('WorkoutController',
         $state.transitionTo('user.select-routine', {}, { location: 'replace' });
         return;
       }
-      $scope.routine = user.routine;
+      $scope.routine = user.current_routine;
       $scope.weight_unit = user.weight_unit;
 
       $scope.lifts = $scope.routine.lifts.map(function(val, i, array) {
