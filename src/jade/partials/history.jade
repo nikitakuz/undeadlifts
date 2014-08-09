@@ -1,0 +1,13 @@
+
+section
+  .heading
+    h1
+      | Workout History!
+  .content
+    .workout(ng-repeat="workout in history")
+      .routine-name!="{{ workout.routine_name }}"
+      .exercises
+        .exercise(ng-repeat="exercise in workout.exercises")
+          .name-and-weight!="{{ exercise.name }} ({{ exercise.weight }} {{ user.weight_unit }})"
+      br
+      br

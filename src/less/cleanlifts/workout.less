@@ -1,0 +1,27 @@
+.name-and-weight {
+  border-bottom: 1px solid #d0d0d0;
+
+  .name, .weight {
+    display: inline-block; width: 50%;
+  }
+
+  .weight {
+    text-align: right;
+  }
+}
+
+// workout sets
+.set { display: inline-block; text-align: center; }
+.one-set .set { width: 100%; }
+.two-sets .set { width: 50%; }
+.three-sets .set { width: 33.3%; }
+.four-sets .set { width: 25%; }
+.five-sets .set { width: 20%; }
+
+.set .reps {
+  display: inline-block; width: 1em; line-height: 1em; padding:1em;
+  border: 1px solid #d0d0d0; border-radius: 100%;
+  color: #d0d0d0;
+}
+
+.set.completed .reps { color: white; border-color: orange; background-color: orange; }

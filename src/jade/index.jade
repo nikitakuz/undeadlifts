@@ -6,7 +6,7 @@ block append scripts
 block body
   nav
     .left
-      a(ui-sref="index")!="UNDEADLIFTS"
+      a(ui-sref="user.index")!="UNDEADLIFTS"
     .right
       a(ng-if="user", ng-click="logout()")!="Logout"
   section(ui-view="")

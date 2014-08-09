@@ -74,7 +74,7 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
 cleanlifts.service('user',
   [         'fref', 'user_id',
     function(fref, user_id) {
-      debugger;
+//      debugger;
     }
   ]
 );
@@ -89,10 +89,13 @@ cleanlifts.config(
           abstract: true,
           template: '<ui-view/>',
           resolve: {
-            user: ['UserService', function(UserService) {
-              return UserService.getUser();
+            user: ['DataService', function(DataService) {
+              return DataService.getUserPromise();
             }]
-          }
+          },
+          controller: ['$rootScope', 'user', function($rootScope, user) {
+            $rootScope.user = user;
+          }]
         }
       );
 
@@ -106,6 +109,10 @@ cleanlifts.run(
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
       $rootScope.logout = logout;
+
+      $rootScope.getNumber = function(num) {
+        return new Array(Number(parseInt(num)));
+      };
     }
   ]
 );

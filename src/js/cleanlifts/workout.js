@@ -7,8 +7,8 @@ cleanlifts.config(
           templateUrl: 'partials/select-routine.html',
           controller: 'SelectRoutineController',
           resolve: {
-            'routines': ['UserService', function(UserService) {
-              return UserService.getRoutines();
+            'routines': ['DataService', function(DataService) {
+              return DataService.getRoutinesPromise();
             }]
           }
         }
@@ -18,7 +18,12 @@ cleanlifts.config(
         {
           url: '/workout',
           templateUrl: 'partials/workout.html',
-          controller: 'WorkoutController'
+          controller: 'WorkoutController',
+          resolve: {
+            'history': ['DataService', function(DataService) {
+              return DataService.getHistoryPromise();
+            }]
+          }
         }
       );
     }
@@ -42,9 +47,45 @@ cleanlifts.controller('SelectRoutineController',
   ]
 );
 cleanlifts.controller('WorkoutController',
-  [         '$scope', '$state', 'log', 'user',
-    function($scope,   $state,   log,   user) {
+  [         '$scope', '$state', 'log', 'user', 'history',
+    function($scope,   $state,   log,   user,   history) {
       $scope.routine = user.current_workout.routine;
+      $scope.weight_unit = user.weight_unit;
+
+      $scope.exercises = $scope.routine.exercises.map(function(val, i, array) {
+        var split = val.sets.split('x');
+        var num_sets = split[0];
+        var num_reps = split[1];
+        var pluralized = { 1: 'one-set', 2: 'two-sets', 3: 'three-sets', 4: 'four-sets', 5: 'five-sets' }[split[0]];
+        var completed = createArrayFilledWithNumber(num_sets, -1);
+        var weight = user.working_weight[val.name] || 45;
+        return { name: val.name, weight: weight, classname: pluralized, sets: num_sets, reps: num_reps, completed: completed };
+      });
+
+      $scope.updateSet = function(exercise, si) {
+        if (exercise.completed[si] > -1) {
+          exercise.completed[si]--;
+        } else {
+          exercise.completed[si] = exercise.reps;
+        }
+      };
+
+      $scope.finishWorkout = function() {
+        var exercises = $scope.exercises.map(function(e, i) {
+          return { name: e.name, sets: e.sets, reps: e.reps, completed: e.completed, weight: e.weight };
+        });
+        var workout = {
+          routine_name: $scope.routine.name,
+          exercises: exercises
+        };
+        history.$add(workout);
+        debugger;
+      };
+
+      function createArrayFilledWithNumber(length, number) {
+        var a = Array.apply(null, Array(parseInt(length)))
+        return a.map(function() { return number; })
+      }
     }
   ]
 );
