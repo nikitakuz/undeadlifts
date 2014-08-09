@@ -74,6 +74,15 @@ cleanlifts.controller('WorkoutController',
         }
       };
 
+      $scope.changeWorkingWeight = function(lift_name) {
+        var current = user.working_weight[lift_name];
+        var working_weight = prompt('Enter new working weight for ' + lift_name.toLowerCase(), current);
+        if (working_weight) {
+          user.working_weight[lift_name] = working_weight;
+          user.$save();
+        }
+      };
+
       $scope.finishWorkout = function() {
         var lifts = $scope.lifts.map(function(e, i) {
           return { name: e.name, sets: e.sets, reps: e.reps, completed: e.completed, weight: e.weight };
