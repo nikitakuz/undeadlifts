@@ -1,7 +1,8 @@
 section
   .heading
     h3
-      | {{ date | date:'EEE MMM d' }}
+      a(ui-sref="user.workout.change-date")
+        | {{ date | date:'EEE MMM d' }}
     h1
       | {{ routine.name }}
   .content

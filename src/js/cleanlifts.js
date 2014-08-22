@@ -1,4 +1,4 @@
-var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
+var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router', 'ui.bootstrap']);
 
 (function() {
   var log = function(msg) { console.log(msg); };

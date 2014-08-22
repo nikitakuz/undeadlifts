@@ -27,6 +27,14 @@ cleanlifts.config(
         }
       );
 
+      $stateProvider.state('user.workout.change-date',
+        {
+          url: '/workout/change-date',
+          templateUrl: 'partials/workout/change-date.html',
+          controller: 'ChangeDateController'
+        }
+      );
+
       $stateProvider.state('user.workout.change-weight',
         {
           url: '/workout/change-weight/:lift',
@@ -69,6 +77,12 @@ cleanlifts.controller('WorkoutController',
       $scope.routine = user.current_routine;
       $scope.weight_unit = user.weight_unit;
       $scope.showChangeWeight = false;
+
+      $scope.$on('workout.change-date', function(event, newDate) {
+        user.current_routine.date = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate()
+        user.$save();
+        $scope.date = Date.parse(user.current_routine.date);
+      });
 
       $scope.lifts = $scope.routine.lifts.map(function(val, i, array) {
         var split = val.sets.split('x');
@@ -118,6 +132,22 @@ cleanlifts.controller('WorkoutController',
     }
   ]
 );
+cleanlifts.controller('ChangeDateController',
+  [         '$rootScope', '$scope', '$state', '$stateParams',
+    function($rootScope,   $scope,   $state,   $stateParams) {
+      $scope.selected_date = $scope.date;
+      $scope.$watch('selected_date', function(newVal, oldVal) {
+        if (newVal === oldVal || !(newVal instanceof Date)) {
+          return;
+        }
+        $rootScope.$broadcast('workout.change-date', newVal);
+        window.history.back();
+      });
+
+    }
+  ]
+);
+
 cleanlifts.controller('ChangeWeightController',
   [         '$scope', '$state', '$stateParams',
     function($scope,   $state,   $stateParams) {
