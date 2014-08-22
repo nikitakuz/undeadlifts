@@ -1,0 +1,18 @@
+.modal-background
+  .modal-gutter
+  .modal-dialog
+    .heading!="Change {{ lift }} Weight"
+    .content
+      .tal
+        | If your bar weighs 45lb, {{ weight }}lb means you add {{ (weight - 45) / 2 }} on each side.
+      br
+      .tac
+        button(ng-click="decreaseWeight()")!="-"
+        | {{ weight }}
+        button(ng-click="increaseWeight()")!="+"
+      br
+      .tac
+        button(ng-click="saveWeight()")!="OK"
+        button(ng-click="cancelChanges()")!="Cancel"
+
+  .modal-gutter

@@ -26,6 +26,14 @@ cleanlifts.config(
           }
         }
       );
+
+      $stateProvider.state('user.workout.change-weight',
+        {
+          url: '/workout/change-weight/:lift',
+          templateUrl: 'partials/workout/change-weight.html',
+          controller: 'ChangeWeightController'
+        }
+      );
     }
   ]
 );
@@ -39,7 +47,11 @@ cleanlifts.controller('SelectRoutineController',
       $scope.selectRoutine = function(routine) {
         log('User selected a routine.');
         log('Routine chosen: ' + routine.name);
-        user.current_routine = { name: routine.name, lifts: routine.lifts, date: new Date().getTime() };
+        var now = new Date();
+        var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+        user.current_routine = {
+          name: routine.name, lifts: routine.lifts, date: date
+        };
         user.$save();
         $state.transitionTo('user.workout', {}, {});
       };
@@ -47,14 +59,16 @@ cleanlifts.controller('SelectRoutineController',
   ]
 );
 cleanlifts.controller('WorkoutController',
-  [         '$scope', '$state', 'log', 'user', 'history',
-    function($scope,   $state,   log,   user,   history) {
+  [         '$scope', '$state', '$filter', 'log', 'user', 'history',
+    function($scope,   $state,   $filter,   log,   user,   history) {
       if (!user.current_routine) {
         $state.transitionTo('user.select-routine', {}, { location: 'replace' });
         return;
       }
+      $scope.date = Date.parse(user.current_routine.date);
       $scope.routine = user.current_routine;
       $scope.weight_unit = user.weight_unit;
+      $scope.showChangeWeight = false;
 
       $scope.lifts = $scope.routine.lifts.map(function(val, i, array) {
         var split = val.sets.split('x');
@@ -62,8 +76,7 @@ cleanlifts.controller('WorkoutController',
         var num_reps = split[1];
         var pluralized = { 1: 'one-set', 2: 'two-sets', 3: 'three-sets', 4: 'four-sets', 5: 'five-sets' }[split[0]];
         var completed = createArrayFilledWithNumber(num_sets, -1);
-        var weight = user.working_weight[val.name] || 45;
-        return { name: val.name, weight: weight, classname: pluralized, sets: num_sets, reps: num_reps, completed: completed };
+        return { name: val.name, classname: pluralized, sets: num_sets, reps: num_reps, completed: completed };
       });
 
       $scope.updateSet = function(lift, si) {
@@ -74,24 +87,23 @@ cleanlifts.controller('WorkoutController',
         }
       };
 
-      $scope.changeWorkingWeight = function(lift_name) {
-        var current = user.working_weight[lift_name];
-        var working_weight = prompt('Enter new working weight for ' + lift_name.toLowerCase(), current);
-        if (working_weight) {
-          user.working_weight[lift_name] = working_weight;
-          user.$save();
-        }
+      $scope.changeWeight = function(lift_name) {
+        $state.transitionTo('user.workout.change-weight');
       };
 
       $scope.finishWorkout = function() {
-        var lifts = $scope.lifts.map(function(e, i) {
-          return { name: e.name, sets: e.sets, reps: e.reps, completed: e.completed, weight: e.weight };
+        var lifts = $scope.lifts.map(function(lift, i) {
+          delete lift.$$hashKey;
+          lift.weight = user.working_weight[lift.name];
+          return lift;
         });
         var workout = {
+          date: $scope.routine.date,
           routine_name: $scope.routine.name,
           lifts: lifts
         };
         history.$add(workout).then(function(ref) {
+          ref.setPriority(workout.date);
           user.current_routine = null;
           user.$save().then(function(ref) {
             $state.transitionTo('user.history', {}, { location: 'replace' });
@@ -103,6 +115,32 @@ cleanlifts.controller('WorkoutController',
         var a = Array.apply(null, Array(parseInt(length)))
         return a.map(function() { return number; })
       }
+    }
+  ]
+);
+cleanlifts.controller('ChangeWeightController',
+  [         '$scope', '$state', '$stateParams',
+    function($scope,   $state,   $stateParams) {
+      $scope.lift = $stateParams['lift'];
+      $scope.weight = Number($scope.user.working_weight[$scope.lift]);
+
+      $scope.decreaseWeight = function() {
+        $scope.weight = $scope.weight - 5;
+      };
+
+      $scope.increaseWeight = function() {
+        $scope.weight = $scope.weight + 5;
+      };
+
+      $scope.saveWeight = function() {
+        $scope.user.working_weight[$scope.lift] = $scope.weight;
+        $scope.user.$save();
+        window.history.back();
+      };
+
+      $scope.cancelChanges = function() {
+        window.history.back();
+      };
     }
   ]
 );

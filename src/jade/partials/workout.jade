@@ -1,7 +1,7 @@
 section
   .heading
     h3
-      | {{ routine.date | date:'EEE MMM d' }}
+      | {{ date | date:'EEE MMM d' }}
     h1
       | {{ routine.name }}
   .content
@@ -9,7 +9,7 @@ section
       .lift(ng-repeat="lift in lifts", ng-class="[lift.classname]")
         .name-and-weight
           .name!="{{ lift.name }}"
-          .weight(ng-click="changeWorkingWeight(lift.name)")!="{{ user.working_weight[lift.name] }} {{ weight_unit }}"
+          a.weight(ui-sref="user.workout.change-weight({ lift: lift.name })")!="{{ user.working_weight[lift.name] }} {{ weight_unit }}"
         .set(ng-repeat="set in getNumber(lift.sets) track by $index", ng-click="updateSet(lift, $index)", ng-class="{completed: lift.completed[$index] > -1}")
           .reps
             | {{ lift.completed[$index] > -1 ? lift.completed[$index] : lift.reps }}
@@ -17,3 +17,4 @@ section
     br
     .finish-workout.tac
       button.p1em(ng-click="finishWorkout()")!="Finish Workout"
+div(ui-view="")
