@@ -4,9 +4,9 @@ section
       | Workout History
   .content
     .workout(ng-repeat="workout in history")
-      .routine-name!="{{ workout.routine_name }} {{ workout.date }}"
+      .routine-date-and-name!="{{ workout.time | date:'MMM d, yyyy' }} - {{ workout.routine_name }}"
       .lifts
-        .lift(ng-repeat="lift in workout.lifts")
-          .name-and-weight!="{{ lift.name }} ({{ lift.weight }} {{ user.weight_unit }})"
+        .ib.lift(ng-repeat="lift in workout.lifts")
+          span.name-and-weight!="{{ lift.name }} ({{ lift.weight }} {{ user.weight_unit }}){{$last ? '' : ',&nbsp;'}}"
       br
       br

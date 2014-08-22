@@ -67,8 +67,8 @@ cleanlifts.controller('SelectRoutineController',
   ]
 );
 cleanlifts.controller('WorkoutController',
-  [         '$scope', '$state', '$filter', 'log', 'user', 'history',
-    function($scope,   $state,   $filter,   log,   user,   history) {
+  [         '$scope', '$state', '$filter', '$firebase', 'log', 'user', 'history',
+    function($scope,   $state,   $filter,   $firebase, log,   user,   history) {
       if (!user.current_routine) {
         $state.transitionTo('user.select-routine', {}, { location: 'replace' });
         return;
@@ -117,7 +117,12 @@ cleanlifts.controller('WorkoutController',
           lifts: lifts
         };
         history.$add(workout).then(function(ref) {
-          ref.setPriority(workout.date);
+          var f = $firebase(ref).$asObject();
+          // ** Strange bug! ** $priority cannot be set before initial $save().
+          f.$save().then(function() {
+            f.$priority = Number(workout.date.replace(/-/g, ''));
+            f.$save();
+          });
           user.current_routine = null;
           user.$save().then(function(ref) {
             $state.transitionTo('user.history', {}, { location: 'replace' });
