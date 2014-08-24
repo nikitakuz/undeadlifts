@@ -1,9 +1,14 @@
 .calendar
   table
     tr
-      th!="PREV"
-      th(colspan="5")!="MONTH"
-      th!="NEXT"
+      th
+        a(ui-sref="user.history.month(month === 1 ? {year: year - 1, month: 12} : {year: year, month: month - 1})")
+          | &laquo;
+      th(colspan="5")
+        | {{ month_full_name }} {{ year }}
+      th
+        a(ui-sref="user.history.month(month === 12 ? {year: year + 1, month: 1} : {year: year, month: month + 1})")
+          | &raquo;
     tr
       th(ng-repeat="DAY in DAYS_IN_WEEK track by $index")!="{{ DAY }}"
     tr(ng-repeat="week in weeks track by $index")

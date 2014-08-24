@@ -16,6 +16,7 @@ cleanlifts.config(
 cleanlifts.controller('indexController',
   [         '$scope',
     function($scope) {
+      $scope.now = new Date();
     }
   ]
 );

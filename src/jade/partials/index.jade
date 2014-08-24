@@ -5,4 +5,4 @@ section
       button.p1em(ng-if="user.current_routine", ui-sref="user.workout")!="Continue Workout"
       br
       br
-      button.p1em(ui-sref="user.history.calendar")!="History"
+      button.p1em(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")!="History"

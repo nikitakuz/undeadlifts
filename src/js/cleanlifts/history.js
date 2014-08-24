@@ -21,11 +21,11 @@ cleanlifts.config(
           controller: 'HistoryListController'
         }
       );
-      $stateProvider.state('user.history.calendar',
+      $stateProvider.state('user.history.month',
         {
-          url: '/calendar',
-          templateUrl: 'partials/history/calendar.html',
-          controller: 'HistoryCalendarController'
+          url: '/:year/:month',
+          templateUrl: 'partials/history/month.html',
+          controller: 'HistoryMonthController'
         }
       );
       $stateProvider.state('user.history.details',
@@ -62,9 +62,13 @@ cleanlifts.controller('HistoryListController',
     }
   ]
 );
-cleanlifts.controller('HistoryCalendarController',
-  [         '$scope', '$filter', 'history',
-    function($scope,   $filter,   history) {
+cleanlifts.controller('HistoryMonthController',
+  [         '$scope', '$stateParams', '$filter', 'history',
+    function($scope,   $stateParams,   $filter,   history) {
+      $scope.year = parseInt($stateParams.year);
+      $scope.month = parseInt($stateParams.month);
+      $scope.month_full_name = { 1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August',
+        9: 'September', 10: 'October', 11: 'November', 12: 'December' }[$stateParams.month];
       var MS_IN_DAY = 1000 * 60 * 60 * 24;
       $scope.DAYS_IN_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -89,10 +93,7 @@ cleanlifts.controller('HistoryCalendarController',
         return weeks;
       }
 
-      var now = new Date();
-      var year = now.getFullYear();
-      var month = now.getMonth();
-      $scope.weeks = getCalendarWeeks(year, month);
+      $scope.weeks = getCalendarWeeks($scope.year, $scope.month - 1);
 
       $scope.formatDate = function(format, date) {
         console.log($filter('date')(date, format));

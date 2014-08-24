@@ -115,7 +115,7 @@ cleanlifts.controller('WorkoutController',
         user.history[date].push(workout);
         delete user.current_routine;
         user.$save().then(function(ref) {
-            $state.transitionTo('user.history.calendar', {}, {});
+            $state.transitionTo('user.index', {}, {});
         });
       };
 
