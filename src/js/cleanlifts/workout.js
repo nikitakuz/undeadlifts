@@ -110,6 +110,7 @@ cleanlifts.controller('WorkoutController',
           time: $scope.date.getTime()
         };
         var date = $filter('date')($scope.date, 'yyyyMMdd');
+        user.history = user.history || {};
         user.history[date] = user.history[date] || [];
         user.history[date].push(workout);
         delete user.current_routine;
