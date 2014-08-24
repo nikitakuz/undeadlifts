@@ -1,18 +1,25 @@
-.calendar
-  table
-    tr
-      th
-        a(ui-sref="user.history.month(month === 1 ? {year: year - 1, month: 12} : {year: year, month: month - 1})")
-          | &laquo;
-      th(colspan="5")
-        | {{ month_full_name }} {{ year }}
-      th
-        a(ui-sref="user.history.month(month === 12 ? {year: year + 1, month: 1} : {year: year, month: month + 1})")
-          | &raquo;
-    tr
-      th(ng-repeat="DAY in DAYS_IN_WEEK track by $index")!="{{ DAY }}"
-    tr(ng-repeat="week in weeks track by $index")
-      td(ng-repeat="date in week track by $index")
-        span(ng-if="!dateToWorkout[formatDate('yyyyMMdd', date)]")!="{{ date.getDate() }}"
-        a(ng-if="dateToWorkout[formatDate('yyyyMMdd', date)]", ui-sref="user.history.details({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()})")!="{{ date.getDate() }}"
+.heading
+  h1
+    | Workout Calendar
+    a.recent-workouts-link(ui-sref="user.history.list")
+      include ../../svg/list
+
+.content
+  .calendar
+    table
+      tr
+        th
+          a.prev(ui-sref="user.history.month(month === 1 ? {year: year - 1, month: 12} : {year: year, month: month - 1})")
+            | &lsaquo;
+        th(colspan="5")
+          | {{ month_full_name }} {{ year }}
+        th
+          a.next(ui-sref="user.history.month(month === 12 ? {year: year + 1, month: 1} : {year: year, month: month + 1})")
+            | &rsaquo;
+      tr.days-of-the-week
+        th(ng-repeat="DAY in DAYS_IN_WEEK track by $index")!="{{ DAY }}"
+      tr.week(ng-repeat="week in weeks track by $index")
+        td(ng-repeat="date in week track by $index", ng-class="{'different-month': date.getMonth() + 1 !== month}")
+          span(ng-if="!dateToWorkout[formatDate('yyyyMMdd', date)]")!="{{ date.getDate() }}"
+          a.details(ng-if="dateToWorkout[formatDate('yyyyMMdd', date)]", ui-sref="user.history.details({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()})")!="{{ date.getDate() }}"
 

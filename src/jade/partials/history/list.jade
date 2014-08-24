@@ -1,11 +1,17 @@
-.history
-  .workout(ng-repeat="date in history | orderBy:'$id':true ")
-    h2
-      | {{ date.date | date:'EEE, MMM d, yyyy' }}
-    .routine-date-and-name(ng-repeat="workout in date")
-      h3
-        | {{ workout.routine }}
-      .lifts
-        .ib.lift(ng-repeat="lift in workout.lifts")
-          span.name-and-weight!="{{ lift.name }} ({{ lift.weight }} {{ user.weight_unit }}){{$last ? '' : ',&nbsp;'}}"
-      br
+.heading
+  h1
+    | Recent Workouts
+    a.calendar-link(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
+      include ../../svg/calendar
+.content
+  .history
+    .workout(ng-repeat="date in history | orderBy:'$id':true ")
+      h2
+        | {{ date.date | date:'EEE, MMM d, yyyy' }}
+      .routine-date-and-name(ng-repeat="workout in date")
+        h3
+          | {{ workout.routine }}
+        .lifts
+          .ib.lift(ng-repeat="lift in workout.lifts")
+            span.name-and-weight!="{{ lift.name }} ({{ lift.weight }} {{ user.weight_unit }}){{$last ? '' : ',&nbsp;'}}"
+        br

@@ -5,7 +5,7 @@ cleanlifts.config(
         {
           abstract: true,
           url: '/history',
-          templateUrl: 'partials/history.html',
+          template: '<div ui-view=""></div>',
           controller: 'AbstractHistoryController',
           resolve: {
             'history': ['DataService', function(DataService) {
@@ -59,6 +59,7 @@ cleanlifts.controller('AbstractHistoryController',
 cleanlifts.controller('HistoryListController',
   [         '$scope', 'history',
     function($scope,   history) {
+      $scope.now = new Date();
     }
   ]
 );
@@ -70,7 +71,7 @@ cleanlifts.controller('HistoryMonthController',
       $scope.month_full_name = { 1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August',
         9: 'September', 10: 'October', 11: 'November', 12: 'December' }[$stateParams.month];
       var MS_IN_DAY = 1000 * 60 * 60 * 24;
-      $scope.DAYS_IN_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      $scope.DAYS_IN_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
       function getDates(firstDate, length) {
         var dates = new Array(length);
