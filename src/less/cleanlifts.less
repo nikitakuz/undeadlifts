@@ -1,22 +1,37 @@
 @import "common";
 @import "adapt";
 
+@import "cleanlifts/constant";
 @import "cleanlifts/form";
 @import "cleanlifts/workout";
 @import "cleanlifts/history";
 @import "cleanlifts/datepicker";
 
 body {
-  background-color: #f8f8f8;
+  background-color: @lightest_green;
+}
+
+a {
+  cursor: pointer;
+}
+
+button {
+  background-color: #434d38;
+  color: @lightest_green;
 }
 
 nav {
   background-color: #080808;
+  text-align: center;
 
   a {
-    color: #f8f8f8;
+    color: @light_green;
     text-decoration: none;
     font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+
+    &:hover {
+      color: @neon_green;
+    }
   }
 
   .left,
@@ -24,7 +39,12 @@ nav {
     display: inline-block;
     box-sizing: border-box;
     width: 50%;
+    max-width: 20em;
     padding: 0.25em 0.5em;
+  }
+
+  .left {
+    text-align: left;
   }
 
   .right {

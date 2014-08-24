@@ -1,3 +1,5 @@
+@import "constant";
+
 .name-and-weight {
   border-bottom: 1px solid #d0d0d0;
 
@@ -23,8 +25,8 @@
 
 .set .reps {
   display: inline-block; width: 1.25em; line-height: 1.25em; padding:0.5em;
-  border: 1px solid #d0d0d0; border-radius: 100%;
-  color: #d0d0d0;
+  border: 1px solid @light_green; border-radius: 100%;
+  color: @light_green;
 }
 
-.set.completed .reps { color: white; border-color: orange; background-color: orange; }
+.set.completed .reps { color: @neon_green; border-color: @blood_red; background-color: @blood_red; }
