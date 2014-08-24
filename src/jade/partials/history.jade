@@ -2,11 +2,4 @@ section
   .heading
     h1
       | Workout History
-  .content
-    .workout(ng-repeat="workout in history")
-      .routine-date-and-name!="{{ workout.time | date:'MMM d, yyyy' }} - {{ workout.routine_name }}"
-      .lifts
-        .ib.lift(ng-repeat="lift in workout.lifts")
-          span.name-and-weight!="{{ lift.name }} ({{ lift.weight }} {{ user.weight_unit }}){{$last ? '' : ',&nbsp;'}}"
-      br
-      br
+  .content(ui-view="")

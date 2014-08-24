@@ -18,12 +18,7 @@ cleanlifts.config(
         {
           url: '/workout',
           templateUrl: 'partials/workout.html',
-          controller: 'WorkoutController',
-          resolve: {
-            'history': ['DataService', function(DataService) {
-              return DataService.getHistoryPromise();
-            }]
-          }
+          controller: 'WorkoutController'
         }
       );
 
@@ -47,18 +42,16 @@ cleanlifts.config(
 );
 
 cleanlifts.controller('SelectRoutineController',
-  [         '$scope', '$state', 'log', 'user', 'routines',
-    function($scope,   $state,   log,   user,   routines) {
+  [         '$scope', '$state', '$filter', 'log', 'user', 'routines',
+    function($scope,   $state,   $filter,   log,   user,   routines) {
       log('Waiting for user to select a routine...');
       $scope.routines = routines;
 
       $scope.selectRoutine = function(routine) {
         log('User selected a routine.');
         log('Routine chosen: ' + routine.name);
-        var now = new Date();
-        var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
         user.current_routine = {
-          name: routine.name, lifts: routine.lifts, date: date
+          name: routine.name, lifts: routine.lifts, time: new Date().getTime()
         };
         user.$save();
         $state.transitionTo('user.workout', {}, {});
@@ -67,21 +60,21 @@ cleanlifts.controller('SelectRoutineController',
   ]
 );
 cleanlifts.controller('WorkoutController',
-  [         '$scope', '$state', '$filter', '$firebase', 'log', 'user', 'history',
-    function($scope,   $state,   $filter,   $firebase, log,   user,   history) {
+  [         '$scope', '$state', '$filter', '$firebase', 'log', 'user',
+    function($scope,   $state,   $filter,   $firebase,   log,   user) {
       if (!user.current_routine) {
         $state.transitionTo('user.select-routine', {}, { location: 'replace' });
         return;
       }
-      $scope.date = Date.parse(user.current_routine.date);
+      $scope.date = new Date(user.current_routine.time);
       $scope.routine = user.current_routine;
       $scope.weight_unit = user.weight_unit;
       $scope.showChangeWeight = false;
 
       $scope.$on('workout.change-date', function(event, newDate) {
-        user.current_routine.date = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate()
+        $scope.date = new Date(newDate);
+        user.current_routine.time = newDate.getTime();
         user.$save();
-        $scope.date = Date.parse(user.current_routine.date);
       });
 
       $scope.lifts = $scope.routine.lifts.map(function(val, i, array) {
@@ -112,21 +105,16 @@ cleanlifts.controller('WorkoutController',
           return lift;
         });
         var workout = {
-          date: $scope.routine.date,
-          routine_name: $scope.routine.name,
-          lifts: lifts
+          routine: $scope.routine.name,
+          lifts: lifts,
+          time: $scope.date.getTime()
         };
-        history.$add(workout).then(function(ref) {
-          var f = $firebase(ref).$asObject();
-          // ** Strange bug! ** $priority cannot be set before initial $save().
-          f.$save().then(function() {
-            f.$priority = Number(workout.date.replace(/-/g, ''));
-            f.$save();
-          });
-          user.current_routine = null;
-          user.$save().then(function(ref) {
-            $state.transitionTo('user.history', {}, { location: 'replace' });
-          });
+        var date = $filter('date')($scope.date, 'yyyyMMdd');
+        user.history[date] = user.history[date] || [];
+        user.history[date].push(workout);
+        delete user.current_routine;
+        user.$save().then(function(ref) {
+            $state.transitionTo('user.history.calendar', {}, {});
         });
       };
 

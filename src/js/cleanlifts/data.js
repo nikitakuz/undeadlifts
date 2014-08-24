@@ -16,6 +16,12 @@ cleanlifts.service('DataService',
 
         getHistoryPromise: function() {
           return arrayPromise(history);
+        },
+
+        getHistoryDetailsPromise: function(year, month, day) {
+          month = month < 10 ? '0' + month : month;
+          day = day < 10 ? '0' + day : day;
+          return objectPromise(history.child('' + year + month + day));
         }
       };
 

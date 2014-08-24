@@ -1,0 +1,13 @@
+.calendar
+  table
+    tr
+      th!="PREV"
+      th(colspan="5")!="MONTH"
+      th!="NEXT"
+    tr
+      th(ng-repeat="DAY in DAYS_IN_WEEK track by $index")!="{{ DAY }}"
+    tr(ng-repeat="week in weeks track by $index")
+      td(ng-repeat="date in week track by $index")
+        span(ng-if="!dateToWorkout[formatDate('yyyyMMdd', date)]")!="{{ date.getDate() }}"
+        a(ng-if="dateToWorkout[formatDate('yyyyMMdd', date)]", ui-sref="user.history.details({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()})")!="{{ date.getDate() }}"
+
