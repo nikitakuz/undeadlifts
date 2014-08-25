@@ -30,3 +30,22 @@
 }
 
 .set.completed .reps { color: @neon_green; border-color: @blood_red; background-color: @blood_red; }
+
+.rest-timer {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #202020;
+  color: white;
+  font-family: sans-serif;
+
+  .heading, .content { text-align: center; }
+
+  .time {
+    position: relative;
+
+    .dismiss {
+      position: absolute;
+      top: 0;
+      right: 1em;
+    }
+  }
+}

@@ -7,9 +7,9 @@ block append scripts
 block body
   nav
     .left
-      a(ui-sref="user.index")!="UNDEADLIFTS"
+      a.h2-font-size(ui-sref="user.index")!="UNDEADLIFTS"
     .right
-      a(ng-if="user", ng-click="logout()")!="Logout"
+      a.h3-font-size(ng-if="user", ng-click="logout()")!="Logout"
   section(ui-view="")
     .heading
       .tac

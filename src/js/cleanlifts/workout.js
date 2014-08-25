@@ -60,8 +60,13 @@ cleanlifts.controller('SelectRoutineController',
   ]
 );
 cleanlifts.controller('WorkoutController',
-  [         '$scope', '$state', '$filter', '$firebase', 'log', 'user',
-    function($scope,   $state,   $filter,   $firebase,   log,   user) {
+  [         '$rootScope', '$scope', '$state', '$filter', '$firebase', 'log', 'user',
+    function($rootScope,   $scope,   $state,   $filter,   $firebase,   log,   user) {
+      var restTimerTimeout = null;
+      var restTimerInterval = null;
+      $scope.showRestTimer = false;
+      $scope.restTime = 0;
+
       if (!user.current_routine) {
         $state.transitionTo('user.select-routine', {}, { location: 'replace' });
         return;
@@ -92,6 +97,43 @@ cleanlifts.controller('WorkoutController',
         } else {
           lift.completed[si] = lift.reps;
         }
+        if (lift.completed !== -1) {
+          $scope.showRestTimer = false;
+          clearTimeout(restTimerTimeout);
+          restTimerTimeout = setTimeout(function() {
+            startRestTimer(lift.reps, lift.completed[si]);
+          }, 1500);
+        }
+      };
+
+      function startRestTimer(reps, completed) {
+        $scope.clearRestTimer();
+        $scope.$apply(function() {
+          $scope.showRestTimer = true;
+          $scope.rest_message_1 = getRestMessage1(reps, completed);
+          $scope.rest_message_2 = getRestMessage2(reps, completed);
+        });
+        restTimerInterval = setInterval(function() {
+          $scope.$apply(function() {
+            $scope.restTime += 1000;
+          });
+        }, 1000);
+      }
+
+      function getRestMessage1(reps, completed) {
+        return reps === completed ? 'Congrats getting ' + reps + ' reps!' : 'Failing is part of the game!'
+      }
+
+      function getRestMessage2(reps, completed) {
+        return reps === completed ?
+          'If it was easy, rest 90 sec. If not, 3 min.' :
+          'Rest 5 mins and you\'ll get your next set.';
+      }
+
+      $scope.clearRestTimer = function() {
+        clearInterval(restTimerInterval);
+        $scope.restTime = 0;
+        $scope.showRestTimer = false;
       };
 
       $scope.changeWeight = function(lift_name) {
