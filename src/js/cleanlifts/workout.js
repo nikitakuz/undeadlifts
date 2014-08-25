@@ -97,12 +97,15 @@ cleanlifts.controller('WorkoutController',
         } else {
           lift.completed[si] = lift.reps;
         }
-        if (lift.completed !== -1) {
+        if (lift.completed[si] !== -1) {
           $scope.showRestTimer = false;
           clearTimeout(restTimerTimeout);
           restTimerTimeout = setTimeout(function() {
             startRestTimer(lift.reps, lift.completed[si]);
           }, 1500);
+        } else {
+          clearTimeout(restTimerTimeout);
+          $scope.clearRestTimer();
         }
       };
 
