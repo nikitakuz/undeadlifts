@@ -3,7 +3,7 @@
 a.calendar-link,
 a.recent-workouts-link {
   position: absolute;
-  right: 0.25em;
+  right: 0.5em;
   top: 0.25em;
   display: inline-block;
   width: 1em;
@@ -41,6 +41,56 @@ a.recent-workouts-link {
     &:hover {
       background: @blood_red;
       color: @neon_green;
+    }
+  }
+}
+
+.recent-workouts {
+  table {
+    width: 100%;
+  }
+
+  td {
+    padding: 0.5em;
+  }
+
+  td.date {
+    width: 20%;
+
+    text-align: center;
+    vertical-align: top;
+
+    a {
+      display: inline-block;
+      box-sizing: border-box;
+      width: 100%;
+      background: @light_green;
+      padding: 0.5em;
+
+      border-radius: 0.5em;
+      background: @light_green;
+      color: @darker_green;
+      text-decoration: none;
+
+      &:hover {
+        background: @blood_red;
+        color: @neon_green;
+      }
+    }
+
+    .day {
+      font-size: 2em;
+    }
+  }
+
+  td.workouts {
+    .routine-name {
+      margin: 0;
+    }
+
+    .lifts {
+      font-size: 0.9em;
+      font-style: italic;
     }
   }
 }

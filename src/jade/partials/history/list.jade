@@ -4,6 +4,27 @@
     a.calendar-link(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
       include ../../svg/calendar
 .content
+  .recent-workouts
+    .year(ng-repeat="(y, year) in history | orderByKey:true")
+      .month(ng-repeat="(m, month) in year.months | orderByKey:true")
+        h2
+          | {{ prettyMonth(month.month) }} {{ year.year }}
+        table
+          tr.day(ng-repeat="(d, day) in month.days | orderByKey:true")
+            td.date
+              a(ui-sref="user.history.details({year: year.year, month: month.month, day: day.day})")
+                .day
+                  | {{ day.day }}
+                .day-of-week
+                  | {{ getDayOfWeek(day[0].time) }}
+            td.workouts
+              .workout(ng-repeat="workout in day")
+                h3.routine-name
+                  | {{ workout.routine }}
+                .lifts
+                  .ib.lift(ng-repeat="lift in workout.lifts")
+                    span.name-and-weight!="{{ lift.name }}{{$last ? '' : ',&nbsp;'}}"
+                br
   .history
     .workout(ng-repeat="date in history | orderBy:'$id':true ")
       h2

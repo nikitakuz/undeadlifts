@@ -43,7 +43,10 @@ cleanlifts.config(
     }
   ]
 );
-
+cleanlifts.constant('MONTH_NAMES', {
+    1: 'January', 2: 'February', 3: 'March',      4: 'April',    5: 'May',       6: 'June',
+    7: 'July',    8: 'August',   9: 'September', 10: 'October', 11: 'November', 12: 'December'
+});
 cleanlifts.controller('AbstractHistoryController',
   [         '$scope', 'history',
     function($scope,   history) {
@@ -57,19 +60,46 @@ cleanlifts.controller('AbstractHistoryController',
   ]
 );
 cleanlifts.controller('HistoryListController',
-  [         '$scope', 'history',
-    function($scope,   history) {
+  [         '$scope', '$filter', 'MONTH_NAMES', 'history',
+    function($scope,   $filter,   MONTH_NAMES,   history) {
       $scope.now = new Date();
+
+      $scope.getDayOfWeek = function(time) {
+        var d = new Date(time).getDay();
+        return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d];
+      };
+
+      $scope.history = {};
+      var h = $scope.history;
+      for (var i = 0; i < history.length; i++) {
+        for (var j = 0; j < history[i].length; j++) {
+          var workout = history[i][j];
+          var date = new Date(workout.time);
+          var y = date.getFullYear(), m = date.getMonth() + 1, d = date.getDate();
+          h[y] = h[y] || {};
+          h[y].year = y;
+          h[y].months = h[y].months || {};
+          h[y].months[m] = h[y].months[m] || {};
+          h[y].months[m].month = m;
+          h[y].months[m].days = h[y].months[m].days || {};
+          h[y].months[m].days[d] = h[y].months[m].days[d] || [];
+          h[y].months[m].days[d].day = d;
+          h[y].months[m].days[d].workouts = h[y].months[m].days[d].workouts || [];
+          h[y].months[m].days[d].push(workout);
+        }
+      }
+      $scope.prettyMonth = function(month) {
+        return MONTH_NAMES[month];
+      }
     }
   ]
 );
 cleanlifts.controller('HistoryMonthController',
-  [         '$scope', '$stateParams', '$filter', 'history',
-    function($scope,   $stateParams,   $filter,   history) {
+  [         '$scope', '$stateParams', '$filter', 'MONTH_NAMES', 'history',
+    function($scope,   $stateParams,   $filter,   MONTH_NAMES,   history) {
       $scope.year = parseInt($stateParams.year);
       $scope.month = parseInt($stateParams.month);
-      $scope.month_full_name = { 1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August',
-        9: 'September', 10: 'October', 11: 'November', 12: 'December' }[$stateParams.month];
+      $scope.month_full_name = MONTH_NAMES[$stateParams.month];
       var MS_IN_DAY = 1000 * 60 * 60 * 24;
       $scope.DAYS_IN_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 

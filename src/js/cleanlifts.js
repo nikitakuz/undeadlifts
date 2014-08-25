@@ -117,6 +117,19 @@ cleanlifts.run(
   ]
 );
 
+cleanlifts.filter('orderByKey', function() {
+  return function(items, reverse) {
+    var filtered = [];
+    angular.forEach(items, function(item) {
+      filtered.push(item);
+    });
+    filtered.sort(function (a, b) {
+      return (reverse ? (a < b ? 1 : -1) : (a > b ? 1 : -1));
+    });
+    if(reverse) filtered.reverse();
+    return filtered;
+  };
+});
 
 cleanlifts.service('replaceState',
   [         '$state',
