@@ -95,6 +95,7 @@ cleanlifts.config(
           },
           controller: ['$rootScope', 'user', function($rootScope, user) {
             $rootScope.user = user;
+            $rootScope.weight_unit = user.weight_unit;
           }]
         }
       );

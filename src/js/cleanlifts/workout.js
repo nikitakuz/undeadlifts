@@ -73,7 +73,6 @@ cleanlifts.controller('WorkoutController',
       }
       $scope.date = new Date(user.current_routine.time);
       $scope.routine = user.current_routine;
-      $scope.weight_unit = user.weight_unit;
       $scope.showChangeWeight = false;
 
       $scope.$on('workout.change-date', function(event, newDate) {

@@ -19,12 +19,14 @@ section
                   .day-of-week
                     | {{ getDayOfWeek(day[0].time) }}
               td.workouts
-                .workout(ng-repeat="workout in day")
+                .past-workout(ng-repeat="workout in day")
                   h3.routine-name
                     | {{ workout.routine }}
                   .lifts
                     .ib.lift(ng-repeat="lift in workout.lifts")
-                      span.name-and-weight!="{{ lift.name }}{{$last ? '' : ',&nbsp;'}}"
+                      .lift-name="{{ lift.name | shortenLiftName }}"
+                      .reps-completed="{{ lift.completed | liftsCompleted }}"
+                      .weight="{{ lift.weight }}{{ weight_unit }}"
                   br
     .history
       .workout(ng-repeat="date in history | orderBy:'$id':true ")

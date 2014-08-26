@@ -47,6 +47,24 @@ cleanlifts.constant('MONTH_NAMES', {
     1: 'January', 2: 'February', 3: 'March',      4: 'April',    5: 'May',       6: 'June',
     7: 'July',    8: 'August',   9: 'September', 10: 'October', 11: 'November', 12: 'December'
 });
+cleanlifts.filter('liftsCompleted', function() {
+  return function(arr) {
+    return arr.join('/').replace(/-1/g, '0');
+  }
+});
+cleanlifts.filter('shortenLiftName', function() {
+  return function(name) {
+    if (name === 'Overhead Press') {
+      return 'OH Press'
+    } else if (name === 'Bench Press') {
+      return 'Bench'
+    } else if (name === 'Barbell Row') {
+      return 'Row'
+    } else {
+      return name;
+    }
+  }
+});
 cleanlifts.controller('AbstractHistoryController',
   [         '$scope', 'history',
     function($scope,   history) {

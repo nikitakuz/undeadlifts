@@ -52,61 +52,61 @@
       .routine-name { width: 70%; }
     }
   }
-}
 
-.name-and-weight {
-  border-bottom: 1px solid @light_green;
+  .name-and-weight {
+    border-bottom: 1px solid @light_green;
 
-  .name, .weight {
-    padding: 0.5em;
-    box-sizing: border-box;
-    display: inline-block;
-    vertical-align: bottom;
-  }
+    .name, .weight {
+      padding: 0.5em;
+      box-sizing: border-box;
+      display: inline-block;
+      vertical-align: bottom;
+    }
 
-  .name {
-    width: 75%;
-    line-height: 1.25em;
-    font-family: @finger_paint;
-    text-transform: uppercase;
-  }
+    .name {
+      width: 75%;
+      line-height: 1.25em;
+      font-family: @finger_paint;
+      text-transform: uppercase;
+    }
 
-  .weight {
-    width: 25%;
+    .weight {
+      width: 25%;
 
-    background-color: @darker_green;
-    color: @lightest_green;
-    font-family: monospace;
+      background-color: @darker_green;
+      color: @lightest_green;
+      font-family: monospace;
 
-    &:hover {
-      color: @neon_green;
+      &:hover {
+        color: @neon_green;
+      }
+    }
+
+    @media (min-width: 22.5em) {
+      .name { width: 80%; }
+      .weight { width: 20%; }
     }
   }
 
-  @media (min-width: 22.5em) {
-    .name { width: 80%; }
-    .weight { width: 20%; }
+  // workout sets
+  .set {
+    display: inline-block; box-sizing: border-box; padding: 0.5em;
+    font-family: @finger_paint; cursor: pointer; text-align: center;
   }
-}
+  .one-set .set { width: 100%; }
+  .two-sets .set { width: 50%; }
+  .three-sets .set { width: 33.3%; }
+  .four-sets .set { width: 25%; }
+  .five-sets .set { width: 20%; }
 
-// workout sets
-.set {
-  display: inline-block; box-sizing: border-box; padding: 0.5em;
-  font-family: @finger_paint; cursor: pointer; text-align: center;
-}
-.one-set .set { width: 100%; }
-.two-sets .set { width: 50%; }
-.three-sets .set { width: 33.3%; }
-.four-sets .set { width: 25%; }
-.five-sets .set { width: 20%; }
+  .set .reps {
+    display: inline-block; width: 1.25em; line-height: 1.25em; padding:0.5em;
+    border: 1px solid @light_green; border-radius: 100%;
+    color: @light_green;
+  }
 
-.set .reps {
-  display: inline-block; width: 1.25em; line-height: 1.25em; padding:0.5em;
-  border: 1px solid @light_green; border-radius: 100%;
-  color: @light_green;
+  .set.completed .reps { color: @neon_green; border-color: @blood_red; background-color: @blood_red; }
 }
-
-.set.completed .reps { color: @neon_green; border-color: @blood_red; background-color: @blood_red; }
 
 .rest-timer {
   position: absolute; top: 0; left: 0; right: 0;
