@@ -11,9 +11,10 @@ block body
         a.h2-font-size(ui-sref="user.index")!="UNDEADLIFTS"
       .right
         a.h3-font-size(ng-if="user", ng-click="logout()")!="Logout"
-  section(ui-view="")
-    .heading
-      .tac
-        .ib.tal.p1em.w100.mxw20em
-          h1
-            | Loading...
+  div(ui-view="")
+    section
+      .heading
+        .tac
+          .ib.tal.p1em.w100.mxw20em
+            h1
+              | Loading...

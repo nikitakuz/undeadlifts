@@ -17,37 +17,43 @@ a.recent-workouts-link {
   }
 
   th, td {
-    line-height: 2em;
-  }
-
-  td {
-    width: 3em;
+    width: 2.5em;
     text-align: center;
+    line-height: 2.5em;
   }
 
-  td.different-month {
-    opacity: 0.5;
+  .date {
+    background: @lightest_green;
+    border: 1px solid mix(@light_green, black, 75%);
+    margin: 0.125em;
   }
 
-  a {
+  a.prev, a.next { font-size: 2em; }
+
+  tr.days-of-the-week { font-size: 0.875em; }
+
+  a.details {
     display: inline-block;
     width: 100%;
     height: 100%;
-    border-radius: 0.5em;
-    background: @lightest_green;
-    color: @darker_green;
+    background: @blood_red;
+    color: @lightest_green;
     text-decoration: none;
 
     &:hover {
-      background: @blood_red;
       color: @neon_green;
     }
   }
 }
 
 .recent-workouts {
+
   table {
     width: 100%;
+  }
+
+  tr {
+    background: @lightest_green;
   }
 
   td {

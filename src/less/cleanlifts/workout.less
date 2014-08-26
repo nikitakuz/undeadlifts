@@ -8,19 +8,20 @@
   }
 
   .date-and-routine-name {
-    font-family: @finger_paint;
     font-size: 0.95em;
 
     .date, .routine-name {
       display: inline-block;
       box-sizing: border-box;
       padding: 0.5em;
+      vertical-align: bottom;
     }
 
     .date {
-      text-align: center;
       width: 40%;
       background-color: @darker_green;
+      font-family: monospace;
+      text-align: center;
 
       a {
         color: @lightest_green;
@@ -33,6 +34,8 @@
 
     .routine-name {
       width: 60%;
+      line-height: 1.25em;
+      font-family: @finger_paint;
       text-align: center;
       text-overflow: ellipsis;
     }
@@ -54,24 +57,26 @@
 .name-and-weight {
   border-bottom: 1px solid @light_green;
 
-  .name {
-    width: 75%;
-    text-transform: uppercase;
-  }
-
   .name, .weight {
     padding: 0.5em;
     box-sizing: border-box;
     display: inline-block;
+    vertical-align: bottom;
+  }
+
+  .name {
+    width: 75%;
+    line-height: 1.25em;
     font-family: @finger_paint;
+    text-transform: uppercase;
   }
 
   .weight {
     width: 25%;
 
     background-color: @darker_green;
-
     color: @lightest_green;
+    font-family: monospace;
 
     &:hover {
       color: @neon_green;
@@ -86,8 +91,8 @@
 
 // workout sets
 .set {
-  display: inline-block; box-sizing: border-box;
-  padding: 0.5em; text-align: center; cursor: pointer;
+  display: inline-block; box-sizing: border-box; padding: 0.5em;
+  font-family: @finger_paint; cursor: pointer; text-align: center;
 }
 .one-set .set { width: 100%; }
 .two-sets .set { width: 50%; }
@@ -125,4 +130,29 @@
       }
     }
   }
+}
+
+.plates {
+  .plate {
+    display: block;
+    margin: 0 auto;
+    border: 3px solid @darker_green;
+    border-radius: 100%;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .forty-five, .thirty-five, .twenty-five, .ten, .five, .two-point-five {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 0.5em 1em;
+  }
+
+  .forty-five .plate { width: 5em; line-height: 5em; }
+  .thirty-five .plate { width: 4.5em; line-height: 4.5em; }
+  .twenty-five .plate { width: 4em; line-height: 4em; }
+  .ten .plate { width: 3.5em; line-height: 3.5em; }
+  .five .plate { width: 3em; line-height: 3em; }
+  .two-point-five .plate { width: 2.5em; line-height: 2.5em; }
 }

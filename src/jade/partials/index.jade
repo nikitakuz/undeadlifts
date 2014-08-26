@@ -1,16 +1,17 @@
-.content
-  .index
-    a(ng-if="!user.current_routine", ui-sref="user.select-routine")
-      .icon
-        include ../svg/dumbell
-      h1.h3-font-size!="New Workout"
-    a(ng-if="user.current_routine", ui-sref="user.workout")
-      .icon
-        include ../svg/dumbell
-      h1.h3-font-size!="Continue Workout"
-    br
-    br
-    a(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
-      .icon
-        include ../svg/calendar
-      h1.h3-font-size!="History"
+section
+  .content
+    .index
+      a(ng-if="!user.current_routine", ui-sref="user.select-routine")
+        .icon
+          include ../svg/dumbell
+        h1.h3-font-size!="New Workout"
+      a(ng-if="user.current_routine", ui-sref="user.workout")
+        .icon
+          include ../svg/dumbell
+        h1.h3-font-size!="Continue Workout"
+      br
+      br
+      a(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
+        .icon
+          include ../svg/calendar
+        h1.h3-font-size!="History"
