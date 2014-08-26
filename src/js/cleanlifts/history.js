@@ -49,7 +49,14 @@ cleanlifts.constant('MONTH_NAMES', {
 });
 cleanlifts.filter('liftsCompleted', function() {
   return function(arr) {
-    return arr.join('/').replace(/-1/g, '0');
+    var str = arr.join('/').replace(/-1/g, '0');
+    if (str === '5/5/5/5/5') {
+      return '5x5';
+    } else if (str === '8/8/8') {
+      return '3X8';
+    } else {
+      return str;
+    }
   }
 });
 cleanlifts.filter('shortenLiftName', function() {
@@ -158,9 +165,10 @@ cleanlifts.controller('HistoryMonthController',
   ]
 );
 cleanlifts.controller('HistoryDetailsController',
-  [         '$scope', '$filter', 'history', 'details',
-    function($scope,   $filter,   history,   details) {
+  [         '$scope', '$stateParams', '$filter', 'history', 'details',
+    function($scope,   $stateParams,   $filter,   history,   details) {
       $scope.details = details;
+      $scope.date = new Date($stateParams.year, $stateParams.month, $stateParams.day);
     }
   ]
 );

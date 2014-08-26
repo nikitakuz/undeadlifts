@@ -1,16 +1,15 @@
 .modal-background
   section
-    .modal-gutter
-    .modal-dialog
-      .heading
+    .content
+      .modal-gutter
+      .modal-dialog
         h3!="Change {{ lift }} Weight"
-      .content
         .tal
           | If your bar weighs {{ weight_unit === 'kg' ? 20 : 45 }}{{ weight_unit }}, {{ weight }}{{ weight_unit }} means you add {{ (weight - 45) / 2 }}{{ weight_unit }} on each side.
         br
         .tac
           button(ng-click="decreaseWeight()")!="-"
-          span.h2-font-size
+          span.h2-font-size.monospace
             | &nbsp;&nbsp;{{ weight }}{{ weight_unit }}&nbsp;&nbsp;
           button(ng-click="increaseWeight()")!="+"
         br
@@ -39,7 +38,6 @@
               .plate!="5lb"
             .two-point-five(ng-if="plates['2.5']")
               | {{ plates['2.5'] }} X
-              .plate!="2.5lb"
+              .plate!="2&frac12;lb"
 
-
-  .modal-gutter
+      .modal-gutter

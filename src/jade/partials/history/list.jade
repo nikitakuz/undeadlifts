@@ -22,20 +22,8 @@ section
                 .past-workout(ng-repeat="workout in day")
                   h3.routine-name
                     | {{ workout.routine }}
-                  .lifts
-                    .ib.lift(ng-repeat="lift in workout.lifts")
-                      .lift-name="{{ lift.name | shortenLiftName }}"
-                      .reps-completed="{{ lift.completed | liftsCompleted }}"
-                      .weight="{{ lift.weight }}{{ weight_unit }}"
-                  br
-    .history
-      .workout(ng-repeat="date in history | orderBy:'$id':true ")
-        h2
-          | {{ date.date | date:'EEE, MMM d, yyyy' }}
-        .routine-date-and-name(ng-repeat="workout in date")
-          h3
-            | {{ workout.routine }}
-          .lifts
-            .ib.lift(ng-repeat="lift in workout.lifts")
-              span.name-and-weight!="{{ lift.name }} ({{ lift.weight }} {{ user.weight_unit }}){{$last ? '' : ',&nbsp;'}}"
-          br
+                  table.lifts
+                    tr.lift(ng-repeat="lift in workout.lifts")
+                      td.lift-name="{{ lift.name }}"
+                      td.weight="{{ lift.weight }}{{ weight_unit }}"
+                      td.reps-completed="{{ lift.completed | liftsCompleted }}"

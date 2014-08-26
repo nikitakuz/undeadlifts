@@ -56,7 +56,7 @@ a.recent-workouts-link {
     background: @lightest_green;
   }
 
-  td {
+  td.date, td.workouts {
     padding: 0.5em;
   }
 
@@ -94,13 +94,18 @@ a.recent-workouts-link {
       margin: 0;
     }
 
-    .lifts {
+    tr.lift {
+      &:nth-child(odd) { background: rgba(0, 0, 0, 0.1); }
+      &:nth-child(even) { background: rgba(255, 255, 255, 0.1); }
 
-    }
+      td.lift-name {
+        width: 50%;
+      }
 
-    .lift {
-      margin: 0 0.5em;
-      text-align: center;
+      td.weight, td.reps-completed {
+        width: 25%;
+        text-align: center;
+      }
     }
   }
 }
