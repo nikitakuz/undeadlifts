@@ -1,21 +1,93 @@
 @import "constant";
 
+.workout {
+  .date-and-routine-name, .lift {
+    background: @lightest_green;
+    box-shadow: @box_shadow;
+    margin: 1em 0;
+  }
+
+  .date-and-routine-name {
+    font-family: @finger_paint;
+    font-size: 0.95em;
+
+    .date, .routine-name {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 0.5em;
+    }
+
+    .date {
+      text-align: center;
+      width: 40%;
+      background-color: @darker_green;
+
+      a {
+        color: @lightest_green;
+
+        &:hover {
+          color: @neon_green;
+        }
+      }
+    }
+
+    .routine-name {
+      width: 60%;
+      text-align: center;
+      text-overflow: ellipsis;
+    }
+
+    @media(min-width: 22.5em) { font-size: 1em; }
+
+    @media(min-width: 25em) {
+      .date { width: 35%; }
+      .routine-name { width: 65%; }
+    }
+
+    @media(min-width: 27.5em) {
+      .date { width: 30%; }
+      .routine-name { width: 70%; }
+    }
+  }
+}
+
 .name-and-weight {
-  border-bottom: 1px solid #d0d0d0;
+  border-bottom: 1px solid @light_green;
+
+  .name {
+    width: 75%;
+    text-transform: uppercase;
+  }
 
   .name, .weight {
-    display: inline-block; width: 50%;
+    padding: 0.5em;
+    box-sizing: border-box;
+    display: inline-block;
+    font-family: @finger_paint;
   }
 
   .weight {
-    text-align: right;
+    width: 25%;
+
+    background-color: @darker_green;
+
+    color: @lightest_green;
+
+    &:hover {
+      color: @neon_green;
+    }
+  }
+
+  @media (min-width: 22.5em) {
+    .name { width: 80%; }
+    .weight { width: 20%; }
   }
 }
 
 // workout sets
 .set {
   display: inline-block; box-sizing: border-box;
-  padding: 0.5em; text-align: center;
+  padding: 0.5em; text-align: center; cursor: pointer;
 }
 .one-set .set { width: 100%; }
 .two-sets .set { width: 50%; }

@@ -1,0 +1,26 @@
+@import "constant";
+
+.index {
+  text-align: center;
+
+  a {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 66.666%;
+    min-width: 12em;
+    padding: 1em;
+    border-radius: 0.5em;
+    background: @lightest_green;
+
+    .icon {
+      width: 4em;
+      height: 4em;
+      margin: 0 auto;
+    }
+
+    &:hover {
+      background: @blood_red;
+      color: @neon_green;
+    }
+  }
+}

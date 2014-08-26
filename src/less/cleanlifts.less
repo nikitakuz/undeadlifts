@@ -2,14 +2,16 @@
 @import "adapt";
 
 @import "cleanlifts/constant";
+@import "cleanlifts/index";
 @import "cleanlifts/form";
+@import "cleanlifts/modal";
 @import "cleanlifts/workout";
 @import "cleanlifts/history";
 @import "cleanlifts/datepicker";
 
 body {
-  background-color: @lightest_green;
-  font-family: @snippet;
+  background-color: @light_green;
+  font-family: @finger_paint;
 }
 
 a {
@@ -19,12 +21,26 @@ a {
 }
 
 button {
-  background-color: #434d38;
+  border: 0;
+  box-shadow: @box_shadow;
+  background-color: @darker_green;
   color: @lightest_green;
+
+  &:hover {
+    color: @neon_green;
+  }
 }
 
 h1 { font-family: @finger_paint; }
 h2, h3 { font-family: @alconica; }
+
+nav, section {
+  .heading, .content {
+    max-width: 30em;
+
+    padding-left: 0.5em; padding-right: 0.5em;
+  }
+}
 
 nav {
   background-color: #080808;
@@ -45,7 +61,6 @@ nav {
     display: inline-block;
     box-sizing: border-box;
     width: 50%;
-    max-width: 20em;
     padding: 0.25em 0.5em;
   }
 
@@ -60,6 +75,7 @@ nav {
 
 section {
   position: relative;
+  padding-top: 0.5em; padding-bottom: 0.5em;
 }
 
 .heading {

@@ -1,22 +1,21 @@
-.heading
-  h3
-    a(ui-sref="user.workout.change-date")
-      | {{ date | date:'EEE MMM d' }}
-  h1
-    | {{ routine.name }}
-.content
-  .routine
-    .lift(ng-repeat="lift in lifts", ng-class="[lift.classname]")
-      .name-and-weight
-        .name!="{{ lift.name }}"
-        a.weight(ui-sref="user.workout.change-weight({ lift: lift.name })")!="{{ user.working_weight[lift.name] }} {{ weight_unit }}"
-      .set(ng-repeat="set in getNumber(lift.sets) track by $index", ng-click="updateSet(lift, $index)", ng-class="{completed: lift.completed[$index] > -1}")
-        .reps
-          | {{ lift.completed[$index] > -1 ? lift.completed[$index] : lift.reps }}
-  br
-  br
-  .finish-workout.tac
-    button.p1em(ng-click="finishWorkout()")!="Finish Workout"
+.workout
+  .content
+    .date-and-routine-name.h3-font-size
+      .date
+        a(ui-sref="user.workout.change-date")
+          | {{ date | date:'EEE MMM d' }}
+      .routine-name
+        | {{ routine.name }}
+    .routine
+      .lift(ng-repeat="lift in lifts", ng-class="[lift.classname]")
+        .name-and-weight.tar
+          .name.tal!="{{ lift.name }}"
+          a.weight.tac(ui-sref="user.workout.change-weight({ lift: lift.name })")!="{{ user.working_weight[lift.name] }} {{ weight_unit }}"
+        .set(ng-repeat="set in getNumber(lift.sets) track by $index", ng-click="updateSet(lift, $index)", ng-class="{completed: lift.completed[$index] > -1}")
+          .reps
+            | {{ lift.completed[$index] > -1 ? lift.completed[$index] : lift.reps }}
+    .finish-workout.tac
+      button.p1em(ng-click="finishWorkout()")!="Finish Workout"
 .rest-timer(ng-show="showRestTimer")
   .heading
     h3

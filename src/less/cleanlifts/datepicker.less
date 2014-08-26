@@ -1,4 +1,8 @@
 .date-picker {
+  td {
+    padding: 3px;
+  }
+
   .btn {
     display: inline-block;
     margin-bottom: 0;
@@ -7,9 +11,8 @@
     vertical-align: middle;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
     white-space: nowrap;
-    padding: 6px 12px;
+    padding: 4px 8px;
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;
@@ -17,12 +20,16 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    &:hover {
+      color: @blood_red;
+      background-color: @neon_green;
+    }
   }
 
   .btn-info {
-    color: #fff;
-    background-color: #39b3d7;
-    border-color: #269abc;
+    color: @neon_green;
+    background-color: @blood_red;
   }
 
   .glyphicon-chevron-left:before {

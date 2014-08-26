@@ -1,6 +1,10 @@
 .adapt(@columns, @width) {
   @media (min-width: (@columns * 2.5em)) {
-    section > * { width: (@width / @columns) * 100%; }
+    section {
+      .heading, .content {
+        width: (@width / @columns) * 100%;
+      }
+    }
   }
 }
 
