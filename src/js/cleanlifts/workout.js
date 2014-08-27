@@ -64,6 +64,7 @@ cleanlifts.controller('WorkoutController',
     function($rootScope,   $scope,   $state,   $filter,   $firebase,   log,   user) {
       var restTimerTimeout = null;
       var restTimerInterval = null;
+      var timerSound = new Howl({ urls: ['mp3/chirp-chirp.mp3'] });
       $scope.showRestTimer = false;
       $scope.restTime = 0;
 
@@ -118,6 +119,9 @@ cleanlifts.controller('WorkoutController',
         restTimerInterval = setInterval(function() {
           $scope.$apply(function() {
             $scope.restTime += 1000;
+            if ($scope.restTime === 90 * 1000 || $scope.restTime === 180 * 1000) {
+              timerSound.play();
+            }
           });
         }, 1000);
       }
