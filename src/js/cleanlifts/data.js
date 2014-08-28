@@ -1,15 +1,12 @@
 cleanlifts.service('DataService',
-  [         '$firebase', 'fref', 'user_id',
-    function($firebase,   fref,   user_id) {
-      var user = fref.child('users').child(user_id);
+  [         '$firebase', 'FBREF', 'user_id',
+    function($firebase,   FBREF,   user_id) {
+      var user = FBREF.child('users').child(user_id);
+      var workout = FBREF.child('workout');
       var routines = user.child('routines');
       var history = user.child('history');
 
       return {
-        getUserPromise: function() {
-          return objectPromise(user);
-        },
-
         getRoutinesPromise: function() {
           return arrayPromise(routines);
         },

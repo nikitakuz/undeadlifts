@@ -1,20 +1,21 @@
 .workout
   section
     .content
+      | {{ routine2 }}
       .date-and-routine-name.h3-font-size
         .date
           a(ui-sref="user.workout.change-date")
             | {{ date | date:'EEE MMM d' }}
         .routine-name
-          | {{ routine.name }}
+          | {{ workout.routine.name }}
       .routine
-        .lift(ng-repeat="lift in lifts", ng-class="[lift.classname]")
+        .lift(ng-repeat="lift in lifts", ng-class="classname", ng-controller="LiftController")
           .name-and-weight.tar
             .name.tal!="{{ lift.name }}"
             a.weight.tac(ui-sref="user.workout.change-weight({ lift: lift.name })")!="{{ user.working_weight[lift.name] }} {{ weight_unit }}"
-          .set(ng-repeat="set in getNumber(lift.sets) track by $index", ng-click="updateSet(lift, $index)", ng-class="{completed: lift.completed[$index] > -1}")
+          .set(ng-repeat="set in lift.sets track by $index", ng-click="updateSet($index)", ng-class="{completed: lift.completed[$index] > -1}")
             .reps
-              | {{ lift.completed[$index] > -1 ? lift.completed[$index] : lift.reps }}
+              | {{ lift.completed[$index] > -1 ? lift.completed[$index] : set }}
       .finish-workout.tac
         button.p1em(ng-click="finishWorkout()")!="Finish Workout"
 .rest-timer(ng-show="showRestTimer")

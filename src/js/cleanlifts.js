@@ -2,11 +2,13 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router', 'ui.boot
 
 (function() {
   var log = function(msg) { console.log(msg); };
-  var fref = new Firebase('https://cleanlifts.firebaseio.com');
+  var FBURL = 'https://cleanlifts.firebaseio.com';
+  var FBREF = new Firebase(FBURL);
+  cleanlifts.constant('FBURL', FBURL);
   cleanlifts.constant('log', log );
-  cleanlifts.constant('fref', fref);
+  cleanlifts.constant('FBREF', FBREF);
 
-  var fbsl = new FirebaseSimpleLogin(fref, loginCallback);
+  var fbsl = new FirebaseSimpleLogin(FBREF, loginCallback);
 
   function loginCallback(error, user) {
     if (error) {
@@ -43,7 +45,7 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router', 'ui.boot
 
   function getUserData(uid, callback) {
     log('Fetching user data...');
-    var userRef = fref.child('users').child(uid);
+    var userRef = FBREF.child('users').child(uid);
     userRef.once('value', function(snapshot) {
       callback(snapshot.val());
     });
@@ -51,7 +53,7 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router', 'ui.boot
 
   function setUserData(user, callback) {
     log('Creating user data...');
-    var userRef = fref.child('users').child(user.uid);
+    var userRef = FBREF.child('users').child(user.uid);
     userRef.set({
       email: user.email,
       provider: user.provider,
@@ -72,8 +74,8 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router', 'ui.boot
 })();
 
 cleanlifts.service('user',
-  [         'fref', 'user_id',
-    function(fref, user_id) {
+  [         'FREF', 'user_id',
+    function(FREF, user_id) {
 //      debugger;
     }
   ]
@@ -89,8 +91,9 @@ cleanlifts.config(
           abstract: true,
           template: '<ui-view/>',
           resolve: {
-            user: ['DataService', function(DataService) {
-              return DataService.getUserPromise();
+            user: ['firebase', 'user_id', function(firebase, user_id) {
+              var user = firebase.sync(['users', user_id]);
+              return user.$asObject().$loaded();
             }]
           },
           controller: ['$rootScope', 'user', function($rootScope, user) {
