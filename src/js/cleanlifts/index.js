@@ -5,7 +5,7 @@ cleanlifts.config(
         {
           url: '/',
           templateUrl: 'partials/index.html',
-          controller: 'indexController',
+          controller: 'indexController'
         }
       );
     }
