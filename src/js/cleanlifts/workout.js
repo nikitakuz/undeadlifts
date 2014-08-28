@@ -5,12 +5,7 @@ cleanlifts.config(
         {
           url: '/select-routine',
           templateUrl: 'partials/select-routine.html',
-          controller: 'SelectRoutineController',
-          resolve: {
-            'routines': ['DataService', function(DataService) {
-              return DataService.getRoutinesPromise();
-            }]
-          }
+          controller: 'SelectRoutineController'
         }
       );
 
@@ -40,62 +35,40 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.service('workout',
-  [         '$firebase', '$filter', 'FBREF',
-    function($firebase,   $filter,   FBREF) {
-      var workouts = FBREF.child('workouts');
 
-      return {
-        create: function(routine, onComplete) {
-          var now = new Date();
-          var workout = {
-            routine: routine,
-            timestamp: now.getTime(),
-            date: $filter('date')(now, 'yyyyMMdd')
-          };
-          var ref = workouts.push(workout, function(err) {
-            if (err) {
-              onComplete(new Error('Could not create workout.'), false);
-            } else {
-              onComplete(false, ref.name());
-            }
-          });
-        },
-        sync: function(refId) {
-          return $firebase(workouts.child(refId)).$asObject();
-        }
-      }
-    }
-  ]
-);
 cleanlifts.controller('SelectRoutineController',
-  [         '$scope', '$state', '$filter', 'log', 'user', 'routines', 'workout',
-    function($scope,   $state,   $filter,   log,   user,   routines,   workout) {
+  [         '$scope', '$state', '$filter', 'firebase', 'log', 'user',
+    function($scope,   $state,   $filter,   firebase,   log,   user) {
       log('Waiting for user to select a routine...');
-      $scope.routines = routines;
+      $scope.routines = JSON.parse(JSON.stringify(user.routines)); // BAD HACK. Sorry.
 
       $scope.selectRoutine = function(routine) {
         log('User selected a routine.');
         log('Routine chosen: ' + routine.name);
         // Remove firebase properties($id, $priority) and protect against unintentional modification.
-        var copy = { name: routine.name, lifts: JSON.parse(JSON.stringify(routine.lifts)) };
-        workout.create(copy, function(err, refId) {
-            if (!err) {
-              user.current_workout = refId;
-              user.$save();
-              $state.transitionTo('user.workout', {}, {});
-            } else {
-              console.log('Failed to create a workout.');
-            }
+        var routine_copy = { name: routine.name, lifts: JSON.parse(JSON.stringify(routine.lifts)) };
+        var now = new Date();
+        var workout = {
+          routine: routine_copy,
+          timestamp: now.getTime(),
+          date: $filter('date')(now, 'yyyyMMdd')
+        };
+        firebase.push('workouts', workout, function(err, refId) {
+          if (!err) {
+            user.current_workout = refId;
+            user.$save();
+            $state.transitionTo('user.workout', {}, {});
+          } else {
+            console.log('Failed to create a workout.');
           }
-        );
+        });
       };
     }
   ]
 );
 cleanlifts.controller('WorkoutController',
-  [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'log', 'user', 'workout',
-    function($rootScope,   $scope,   $state,   $filter,   firebase,   util,   log,   user,   workout) {
+  [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'log', 'user',
+    function($rootScope,   $scope,   $state,   $filter,   firebase,   util,   log,   user) {
       $scope.restTimerTimeout = null;
       $scope.restTimerInterval = null;
       var timerSound = new Howl({ urls: ['mp3/chirp-chirp.mp3'] });

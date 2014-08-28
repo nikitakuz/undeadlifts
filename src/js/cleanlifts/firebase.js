@@ -14,6 +14,16 @@ cleanlifts.service('firebase',
         sync: function(path) {
           var ref = this.ref(path);
           return $firebase(ref);
+        },
+
+        push: function(path, val, onComplete) {
+          var ref = this.ref(path).push(val, function(err) {
+            if (err) {
+              onComplete(new Error('Push failed.'), false);
+            } else {
+              onComplete(false, ref.name());
+            }
+          });
         }
       }
     }
