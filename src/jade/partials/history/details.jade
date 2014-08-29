@@ -9,9 +9,9 @@
           a
             | {{ date | date:'EEE MMM d' }}
         .routine-name
-          | {{ workout.routine }}
+          | {{ workout.routine.name }}
       .routine
-        .lift(ng-repeat="lift in workout.lifts", ng-class="[lift.classname]")
+        .lift(ng-repeat="lift in workout.routine.lifts", ng-class="[lift.classname]")
           .name-and-weight
             .name!="{{ lift.name }}"
             a.weight(ui-sref="user.workout.change-weight({ lift: lift.name })")!="{{ user.working_weight[lift.name] }} {{ weight_unit }}"

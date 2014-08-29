@@ -21,9 +21,9 @@ section
               td.workouts
                 .past-workout(ng-repeat="workout in day")
                   h3.routine-name
-                    | {{ workout.routine }}
+                    | {{ workout.routine.name }}
                   table.lifts
-                    tr.lift(ng-repeat="lift in workout.lifts")
+                    tr.lift(ng-repeat="lift in workout.routine.lifts")
                       td.lift-name="{{ lift.name }}"
                       td.weight="{{ lift.weight }}{{ weight_unit }}"
                       td.reps-completed="{{ lift.completed | liftsCompleted }}"

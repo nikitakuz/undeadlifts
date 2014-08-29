@@ -49,9 +49,11 @@ cleanlifts.controller('HistoryMonthController',
       };
 
       $scope.dateToWorkout = {};
-      for (var i = 0; i < $scope.history.length; i++) {
-        var workout = $scope.history[i];
-        $scope.dateToWorkout[workout.$id] = workout;
+      for (var i in $scope.history) {
+        if ($scope.history.hasOwnProperty(i)) {
+          var workout = $scope.history[i];
+          $scope.dateToWorkout[i] = workout;
+        }
       }
     }
   ]
