@@ -119,7 +119,7 @@ cleanlifts.controller('WorkoutController',
         var date = $scope.workout.date;
         user.history = user.history || {};
         user.history[date] = user.history[date] || {};
-        user.history[date][user.current_workout] = true;
+        user.history[date]= user.current_workout;
         delete user.current_workout;
         user.$save().then(function(ref) {
             $state.transitionTo('user.index', {}, {});

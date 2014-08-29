@@ -22,14 +22,9 @@ cleanlifts.controller('HistoryListController',
       };
 
       $scope.history = {};
-      for (var date in user.history) {
-        if (user.history.hasOwnProperty(date)) {
-          var workouts = user.history[date];
-          for (var id in workouts) {
-            if (workouts.hasOwnProperty(id) && workouts[id]) {
-              loadWorkout(id, util.parseYyyyMmDd(date));
-            }
-          }
+      for (var yyyyMmDd in user.history) {
+        if (user.history.hasOwnProperty(yyyyMmDd)) {
+          loadWorkout(user.history[yyyyMmDd], util.parseYyyyMmDd(yyyyMmDd));
         }
       }
 
@@ -45,9 +40,8 @@ cleanlifts.controller('HistoryListController',
         h[y].months[m].days = h[y].months[m].days || {};
         h[y].months[m].days[d] = h[y].months[m].days[d] || [];
         h[y].months[m].days[d].day = d;
-        h[y].months[m].days[d].workouts = h[y].months[m].days[d].workouts || [];
         workout.$loaded().then(function() {
-          h[y].months[m].days[d].push(workout);
+          h[y].months[m].days[d].workout = workout;
         });
       }
 

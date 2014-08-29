@@ -18,12 +18,11 @@ section
                     | {{ day.day }}
                   .day-of-week
                     | {{ getDayOfWeek(day[0].time) }}
-              td.workouts
-                .past-workout(ng-repeat="workout in day")
-                  h3.routine-name
-                    | {{ workout.routine.name }}
-                  table.lifts
-                    tr.lift(ng-repeat="lift in workout.routine.lifts")
-                      td.lift-name="{{ lift.name }}"
-                      td.weight="{{ lift.weight }}{{ weight_unit }}"
-                      td.reps-completed="{{ lift.completed | liftsCompleted }}"
+              td.workout
+                h3.routine-name
+                  | {{ day.workout.routine.name }}
+                table.lifts
+                  tr.lift(ng-repeat="lift in day.workout.routine.lifts")
+                    td.lift-name="{{ lift.name }}"
+                    td.weight="{{ lift.weight }}{{ weight_unit }}"
+                    td.reps-completed="{{ lift.completed | liftsCompleted }}"
