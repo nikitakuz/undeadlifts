@@ -25,7 +25,7 @@ cleanlifts.service('firebase',
             }
           });
         }
-      }
+      };
     }
   ]
 );

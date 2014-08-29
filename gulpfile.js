@@ -13,7 +13,7 @@ var paths = {
   less: SRC + 'less/*.less',
   jade: SRC + 'jade/**/*.jade',
   scripts: [SRC + 'js/**/*.js', '!' + SRC + 'js/lib/**/*.js'],
-  app: [SRC + 'js/cleanlifts.js', SRC + 'js/cleanlifts/**/*.js'],
+  app: [SRC + 'js/cleanlifts/**/*.js'],
   login: [SRC + 'js/login.js'],
   signup: [SRC + 'js/signup.js'],
   lib: SRC + 'js/lib/**/*.js'

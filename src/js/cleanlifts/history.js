@@ -57,20 +57,20 @@ cleanlifts.filter('liftsCompleted', function() {
     } else {
       return str;
     }
-  }
+  };
 });
 cleanlifts.filter('shortenLiftName', function() {
   return function(name) {
     if (name === 'Overhead Press') {
-      return 'OH Press'
+      return 'OH Press';
     } else if (name === 'Bench Press') {
-      return 'Bench'
+      return 'Bench';
     } else if (name === 'Barbell Row') {
-      return 'Row'
+      return 'Row';
     } else {
       return name;
     }
-  }
+  };
 });
 cleanlifts.controller('AbstractHistoryController',
   [         '$scope', 'history',
@@ -115,7 +115,7 @@ cleanlifts.controller('HistoryListController',
       }
       $scope.prettyMonth = function(month) {
         return MONTH_NAMES[month];
-      }
+      };
     }
   ]
 );
