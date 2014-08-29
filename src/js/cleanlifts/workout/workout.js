@@ -19,8 +19,8 @@ cleanlifts.config(
   ]
 );
 cleanlifts.controller('WorkoutController',
-  [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'log', 'user', 'workout',
-    function($rootScope,   $scope,   $state,   $filter,   firebase,   util,   log,   user,   workout) {
+  [         '$rootScope', '$scope', '$state', '$timeout', '$filter', 'firebase', 'util', 'log', 'user', 'workout',
+    function($rootScope,   $scope,   $state,   $timeout,   $filter,   firebase,   util,   log,   user,   workout) {
       $scope.restTimerTimeout = null;
       $scope.restTimerInterval = null;
       var timerSound = new Howl({ urls: ['mp3/chirp-chirp.mp3'] });
@@ -29,7 +29,15 @@ cleanlifts.controller('WorkoutController',
       $scope.restTime = 0;
 
       if (!workout || !workout.routine) {
-        $state.transitionTo('user.select-routine', {}, { location: 'replace' });
+        if ($state.includes('user.workout')) {
+          $state.transitionTo('user.select-routine', {}, { location: 'replace' });
+        } else if ($state.includes('user.history.details')) {
+          $state.transitionTo(
+            'user.history.month',
+            { year: $state.params.year, month: $state.params.month },
+            { location: 'replace' }
+          );
+        }
         return;
       }
 
@@ -39,11 +47,11 @@ cleanlifts.controller('WorkoutController',
           $state.transitionTo('user.select-routine', {}, { location: 'replace' });
           return;
         }
-        $scope.date = parseDate($scope.workout.date);
+        $scope.setDate($scope.workout.date);
         $scope.routine = $scope.workout.routine;
       });
 
-      var path = ['workouts', user.current_workout, 'routine', 'lifts'];
+      var path = ['workouts', workout.$id, 'routine', 'lifts'];
       $scope.lifts = firebase.sync(path).$asArray();
       $scope.lifts.$loaded().then(function() {
         var lifts = $scope.lifts;
@@ -56,6 +64,11 @@ cleanlifts.controller('WorkoutController',
         }
       });
 
+      $scope.setDate = function(date) {
+        $scope.workout.date = date;
+        $scope.date = util.parseYyyyMmDd(date);
+      };
+
       function validateWorkout(workout) {
         var valid = workout.date && workout.routine;
         if (valid) {
@@ -66,18 +79,6 @@ cleanlifts.controller('WorkoutController',
           return false;
         }
       }
-
-      function parseDate(date) {
-        var yyyy = date.substr(0, 4);
-        var mm = date.substr(4, 2);
-        var dd = date.substr(6, 2);
-        return new Date(yyyy, mm - 1, dd);
-      }
-
-      $scope.$on('workout.change-date', function(event, newDate) {
-        $scope.date = new Date(newDate);
-        $scope.workout.date = $filter('date')(newDate, 'yyyyMMdd');
-      });
 
       $scope.clearRestTimer = function() {
         clearTimeout($scope.restTimerTimeout);
@@ -118,20 +119,32 @@ cleanlifts.controller('WorkoutController',
       $scope.finishWorkout = function() {
         var date = $scope.workout.date;
         user.history = user.history || {};
-        user.history[date] = user.history[date] || {};
-        user.history[date]= user.current_workout;
-        delete user.current_workout;
-        user.$save().then(function(ref) {
+        if (user.history[date]) {
+          if (confirm('A workout already exists for this date. Do you want to overwrite it with this one?')) {
+            saveWorkout();
+          }
+        } else {
+          saveWorkout();
+        }
+
+        function saveWorkout() {
+          user.history[date] = user.current_workout;
+          delete user.current_workout;
+          user.$save().then(function(ref) {
             $state.transitionTo('user.index', {}, {});
-        });
+          });
+        }
       };
+
+      $scope.updateWorkout = function() {
+        alert('coming soon');
+      }
     }
   ]
 );
 cleanlifts.controller('LiftController',
   [         '$scope',
     function($scope) {
-      console.log($scope.lift);
       $scope.classname = { 1: 'one-set', 2: 'two-sets', 3: 'three-sets', 4: 'four-sets', 5: 'five-sets' }[$scope.lift.sets.length];
 
       $scope.updateSet = function(si) {
