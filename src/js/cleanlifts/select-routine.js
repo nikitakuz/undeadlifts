@@ -26,7 +26,7 @@ cleanlifts.controller('SelectRoutineController',
         var workout = {
           routine: routine_copy,
           timestamp: now.getTime(),
-          date: $filter('date')(now, 'yyyyMMdd')
+          yyyymmdd: $filter('date')(now, 'yyyyMMdd')
         };
         firebase.push('workouts', workout, function(err, refId) {
           if (!err) {

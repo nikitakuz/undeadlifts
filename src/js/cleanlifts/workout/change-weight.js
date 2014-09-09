@@ -12,8 +12,8 @@ cleanlifts.config(
   ]
 );
 cleanlifts.controller('ChangeWeightController',
-  [         '$scope', '$state', '$stateParams',
-    function($scope,   $state,   $stateParams) {
+  [         '$scope', '$state', '$stateParams', 'workout',
+    function($scope,   $state,   $stateParams, workout) {
       $scope.lift = $stateParams.lift;
       $scope.weight = Number($scope.user.working_weight[$scope.lift]);
       $scope.plates = {};
@@ -31,8 +31,16 @@ cleanlifts.controller('ChangeWeightController',
       };
 
       $scope.saveWeight = function() {
-        $scope.user.working_weight[$scope.lift] = $scope.weight;
-        $scope.user.$save();
+        if ($state.includes('user.workout')) {
+          $scope.user.working_weight[$scope.lift] = $scope.weight;
+          $scope.user.$save();
+        }
+        var lifts = $scope.workout.routine.lifts;
+        for (var i = 0; i < lifts.length; i++) {
+          if (lifts[i].name === $scope.lift) {
+            lifts[i].weight = $scope.weight;
+          }
+        }
         window.history.back();
       };
 
