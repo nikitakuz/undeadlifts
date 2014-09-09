@@ -1,9 +1,12 @@
+nav
+  .content
+    .w33.tal
+      include ../../include/nav-index-link
+    .w33.tac
+      .h2-font-size!="History"
+    .w33.tar
+      include ../../include/nav-history-month-link
 section
-  .heading
-    h1
-      | Recent Workouts
-      a.calendar-link(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
-        include ../../svg/calendar
   .content
     .recent-workouts
       .year(ng-repeat="(y, year) in history | orderObjectBy:'year':true")
@@ -25,4 +28,4 @@ section
                   tr.lift(ng-repeat="lift in day.workout.routine.lifts")
                     td.lift-name="{{ lift.name }}"
                     td.weight="{{ lift.weight }}{{ weight_unit }}"
-                    td.reps-completed="{{ lift.completed | liftsCompleted }}"
+                    td.reps-completed="{{ lift.sets | setsCompleted }}"

@@ -129,6 +129,15 @@ cleanlifts.controller('WorkoutController',
           });
         }
       };
+
+      $scope.deleteWorkout = function() {
+        if (confirm('Are you sure you want to delete this workout?')) {
+          delete user.current_workout;
+          user.$save().then(function(ref) {
+            $state.transitionTo('user.index', {}, {});
+          });
+        }
+      }
     }
   ]
 );

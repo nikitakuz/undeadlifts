@@ -6,12 +6,6 @@ block append scripts
   script(src="js/cleanlifts.js")
 
 block body
-  nav
-    .content
-      .left
-        a.h2-font-size(ui-sref="user.index")!="UNDEADLIFTS"
-      .right
-        a.h3-font-size(ng-if="user", ng-click="logout()")!="Logout"
   div(ui-view="")
     section
       .heading

@@ -9,6 +9,10 @@
 @import "cleanlifts/history";
 @import "cleanlifts/datepicker";
 
+html, body {
+  height: 100%;
+}
+
 body {
   background-color: @light_green;
   font-family: @belleza;
@@ -45,8 +49,17 @@ nav, section {
 
 nav {
   background-color: #080808;
-  text-align: center;
+  color: @light_green;
   font-family: @creepster;
+
+  .content {
+    padding: 0.125em 0.5em;
+    > div {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
 
   a {
     color: @light_green;
@@ -57,21 +70,10 @@ nav {
     }
   }
 
-  .left,
-  .right {
-    display: inline-block;
-    box-sizing: border-box;
-    width: 50%;
-    padding: 0.25em 0.5em;
-  }
+  .lang, .icon { display: inline-block; vertical-align: middle; }
 
-  .left {
-    text-align: left;
-  }
-
-  .right {
-    text-align: right;
-  }
+  .lang { padding-bottom: 0.25em; }
+  .icon { width: 1em; height: 1em; }
 }
 
 section {
@@ -79,7 +81,33 @@ section {
   padding-top: 0.5em; padding-bottom: 0.5em;
 }
 
+
 .heading {
   position: relative;
 }
 
+.creepster {
+  font-family: @creepster;
+}
+
+
+// STICKY FOOTER
+
+.wrap {
+  min-height: 100%;
+}
+
+.main {
+  padding-bottom: 24px;
+}
+
+.footer {
+  margin-top: -24px;
+  height: 24px;
+  padding: 0em 0.5em;
+  background-color: rgba(0, 0, 0, 0.75);
+
+  font-size: 10px; text-align: right;
+  color: rgba(255, 255, 255, 0.75);
+  a { color: rgba(255, 255, 255, 0.875); &:hover { text-decoration: underline; } }
+}

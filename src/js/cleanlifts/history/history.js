@@ -16,9 +16,12 @@ cleanlifts.constant('MONTH_NAMES', {
     1: 'January', 2: 'February', 3: 'March',      4: 'April',    5: 'May',       6: 'June',
     7: 'July',    8: 'August',   9: 'September', 10: 'October', 11: 'November', 12: 'December'
 });
-cleanlifts.filter('liftsCompleted', function() {
-  return function(arr) {
-    var str = arr.join('/').replace(/-1/g, '0');
+cleanlifts.filter('setsCompleted', function() {
+  return function(sets) {
+    sets = sets.map(function(set) {
+      return set.completed || 0;
+    });
+    var str = sets.join('/').replace(/-1/g, '0');
     if (str === '5/5/5/5/5') {
       return '5x5';
     } else if (str === '8/8/8') {

@@ -1,3 +1,16 @@
+nav
+  .content
+    .w33.tal(ng-if="$state.includes('user.workout')")
+      include ../include/nav-index-link
+    .w33.tal(ng-if="$state.includes('user.history')")
+      include ../include/nav-history-link
+    .w33.tac
+      .h2-font-size(ng-if="$state.includes('user.history')")!="History"
+      .h2-font-size(ng-if="$state.includes('user.workout')")!="Workout"
+    .w33.tar
+      a.h2-font-size(ng-click="deleteWorkout()")
+        .icon
+          include ../svg/trash
 .workout
   section
     .content
