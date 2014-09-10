@@ -12,25 +12,25 @@ block append body
     .content
       form(name="form")
         article
-          div(style="font-size: 1.5em")
+          .brand
             .h3-font-size.tac
-              .icon.vam(style="width: 1.5em; height: 1.5em;")
+              .icon.vam
                 include svg/zombie-head
               .ib.vam.creepster
                 | Undead Lifts
+        article.tac
+          .h3-font-size
+            | Login to your account.
         article.error(ng-show="error", ng-bind="error")
         article
           label
             | Email Address
-          br
           input(type="email", ng-model="email", ng-required="true")
         article
           label
             | Password
-          br
           input(type="password", ng-model="password", ng-required="true")
-          br
         article.submit
           button(ng-click="login()", ng-disabled="form.$invalid")!="Login to my account"
       article.create-account
-        a(href="signup.html")!="Create a new account!"
+        a(href="signup.html")!="Create your free account"

@@ -12,27 +12,26 @@ block append body
     .content(ng-controller="SignUpController")
       form(name="form")
         article
-          div(style="font-size: 1.5em")
-            .h3-font-size.tac
-              .icon.vam(style="width: 1.5em; height: 1.5em;")
+          .h3-font-size.tac
+            .brand
+              .icon.vam
                 include svg/zombie-head
               .ib.vam.creepster
                 | Undead Lifts
-        .h3-font-size
-          | Create you free account.
+        article.tac
+          .h3-font-size
+            | Create your free account.
         article.error(ng-show="error", ng-bind="error")
         article
           label
             | Email Address
-          br
           input(type="email", ng-model="email", ng-required="true")
         article
           label
             | Create Password
-          br
           input(type="password", ng-model="password", ng-required="true")
         article.submit
           button(ng-click="signup()", ng-disabled="form.$invalid")!="Create My Account"
 
       article.sign-in
-        a(href="login.html")!="Login to your Account"
+        a(href="login.html")!="Login to your account"
