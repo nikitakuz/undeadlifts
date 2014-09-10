@@ -27,9 +27,9 @@ nav
         .lift(ng-repeat="lift in lifts", ng-class="classname", ng-controller="LiftController")
           .name-and-weight.tar
             .name.tal!="{{ lift.name }}"
-            a.weight.tac(ng-if="$state.includes('user.workout')", ui-sref="user.workout.change-weight({ lift: lift.name })")
+            a.weight(ng-if="$state.includes('user.workout')", ui-sref="user.workout.change-weight({ lift: lift.name })")
               | {{ lift.weight }} {{ weight_unit }}
-            a.weight.tac(ng-if="$state.includes('user.history.details')", ui-sref="user.history.details.change-weight({ lift: lift.name })")
+            a.weight(ng-if="$state.includes('user.history.details')", ui-sref="user.history.details.change-weight({ lift: lift.name })")
               | {{ lift.weight }} {{ weight_unit }}
           .set(ng-repeat="set in lift.sets track by $index", ng-click="updateSet($index)", ng-class="{completed: set.completed > -1}")
             .reps
