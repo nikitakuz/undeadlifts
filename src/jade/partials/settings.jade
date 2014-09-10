@@ -8,7 +8,14 @@ nav
       include ../include/nav-sign-out-link
 section
   .content
-      article
-        | Auto-increment
-      article
-        | Rest Timer sound
+    article(ng-repeat="id in setting_ids")
+      .setting
+        .name-and-control
+          .name.ib.w75.tal.h3-font-size
+            | {{ settings[id].name }}
+          .control.ib.w25.tar
+            a.boolean(ng-if="settings[id].type === 'boolean'", ng-class="[user.settings[id]]", ng-click="toggleBooleanSetting(id)")
+              .off!="OFF"
+              .on!="ON"
+        .note.tal(ng-if="settings[id].note")
+          | {{ settings[id].note }}

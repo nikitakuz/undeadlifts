@@ -29,7 +29,7 @@ cleanlifts.controller('RestTimerController',
             restTimerInterval = setInterval(function() {
               $scope.$apply(function() {
                 $scope.restTime += 1000;
-                if ($scope.restTime === 90 * 1000 || $scope.restTime === 180 * 1000) {
+                if ($scope.user.settings['rest-timer-sound'] && ($scope.restTime === 90 * 1000 || $scope.restTime === 180 * 1000)) {
                   timerSound.play();
                 }
               });
