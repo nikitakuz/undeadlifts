@@ -9,6 +9,7 @@
 
   .date-and-routine-name {
     font-size: 0.95em;
+    @media(min-width: 22.5em) { font-size: 1em; }
 
     .date, .routine-name {
       display: inline-block;
@@ -40,7 +41,11 @@
       text-overflow: ellipsis;
     }
 
-    @media(min-width: 22.5em) { font-size: 1em; }
+
+    @media(min-width: 22.5em) {
+      .date { width: 37.5%; }
+      .routine-name { width: 62.5%; }
+    }
 
     @media(min-width: 25em) {
       .date { width: 35%; }
@@ -48,6 +53,11 @@
     }
 
     @media(min-width: 27.5em) {
+      .date { width: 32.5%; }
+      .routine-name { width: 67.5%; }
+    }
+
+    @media(min-width: 30em) {
       .date { width: 30%; }
       .routine-name { width: 70%; }
     }
@@ -83,6 +93,11 @@
     }
 
     @media (min-width: 22.5em) {
+      .name { width: 77.5%; }
+      .weight { width: 22.5%; }
+    }
+
+    @media (min-width: 25em) {
       .name { width: 80%; }
       .weight { width: 20%; }
     }
