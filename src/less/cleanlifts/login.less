@@ -1,0 +1,58 @@
+.login, .signup {
+  .ldquo, .quote, .rdquo { display: inline-block; vertical-align: middle}
+
+  .quote { line-height: 3em; color: @lightest_green; font-style: italic; }
+
+  .ldquo, .rdquo { font-size: 3em; line-height: 1em; color: rgba(0, 0, 0, 0.333); }
+
+  .ldquo { padding: 0.25em 0.25em 0.125em; }
+
+  .rdquo { padding: 0.375em 0.25em 0; }
+
+  form, .create-account, .sign-in {
+    box-sizing: border-box;
+    width: 20em;
+    max-width: 90%;
+    margin: 0 auto;
+    border-radius: 0.25em;
+  }
+
+  form {
+    padding: 0.5em 1em;
+    text-align: left;
+
+    background-color: @lightest_green;
+
+    input, button {
+      border-radius: 0.25em;
+    }
+
+    input {
+      width: 100%;
+      border-radius: 0.25em;
+      padding: 0.333em;
+    }
+
+    button {
+      padding: 0.5em 1em;
+      width: 100%;
+    }
+  }
+
+  .create-account, .sign-in {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    padding: 0.5em 1em;
+    border: 3px solid @lightest_green;
+    font-family: monospace;
+
+    a {
+      color: @lightest_green;
+
+      &:hover {
+        color: @neon_green;
+      }
+    }
+  }
+}

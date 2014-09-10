@@ -4,26 +4,35 @@ block append scripts
   script(src="js/signup.js")
 
 block append body
-  section
+  section.signup
     .heading
-      h1
-        | Create Your Free Account!
+      .ldquo!="&ldquo;"
+      .quote!="You ain't dead yet."
+      .rdquo!="&rdquo;"
     .content(ng-controller="SignUpController")
       form(name="form")
-        .error(ng-show="error")!="{{error}}"
-        .field
+        article
+          div(style="font-size: 1.5em")
+            .h3-font-size.tac
+              .icon.vam(style="width: 1.5em; height: 1.5em;")
+                include svg/zombie-head
+              .ib.vam.creepster
+                | Undead Lifts
+        .h3-font-size
+          | Create you free account.
+        article.error(ng-show="error", ng-bind="error")
+        article
           label
             | Email Address
           br
           input(type="email", ng-model="email", ng-required="true")
-        .field
+        article
           label
             | Create Password
           br
           input(type="password", ng-model="password", ng-required="true")
-        .field
+        article.submit
           button(ng-click="signup()", ng-disabled="form.$invalid")!="Create My Account"
 
-      .tac
-        .ib.tal.p1em.w100.mxw20em
-          a(href="login.html")!="Login to your Account"
+      article.sign-in
+        a(href="login.html")!="Login to your Account"

@@ -4,27 +4,33 @@ block append scripts
   script(src="js/login.js")
 
 block append body
-  section(ng-controller="LoginController")
+  section(ng-controller="LoginController").login
     .heading
-      include svg/zombie-head
-      h1.ib.vam.creepster
-        | Undead Lifts
+      .ldquo!="&ldquo;"
+      .quote!="You ain't dead yet."
+      .rdquo!="&rdquo;"
     .content
-      .tac
-        form.ib.tal.p1em.bcw.w100.mxw20em(name="form")
-          .error(ng-show="error")!="{{error}}"
-          .field
-            label
-              | Email Address
-            br
-            input.w100(type="email", ng-model="email", ng-required="true")
-          .field
-            label
-              | Password
-            br
-            input.w100(type="password", ng-model="password", ng-required="true")
-          .field
-            button(ng-click="login()", ng-disabled="form.$invalid")!="Sign In"
-        .tac
-          .ib.tal.p1em.w100.mxw20em
-            a(href="signup.html")!="Create a new account!"
+      form(name="form")
+        article
+          div(style="font-size: 1.5em")
+            .h3-font-size.tac
+              .icon.vam(style="width: 1.5em; height: 1.5em;")
+                include svg/zombie-head
+              .ib.vam.creepster
+                | Undead Lifts
+        article.error(ng-show="error", ng-bind="error")
+        article
+          label
+            | Email Address
+          br
+          input(type="email", ng-model="email", ng-required="true")
+        article
+          label
+            | Password
+          br
+          input(type="password", ng-model="password", ng-required="true")
+          br
+        article.submit
+          button(ng-click="login()", ng-disabled="form.$invalid")!="Login to my account"
+      article.create-account
+        a(href="signup.html")!="Create a new account!"
