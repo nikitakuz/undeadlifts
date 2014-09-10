@@ -15,18 +15,11 @@ cleanlifts.controller('WorkoutChangeDateController',
   [         '$rootScope', '$scope', '$timeout', '$state', '$filter', 'util', 'user', 'workout',
     function($rootScope,   $scope,   $timeout,   $state,   $filter,   util,   user,   workout) {
       $scope.current_date = util.parseYyyyMmDd(workout.yyyymmdd);
-      $scope.selected_date = $scope.current_date;
-      $scope.changeDate = function() {
-        if ($scope.selected_date === $scope.current_date) {
-          return;
+      $scope.changeDate = function(date) {
+        if (date === $scope.current_date) {
+          $scope.workout.yyyymmdd = $filter('date')(date, 'yyyyMMdd');
         }
-        $scope.workout.yyyymmdd = $filter('date')($scope.selected_date, 'yyyyMMdd');
         window.history.back();
-/*
-        $scope.workout.$save().then(function() {
-//          $scope.setDate(newDate);
-        });
-*/
       };
     }
   ]

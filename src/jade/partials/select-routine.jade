@@ -9,7 +9,5 @@ nav
 section
   .content
     .tac
-      .routine(ng-repeat="routine in routines")
+      article.routine(ng-repeat="routine in routines")
         button.p1em(ng-click="selectRoutine(routine)")!="{{routine.name}}"
-        br
-        br

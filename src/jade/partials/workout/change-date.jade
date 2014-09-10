@@ -2,9 +2,6 @@
   .modal-gutter
   .modal-dialog
     .date-picker
-      datepicker(ng-model="selected_date", min-date="minDate", show-weeks="false")
+      datepicker(date="date", min-date="minDate", show-weeks="false", on-submit="changeDate(date)")
         | Hello
-    br
-    .change-date
-      button(ng-click="changeDate()")="Change Date"
   .modal-gutter

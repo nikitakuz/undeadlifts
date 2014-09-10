@@ -68,14 +68,13 @@ cleanlifts.controller('WorkoutController',
         var target, completed;
         if (!allSetsCompleted(newVal.sets)) {
           for (var i = 0; i < newVal.sets.length; i++) {
-            var target = newVal.sets[i].target;
             var newCompleted = newVal.sets[i].completed;
             var oldCompleted = oldVal.sets[i].completed;
             // Check if this is the set that changed and if the set has been marked completed
             if (newCompleted !== oldCompleted && newCompleted !== undefined) {
               startTimer = true;
               target = newVal.sets[i].target;
-              completed = newCompleted
+              completed = newCompleted;
             }
           }
         }
@@ -137,7 +136,7 @@ cleanlifts.controller('WorkoutController',
             $state.transitionTo('user.index', {}, {});
           });
         }
-      }
+      };
     }
   ]
 );

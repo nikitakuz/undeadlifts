@@ -43,7 +43,7 @@ cleanlifts.controller('RestTimerController',
           $scope.showRestTimer = false;
           $scope.restTime = 0;
         }
-      }
+      };
     }
   ]
 );

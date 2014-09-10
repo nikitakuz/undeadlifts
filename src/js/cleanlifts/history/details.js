@@ -43,11 +43,7 @@ cleanlifts.controller('HistoryWorkoutController',
   [         '$scope', '$state', '$stateParams', '$filter', 'firebase', 'user', 'workout',
     function($scope,   $state,   $stateParams,   $filter,   firebase,   user,   workout) {
       if (!workout || !workout.routine) {
-        $state.transitionTo(
-          'user.history.month',
-          { year: $stateParams.year, month: $stateParams.month },
-          { location: 'replace' }
-        );
+        replaceStateWithUserHistoryMonth();
         return;
       }
       $scope.workout = workout;
@@ -66,32 +62,22 @@ cleanlifts.controller('HistoryWorkoutController',
           var workout_exists = typeof user.history[yyyymmdd] === 'string';
           if (workout_exists && user.history[yyyymmdd] !== $scope.workout.$id) {
             if (confirm('A workout already exists for this date. Do you want to overwrite it with this one?')) {
-              user.history[yyyymmdd] = $scope.workout.$id;
-              delete user.history[$filter('date')($scope.date, 'yyyyMMdd')];
-              user.$save();
+              changeWorkoutDate(yyyymmdd);
               saveWorkout();
             }
           } else {
+            changeWorkoutDate(yyyymmdd);
             saveWorkout();
           }
         } else {
           saveWorkout();
         }
-        /*
-         user.history[newDate] = user.history[date.$value];
-         delete user.history[date.$value];
-         user.$save().then(function() {
-           workout.date = newDate;
-           workout.$save().then(function() {
-             var date = util.parseYyyyMmDd(newDate);
-             $state.transitionTo(
-               'user.history.details',
-               { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()},
-               { replace: true }
-             );
-           });
-         });
-         */
+
+        function changeWorkoutDate(yyyymmdd) {
+          user.history[yyyymmdd] = $scope.workout.$id;
+          delete user.history[$filter('date')($scope.date, 'yyyyMMdd')];
+          user.$save();
+        }
 
         function saveWorkout() {
           // Remove $$hashKey attributes from lifts before $save()-ing to firebase.
@@ -102,6 +88,22 @@ cleanlifts.controller('HistoryWorkoutController',
             { year: $stateParams.year, month: $stateParams.month }
           );
         }
+      };
+
+      $scope.deleteWorkout = function() {
+        if (confirm('Are you sure you want to delete this workout?')) {
+          var yyyymmdd = $filter('date')($scope.date, 'yyyyMMdd');
+          delete user.history[yyyymmdd];
+          user.$save().then(replaceStateWithUserHistoryMonth);
+        }
+      };
+
+      function replaceStateWithUserHistoryMonth() {
+        $state.transitionTo(
+          'user.history.month',
+          { year: $stateParams.year, month: $stateParams.month },
+          { location: 'replace' }
+        );
       }
     }
   ]
@@ -111,9 +113,9 @@ cleanlifts.controller('HistoryChangeDateController',
     function($rootScope,   $scope,   $stateParams) {
       $scope.current_date = $scope.new_date || new Date($stateParams.year, $stateParams.month - 1, $stateParams.day);
       $scope.selected_date = $scope.current_date;
-      $scope.changeDate = function() {
-        if ($scope.selected_date !== $scope.current_date) {
-          $scope.selectNewDate($scope.selected_date);
+      $scope.changeDate = function(date) {
+        if (date !== $scope.current_date) {
+          $scope.selectNewDate(date);
         }
         window.history.back();
       };

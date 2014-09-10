@@ -1,0 +1,16 @@
+table
+  thead
+    tr
+      th
+        a(ng-click="prev()")!="&lang;"
+      th(colspan="5")!="{{ date | date:'MMMM yyyy' }}"
+      th
+        a(ng-click="next()")!="&rang;"
+    tr.days-of-the-week
+      th(ng-repeat="day in DAYS_IN_WEEK")!="{{ day|date:'EEE' }}"
+  tbody
+    tr(ng-repeat="week in weeks")
+      td(ng-repeat="day in week")
+        a(ng-if="date.getMonth() === day.getMonth()", ng-class="{'active': isSameDay(day)}", ng-click="setDate(day)", ng-bind="day.getDate()")
+.submit
+  button(ng-click="submit()")="Change Date"

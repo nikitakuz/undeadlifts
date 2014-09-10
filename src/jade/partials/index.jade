@@ -1,23 +1,27 @@
 nav
   .content
-    .ib.w50.tal
+    .w25.tal
+      .h2-font-size
+        .icon
+          include ../svg/zombie-head
+    .w50.tac
       .h2-font-size!="UNDEADLIFTS"
-    .ib.w50.tar
+    .w25.tar
       include ../include/nav-sign-out-link
 section
   .content
     .index
-      a(ng-if="!user.current_workout", ui-sref="user.select-routine")
-        .icon
-          include ../svg/dumbell
-        .h3-font-size.monospace!="New Workout"
-      a(ng-if="user.current_workout", ui-sref="user.workout")
-        .icon
-          include ../svg/dumbell
-        .h3-font-size.monospace!="Continue Workout"
-      br
-      br
-      a(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
-        .icon
-          include ../svg/calendar
-        .h3-font-size.monospace!="History"
+      article
+        a(ng-if="!user.current_workout", ui-sref="user.select-routine")
+          .icon
+            include ../svg/dumbell
+          .h3-font-size!="New Workout"
+        a(ng-if="user.current_workout", ui-sref="user.workout")
+          .icon
+            include ../svg/dumbell
+          .h3-font-size!="Continue Workout"
+      article
+        a(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
+          .icon
+            include ../svg/calendar
+          .h3-font-size.monospace!="History"
