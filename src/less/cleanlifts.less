@@ -51,6 +51,7 @@ nav, section {
 nav {
   background-color: #080808;
   color: @light_green;
+  padding: 0.25em 0;
   font-family: @creepster;
 
   .content {
@@ -61,6 +62,10 @@ nav {
     }
   }
 
+  .state-title {
+    font-size: 1.25em;
+    text-align: center;
+  }
 
   a {
     color: @light_green;
@@ -71,10 +76,10 @@ nav {
     }
   }
 
-  .lang, .icon { display: inline-block; vertical-align: middle; }
+  .nbsp, .lang, .icon { display: inline-block; vertical-align: middle; }
 
-  .lang { padding-bottom: 0.25em; font-size: 0.75em; line-height: 1.333em; }
-  .icon { width: 1em; height: 1em; }
+  .nbsp, .lang { width: 0.5em; padding-bottom: 0.25em; font-size: 0.75em; line-height: 1.333em; font-family: monospace; }
+  .icon { width: 1.25em; height: 1.25em; }
 }
 
 section {
