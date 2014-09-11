@@ -33,9 +33,23 @@ nav
                 | {{ lift.weight }} {{ weight_unit }}
               a.weight(ng-if="$state.includes('user.history.details')", ui-sref="user.history.details.change-weight({ lift: lift.name })")
                 | {{ lift.weight }} {{ weight_unit }}
-            .set(ng-repeat="set in lift.sets track by $index", ng-click="updateSet($index)", ng-class="{completed: set.completed > -1}")
-              .reps
-                | {{ set.completed > -1 ? set.completed : set.target }}
+            .status
+              .sets(ng-style="getStyle('sets')")
+                .vah
+                .set(ng-repeat="set in lift.sets track by $index", ng-click="updateSet($index)", ng-class="{completed: set.completed > -1}")
+                  .reps
+                    | {{ set.completed > -1 ? set.completed : set.target }}
+                .vah
+              .success(ng-style="getStyle('success')", ng-click="dismissMessage()")
+                .vah
+                .message!="{{successMessage}}"
+                .vah
+                a.dismiss!="&times;"
+              .failure(ng-style="getStyle('failure')", ng-click="dismissMessage()")
+                .vah
+                .message!="{{failureMessage}}"
+                .vah
+                a.dismiss!="&times;"
       article
         .finish-workout.tac
           button.p1em(ng-if="$state.includes('user.workout')", ng-click="finishWorkout()")!="Finish Workout"
@@ -51,5 +65,5 @@ nav
       .time.h3-font-size
         | {{ restTime | date:'m' }}m {{ restTime | date:'s' }}s
         a.dismiss(ng-click="restTimer.clear()")
-          | X
+          | &times;
 div(ui-view="")
