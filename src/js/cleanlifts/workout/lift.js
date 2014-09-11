@@ -27,14 +27,14 @@ cleanlifts.controller('LiftController',
                   $scope.success = true;
                   $scope.failure = false;
                 });
-              }, timeoutLength)
+              }, timeoutLength);
             } else {
               messageTimeout = setTimeout(function() {
                 $scope.$apply(function() {
                   $scope.success = false;
                   $scope.failure = true;
                 });
-              }, timeoutLength)
+              }, timeoutLength);
             }
           }
         }
@@ -49,7 +49,7 @@ cleanlifts.controller('LiftController',
         } else if (element === 'failure') {
           show = $scope.failure;
         }
-        return { 'opacity': show ? '1' : '0', 'z-index': show ? '2' : '1' };
+        return { 'opacity': show ? 1 : 0, 'z-index': show ? 1 : 0 };
       };
 
       $scope.dismissMessage = function() {

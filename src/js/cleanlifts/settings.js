@@ -39,7 +39,7 @@ cleanlifts.controller('UserSettingsController',
           $scope.user.settings[id] = !$scope.user.settings[id];
           $scope.user.$save();
         }
-      }
+      };
     }
   ]
 );

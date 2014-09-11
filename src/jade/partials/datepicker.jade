@@ -2,10 +2,10 @@ table
   thead
     tr
       th
-        a(ng-click="prev()")!="&lang;"
+        a(ng-click="prev()")!="&lsaquo;"
       th(colspan="5")!="{{ date | date:'MMMM yyyy' }}"
       th
-        a(ng-click="next()")!="&rang;"
+        a(ng-click="next()")!="&rsaquo;"
     tr.days-of-the-week
       th(ng-repeat="day in DAYS_IN_WEEK")!="{{ day|date:'EEE' }}"
   tbody

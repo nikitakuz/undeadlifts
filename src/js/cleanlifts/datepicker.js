@@ -25,7 +25,7 @@ cleanlifts.directive('datepicker',
             return dates;
           }
 
-          function getCalendarWeeks(year, month) {
+          function getCalendarWeeks() {
             var year = scope.date.getFullYear(), month = scope.date.getMonth();
             var firstDayInMonth = new Date(year, month, 1);
             var firstDayOnCalendar = new Date(firstDayInMonth.getTime() - (firstDayInMonth.getDay() * MS_IN_DAY));
@@ -61,9 +61,9 @@ cleanlifts.directive('datepicker',
 
           scope.setDate = function(date) {
             scope.date = date;
-          }
+          };
         }
-      }
+      };
     }
   ]
 );
