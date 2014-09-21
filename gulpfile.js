@@ -6,6 +6,8 @@ var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
+var karma = require('karma').server;
+
 var SRC = './src/';
 var BUILD = './build/';
 
@@ -70,4 +72,11 @@ gulp.task('watch', ['jade', 'less', 'app', 'login', 'signup', 'lib'], function()
   gulp.watch(paths.app, ['app']);
   gulp.watch(paths.login, ['login']);
   gulp.watch(paths.signup, ['signup']);
+});
+
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
 });
