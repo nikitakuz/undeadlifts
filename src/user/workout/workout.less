@@ -1,0 +1,203 @@
+@import "../../common/constant";
+
+.workout {
+  .date-and-routine-name, .lift {
+    background: @lightest_green;
+    box-shadow: @box_shadow;
+  }
+
+  .date-and-routine-name {
+    font-size: 0.95em;
+    text-align: left;
+    @media(min-width: 22.5em) { font-size: 1em; }
+
+    .date, .routine-name {
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 0.5em;
+      text-align: center;
+      vertical-align: bottom;
+    }
+
+    .date {
+      width: 40%;
+      background-color: @darker_green;
+      font-family: monospace;
+
+      a {
+        color: @lightest_green;
+
+        &:hover {
+          color: @neon_green;
+        }
+      }
+    }
+
+    .routine-name {
+      width: 60%;
+      line-height: 1.25em;
+      font-family: @finger_paint;
+      text-overflow: ellipsis;
+    }
+
+
+    @media(min-width: 22.5em) {
+      .date { width: 37.5%; }
+      .routine-name { width: 62.5%; }
+    }
+
+    @media(min-width: 25em) {
+      .date { width: 35%; }
+      .routine-name { width: 65%; }
+    }
+
+    @media(min-width: 27.5em) {
+      .date { width: 32.5%; }
+      .routine-name { width: 67.5%; }
+    }
+
+    @media(min-width: 30em) {
+      .date { width: 30%; }
+      .routine-name { width: 70%; }
+    }
+  }
+
+  .lift {
+    position: relative;
+
+    .vah, .set, .message { display: inline-block; vertical-align: middle; }
+    .status, .vah { height: 3.5em; }
+    .status { position: relative; }
+    .vah { width: 0; }
+
+    .sets, .success, .failure {
+      position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+      -webkit-transition: opacity 0.2s linear; transition: opacity 0.2s linear;
+    }
+  }
+
+  .name-and-weight {
+    border-bottom: 1px solid @light_green;
+    text-align: right;
+
+    .name, .weight {
+      padding: 0.5em;
+      box-sizing: border-box;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
+    .name {
+      width: 75%;
+      line-height: 1.25em;
+      font-family: @finger_paint;
+      text-transform: uppercase;
+    }
+
+    .weight {
+      width: 25%;
+      text-align: center;
+
+      background-color: @darker_green;
+      color: @lightest_green;
+      font-family: monospace;
+
+      &:hover {
+        color: @neon_green;
+      }
+    }
+
+    @media (min-width: 22.5em) {
+      .name { width: 77.5%; }
+      .weight { width: 22.5%; }
+    }
+
+    @media (min-width: 25em) {
+      .name { width: 80%; }
+      .weight { width: 20%; }
+    }
+  }
+
+  // workout sets
+  .set {
+    font-family: @finger_paint; cursor: pointer; text-align: center;
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;
+  }
+  .one-set .set { width: 100%; }
+  .two-sets .set { width: 50%; }
+  .three-sets .set { width: 33.3%; }
+  .four-sets .set { width: 25%; }
+  .five-sets .set { width: 20%; }
+
+  .set .reps {
+    display: inline-block; width: 1.25em; line-height: 1.25em; padding:0.5em;
+    border: 1px solid @light_green; border-radius: 100%;
+    color: @light_green;
+  }
+
+  .set.completed .reps { color: @neon_green; border-color: @blood_red; background-color: @blood_red; }
+
+  .success, .failure {
+    // line-height: 2.25em;
+  }
+
+  .dismiss {
+    font-size: 2em; line-height: 1.875em;
+    position: absolute; bottom: 0; right: 0.5em;
+
+    &:hover {
+      color: @blood_red;
+    }
+  }
+}
+
+.rest-timer {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #202020;
+  color: white;
+  font-family: sans-serif;
+
+  .heading, .content { text-align: center; }
+
+  .time {
+    position: relative;
+
+    .dismiss {
+      position: absolute;
+      top: 0;
+      right: 0.667em;
+      font-size: 1.5em;
+      color: @neon_green;
+
+      &:hover {
+        color: @blood_red;
+      }
+    }
+  }
+}
+
+.plates {
+  .plate {
+    display: block;
+    margin: 0 auto;
+    border: 3px solid @darker_green;
+    border-radius: 100%;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .forty-five, .thirty-five, .twenty-five, .ten, .five, .two-point-five {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-family: monospace;
+    margin: 0 0.5em 1em;
+  }
+
+  .forty-five .plate { width: 5em; line-height: 5em; }
+  .thirty-five .plate { width: 4.5em; line-height: 4.5em; }
+  .twenty-five .plate { width: 4em; line-height: 4em; }
+  .ten .plate { width: 3.5em; line-height: 3.5em; }
+  .five .plate { width: 3em; line-height: 3em; }
+  .two-point-five .plate { width: 2.5em; line-height: 2.5em; }
+}

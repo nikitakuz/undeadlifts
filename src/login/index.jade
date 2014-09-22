@@ -1,0 +1,36 @@
+extends ../base
+
+block append scripts
+  script(src="login.js")
+
+block append body
+  section(ng-controller="LoginController").login
+    .heading
+      .ldquo!="&ldquo;"
+      .quote!="You ain't dead yet."
+      .rdquo!="&rdquo;"
+    .content
+      form(name="form")
+        article
+          .h3-font-size.tac
+            .brand
+              .icon.vam
+                include ../jade-include/svg/zombie-head
+              .ib.vam.creepster
+                | Undead Lifts
+        article.tac
+          .h3-font-size
+            | Login to your account.
+        article.error(ng-show="error", ng-bind="error")
+        article
+          label
+            | Email Address
+          input(type="email", ng-model="email", ng-required="true")
+        article
+          label
+            | Password
+          input(type="password", ng-model="password", ng-required="true")
+        article.submit
+          button(ng-click="login()", ng-disabled="form.$invalid")!="Login to my account"
+      article.create-account
+        a(href="/signup")!="Create your free account"

@@ -1,0 +1,48 @@
+.adapt(@columns, @font-size, @line-height) {
+  @media (min-width: (@columns * 2.5em)) {
+    body { font-size: @font-size; line-height: @line-height; }
+  }
+}
+
+@columns-12: 30em; // 12 * 2.5em;
+@columns-14: 35em; // 14 * 2.5em;
+@columns-16: 40em; // 16 * 2.5em;
+@columns-18: 45em; // 18 * 2.5em;
+@columns-20: 50em; // 20 * 2.5em;
+@columns-22: 55em; // 22 * 2.5em;
+
+// 12 columns
+//.adapt(12, 15px, 1.5333em);
+@media (min-width: @columns-12) {
+  body { line-height: 1.5333em; }
+}
+
+
+//.adapt(14, 16px, 1.5em);
+@media (min-width: @columns-14) {
+  body { font-size: 16px; line-height: 1.5em; }
+  h1, .h1-font-size { font-size: 1.6875em; line-height: 1.37037em;} // 27px / 37px
+  h2, .h2-font-size { font-size: 1.4375em; line-height: 1.434783em; } // 23px / 33px
+  h3, .h3-font-size { font-size: 1.1875em; line-height: 1.473684em; } // 19px / 28px
+}
+
+// .adapt(16, 16px, 1.5625em);
+@media (min-width: @columns-16) {
+  body { line-height: 1.5625em; }
+}
+
+// .adapt(20, 17px, 1.529411em);
+@media (min-width: @columns-20) {
+  body { font-size: 17px; line-height: 1.529411em; }
+  h1, .h1-font-size { font-size: 1.94118em; } // 33px
+  h2, .h2-font-size { font-size: 1.52941em; } // 26px
+  h3, .h3-font-size { font-size: 1.23529em; } // 21px
+}
+
+
+// 14 columns
+
+.adapt(22, 17px, 1.588235em);
+
+.adapt(25, 18px, 1.64705882em);
+.adapt(28, 18px, 1.70588235em);

@@ -1,0 +1,24 @@
+html
+  head
+    block head
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      block stylesheets
+        link(rel="stylesheet", type="text/css", href="/common.css")
+        link(rel="stylesheet", type="text/css", href="//fonts.googleapis.com/css?family=Snippet|Trade+Winds|Macondo+Swash+Caps|Philosopher|Rum+Raisin|Jolly+Lodger|Finger+Paint|Convergence|Creepster|Aclonica|Belleza|Macondo|Nova+Cut")
+      block scripts
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js")
+        script(src="https://cdn.firebase.com/js/client/1.0.21/firebase.js")
+        script(src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js")
+        script(src="https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js")
+        script(src="/lib/js/angular-ui-router-0.2.10.js")
+  body
+    .wrap
+      .main
+        block body
+    .footer
+      block footer
+        a(href="http://icons8.com/icons/#!/5150/zombie")!="Zombie"
+        !=" icon by "
+        a(href="http://www.icons8.com", title="Icons8")!="Icons8"
+        !=" is licensed under "
+        a(href="https://creativecommons.org/licenses/by-nd/3.0/", title="Creative Commons Attribution-NoDerivs 3.0 Unported")!="CC BY-ND 3.0"

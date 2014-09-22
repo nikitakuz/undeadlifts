@@ -1,0 +1,18 @@
+extends ../base
+
+block append stylesheets
+  link(rel="stylesheet", type="text/css", href="/user.css")
+
+block append scripts
+  // script(src="js/lib/ui-bootstrap-datepicker-tpls-0.10.0.min.js")
+  script(src="/lib/js/howler-1.1.25.js")
+  script(src="user.js")
+
+block body
+  div(ui-view="")
+    section
+      .heading
+        .tac
+          .ib.tal.p1em.w100.mxw20em
+            h1
+              | Loading...

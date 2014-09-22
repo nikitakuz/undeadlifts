@@ -1,0 +1,29 @@
+@import "../../common/constant";
+
+.index {
+  text-align: center;
+
+  section {
+    a {
+      display: inline-block;
+      box-sizing: border-box;
+      width: 66.666%;
+      min-width: 12em;
+      padding: 1em;
+      border-radius: 0.5em;
+      background: @lightest_green;
+      font-family: monospace;
+
+      .icon {
+        width: 3em;
+        height: 3em;
+        margin: 0 auto;
+      }
+
+      &:hover {
+        background: @blood_red;
+        color: @neon_green;
+      }
+    }
+  }
+}

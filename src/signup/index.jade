@@ -1,0 +1,37 @@
+extends ../base
+
+block append scripts
+  script(src="signup.js")
+
+block append body
+  section.signup
+    .heading
+      .ldquo!="&ldquo;"
+      .quote!="Space monkey."
+      .rdquo!="&rdquo;"
+    .content(ng-controller="SignUpController")
+      form(name="form")
+        article
+          .h3-font-size.tac
+            .brand
+              .icon.vam
+                include ../jade-include/svg/zombie-head
+              .ib.vam.creepster
+                | Undead Lifts
+        article.tac
+          .h3-font-size
+            | Create your free account.
+        article.error(ng-show="error", ng-bind="error")
+        article
+          label
+            | Email Address
+          input(type="email", ng-model="email", ng-required="true")
+        article
+          label
+            | Create Password
+          input(type="password", ng-model="password", ng-required="true")
+        article.submit
+          button(ng-click="signup()", ng-disabled="form.$invalid")!="Create my free account"
+
+      article.sign-in
+        a(href="/login")!="Login to your account"
