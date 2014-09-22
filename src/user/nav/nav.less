@@ -1,12 +1,14 @@
+@import "../../constant";
+
+@nav_background: #080808;
+
 nav {
-  background-color: #080808;
+  background-color: @nav_background;
   color: @light_green;
-  padding: 0.25em 0;
+  padding: 0.375em 0;
   font-family: @creepster;
 
   .content {
-    padding-top: 0.125em;
-    padding-bottom: 0.125em;
     > div {
       display: inline-block;
       vertical-align: middle;
@@ -31,4 +33,27 @@ nav {
 
   .nbsp, .lsaquo { margin: 0 -0.125em; padding-bottom: 0.25em; font-size: 1.333em; line-height: 0.75em; font-family: monospace; }
   .icon { width: 1.25em; height: 1.25em; }
+
+  .hide-menu {
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+    z-index: 50;
+  }
+
+  .menu {
+    position: absolute;
+    right: 0; top: 0;
+    font-family: monospace;
+    z-index: 100;
+
+    .top-position-helper {
+      padding: 0 0 0.375em 0;
+    }
+
+    a {
+      display: block;
+      padding: 0 0.5em;
+      line-height: 1.5em;
+      background: @nav_background;
+    }
+  }
 }

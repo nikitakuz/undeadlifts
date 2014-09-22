@@ -8,8 +8,8 @@ cleanlifts.config(
           url: '/',
           templateUrl: 'user/index/index.html',
           controller:
-            [         '$scope',
-              function($scope) {
+            [         '$rootScope', '$scope',
+              function($rootScope,   $scope) {
                 $scope.now = new Date();
               }
             ]

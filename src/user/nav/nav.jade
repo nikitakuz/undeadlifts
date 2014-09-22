@@ -1,0 +1,37 @@
+nav(ng-controller="NavController")
+  .content
+    .w25.tal
+      .h2-font-size(ng-if="$state.is('user.index')")
+        .nbsp!="&nbsp;"
+        .icon
+          include ../../jade-svg/zombie-head
+      a(ng-if="!$state.is('user.index')", ng-click="back()")
+        .h2-font-size
+          .lsaquo!="&lsaquo;"
+          .icon
+            include ../../jade-svg/zombie-head
+
+    .w50.state-title
+      .h2-font-size!="{{ title }}"
+    .w25.tar
+      .ib.h2-font-size(ng-if="$state.is('user.history.month')")
+        a.icon(ui-sref="user.history.list")
+          include ../../jade-svg/list
+        .nbsp!="&nbsp;"
+      .ib.h2-font-size(ng-if="$state.is('user.history.list')")
+        a.icon(ui-sref="user.history.month({ year: now.getFullYear(), month: now.getMonth() + 1 })")
+          include ../../jade-svg/calendar
+        .nbsp!="&nbsp;"
+      .ib.h2-font-size
+        a.icon(ng-click="showMenu = true;")
+          include ../../jade-svg/drops
+        .nbsp!="&nbsp;"
+      .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
+      .menu(ng-show="showMenu")
+        .top-position-helper.h2-font-size!="&nbsp;"
+        a.h3-font-size(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')")
+          !="Delete Workout"
+        a.h3-font-size(ui-sref="user.settings")
+          !="Settings"
+        a.h3-font-size(ng-click="logout()")
+          !="Logout"

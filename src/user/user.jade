@@ -9,10 +9,12 @@ block append scripts
   script(src="user.js")
 
 block body
-  div(ui-view="")
-    section
-      .heading
-        .tac
-          .ib.tal.p1em.w100.mxw20em
-            h1
-              | Loading...
+  .user
+    div(ng-include="'user/nav/nav.html'")
+    div(ui-view="")
+      section
+        .heading
+          .tac
+            .ib.tal.p1em.w100.mxw20em
+              h1
+                | Loading...
