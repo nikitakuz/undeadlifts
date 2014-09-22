@@ -6,19 +6,6 @@
     "**/.*",
     "**/node_modules/**"
   ],
-  "redirects": [
-    {
-      "source": "/login",
-      "destination": "/login/",
-      "type": 301
-    },
-    {
-      "source": "/signup",
-      "destination": "/signup/",
-      "type": 301
-    }
-  ],
-
   "rewrites": [
     {
       "source": "/",

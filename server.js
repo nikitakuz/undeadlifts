@@ -16,13 +16,11 @@ http.createServer(function (request, response) {
 
   var uri = url.parse(request.url).pathname;
 
-  // Check if redirect exists
-  for (var i = 0; i < redirects.length; i++) {
-    if (uri === redirects[i].source) {
-      response.writeHead(301, { Location: redirects[i].destination });
-      response.end();
-      return;
-    }
+  // Redirect to trailing slash to simulate Firebase hosting environment;
+  if (uri.length > 1 && uri.indexOf('.') === -1 && uri.slice(-1) !== '/') {
+    response.writeHead(301, { Location: uri + '/' });
+    response.end();
+    return;
   }
 
   // Check if rewrite exists
