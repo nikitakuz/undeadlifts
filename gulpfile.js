@@ -18,7 +18,7 @@ var paths = {
   app: [SRC + 'js/cleanlifts/**/*.js'],
   lib: SRC + 'lib/**/*',
   common: {
-    less: SRC + 'common.less'
+    less: SRC + 'common-less/common.less'
   },
   login: {
     jade: SRC + 'login/**/*.jade',
@@ -63,6 +63,7 @@ gulp.task('index-jade', function() {
 gulp.task('common-less', function() {
   return gulp.src(paths.common.less)
     .pipe(less())
+    .pipe(concat('common.css'))
     .pipe(gulp.dest(BUILD));
 });
 

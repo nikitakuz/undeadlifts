@@ -25,7 +25,7 @@ http.createServer(function (request, response) {
 
   // Check if rewrite exists
   for (var i = 0; i < rewrites.length; i++) {
-    if (uri === rewrites[i].source) {
+    if (uri === rewrites[i].source || uri === rewrites[i].source + '/') {
       uri = rewrites[i].destination;
     }
   }
