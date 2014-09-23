@@ -21,16 +21,17 @@ block append body
         article.tac
           .h3-font-size
             | Login to your account.
-        article.error(ng-show="error", ng-bind="error")
-        article
+        article.email
           label
             | Email Address
-          input(type="email", ng-model="email", ng-required="true")
-        article
+          .input-wrapper(ng-class="{error: emailError}")
+            input(type="email", name="email", ng-model="email", ng-required="true", focus="focusEmail")
+        article.password
           label
             | Password
-          input(type="password", ng-model="password", ng-required="true")
+          .input-wrapper(ng-class="{error: passwordError}")
+            input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
         article.submit
-          button(ng-click="login()", ng-disabled="form.$invalid")!="Login to my account"
+          button(ng-click="login()", ng-disabled="form.$invalid", ng-bind="loginButtonText")!="Login to my account"
       article.create-account
         a(href="/signup")!="Create your free account"

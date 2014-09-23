@@ -23,6 +23,10 @@
     border-radius: 0.25em;
   }
 
+  @input_padding: 0.333em;
+  @input_box_shadow: inset 1px 0px 3px 1px rgba(0, 0, 0, 0.1);
+  @input_error_box_shadow: fadeout(@blood_red, 25%) 0 0 3px 1px;
+
   form {
     padding: 0.5em 1em;
     text-align: left;
@@ -36,12 +40,51 @@
     input {
       width: 100%;
       border-radius: 0.25em;
-      padding: 0.333em;
+      border: 1px solid fadeout(@dark_green, 50%);
+      outline: none;
+      padding: @input_padding;
+
+      box-shadow: @input_box_shadow;
+
+      &:focus {
+        box-shadow: @input_box_shadow, fadeout(@neon_green, 25%) 0 0 4px 2px;
+      }
     }
 
     button {
       padding: 0.5em 1em;
       width: 100%;
+
+      &[disabled=disabled] {
+        opacity: 0.5;
+        color: gray;
+        cursor: not-allowed;
+      }
+    }
+
+    .error {
+      position: relative;
+
+      input {
+        color: @blood_red;
+        border-color: @blood_red;
+        box-shadow: @input_error_box_shadow;
+      }
+
+      &:after {
+        content: '\00D7'; // &mult;
+        position: absolute; top: 0; right: 0.25em;
+        padding: @input_padding;
+        line-height: 1em;
+        color: @blood_red;
+        transform: scale(1.667, 1.667);
+      }
+    }
+
+    &.ng-dirty.ng-invalid-email .email input:not(:focus) {
+      color: @blood_red;
+      border-color: @blood_red;
+      box-shadow: @input_error_box_shadow;
     }
   }
 
