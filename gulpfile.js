@@ -128,7 +128,7 @@ gulp.task('user-less', function() {
 });
 
 gulp.task('watch', ['lib', 'index-jade', 'common-less', 'login', 'signup', 'user'], function() {
-  gulp.watch([paths.common.less, SRC + 'common/**/*.less'], ['common-less']);
+  gulp.watch(SRC + 'common-less/**/*.less', ['common-less']);
   gulp.watch(paths.login.jade, ['login-jade']);
   gulp.watch(paths.login.js, ['login-js']);
   gulp.watch(paths.signup.jade, ['signup-jade']);
