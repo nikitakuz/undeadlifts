@@ -28,6 +28,10 @@
       "destination": "/login/login.js"
     },
     {
+      "source": "/signup",
+      "destination": "/signup/signup.html"
+    },
+    {
       "source": "/signup.js",
       "destination": "/signup/signup.js"
     }
