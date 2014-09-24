@@ -29,7 +29,7 @@ nav(ng-controller="NavController")
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
         .top-position-helper.h2-font-size!="&nbsp;"
-        a.h3-font-size(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')")
+        a.h3-font-size(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')", ng-click="deleteWorkout()")
           !="Delete Workout"
         a.h3-font-size(ui-sref="user.settings")
           !="Settings"

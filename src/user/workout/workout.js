@@ -128,14 +128,15 @@ cleanlifts.controller('WorkoutController',
         }
       };
 
-      $scope.deleteWorkout = function() {
+      $scope.$on('workout.delete', function() {
         if (confirm('Are you sure you want to delete this workout?')) {
           delete user.current_workout;
+          firebase.sync(['workouts', $scope.workout.$id]).$remove();
           user.$save().then(function(ref) {
             $state.transitionTo('user.index', {}, {});
           });
         }
-      };
+      });
     }
   ]
 );

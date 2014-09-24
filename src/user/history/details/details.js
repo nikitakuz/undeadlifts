@@ -40,8 +40,8 @@ cleanlifts.config(
   ]
 );
 cleanlifts.controller('HistoryWorkoutController',
-  [         '$scope', '$state', '$stateParams', '$filter', 'firebase', 'user', 'workout',
-    function($scope,   $state,   $stateParams,   $filter,   firebase,   user,   workout) {
+  [         '$window', '$scope', '$state', '$stateParams', '$filter', 'firebase', 'user', 'workout',
+    function($window,   $scope,   $state,   $stateParams,   $filter,   firebase,   user,   workout) {
       if (!workout || !workout.routine) {
         replaceStateWithUserHistoryMonth();
         return;
@@ -90,13 +90,19 @@ cleanlifts.controller('HistoryWorkoutController',
         }
       };
 
-      $scope.deleteWorkout = function() {
+      $scope.$on('workout.delete', function() {
         if (confirm('Are you sure you want to delete this workout?')) {
-          var yyyymmdd = $filter('date')($scope.date, 'yyyyMMdd');
-          delete user.history[yyyymmdd];
-          user.$save().then(replaceStateWithUserHistoryMonth);
+          firebase.sync(['workouts', $scope.workout.$id]).$remove();
+          delete user.history[$filter('date')($scope.date, 'yyyyMMdd')];
+          user.$save().then(function() {
+            if ($window.history && $window.history.back) {
+              $window.history.back();
+            } else {
+              replaceStateWithUserHistoryMonth()
+            }
+          });
         }
-      };
+      });
 
       function replaceStateWithUserHistoryMonth() {
         $state.transitionTo(

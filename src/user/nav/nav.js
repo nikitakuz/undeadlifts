@@ -1,6 +1,6 @@
 cleanlifts.controller('NavController',
-  [         '$window', '$location', '$scope', '$state',
-    function($window,  $location,   $scope,   $state) {
+  [         '$window', '$rootScope', '$scope', '$state',
+    function($window,   $rootScope,   $scope,   $state) {
       $scope.showMenu = false;
       $scope.now = new Date();
 
@@ -21,6 +21,10 @@ cleanlifts.controller('NavController',
 
       $scope.switchHistoryView = function() {
         // TODO: write and use this function
+      };
+
+      $scope.deleteWorkout = function() {
+        $rootScope.$broadcast('workout.delete');
       };
 
       $scope.back = function() {
