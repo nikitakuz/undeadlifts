@@ -1,0 +1,35 @@
+ui-view
+  section.create-routine
+    .heading
+      .search
+        | Search
+      .selected
+        | Selected
+    .content
+      .lifts
+        article.search
+          input(type="text", ng-model="search", placeholder="Filter by name")
+        article.search
+          select(ng-model="type")
+            option(value="-2" disabled)!="Filter by Type"
+            option(value="-1")!="Any"
+            option(value="0")!="Barbell"
+            option(value="1")!="Dumbell"
+            option(value="2")!="Cable"
+            option(value="3")!="Bodyweight"
+        // article(ng-repeat="lift in lifts | filter:search | filter:isLiftSelectedFilter() | filter:isLiftTypeFilter()")
+        article(ng-repeat="lift in lifts | filter:search | filter:isLiftTypeFilter()")
+          .lift(ng-click="selectLift(lift)", ng-class="{'selected': selected.indexOf(lift) > -1}")
+            .name
+              | {{ lift.name }}
+      .selected-lifts
+        article(ng-repeat="lift in selected")
+          .lift(ng-click="deselectLift(lift)")
+            .name
+              | {{ lift.name }}
+        article.clear(ng-show="selected.length > 0")
+          input(type="submit", ng-click="selected = []", value="Clear")
+        article.create(ng-show="selected.length > 0")
+          a(ui-sref="user.create-routine.sets-and-reps")
+            input(type="submit", value="Continue")
+
