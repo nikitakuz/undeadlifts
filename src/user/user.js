@@ -81,24 +81,22 @@ cleanlifts.config(
       $stateProvider.state('user',
         {
           abstract: true,
-          template: '<div class="user"><ui-view/></div>',
+          template: '<div><ui-view class="user"/></div>',
           className: 'user',
           resolve: {
-            user:
-              [         'firebase', 'user_id',
-                function(firebase,   user_id) {
-                  var user = firebase.sync(['users', user_id]);
-                  return user.$asObject().$loaded();
-                }
-              ]
-          },
-          controller:
-            [         '$rootScope', 'user',
-              function($rootScope,   user) {
-                $rootScope.user = user;
-                $rootScope.weight_unit = user.weight_unit;
+            user: [   'firebase', 'user_id',
+              function(firebase,   user_id) {
+                var user = firebase.sync(['users', user_id]);
+                return user.$asObject().$loaded();
               }
             ]
+          },
+          controller: ['$scope', 'user',
+            function   ($scope,   user) {
+              $scope.user = user;
+              $scope.weight_unit = user.weight_unit;
+            }
+          ]
         }
       );
     }
