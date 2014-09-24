@@ -1,4 +1,4 @@
-cleanlifts.service('util',
+undeadlifts.service('util',
   [
     function() {
       return {
@@ -17,7 +17,7 @@ cleanlifts.service('util',
   ]
 );
 
-cleanlifts.filter('orderObjectBy', function() {
+undeadlifts.filter('orderObjectBy', function() {
   return function(items, field, reverse) {
     var filtered = [];
     angular.forEach(items, function(item) {
@@ -31,7 +31,7 @@ cleanlifts.filter('orderObjectBy', function() {
   };
 });
 
-cleanlifts.service('replaceState',
+undeadlifts.service('replaceState',
   [         '$state',
     function($state) {
       return function(state, params) {

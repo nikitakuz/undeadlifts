@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
       $stateProvider.state('user.workout.change-weight',
@@ -11,7 +11,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('ChangeWeightController',
+undeadlifts.controller('ChangeWeightController',
   [         '$scope', '$state', '$stateParams', 'workout',
     function($scope,   $state,   $stateParams, workout) {
       $scope.lift = $stateParams.lift;

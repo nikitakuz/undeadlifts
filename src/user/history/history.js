@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
       $stateProvider.state('user.history',
@@ -12,11 +12,11 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.constant('MONTH_NAMES', {
+undeadlifts.constant('MONTH_NAMES', {
     1: 'January', 2: 'February', 3: 'March',      4: 'April',    5: 'May',       6: 'June',
     7: 'July',    8: 'August',   9: 'September', 10: 'October', 11: 'November', 12: 'December'
 });
-cleanlifts.filter('setsCompleted', function() {
+undeadlifts.filter('setsCompleted', function() {
   return function(sets) {
     sets = sets.map(function(set) {
       return set.completed || 0;
@@ -31,7 +31,7 @@ cleanlifts.filter('setsCompleted', function() {
     }
   };
 });
-cleanlifts.filter('shortenLiftName', function() {
+undeadlifts.filter('shortenLiftName', function() {
   return function(name) {
     if (name === 'Overhead Press') {
       return 'OH Press';
@@ -44,17 +44,10 @@ cleanlifts.filter('shortenLiftName', function() {
     }
   };
 });
-cleanlifts.controller('AbstractHistoryController',
+undeadlifts.controller('AbstractHistoryController',
   [         '$scope', 'user',
     function($scope,   user) {
       $scope.history = user.history;
-
-/*
-      for (var i = 0; i < history.length; i++) {
-        var $id = history[i].$id;
-        history[i].date = new Date($id.substr(0, 4), $id.substr(4, 2), $id.substr(6, 2));
-      }
-*/
     }
   ]
 );

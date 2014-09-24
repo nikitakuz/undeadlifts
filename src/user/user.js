@@ -1,12 +1,12 @@
-var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
+var undeadlifts = angular.module('undeadlifts', ['firebase', 'ui.router']);
 
 (function() {
   var log = function(msg) { console.log(msg); };
-  var FBURL = 'https://cleanlifts.firebaseio.com';
+  var FBURL = 'https://undeadlifts.firebaseio.com';
   var FBREF = new Firebase(FBURL);
-  cleanlifts.constant('FBURL', FBURL);
-  cleanlifts.constant('log', log );
-  cleanlifts.constant('FBREF', FBREF);
+  undeadlifts.constant('FBURL', FBURL);
+  undeadlifts.constant('log', log );
+  undeadlifts.constant('FBREF', FBREF);
 
   var fbsl = new FirebaseSimpleLogin(FBREF, loginCallback);
 
@@ -15,7 +15,7 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
       log(error);
     } else if (user) {
       log('User logged in.');
-      cleanlifts.constant('user_id', user.uid);
+      undeadlifts.constant('user_id', user.uid);
       getUserData(user.uid, function(data) {
         if (!data) {
           log('No user data.');
@@ -64,16 +64,16 @@ var cleanlifts = angular.module('cleanlifts', ['firebase', 'ui.router']);
   function bootstrapApplication() {
     log('Bootstrapping application...');
     angular.element(document).ready(function() {
-      angular.bootstrap(document, ['cleanlifts']);
+      angular.bootstrap(document, ['undeadlifts']);
     });
   }
 
-  cleanlifts.constant('logout', function() {
+  undeadlifts.constant('logout', function() {
     fbsl.logout();
   });
 })();
 
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
       $urlRouterProvider.otherwise('/');
@@ -103,7 +103,7 @@ cleanlifts.config(
   ]
 );
 
-cleanlifts.run(
+undeadlifts.run(
   [         '$rootScope', '$state', '$stateParams', 'logout',
     function($rootScope,   $state,   $stateParams,   logout) {
       $rootScope.$state = $state;

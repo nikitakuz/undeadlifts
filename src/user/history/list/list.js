@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
       $stateProvider.state('user.history.list',
@@ -11,7 +11,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('HistoryListController',
+undeadlifts.controller('HistoryListController',
   [         '$scope', '$filter', 'firebase', 'util', 'MONTH_NAMES', 'user',
     function($scope,   $filter,   firebase,   util,   MONTH_NAMES,   user) {
       $scope.now = new Date();

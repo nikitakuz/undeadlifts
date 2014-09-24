@@ -86,7 +86,7 @@
     }
   );
 
-  var fb = new Firebase('https://cleanlifts.firebaseio.com');
+  var fb = new Firebase('https://undeadlifts.firebaseio.com');
   var fbsl = new FirebaseSimpleLogin(fb, function(error, user) {
     if (error) {
       if (loginControllerScope) {

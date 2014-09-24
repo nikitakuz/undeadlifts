@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
       $stateProvider.state('user.workout',
@@ -18,7 +18,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('WorkoutController',
+undeadlifts.controller('WorkoutController',
   [         '$rootScope', '$scope', '$state', '$timeout', '$filter', 'firebase', 'util', 'log', 'user', 'workout',
     function($rootScope,   $scope,   $state,   $timeout,   $filter,   firebase,   util,   log,   user,   workout) {
       $scope.restTimerTimeout = null;

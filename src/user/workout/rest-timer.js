@@ -1,4 +1,4 @@
-cleanlifts.controller('RestTimerController',
+undeadlifts.controller('RestTimerController',
   [         '$rootScope', '$scope',
     function($rootScope,   $scope) {
       var restTimerTimeout = null;

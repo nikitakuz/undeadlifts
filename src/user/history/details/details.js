@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
       function stateParamsToYyyyMmDd($stateParams) {
@@ -39,7 +39,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('HistoryWorkoutController',
+undeadlifts.controller('HistoryWorkoutController',
   [         '$window', '$scope', '$state', '$stateParams', '$filter', 'firebase', 'user', 'workout',
     function($window,   $scope,   $state,   $stateParams,   $filter,   firebase,   user,   workout) {
       if (!workout || !workout.routine) {
@@ -114,7 +114,7 @@ cleanlifts.controller('HistoryWorkoutController',
     }
   ]
 );
-cleanlifts.controller('HistoryChangeDateController',
+undeadlifts.controller('HistoryChangeDateController',
   [         '$rootScope', '$scope', '$stateParams',
     function($rootScope,   $scope,   $stateParams) {
       $scope.current_date = $scope.new_date || new Date($stateParams.year, $stateParams.month - 1, $stateParams.day);

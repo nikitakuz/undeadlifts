@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
       $urlRouterProvider.otherwise('/');

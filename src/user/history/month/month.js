@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
       $stateProvider.state('user.history.month',
@@ -11,7 +11,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('HistoryMonthController',
+undeadlifts.controller('HistoryMonthController',
   [         '$scope', '$stateParams', '$filter', 'MONTH_NAMES',
     function($scope,   $stateParams,   $filter,   MONTH_NAMES) {
       $scope.year = parseInt($stateParams.year);

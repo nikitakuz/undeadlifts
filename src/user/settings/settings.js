@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
       $stateProvider.state('user.settings',
@@ -11,7 +11,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('UserSettingsController',
+undeadlifts.controller('UserSettingsController',
   [         '$scope',
     function($scope) {
       $scope.setting_ids = ['auto-increment', 'rest-timer-sound'];

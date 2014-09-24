@@ -1,4 +1,4 @@
-cleanlifts.service('firebase',
+undeadlifts.service('firebase',
   [         '$firebase', 'FBREF',
     function($firebase,   FBREF) {
       return {

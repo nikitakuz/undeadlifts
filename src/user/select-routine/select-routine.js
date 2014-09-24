@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider', '$urlRouterProvider',
     function($stateProvider,   $urlRouterProvider) {
       $stateProvider.state('user.select-routine',
@@ -11,7 +11,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('SelectRoutineController',
+undeadlifts.controller('SelectRoutineController',
   [         '$scope', '$state', '$filter', 'firebase', 'log', 'user',
     function($scope,   $state,   $filter,   firebase,   log,   user) {
       log('Waiting for user to select a routine...');

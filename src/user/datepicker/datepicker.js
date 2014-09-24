@@ -1,4 +1,4 @@
-cleanlifts.directive('datepicker',
+undeadlifts.directive('datepicker',
   [
     function() {
       return {

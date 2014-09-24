@@ -1,4 +1,4 @@
-cleanlifts.controller('NavController',
+undeadlifts.controller('NavController',
   [         '$window', '$rootScope', '$scope', '$state',
     function($window,   $rootScope,   $scope,   $state) {
       $scope.showMenu = false;

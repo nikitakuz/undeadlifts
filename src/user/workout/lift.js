@@ -1,4 +1,4 @@
-cleanlifts.controller('LiftController',
+undeadlifts.controller('LiftController',
   [         '$rootScope', '$scope', '$state',
     function($rootScope,   $scope,   $state) {
       $scope.classname = { 1: 'one-set', 2: 'two-sets', 3: 'three-sets', 4: 'four-sets', 5: 'five-sets' }[$scope.lift.sets.length];

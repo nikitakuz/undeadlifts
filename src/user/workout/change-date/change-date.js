@@ -1,4 +1,4 @@
-cleanlifts.config(
+undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
       $stateProvider.state('user.workout.change-date',
@@ -11,7 +11,7 @@ cleanlifts.config(
     }
   ]
 );
-cleanlifts.controller('WorkoutChangeDateController',
+undeadlifts.controller('WorkoutChangeDateController',
   [         '$rootScope', '$scope', '$timeout', '$state', '$filter', 'util', 'user', 'workout',
     function($rootScope,   $scope,   $timeout,   $state,   $filter,   util,   user,   workout) {
       $scope.current_date = util.parseYyyyMmDd(workout.yyyymmdd);
