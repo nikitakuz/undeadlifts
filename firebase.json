@@ -18,22 +18,6 @@
     {
       "source": "/user.css",
       "destination": "/user/user.css"
-    },
-    {
-      "source": "/login",
-      "destination": "/login/login.html"
-    },
-    {
-      "source": "/login.js",
-      "destination": "/login/login.js"
-    },
-    {
-      "source": "/signup",
-      "destination": "/signup/signup.html"
-    },
-    {
-      "source": "/signup.js",
-      "destination": "/signup/signup.js"
     }
   ]
 }
