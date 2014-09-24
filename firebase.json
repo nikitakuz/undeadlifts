@@ -1,5 +1,5 @@
 {
-  "firebase": "cleanlifts",
+  "firebase": "undeadlifts",
   "public": "build",
   "ignore": [
     "firebase.json",
@@ -24,8 +24,12 @@
       "destination": "/login/login.html"
     },
     {
-      "source": "/signup",
-      "destination": "/signup/signup.html"
+      "source": "/login.js",
+      "destination": "/login/login.js"
+    },
+    {
+      "source": "/signup.js",
+      "destination": "/signup/signup.js"
     }
   ]
 }
