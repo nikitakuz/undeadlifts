@@ -27,6 +27,8 @@ cleanlifts.controller('UserSettingsController',
         }
       };
 
+      $scope.user.settings = $scope.user.settings || {};
+
       for (var i in $scope.settings) {
         if ($scope.settings.hasOwnProperty(i) && !$scope.user.settings.hasOwnProperty(i)) {
           $scope.user.settings[i] = $scope.settings[i].default;
