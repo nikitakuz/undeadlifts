@@ -3,6 +3,8 @@ section
     .tac
       article.routine(ng-repeat="routine in routines")
         button.p1em(ng-click="selectRoutine(routine)")!="{{routine.name}}"
+      article(ng-if="routines.length === 0")
+        | You have no routines.
       hr
       article.create-routine
         button.p1em(ui-sref="user.create-routine.select-lifts")!="Create Routine"

@@ -15,7 +15,11 @@ undeadlifts.controller('SelectRoutineController',
   [         '$scope', '$state', '$filter', 'firebase', 'log', 'user',
     function($scope,   $state,   $filter,   firebase,   log,   user) {
       log('Waiting for user to select a routine...');
-      $scope.routines = JSON.parse(JSON.stringify(user.routines)); // BAD HACK. Sorry.
+      if (user.routines) {
+        $scope.routines = JSON.parse(JSON.stringify(user.routines)); // BAD HACK. Sorry.
+      } else {
+        $scope.routines = [];
+      }
 
       $scope.selectRoutine = function(routine) {
         log('User selected a routine.');
