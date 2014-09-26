@@ -19,8 +19,8 @@ undeadlifts.config(
   ]
 );
 undeadlifts.controller('WorkoutController',
-  [         '$rootScope', '$scope', '$state', '$timeout', '$filter', 'firebase', 'util', 'log', 'user', 'workout',
-    function($rootScope,   $scope,   $state,   $timeout,   $filter,   firebase,   util,   log,   user,   workout) {
+  [         '$rootScope', '$scope', '$state', '$timeout', '$filter', 'firebase', 'util', 'log', 'user', 'workout', 'lifts',
+    function($rootScope,   $scope,   $state,   $timeout,   $filter,   firebase,   util,   log,   user,   workout,   lifts) {
       $scope.restTimerTimeout = null;
       $scope.restTimerInterval = null;
       $scope.showRestTimer = false;
@@ -49,12 +49,15 @@ undeadlifts.controller('WorkoutController',
       var path = ['workouts', workout.$id, 'routine', 'lifts'];
       $scope.lifts = firebase.sync(path).$asArray();
       $scope.lifts.$loaded().then(function() {
-        var lifts = $scope.lifts;
-        for (var i = 0; i < lifts.length; i++) {
-          var lift = lifts[i];
+        for (var i = 0; i < $scope.lifts.length; i++) {
+          var lift = $scope.lifts[i];
           if (!lift.weight) {
-            lift.weight = user.working_weight[lift.name];
-            lifts.$save(i);
+            if (user.working_weight[lift.name]) {
+              lift.weight = user.working_weight[lift.name];
+            } else {
+              lift.weight = lifts.getStartingWeight(lift.name)
+            }
+           $scope.lifts.$save(i);
           }
 
           $scope.$watch('lifts[' + i + ']', onLiftChange, true);
