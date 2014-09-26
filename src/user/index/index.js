@@ -1,8 +1,6 @@
 undeadlifts.config(
-  [         '$stateProvider', '$urlRouterProvider',
-    function($stateProvider,   $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/');
-
+  [         '$stateProvider',
+    function($stateProvider) {
       $stateProvider.state('user.index',
         {
           url: '/',

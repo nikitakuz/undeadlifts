@@ -1,0 +1,29 @@
+section.select-lifts
+  .content
+    .routine-wrapper
+      .routine(ng-style="{top: windowScrollY}")
+        h3
+          | Routine
+        article(ng-if="selected.length === 0")
+          | No lifts selected.
+        article(ng-show="selected.length")
+          .lift(ng-repeat="lift in selected")
+            .number(ng-bind="$index + 1 + '.'")
+            .name(ng-bind="lift.name")
+            .remove(ng-click="deselectLift(lift)")!="&times;"
+          //button.lift.selected(ng-click="deselectLift(lift)")
+            | {{ lift.name }}
+        article.create(ng-show="selected.length")
+          button(ui-sref="user.create-routine.sets-and-reps")!="Sets and Reps"
+        // article.clear(ng-show="selected.length")
+          // button(ng-click="clearSelected()")!="Clear"
+    .lifts-wrapper
+      .lifts
+        article.lift-type.h3-font-size
+          select(ng-model="type", ng-options="type.name for type in types")
+        article.name-search(ng-show="type !== -2")
+          input(type="text", ng-model="search", placeholder="Filter by name")
+        // article(ng-repeat="lift in lifts | filter:search | filter:isLiftSelectedFilter() | filter:isLiftTypeFilter()")
+        article.lift(ng-show="type !== -2", ng-repeat="lift in lifts | filter:search | filter:isLiftTypeFilter(type)")
+          button.lift(ng-click="selectLift(lift)", ng-class="{'selected': selected.indexOf(lift) > -1}")
+            | {{ lift.name }}

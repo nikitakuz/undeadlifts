@@ -15,7 +15,8 @@ undeadlifts.controller('SetsAndRepsController',
   [         '$state', '$scope',
     function($state,   $scope) {
       if (!$scope.selected || $scope.selected.length < 1) {
-        $state.transitionTo('user.create-routine', {}, { location: 'replace' });
+        $state.transitionTo('user.create-routine.select-lifts', {}, { location: 'replace' });
+        return;
       }
 
       $scope.routine = {
