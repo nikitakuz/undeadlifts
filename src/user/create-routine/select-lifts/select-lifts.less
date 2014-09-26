@@ -7,21 +7,18 @@
   }
 
   .routine-wrapper, .lifts-wrapper {
-    box-sizing: border-box;
-    position: relative; vertical-align: top;
-    display: inline-block; width: 50%;
+    position: relative; box-sizing: border-box; display: inline-block; vertical-align: top;
 
-    -webkit-transition: width 0.1s linear;
-    transition: width 0.1s linear;
+    -webkit-transition: width 0.1s linear; transition: width 0.1s linear;
   }
 
   .routine-wrapper {
-    padding-right: 0.25em;
+    padding-right: 0.25em;    width: 50%;
     @media(min-width: 30em) { width: 33.3%; }
   }
 
   .lifts-wrapper {
-    padding-left: 0.25em;
+    padding-left: 0.25em;     width: 50%;
     @media(min-width: 30em) { width: 66.6%; }
   }
 
@@ -30,19 +27,14 @@
     text-align: left; background-color: @lightest_green;
   }
 
-  .routine h3, .lifts .lift-type { height: 1.5em; }
+  .routine h3, .lifts .lift-type { border-bottom: 1px solid @light_green; }
+  .routine h3, .lifts .lift-type .fake-select { height: 1.5em; } // .fake-select is important here
 
   .routine {
     position: absolute; left: 0; top: 0; right: 0.25em;
-    -webkit-transition: top 0.1s linear;
-    transition: top 0.1s linear;
+    -webkit-transition: top 0.1s linear; transition: top 0.1s linear;
 
-    h3 {
-      margin: 0;
-      padding: 0.375em 0.5em 0.125em;
-      border-bottom: 1px solid @light_green;
-      font-family: @finger_paint;
-    }
+    h3 { margin: 0; padding: 0.375em 0.5em 0.125em; font-family: @finger_paint; }
 
     .lift {
       line-height: 2em;
@@ -79,8 +71,24 @@
   }
 
   .lift-type {
-    padding: 0.375em 0.5em 0.125em;
-    border-bottom: 1px solid @light_green;
+    position: relative;
+
+    .fake-select {
+      position: relative; padding: 0 0.5em;
+      border: 1px solid @dark_green; border-radius: 4px;
+      overflow: hidden;
+    }
+
+    // black triangle down
+    .dtrif {
+      position: absolute; top: 0; right: 0; bottom: 0; width: 1em;
+      line-height: 1em; font-size: 1.25em; text-align: center;
+    }
+
+    select {
+      position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+      opacity: 0;
+    }
   }
 
   .lift {

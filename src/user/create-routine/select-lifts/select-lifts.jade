@@ -19,7 +19,10 @@ section.select-lifts
           // button(ng-click="clearSelected()")!="Clear"
     .lifts-wrapper
       .lifts
-        article.lift-type.h3-font-size
+        article.lift-type
+          .fake-select.h3-font-size
+            .value(ng-bind="type.name")
+            .dtrif!="&dtrif;"
           select(ng-model="type", ng-options="type.name for type in types")
         article.name-search(ng-show="type !== -2")
           input(type="text", ng-model="search", placeholder="Filter by name")
