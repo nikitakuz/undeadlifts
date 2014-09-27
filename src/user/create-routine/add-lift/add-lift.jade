@@ -1,0 +1,21 @@
+section.filters
+  .content
+    article.type-filter
+      .fake-select
+        .filter
+          include ../../../jade-svg/filter
+        .value(ng-bind="type.name")
+        .chevron-arrow-down
+          include ../../../jade-svg/chevron-arrow-down
+      select(ng-model="type", ng-options="type.name for type in types")
+    article.name-filter(ng-show="type !== -2")
+      .search
+        include ../../../jade-svg/search
+      input(type="text", ng-model="search", placeholder="Filter by name")
+section.add-lift
+  .content
+    // article(ng-repeat="lift in lifts | filter:search | filter:isLiftSelectedFilter() | filter:isLiftTypeFilter()")
+    .lifts
+      article.lift(ng-show="type !== -2", ng-repeat="lift in lifts | filter:search | filter:isLiftTypeFilter(type)")
+        button(ng-click="addLift(lift)", ng-disabled="selected.indexOf(lift) > -1")
+          | {{ lift.name }}

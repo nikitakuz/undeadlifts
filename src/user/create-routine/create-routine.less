@@ -1,28 +1,99 @@
 @import "../../constant";
 
 .create-routine {
-  @placeholder_color: @dark_green;
+  @label_font_family: monospace;
 
-  article { padding: 0.25em 0.5em; }
+  .routine-name {
+    border: 1px solid @darker_green; padding: 0;
+    background: @darker_green;
 
-  input, select, button {
-    box-sizing: border-box; width: 100%;
-    line-height: 1.25em; padding: 0.375em;
-    border-radius: 4px;
+    label, .value { box-sizing: border-box; display: inline-block; vertical-align: top; font-size: 1.5em;}
+
+    label {
+      width: 30%; padding: 0.125em;
+      color: @lightest_green;
+      font-family: @label_font_family;
+    }
+
+    .value {
+      width: 70%;
+      background: rgba(255, 255, 255, 0.9); color: @darker_green;
+
+      input {
+        border: 0; padding: 0.125em 0.5em;
+        background: transparent; color: inherit;
+      }
+    }
   }
 
-  input, select {
-    background-color: rgba(255, 255, 255, 0.25);
+  table.lifts {
+    width: 100%; background: @lightest_green;
+    border-top: 1px solid @dark_green;
+    border-left: 1px solid @dark_green;
   }
 
-  input {
-    &::-webkit-input-placeholder { color: @placeholder_color; }
-    &:-moz-placeholder { color: @placeholder_color; opacity:  1; }
-    &::-moz-placeholder { color: @placeholder_color; opacity:  1; }
-    &:-ms-input-placeholder { color: @placeholder_color; }
+  tr:nth-child(odd) { background: rgba(255, 255, 255, 0.1); }
+  tr:nth-child(even) { background: rgba(0, 0, 0, 0.1); }
+  tr:first-child  {
+    background: @darker_green; color: @lightest_green;
+    font-size: 1.5em; font-family: @label_font_family;
   }
 
-  button {
-    font-size: 0.9375em;
+  th, td {
+    padding: 0.25em 0.5em;
+
+    &.name { width: 50%; text-align: left; }
+
+    &.sets, &.reps, &.remove { text-align: center; }
+
+    &.sets, &.reps {
+      position:relative; width: 20%;
+
+      .value, .plus, .minus { display: inline-block; }
+      .value { width: 50%; }
+      .plus, .minus {
+        width: 25%;
+        cursor: pointer;
+        &.disabled { opacity: 0.5; }
+      }
+    }
+
+    &.remove {
+      width: 10%; font-size: 1.5em;
+
+      a:hover { width: 100%; color: @blood_red; }
+    }
+  }
+
+  th {
+    border-right: 1px solid @light_green;
+
+    &:last-child { border-right: 1px solid @dark_green; }
+  }
+
+  td {
+    border-right: 1px solid @dark_green;
+    border-bottom: 1px solid @dark_green;
+  }
+
+  td.name, td.sets, td.reps { font-family: @finger_paint; }
+
+  .buttons {
+    button {
+      width: 100%; padding: 0.5em;
+
+      &:disabled {
+        opacity: 0.5;
+        color: white;
+      }
+    }
+
+    .add-lift, .create-routine { box-sizing: border-box; display: inline-block; width: 100%; padding: 0.25em 0; }
+
+    @media(min-width: 30em) {
+      .add-lift, .create-routine { width: 50%; }
+      .add-lift { padding-right: 0.25em; }
+      .create-routine { padding-left: 0.25em; }
+    }
   }
 }

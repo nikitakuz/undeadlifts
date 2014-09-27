@@ -8,8 +8,10 @@ undeadlifts.controller('NavController',
         $scope.showMenu = false;
         if ($state.includes('user.index')) {
           $scope.title = 'UndeadLifts';
-        } else if ($state.includes('user.create-routine')) {
+        } else if ($state.includes('user.create-routine.index')) {
           $scope.title = 'Create Routine';
+        } else if ($state.includes('user.create-routine.add-lift')) {
+          $scope.title = 'Add Lift';
         } else if ($state.includes('user.select-routine')) {
           $scope.title = 'Select Routine';
         } else if ($state.includes('user.workout')) {

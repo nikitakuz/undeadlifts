@@ -1,0 +1,30 @@
+section.create-routine
+  .content
+    article.routine-name
+      label!="Name"
+      .value
+        input.w100(type="text", ng-model="routine.name", placeholder="Name this routine")
+    article
+      table.lifts
+        tr
+          th.name!="Lift"
+          th.sets!="Sets"
+          th.reps!="Reps"
+          th.remove
+        tr.lift(ng-repeat="lift in selected")
+          td.name(ng-bind="lift.name")
+          td.sets
+            .minus(ng-click="decreaseSets(lift)", ng-class="{'disabled': lift.sets <= MIN_SETS}")!="-"
+            .value(ng-bind="lift.sets")
+            .plus(ng-click="increaseSets(lift)", ng-class="{'disabled': lift.sets >= MAX_SETS}")!="+"
+          td.reps
+            .minus(ng-click="decreaseReps(lift)", ng-class="{'disabled': lift.reps <= MIN_REPS}")!="-"
+            .value(ng-bind="lift.reps")
+            .plus(ng-click="increaseReps(lift)", ng-class="{'disabled': lift.reps >= MAX_REPS}")!="+"
+          td.remove
+            a(ng-click="removeLift(lift)")!="&times;"
+    article.buttons
+      .add-lift
+        button(ui-sref="user.create-routine.add-lift")!="Add Lift"
+      .create-routine
+        button(ng-disabled="routine.name.length < 1", ng-click="createRoutine()")!="Create Routine"

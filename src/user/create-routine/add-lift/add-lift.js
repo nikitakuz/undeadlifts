@@ -1,20 +1,20 @@
 undeadlifts.config(
   [         '$stateProvider',
     function($stateProvider) {
-      $stateProvider.state('user.create-routine.select-lifts',
+      $stateProvider.state('user.create-routine.add-lift',
         {
-          url: '',
-          templateUrl: 'user/create-routine/select-lifts/select-lifts.html',
-          controller: 'SelectLiftsController'
+          url: '/add-lift',
+          templateUrl: 'user/create-routine/add-lift/add-lift.html',
+          controller: 'AddLiftController'
         }
       );
     }
   ]
 );
 
-undeadlifts.controller('SelectLiftsController',
-  [         '$window', '$scope', 'lifts',
-    function($window,   $scope,   lifts) {
+undeadlifts.controller('AddLiftController',
+  [         '$window', '$state', '$scope', 'lifts',
+    function($window,   $state,   $scope,   lifts) {
       var BARBELL = lifts.BARBELL;
       var DUMBELL = lifts.DUMBELL;
       var CABLE = lifts.CABLE;
@@ -30,17 +30,15 @@ undeadlifts.controller('SelectLiftsController',
 
       $scope.type = $scope.types[0];
 
-      $scope.selectLift = function(lift) {
-        if ($scope.selected.indexOf(lift) > -1) {
-          $scope.deselectLift(lift);
-          return;
+      $scope.addLift = function(lift) {
+        if ($scope.selected.indexOf(lift) === -1) {
+          $scope.selected.push(lift);
         }
-        $scope.selected.push(lift);
-      };
-
-      $scope.deselectLift = function(lift) {
-        var index = $scope.selected.indexOf(lift);
-        $scope.selected.splice(index, 1);
+        if ($window.history && $window.history.back) {
+          $window.history.back();
+        } else {
+          $state.transitionTo('user.create-routine.index', {}, { location: 'replace' });
+        }
       };
 
       $scope.clearSelected = function() {
