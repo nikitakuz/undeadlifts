@@ -17,6 +17,7 @@ var paths = {
   scripts: [SRC + 'js/**/*.js', '!' + SRC + 'js/lib/**/*.js'],
   app: [SRC + 'js/cleanlifts/**/*.js'],
   lib: SRC + 'lib/**/*',
+  favicon: SRC + 'favicon/**/*',
   common: {
     less: SRC + 'common-less/common.less'
   },
@@ -36,22 +37,27 @@ var paths = {
 };
 
 gulp.task('lint', function() {
-    return gulp.src(paths.scripts)
-      .pipe(jshint())
-      .pipe(jshint.reporter('default'));
+  return gulp.src(paths.scripts)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
 gulp.task('app', ['lint'], function() {
-    return gulp.src(paths.app)
-      .pipe(concat('cleanlifts.js'))
+  return gulp.src(paths.app)
+    .pipe(concat('cleanlifts.js'))
 //      .pipe(uglify())
-      .pipe(gulp.dest(BUILD + 'js'))
+    .pipe(gulp.dest(BUILD + 'js'))
 });
 
 // COMMON
 gulp.task('lib', function() {
   return gulp.src(paths.lib)
     .pipe(gulp.dest(BUILD + '/lib'))
+});
+
+gulp.task('favicon', function() {
+  return gulp.src(paths.favicon)
+    .pipe(gulp.dest(BUILD + '/favicon'))
 });
 
 gulp.task('index-jade', function() {
@@ -127,7 +133,9 @@ gulp.task('user-less', function() {
     .pipe(gulp.dest(BUILD + '/user'));
 });
 
-gulp.task('watch', ['lib', 'index-jade', 'common-less', 'login', 'signup', 'user'], function() {
+gulp.task('build', ['lib', 'index-jade', 'common-less', 'login', 'signup', 'user']);
+
+gulp.task('watch', ['build'], function() {
   gulp.watch(SRC + 'common-less/**/*.less', ['common-less']);
   gulp.watch(paths.login.jade, ['login-jade']);
   gulp.watch(paths.login.js, ['login-js']);
