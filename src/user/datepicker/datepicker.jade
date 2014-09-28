@@ -12,5 +12,8 @@ table
     tr(ng-repeat="week in weeks")
       td(ng-repeat="day in week")
         a(ng-if="date.getMonth() === day.getMonth()", ng-class="{'active': isSameDay(day)}", ng-click="setDate(day)", ng-bind="day.getDate()")
-.submit
-  button(ng-click="submit()")="Change Date"
+.buttons
+  .cancel.ib.w33.pr05em
+    button.w100(ng-click="state.prev()")="Cancel"
+  .change.ib.w66.pl05em
+    button.w100(ng-click="submit()")="Change Date"
