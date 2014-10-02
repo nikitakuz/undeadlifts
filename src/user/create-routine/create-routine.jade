@@ -11,6 +11,8 @@ section.create-routine
           th.sets!="Sets"
           th.reps!="Reps"
           th.remove
+        tr.lift(ng-if="selected.length === 0")
+          td(colspan="4").name!="No lifts selected."
         tr.lift(ng-repeat="lift in selected")
           td.name(ng-bind="lift.name")
           td.sets
@@ -27,4 +29,4 @@ section.create-routine
       .add-lift
         button(ui-sref="user.create-routine.add-lift")!="Add Lift"
       .create-routine
-        button(ng-disabled="routine.name.length < 1", ng-click="createRoutine()")!="Create Routine"
+        button(ng-disabled="routine.name.length < 1 || selected.length === 0", ng-click="createRoutine()")!="Create Routine"
