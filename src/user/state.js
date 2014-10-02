@@ -18,7 +18,7 @@ undeadlifts.service('state',
       }
 
       function back(fallbackName, fallbackParams) {
-        if (!$window.history && $window.history.back) {
+        if ($window.history && $window.history.back) {
           $window.history.back()
         } else {
           this.replace(fallbackName || getParent($state.current.name), fallbackParams || $state.params);
