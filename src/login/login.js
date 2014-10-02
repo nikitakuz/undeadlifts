@@ -34,11 +34,6 @@
             $scope.passwordError = true;
             focusPassword();
           }
-/*
-          $scope.$apply(function() {
-            $scope.error = message || 'Unknown error';
-          });
-*/
         };
 
         $scope.$watch('form.email.$viewValue', function(newVal, oldVal) {
@@ -97,9 +92,9 @@
     } else if (user) {
       console.log('User logged in. Redirecting to app...');
       if (location.replace) {
-        location.replace('/');
+        location.replace('/' + window.location.hash);
       } else {
-        location.href = '/';
+        location.href = '/'  + window.location.hash;
       }
     } else {
       console.log('No user found. Bootstrapping login module...');
