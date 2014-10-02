@@ -91,9 +91,10 @@ undeadlifts.config(
               }
             ]
           },
-          controller: ['$scope', 'user',
-            function   ($scope,   user) {
+          controller: ['$scope', 'state', 'user',
+            function   ($scope,   state,   user) {
               $scope.user = user;
+              $scope.state = state;
               $scope.weight_unit = user.weight_unit;
             }
           ]

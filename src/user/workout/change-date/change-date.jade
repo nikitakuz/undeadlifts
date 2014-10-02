@@ -1,7 +1,14 @@
-.modal-background
+// TODO: Find a way around the following copy-paste.
+.modal-background(ng-if="$state.includes('user.workout')", ui-sref="user.workout")
   .modal-gutter
   .modal-dialog
     .date-picker
       datepicker(date="date", min-date="minDate", show-weeks="false", on-submit="changeDate(date)")
-        | Hello
+  .modal-gutter
+// TODO: Find a way around the following copy-paste.
+.modal-background(ng-if="$state.includes('user.history.details')", ui-sref="user.history.details")
+  .modal-gutter
+  .modal-dialog
+    .date-picker
+      datepicker(date="date", min-date="minDate", show-weeks="false", on-submit="changeDate(date)")
   .modal-gutter
