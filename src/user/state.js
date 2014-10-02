@@ -18,10 +18,20 @@ undeadlifts.service('state',
       }
 
       function back(fallbackName, fallbackParams) {
-        if ($window.history && $window.history.back) {
+        if (!$window.history && $window.history.back) {
           $window.history.back()
         } else {
-          this.replace(fallbackName || 'user.index', fallbackParams || {});
+          this.replace(fallbackName || getParent($state.current.name), fallbackParams || $state.params);
+        }
+      }
+
+      function getParent(name) {
+        var split = name.split('.');
+        if (split.length > 2) {
+          split.pop();
+          return split.join('.');
+        } else {
+          return 'user.index';
         }
       }
 

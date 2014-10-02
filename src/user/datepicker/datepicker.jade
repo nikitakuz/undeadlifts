@@ -14,9 +14,6 @@ table
         a(ng-if="date.getMonth() === day.getMonth()", ng-class="{'active': isSameDay(day)}", ng-click="setDate(day)", ng-bind="day.getDate()")
 .buttons
   .cancel.ib.w33.pr05em
-    // TODO: Find a way around the following copy-paste.
-    button.w100(ng-if="$state.includes('user.workout')", ui-sref="user.workout")="Cancel"
-    // TODO: Find a way around the following copy-paste.
-    button.w100(ng-if="$state.includes('user.history.details')", ui-sref="user.history.details")="Cancel"
+    button.w100(ng-click="state.back()")="Cancel"
   .change.ib.w66.pl05em
     button.w100(ng-click="submit()")="Change Date"
