@@ -22,6 +22,10 @@ nav#nav(ng-controller="NavController")
         a.icon(ui-sref="user.history.month({ year: now.getFullYear(), month: now.getMonth() + 1 })")
           include ../../jade-svg/calendar
         .nbsp!="&nbsp;"
+      .ib.h2-font-size(ng-if="$state.includes('user.select-routine')")
+        a.icon(ui-sref="user.create-routine.index")
+          include ../../jade-svg/plus
+        .nbsp!="&nbsp;"
       .ib.h2-font-size
         a.icon(ng-click="showMenu = true;")
           include ../../jade-svg/drops
