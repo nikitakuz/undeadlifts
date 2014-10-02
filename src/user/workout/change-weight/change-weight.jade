@@ -14,11 +14,12 @@
           button(ng-click="increaseWeight()")!="+"
         br
         .tac
-          button(ng-click="saveWeight()")!="OK"
-          | &nbsp;&nbsp;&nbsp;
-          button(ng-click="cancelChanges()")!="Cancel"
-        br
+          .ib.w50.pr05em
+            button.w100(ng-click="cancelChanges()")!="Cancel"
+          .ib.w50.pl05em
+            button.w100(ng-click="saveWeight()")!="OK"
         .plates
+          br
           h3!="Plate Calculator"
           .forty-five(ng-if="plates['45']")
             | {{ plates['45'] }} X

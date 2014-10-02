@@ -57,7 +57,8 @@ var undeadlifts = angular.module('undeadlifts', ['firebase', 'ui.router']);
     userRef.set({
       email: user.email,
       provider: user.provider,
-      provider_id: user.id
+      provider_id: user.id,
+      weight_unit: 'lb'
     }, callback);
   }
 

@@ -65,6 +65,7 @@ undeadlifts.controller('AbstractCreateRoutineController',
       };
 
       $scope.createRoutine = function() {
+        $scope.user.routines = $scope.user.routines || [];
         var routines = $scope.user.routines;
         for (var i = 0; i < routines.length; i++) {
           if (routines[i].name === $scope.routine.name) {

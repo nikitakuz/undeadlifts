@@ -8,4 +8,7 @@ section.select-routine
             .lift(ng-repeat="lift in routine.lifts")
               | {{ lift.name }} {{ lift.sets.length }}x{{ lift.sets[0].target }}{{ !$last ? ',&nbsp;' : '' }}
       article(ng-if="routines.length === 0")
-        | You have no routines.
+        .routine
+          .name.h3-font-size!="No routines created."
+          .lifts
+            .lift(ui-sref="user.create-routine.index")!="Create a routine"

@@ -25,7 +25,7 @@ undeadlifts.controller('SelectRoutineController',
         log('User selected a routine.');
         log('Routine chosen: ' + routine.name);
         // Remove firebase properties($id, $priority) and protect against unintentional modification.
-        var routine_copy = { name: routine.name, lifts: JSON.parse(JSON.stringify(routine.lifts)) };
+        var routine_copy = { name: routine.name, lifts: angular.copy(routine.lifts) };
         var now = new Date();
         var workout = {
           routine: routine_copy,

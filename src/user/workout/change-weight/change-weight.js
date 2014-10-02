@@ -12,10 +12,13 @@ undeadlifts.config(
   ]
 );
 undeadlifts.controller('ChangeWeightController',
-  [         '$scope', '$state', '$stateParams', 'workout',
-    function($scope,   $state,   $stateParams, workout) {
+  [         '$scope', '$state', '$stateParams', 'workout', 'lifts',
+    function($scope,   $state,   $stateParams,   workout,   lifts) {
       $scope.lift = $stateParams.lift;
+      $scope.lifts = lifts;
+      $scope.user.working_weight = $scope.user.working_weight || {};
       $scope.weight = Number($scope.user.working_weight[$scope.lift]);
+      $scope.weight = $scope.weight || lifts.getStartingWeight($scope.lift);
       $scope.plates = {};
 
       calculatePlates();
