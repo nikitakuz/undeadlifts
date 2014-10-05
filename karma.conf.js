@@ -19,8 +19,9 @@ module.exports = function(config) {
       'https://cdn.firebase.com/js/client/1.0.21/firebase.js',
       'https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js',
       'https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js',
-      'js/lib/angular-ui-router-0.2.10.js',
-      'src/js/**/*.js'
+      'src/lib/js/angular-ui-router-0.2.10.js',
+      'src/user/user.js',
+      'src/**/*.js'
     ],
 
 
@@ -38,7 +39,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['spec'],
 
 
     // web server port

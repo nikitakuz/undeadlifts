@@ -11,6 +11,7 @@
     "gulp-uglify": "^0.3.1",
     "karma": "^0.12.23",
     "karma-chrome-launcher": "^0.1.4",
-    "karma-jasmine": "^0.1.5"
+    "karma-jasmine": "^0.1.5",
+    "karma-spec-reporter": "0.0.13"
   }
 }

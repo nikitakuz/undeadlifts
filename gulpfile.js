@@ -149,6 +149,7 @@ gulp.task('watch', ['build'], function() {
 gulp.task('test', function (done) {
   karma.start({
     configFile: __dirname + '/karma.conf.js',
-    singleRun: true
+    singleRun: false
+//    singleRun: true
   }, done);
 });
