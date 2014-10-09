@@ -19,8 +19,8 @@ undeadlifts.config(
   ]
 );
 undeadlifts.controller('WorkoutController',
-  [         '$rootScope', '$scope', '$state', '$timeout', '$filter', 'state', 'firebase', 'util', 'log', 'user', 'workout', 'lifts',
-    function($rootScope,   $scope,   $state,   $timeout,   $filter,   state,   firebase,   util,   log,   user,   workout,   lifts) {
+  [         '$rootScope', '$scope', '$state', '$timeout', '$filter', 'replaceState', 'firebase', 'util', 'log', 'user', 'workout', 'lifts',
+    function($rootScope,   $scope,   $state,   $timeout,   $filter,   replaceState,   firebase,   util,   log,   user,   workout,   lifts) {
       $scope.restTimerTimeout = null;
       $scope.restTimerInterval = null;
       $scope.showRestTimer = false;
@@ -34,7 +34,7 @@ undeadlifts.controller('WorkoutController',
       workout.$bindTo($scope, 'workout').then(function() {
         var valid = validateWorkout($scope.workout);
         if (!valid) {
-          state.replace('user.select-routine');
+          replaceState('user.select-routine');
           return;
         }
         $scope.date = util.parseYyyyMmDd($scope.workout.yyyymmdd);
@@ -48,7 +48,7 @@ undeadlifts.controller('WorkoutController',
 
       $scope.$watch('user.current_workout', function(newVal, oldVal) {
         if (!newVal) {
-          state.replace('user.select-routine');
+          replaceState('user.select-routine');
         }
       });
 
@@ -133,7 +133,7 @@ undeadlifts.controller('WorkoutController',
           delete $scope.workout.yyyymmdd;
           delete user.current_workout;
           user.$save().then(function(ref) {
-            state.replace('user.index');
+            replaceState('user.index');
           });
         }
       };
@@ -143,7 +143,7 @@ undeadlifts.controller('WorkoutController',
           delete user.current_workout;
           firebase.sync(['workouts', $scope.workout.$id]).$remove();
           user.$save().then(function(ref) {
-            state.replace('user.index');
+            replaceState('user.index');
           });
         }
       });

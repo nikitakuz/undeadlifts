@@ -16,34 +16,15 @@ undeadlifts.service('state',
         }
       });
 */
-
-      function replace(name, params) {
-        $state.transitionTo(name, params || {}, {location: 'replace'});
-      }
-
-      function back(fallbackName, fallbackParams) {
-        if ($window.history && $window.history.back) {
-          $window.history.back();
-        } else {
-          this.replace(fallbackName || getParent($state.current.name), fallbackParams || $state.params);
-        }
-      }
-
-      function getParent(name) {
-        var split = name.split('.');
-        if (split.length > 2) {
-          split.pop();
-          return split.join('.');
-        } else {
-          return 'user.index';
-        }
-      }
-
       return {
-        replace: replace,
-        back: back,
+        currentName: function() {
+          return $state.current.name;
+        },
         includes: function(name) {
           return $state.includes(name);
+        },
+        is: function(name) {
+          return $state.is(name);
         }
       };
     }

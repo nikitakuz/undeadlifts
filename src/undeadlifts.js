@@ -11,23 +11,30 @@ undeadlifts.constant('log', function(msg) {
   console.log(msg);
 });
 
-undeadlifts.service('userService',
-  [         'firebase',
-    function(firebase) {
-      return {
-        getUserDataPromise: function(user) {
-          firebase.sync(['user', user.uid]);
-        }
-      };
-    }
-  ]
-);
-
 undeadlifts.run(
-  [         '$rootScope', '$state', '$stateParams',
-    function($rootScope,   $state,   $stateParams) {
+  [         '$rootScope', '$state', '$stateParams', 'replaceState',
+    function($rootScope,   $state,   $stateParams,   replaceState) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
+      $rootScope.replaceState = replaceState;
+
+/*
+      FBREF.onAuth(function(auth) {
+        if (auth && !$state.includes('user')) {
+          replaceState('user.index');
+        } else if (!auth && $state.includes('user')) {
+          replaceState('login');
+        }
+      });
+*/
+
+      // The following controls whether the back button will replace the current state with 'user.index' or use history.back()
+      $rootScope.initialState = true;
+      $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        if (!fromState.abstract) {
+          $rootScope.initialState = false;
+        }
+      });
 
       $rootScope.getNumber = function(num) {
         return new Array(Number(parseInt(num)));

@@ -12,28 +12,19 @@ var SRC = './src/';
 var BUILD = './build/';
 
 var paths = {
-  less: SRC + 'less/*.less',
   jade: SRC + '**/*.jade',
-  scripts: [SRC + 'undeadlifts.js', SRC + '**/*.js', '!' + SRC + 'lib/**/*.js', '!' + SRC + '**/*_test.js'],
-  app: [SRC + 'js/cleanlifts/**/*.js'],
+  less: [
+      SRC + 'common-less/common.less',
+      SRC + 'user/**/*.less'
+  ],
+  scripts: [
+      SRC + 'undeadlifts.js',
+      SRC + '**/*.js',
+      '!' + SRC + 'lib/**/*.js',
+      '!' + SRC + '**/*_test.js'
+  ],
   lib: SRC + 'lib/**/*',
-  favicon: SRC + 'favicon/**/*',
-  common: {
-    less: SRC + 'common-less/common.less'
-  },
-  login: {
-    jade: SRC + 'login/**/*.jade',
-    js: SRC + 'login/**/*.js'
-  },
-  signup: {
-    jade: SRC + 'signup/**/*.jade',
-    js: SRC + 'signup/**/*.js'
-  },
-  user: {
-    jade: SRC + 'user/**/*.jade',
-    js: [SRC + 'user/user.js', SRC + 'user/**/*.js', '!' + SRC + 'user/**/*_test.js'],
-    less: [SRC + 'user/**/*.less']
-  }
+  favicon: SRC + 'favicon/**/*'
 };
 
 gulp.task('lint', function() {

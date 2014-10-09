@@ -5,13 +5,6 @@ undeadlifts.config(
         {
           url: '/signup',
           templateUrl: 'signup/index.html',
-          resolve: {
-            simpleLogin: [ 'simpleLogin',
-              function(simpleLogin) {
-                return simpleLogin.getInitPromise();
-              }
-            ]
-          },
           controller: 'SignupController'
         }
       );
@@ -20,9 +13,8 @@ undeadlifts.config(
 );
 
 undeadlifts.controller('SignupController',
-  [         '$scope', 'state', 'simpleLogin',
-    function($scope,   state,   simpleLogin) {
-      signupControllerScope = $scope;
+  [         '$scope', 'firebase', 'replaceState',
+    function($scope,   firebase,   replaceState) {
       $scope.focusEmail = true;
       $scope.focusPassword = false;
       $scope.emailError = false;
@@ -33,9 +25,11 @@ undeadlifts.controller('SignupController',
 
       $scope.signup = function() {
         $scope.signupButtonText = 'Creating account...';
-        var email = $scope.email;
-        var password = $scope.password;
-        simpleLogin.createUser(email, password, function(error, user) {
+        var credentials = {
+          email: $scope.email,
+          password: $scope.password
+        };
+        firebase.createUser(credentials, function(error, user) {
           if (error) {
             $scope.signupButtonText = 'Create my free account';
             handleAuthError(error);
@@ -43,17 +37,16 @@ undeadlifts.controller('SignupController',
             $scope.$apply(function() {
               $scope.signupButtonText = 'Logging in...';
             });
-            simpleLogin.login('password', {
-              email: email,
-              password: password
+            firebase.authWithPassword(credentials, function(error, user) {
+              if (error) {
+                console.log('Error authenticating');
+              } else if (user) {
+                replaceState('user.index');
+              }
             });
           }
         });
       };
-
-      $scope.$on('simpleLogin.login', function(event, error) {
-        state.replace('user.index');
-      });
 
       $scope.$watch('form.email.$viewValue', function(newVal, oldVal) {
         if ($scope.emailError && newVal !== oldVal) {

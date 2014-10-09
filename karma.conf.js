@@ -18,7 +18,6 @@ module.exports = function(config) {
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js',
       'https://cdn.firebase.com/js/client/1.0.21/firebase.js',
       'https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js',
-      'https://cdn.firebase.com/js/simple-login/1.6.1/firebase-simple-login.js',
       'src/lib/js/angular-ui-router-0.2.10.js',
       'src/user/user.js',
       'src/**/*.js'

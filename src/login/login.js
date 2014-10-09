@@ -3,16 +3,20 @@ undeadlifts.config(
     function($stateProvider) {
       $stateProvider.state('login',
         {
-          url: '/login',
+          url: '/login?b',
           templateUrl: 'login/index.html',
+          controller: 'LoginController',
           resolve: {
-            simpleLogin: [ 'simpleLogin',
-              function(simpleLogin) {
-                return simpleLogin.getInitPromise();
+            firebase: ['firebase', function(firebase) {
+              return firebase.getInitPromise();
+            }],
+            user: ['firebase', 'replaceState', function(firebase, replaceState) {
+              var auth = firebase.getAuth();
+              if (auth && auth.uid) {
+                replaceState('user.index');
               }
-            ]
-          },
-          controller: 'LoginController'
+            }]
+          }
         }
       );
     }
@@ -20,13 +24,8 @@ undeadlifts.config(
 );
 
 undeadlifts.controller('LoginController',
-  [         '$scope', 'state', 'simpleLogin',
-    function($scope,   state,   simpleLogin) {
-      if (simpleLogin.user) {
-        state.replace('user.index');
-        return;
-      }
-
+  [         '$scope', '$state', '$location', 'firebase', 'user', 'replaceState',
+    function($scope,   $state,   $location,   firebase,   user,   replaceState) {
       $scope.focusEmail = true;
       $scope.focusPassword = false;
       $scope.emailError = false;
@@ -35,16 +34,21 @@ undeadlifts.controller('LoginController',
 
       $scope.login = function() {
         $scope.loginButtonText = 'Logging in...';
-        simpleLogin.login('password', { email: $scope.email, password: $scope.password, rememberMe: true });
+        var credentials = { email: $scope.email, password: $scope.password };
+//        simpleLogin.login('password', { email: $scope.email, password: $scope.password, rememberMe: true });
+        firebase.authWithPassword(credentials, function(error, user) {
+          if (error) {
+            $scope.handleError(error);
+          } else if (user) {
+            if ($state.params.b) {
+              $location.url($state.params.b);
+            }
+            replaceState('user.index');
+          } else {
+            log('Unexpected state. No error and no user.');
+          }
+        });
       };
-
-      $scope.$on('simpleLogin.error', function(event, error) {
-        $scope.handleError(error);
-      });
-
-      $scope.$on('simpleLogin.login', function(event, error) {
-        state.replace('user.index');
-      });
 
       $scope.handleError = function(error) {
         $scope.loginButtonText = 'Login to my account';

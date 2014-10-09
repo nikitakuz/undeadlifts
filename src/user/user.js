@@ -9,16 +9,17 @@ undeadlifts.config(
           templateUrl: 'user/user.html',
           controller: 'AbstractUserController',
           resolve: {
-            simpleLogin: ['simpleLogin', function(simpleLogin) {
-              return simpleLogin.getInitPromise();
+            firebase: ['firebase', function(firebase) {
+              return firebase.getInitPromise();
             }],
-            user: ['simpleLogin', 'firebase', 'state', function(simpleLogin, firebase, state) {
-              if (!simpleLogin.user || !simpleLogin.user.uid) {
-                state.replace('login');
+            user: ['$state', 'firebase', 'replaceState', function($state, firebase, replaceState) {
+              var auth = firebase.getAuth();
+              if (!auth || !auth.uid) {
+                var back = (window.location.hash || '').replace('#', '');
+                replaceState('login', {b: back});
                 return;
               }
-              var uid = simpleLogin.user.uid;
-              return firebase.sync(['users', uid]).$asObject().$loaded();
+              return firebase.sync(['users', auth.uid]).$asObject().$loaded();
             }]
           }
         }
@@ -28,19 +29,19 @@ undeadlifts.config(
 );
 
 undeadlifts.controller('AbstractUserController',
-  [         '$scope', 'state', 'simpleLogin', 'user',
-    function($scope,   state,   simpleLogin,   user) {
+  [         '$scope', 'state', 'firebase', 'user', 'replaceState',
+    function($scope,   state,   firebase,   user,   replaceState) {
+//      debugger;
+
       $scope.logout = function() {
-        simpleLogin.logout();
+        firebase.unauth();
+        var b = (location.hash || '').replace('#', '');
+        replaceState('login', {b: b});
+//        simpleLogin.logout();
       };
 
       $scope.user = user;
       $scope.state = state;
-      $scope.weight_unit = simpleLogin.user.weight_unit;
-
-      $scope.$on('simpleLogin.logout', function() {
-        state.replace('login');
-      });
     }
   ]
 );
