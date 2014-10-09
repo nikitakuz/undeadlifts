@@ -1,6 +1,6 @@
 undeadlifts.config(
-  [         '$stateProvider', '$urlRouterProvider',
-    function($stateProvider,   $urlRouterProvider) {
+  [         '$stateProvider',
+    function($stateProvider) {
       $stateProvider.state('user.select-routine',
         {
           url: '/select-routine',

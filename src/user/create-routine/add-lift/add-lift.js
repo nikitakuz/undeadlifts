@@ -47,14 +47,14 @@ undeadlifts.controller('AddLiftController',
 
       $scope.isLiftSelectedFilter = function() {
         return function(lift) {
-          return $scope.selected.indexOf(lift) === -1
-        }
+          return $scope.selected.indexOf(lift) === -1;
+        };
       };
 
       $scope.isLiftTypeFilter = function(type) {
         return function(lift) {
           return type.type < 0 || type.type === lift.type;
-        }
+        };
       };
 
       console.log('setting position interval');

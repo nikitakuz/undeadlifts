@@ -98,7 +98,7 @@ undeadlifts.controller('HistoryWorkoutController',
             if ($window.history && $window.history.back) {
               $window.history.back();
             } else {
-              replaceStateWithUserHistoryMonth()
+              replaceStateWithUserHistoryMonth();
             }
           });
         }

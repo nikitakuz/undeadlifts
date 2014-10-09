@@ -61,6 +61,6 @@ undeadlifts.service('lifts', [
           return 0;
         }
       }
-    }
+    };
   }
 ]);

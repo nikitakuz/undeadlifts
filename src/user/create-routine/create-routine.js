@@ -86,7 +86,7 @@ undeadlifts.controller('AbstractCreateRoutineController',
           routine.lifts[j] = {
             name: lift.name,
             sets: sets
-          }
+          };
         }
         routines.push(routine);
         $scope.user.$save();
