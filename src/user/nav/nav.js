@@ -6,24 +6,13 @@ undeadlifts.controller('NavController',
 
       $scope.$on('$stateChangeSuccess', function(e, state) {
         $scope.showMenu = false;
-        if ($state.includes('user.index')) {
-          $scope.title = 'UndeadLifts';
-        } else if ($state.includes('user.create-routine.index')) {
-          $scope.title = 'Create Routine';
-        } else if ($state.includes('user.create-routine.add-lift')) {
-          $scope.title = 'Add Lift';
-        } else if ($state.includes('user.select-routine')) {
-          $scope.title = 'Select Routine';
-        } else if ($state.includes('user.workout')) {
-          $scope.title = 'Workout';
-        } else if ($state.includes('user.history')) {
-          $scope.title = 'History';
-        } else if ($state.includes('user.settings')) {
-          $scope.title = 'Settings';
-        }
       });
 
-      $scope.switchHistoryView = function() {
+      $scope.getTitle = function(stateCurrentName) {
+        return stateCurrentName.split('.')[1].replace(/-/g, ' ');
+      };
+
+      $scope.toggleHistoryMode = function() {
         // TODO: write and use this function
       };
 

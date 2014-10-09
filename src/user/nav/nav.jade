@@ -12,7 +12,10 @@ nav#nav(ng-controller="NavController")
             include ../../jade-svg/zombie-head
 
     .w50.state-title
-      .h2-font-size!="{{ title }}"
+      .h2-font-size(ng-switch='' on='$state.current.name')
+        span(ng-switch-when="user.index")!="Undead Lifts"
+        span(ng-switch-when="user.create-routine.add-lift")!="Add Lift"
+        span(ng-switch-default="")!="{{ getTitle($state.current.name) }}"
     .w25.tar
       .ib.h2-font-size(ng-if="$state.is('user.history.month')")
         a.icon(ui-sref="user.history.list")

@@ -1,93 +1,85 @@
-(function() {
-  var signup = angular.module('signup', ['firebase']);
-  var signupControllerScope;
-  signup.controller('SignUpController',
-    [         '$scope',
-      function($scope) {
-        signupControllerScope = $scope;
-        $scope.focusEmail = true;
-        $scope.focusPassword = false;
-        $scope.emailError = false;
-        $scope.passwordError = false;
+undeadlifts.config(
+  [         '$stateProvider',
+    function($stateProvider) {
+      $stateProvider.state('signup',
+        {
+          url: '/signup',
+          templateUrl: 'signup/index.html',
+          resolve: {
+            simpleLogin: [ 'simpleLogin',
+              function(simpleLogin) {
+                return simpleLogin.getInitPromise();
+              }
+            ]
+          },
+          controller: 'SignupController'
+        }
+      );
+    }
+  ]
+);
 
-        $scope.signupButtonText = 'Create my free account';
+undeadlifts.controller('SignupController',
+  [         '$scope', 'state', 'simpleLogin',
+    function($scope,   state,   simpleLogin) {
+      signupControllerScope = $scope;
+      $scope.focusEmail = true;
+      $scope.focusPassword = false;
+      $scope.emailError = false;
+      $scope.passwordError = false;
 
-        $scope.signup = function() {
-          $scope.signupButtonText = 'Creating account...';
-          var email = $scope.email;
-          var password = $scope.password;
-          fbsl.createUser(email, password, function(error, user) {
-            if (error) {
-              $scope.signupButtonText = 'Create my free account';
-              handleAuthError(error);
-            } else {
-              $scope.$apply(function() {
-                $scope.signupButtonText = 'Logging in...';
-              });
-              fbsl.login('password', {
-                email: email,
-                password: password
-              });
-            }
-          });
-        };
+      var DEFAULT_SIGNUP_BUTTON_TEXT = 'Create my free account';
+      $scope.signupButtonText = DEFAULT_SIGNUP_BUTTON_TEXT;
 
-        $scope.$watch('form.email.$viewValue', function(newVal, oldVal) {
-          if ($scope.emailError && newVal !== oldVal) {
-            $scope.emailError = false;
+      $scope.signup = function() {
+        $scope.signupButtonText = 'Creating account...';
+        var email = $scope.email;
+        var password = $scope.password;
+        simpleLogin.createUser(email, password, function(error, user) {
+          if (error) {
+            $scope.signupButtonText = 'Create my free account';
+            handleAuthError(error);
+          } else {
+            $scope.$apply(function() {
+              $scope.signupButtonText = 'Logging in...';
+            });
+            simpleLogin.login('password', {
+              email: email,
+              password: password
+            });
           }
         });
+      };
 
-        function handleAuthError(error) {
-          var msg = {
-            'EMAIL_TAKEN': 'This email address is already taken.',
-            'INVALID_EMAIL': 'This email address is invalid.'
-          };
-          if (error.code === 'EMAIL_TAKEN' || error.code === 'INVALID_EMAIL') {
-            $scope.emailError = true;
-            $scope.focusEmail = true;
-          }
-          $scope.error = msg[error.code] || 'Unrecognized error.';
-          $scope.$digest();
-        }
-      }
-    ]
-  );
-
-  signup.directive('focus',
-    function() {
-      return {
-        restrict: 'A',
-        scope: { focus: '=focus' },
-        link: function(scope, element, attrs) {
-          scope.$watch('focus', function(newVal, oldVal) {
-            if (scope.focus) {
-              element[0].focus()
-              element[0].select();
-              scope.focus = false;
-            }
-          });
-        }
-      }
-    }
-  );
-
-  var fb = new Firebase('https://undeadlifts.firebaseio.com');
-  var fbsl = new FirebaseSimpleLogin(fb, function(error, user) {
-    if (error) {
-      console.log(error);
-    } else if (user) {
-      console.log('User logged in. Redirecting to app...');
-      if (location.replace) {
-        location.replace('/');
-      } else {
-        location.href = '/';
-      }
-    } else {
-      console.log('No user found. Bootstrapping signup module...');
-      angular.element(document).ready(function() {
-        angular.bootstrap(document, ['signup']);
+      $scope.$on('simpleLogin.login', function(event, error) {
+        state.replace('user.index');
       });
+
+      $scope.$watch('form.email.$viewValue', function(newVal, oldVal) {
+        if ($scope.emailError && newVal !== oldVal) {
+          $scope.emailError = false;
+          $scope.signupButtonText = DEFAULT_SIGNUP_BUTTON_TEXT;
+        }
+      });
+
+      function handleAuthError(error) {
+        var msg = {
+          'EMAIL_TAKEN': 'This email address is already taken.',
+          'INVALID_EMAIL': 'This email address is invalid.'
+        };
+        if (error.code === 'EMAIL_TAKEN' || error.code === 'INVALID_EMAIL') {
+          $scope.emailError = true;
+          $scope.focusEmail = true;
+        }
+        if (error.code === 'EMAIL_TAKEN') {
+          $scope.signupButtonText = 'Email address already taken';
+        }
+        if (error.code === 'INVALID_EMAIL') {
+          $scope.signupButtonText = 'Invalid email address';
+        }
+        $scope.error = msg[error.code] || 'Unrecognized error.';
+        $scope.$digest();
+      }
     }
-  });
-})();
+  ]
+);

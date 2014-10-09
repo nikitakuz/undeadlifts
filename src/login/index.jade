@@ -1,37 +1,31 @@
-extends ../base
-
-block append scripts
-  script(src="login.js")
-
-block append body
-  section(ng-controller="LoginController").login
-    .heading
-      .ldquo!="&ldquo;"
-      .quote!="You ain't dead yet."
-      .rdquo!="&rdquo;"
-    .content
-      form(name="form")
-        article
-          .h3-font-size.tac
-            .brand
-              .icon.vam
-                include ../jade-svg/zombie-head
-              .ib.vam.creepster
-                | Undead Lifts
-        article.tac
-          .h3-font-size
-            | Login to your account.
-        article.email
-          label
-            | Email Address
-          .input-wrapper(ng-class="{error: emailError}")
-            input(type="email", name="email", ng-model="email", ng-required="true", focus="focusEmail")
-        article.password
-          label
-            | Password
-          .input-wrapper(ng-class="{error: passwordError}")
-            input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
-        article.submit
-          button(ng-click="login()", ng-disabled="form.$invalid", ng-bind="loginButtonText")!="Login to my account"
-      article.create-account
-        a(href="/signup")!="Create your free account"
+section.login
+  .heading
+    .ldquo!="&ldquo;"
+    .quote!="You ain't dead yet."
+    .rdquo!="&rdquo;"
+  .content
+    form(name="form")
+      article
+        .h3-font-size.tac
+          .brand
+            .icon.vam
+              include ../jade-svg/zombie-head
+            .ib.vam.creepster
+              | Undead Lifts
+      article.tac
+        .h3-font-size
+          | Login to your account.
+      article.email
+        label
+          | Email Address
+        .input-wrapper(ng-class="{error: emailError}")
+          input(type="email", name="email", ng-model="email", ng-required="true", focus="focusEmail")
+      article.password
+        label
+          | Password
+        .input-wrapper(ng-class="{error: passwordError}")
+          input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
+      article.submit
+        button(ng-click="login()", ng-disabled="form.$invalid", ng-bind="loginButtonText")!="Login to my account"
+    article.create-account
+      a(ui-sref="signup")!="Create your free account"

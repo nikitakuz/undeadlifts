@@ -5,19 +5,5 @@
     "firebase.json",
     "**/.*",
     "**/node_modules/**"
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/user/user.html"
-    },
-    {
-      "source": "/user.js",
-      "destination": "/user/user.js"
-    },
-    {
-      "source": "/user.css",
-      "destination": "/user/user.css"
-    }
   ]
 }
