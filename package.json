@@ -4,7 +4,6 @@
   "private": false,
   "devDependencies": {
     "gulp": "^3.8.5",
-    "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.3.4",
     "gulp-jade": "^0.6.1",
     "gulp-jshint": "^1.8.3",

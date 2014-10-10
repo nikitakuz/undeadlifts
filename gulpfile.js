@@ -5,7 +5,6 @@ var jade = require('gulp-jade');
 var ngHtml2Js = require('gulp-ng-html2js');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
-var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
@@ -13,15 +12,9 @@ var karma = require('karma').server;
 
 var SRC = './src/';
 var BUILD = './build/';
-var TEMP = './temp/';
 
 var paths = {
-  jade: [SRC + '**/*.jade', '!' + SRC + '*.jade'],
-  partials: [
-      BUILD + '**/*.html',
-      '!' + BUILD + '*.html',
-      '!' + BUILD + 'jade-svg/**/*.html'
-  ],
+  templates: [SRC + '**/*.jade', '!' + SRC + '*.jade'],
   less: [
       SRC + 'common-less/common.less',
       SRC + 'user/**/*.less'
@@ -49,26 +42,14 @@ gulp.task('index', function() {
     .pipe(gulp.dest(BUILD));
 });
 
-gulp.task('jade2js', ['clean-jade2html']);
-
-gulp.task('clean-jade2html', ['html2js'], function() {
-  return gulp.src(TEMP, {read: false})
-    .pipe(clean({force: true}))
-});
-
-gulp.task('html2js', ['jade2html'], function() {
-  return gulp.src([TEMP + '**/*.html'])
+gulp.task('templates', function() {
+  return gulp.src(paths.templates)
+    .pipe(jade())
     .pipe(ngHtml2Js({
       moduleName: 'undeadlifts'
     }))
     .pipe(concat('templates.js'))
     .pipe(gulp.dest(BUILD));
-});
-
-gulp.task('jade2html', function() {
-  return gulp.src(paths.jade)
-    .pipe(jade())
-    .pipe(gulp.dest(TEMP));
 });
 
 gulp.task('less', function() {
@@ -112,11 +93,11 @@ gulp.task('scripts', ['lint'], function() {
     .pipe(gulp.dest(BUILD))
 });
 
-gulp.task('build', ['index', 'lib', 'scripts', 'jade2js', 'less']);
+gulp.task('build', ['index', 'lib', 'scripts', 'templates', 'less']);
 
 gulp.task('watch', ['build'], function() {
   gulp.watch(paths.scripts, ['scripts']);
-  gulp.watch(paths.jade, ['jade2js']);
+  gulp.watch(paths.templates, ['templates']);
   gulp.watch([SRC + '**/*.less'], ['less']);
 });
 
