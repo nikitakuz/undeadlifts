@@ -27,8 +27,8 @@
   );
 
   login.controller('LoginController',
-    [         '$scope', '$state', '$location', 'firebase', 'user', 'replaceState',
-      function($scope,   $state,   $location,   firebase,   user,   replaceState) {
+    [         '$scope', '$state', '$location', 'firebase', 'user',
+      function($scope,   $state,   $location,   firebase,   user) {
         $scope.focusEmail = true;
         $scope.focusPassword = false;
         $scope.emailError = false;

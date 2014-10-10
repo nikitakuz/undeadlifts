@@ -26,7 +26,7 @@
               firebase: ['firebase', function(firebase) {
                 return firebase.getInitPromise();
               }],
-              user: ['$state', 'firebase', 'replaceState', function($state, firebase, replaceState) {
+              user: ['$state', 'firebase', function($state, firebase) {
                 var auth = firebase.getAuth();
                 if (!auth || !auth.uid) {
                   var back = (window.location.hash || '').replace('#', '');

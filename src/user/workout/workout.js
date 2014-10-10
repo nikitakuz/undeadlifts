@@ -30,8 +30,8 @@
   );
 
   workout.controller('WorkoutController',
-    [         '$rootScope', '$scope', '$state', '$timeout', '$filter', 'replaceState', 'firebase', 'util', 'log', 'user', 'workout', 'lifts',
-      function($rootScope,   $scope,   $state,   $timeout,   $filter,   replaceState,   firebase,   util,   log,   user,   workout,   lifts) {
+    [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'log', 'user', 'workout', 'lifts',
+      function($rootScope,   $scope,   $state,  $filter,   firebase,   util,   log,   user,   workout,   lifts) {
         $scope.restTimerTimeout = null;
         $scope.restTimerInterval = null;
         $scope.showRestTimer = false;
