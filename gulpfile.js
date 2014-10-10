@@ -78,7 +78,7 @@ gulp.task('lib-js', function() {
 
 gulp.task('lib-mp3', function() {
   return gulp.src(paths.lib.mp3)
-    .pipe(gulp.dest(BUILD + '/lib/mp3'))
+    .pipe(gulp.dest(BUILD))
 });
 
 gulp.task('favicon', function() {

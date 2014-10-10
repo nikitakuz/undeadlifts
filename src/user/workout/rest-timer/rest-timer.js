@@ -6,7 +6,7 @@
       function($rootScope,   $scope) {
         var restTimerTimeout = null;
         var restTimerInterval = null;
-        var timerSound = new Howl({ urls: ['lib/mp3/chirp-chirp.mp3'] });
+        var timerSound = new Howl({ urls: ['chirp-chirp.mp3'] });
         $scope.showRestTimer = false;
         $scope.restTime = 0;
 
