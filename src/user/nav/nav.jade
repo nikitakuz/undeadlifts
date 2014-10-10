@@ -19,17 +19,22 @@ nav#nav(ng-controller="NavController")
         span(ng-switch-when="user.create-routine.add-lift")!="Add Lift"
         span(ng-switch-default="")!="{{ getTitle() }}"
     .w25.tar
+      // TODO: Clean up the following. Move some of the logic to controller?
       .ib.h2-font-size(ng-if="$state.is('user.history.month')")
-        a.icon(ng-include="'svg/list.html'", ui-sref="user.history.list")
+        a(ui-sref="user.history.list")
+          .icon(ng-include="'svg/list.html'")
         .nbsp!="&nbsp;"
       .ib.h2-font-size(ng-if="$state.is('user.history.list')")
-        a.icon(ng-include="'svg/calendar.html'", ui-sref="user.history.month({ year: now.getFullYear(), month: now.getMonth() + 1 })")
+        a(ui-sref="user.history.month({ year: now.getFullYear(), month: now.getMonth() + 1 })")
+          .icon(ng-include="'svg/calendar.html'")
         .nbsp!="&nbsp;"
       .ib.h2-font-size(ng-if="$state.includes('user.select-routine')")
-        a.icon(ng-include="'svg/plus.html'", ui-sref="user.create-routine.index")
+        a(ui-sref="user.create-routine.index")
+          .icon(ng-include="'svg/plus.html'")
         .nbsp!="&nbsp;"
       .ib.h2-font-size
-        a.icon(ng-include="'svg/drops.html'", ng-click="showMenu = true;")
+        a(ng-click="showMenu = true;")
+          .icon(ng-include="'svg/drops.html'")
         .nbsp!="&nbsp;"
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
