@@ -45,7 +45,6 @@
               if ($state.params.b) {
                 $location.url($state.params.b);
               }
-              debugger;
               $state.replace('user.index');
             } else {
               log('Unexpected state. No error and no user.');

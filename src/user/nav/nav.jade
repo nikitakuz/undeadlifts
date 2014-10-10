@@ -3,18 +3,15 @@ nav#nav(ng-controller="NavController")
     .w25.tal
       .h2-font-size(ng-if="$state.is('user.index')")
         .nbsp!="&nbsp;"
-        .icon
-          include ../../jade-svg/zombie-head
+        .icon(ng-include="'svg/zombie-head.html'")
       a(ng-if="initialState && !$state.is('user.index')", ng-click="$state.replace('user.index')")
         .h2-font-size
           .lsaquo!="&lsaquo;"
-          .icon
-            include ../../jade-svg/zombie-head
+          .icon(ng-include="'svg/zombie-head.html'")
       a(ng-if="!initialState && !$state.is('user.index')", ng-click="$state.back()")
         .h2-font-size
           .lsaquo!="&lsaquo;"
-          .icon
-            include ../../jade-svg/zombie-head
+          .icon(ng-include="'svg/zombie-head.html'")
 
     .w50.state-title
       .h2-font-size(ng-switch='' on='$state.current.name')
@@ -23,20 +20,16 @@ nav#nav(ng-controller="NavController")
         span(ng-switch-default="")!="{{ getTitle() }}"
     .w25.tar
       .ib.h2-font-size(ng-if="$state.is('user.history.month')")
-        a.icon(ui-sref="user.history.list")
-          include ../../jade-svg/list
+        a.icon(ng-include="'svg/list.html'", ui-sref="user.history.list")
         .nbsp!="&nbsp;"
       .ib.h2-font-size(ng-if="$state.is('user.history.list')")
-        a.icon(ui-sref="user.history.month({ year: now.getFullYear(), month: now.getMonth() + 1 })")
-          include ../../jade-svg/calendar
+        a.icon(ng-include="'svg/calendar.html'", ui-sref="user.history.month({ year: now.getFullYear(), month: now.getMonth() + 1 })")
         .nbsp!="&nbsp;"
       .ib.h2-font-size(ng-if="$state.includes('user.select-routine')")
-        a.icon(ui-sref="user.create-routine.index")
-          include ../../jade-svg/plus
+        a.icon(ng-include="'svg/plus.html'", ui-sref="user.create-routine.index")
         .nbsp!="&nbsp;"
       .ib.h2-font-size
-        a.icon(ng-click="showMenu = true;")
-          include ../../jade-svg/drops
+        a.icon(ng-include="'svg/drops.html'", ng-click="showMenu = true;")
         .nbsp!="&nbsp;"
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")

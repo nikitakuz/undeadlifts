@@ -4,20 +4,16 @@
       .index
         article
           a(ng-if="!user.current_workout", ui-sref="user.select-routine")
-            .icon
-              include ../../jade-svg/dumbell
+            .icon(ng-include="'svg/dumbell.html'")
             .h3-font-size!="New Workout"
           a(ng-if="user.current_workout", ui-sref="user.workout")
-            .icon
-              include ../../jade-svg/dumbell
+            .icon(ng-include="'svg/dumbell.html'")
             .h3-font-size!="Continue Workout"
         article
           a(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
-            .icon
-              include ../../jade-svg/calendar
+            .icon(ng-include="'svg/calendar.html'")
             .h3-font-size.monospace!="History"
         article
           a(ui-sref="user.settings")
-            .icon
-              include ../../jade-svg/gear
+            .icon(ng-include="'svg/gear.html'")
             .h3-font-size.monospace!="Settings"

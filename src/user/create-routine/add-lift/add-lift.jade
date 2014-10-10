@@ -2,15 +2,12 @@ section.filters
   .content
     article.type-filter
       .fake-select
-        .filter
-          include ../../../jade-svg/filter
+        .filter(ng-include="'svg/filter.html'")
         .value(ng-bind="type.name")
-        .chevron-arrow-down
-          include ../../../jade-svg/chevron-arrow-down
+        .chevron-arrow-down(ng-include="'svg/chevron-arrow-down.html'")
       select(ng-model="type", ng-options="type.name for type in types")
     article.name-filter(ng-show="type !== -2")
-      .search
-        include ../../../jade-svg/search
+      .search(ng-include="'svg/search.html'")
       input(type="text", ng-model="search", placeholder="Filter by name")
 section.add-lift
   .content

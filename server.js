@@ -23,6 +23,7 @@ http.createServer(function (request, response) {
     return;
   }
 
+/*
   // Check if rewrite exists
   for (var i = 0; i < rewrites.length; i++) {
     if (uri === rewrites[i].source || uri === rewrites[i].source + '/') {
@@ -30,6 +31,7 @@ http.createServer(function (request, response) {
     }
   }
 
+*/
   var filename = path.join(process.cwd(), '/build' + uri);
 
   path.exists(filename, function (exists) {
