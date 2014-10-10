@@ -18,10 +18,15 @@
   });
 
   undeadlifts.run(
-    [         '$window', '$rootScope', '$state', '$stateParams',
-      function($window,   $rootScope,   $state,   $stateParams) {
+    [         '$window', '$rootScope', '$state', '$stateParams', '$timeout',
+      function($window,   $rootScope,   $state,   $stateParams,   $timeout) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+
+        $rootScope.appInitialized = false;
+        $timeout(function() {
+          $rootScope.appInitialized = true;
+        }, 1);
 
         $state.replace = function(name, params) {
           $state.transitionTo(name, params || {}, {location: 'replace'});

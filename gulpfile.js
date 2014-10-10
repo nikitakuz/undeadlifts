@@ -6,7 +6,6 @@ var ngHtml2Js = require('gulp-ng-html2js');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
 
 var karma = require('karma').server;
 
