@@ -1,5 +1,9 @@
 (function() {
-  var createRoutine = angular.module('undeadlifts.user.create-routine', []);
+  var createRoutine = angular.module('undeadlifts.user.create-routine',
+    [
+      'undeadlifts.user.create-routine.add-lift'
+    ]
+  );
 
   createRoutine.config(
     [         '$stateProvider',

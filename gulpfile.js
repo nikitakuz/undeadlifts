@@ -83,7 +83,7 @@ gulp.task('build', ['lib', 'html2js', 'less', 'scripts']);
 
 gulp.task('watch', ['build'], function() {
   gulp.watch(paths.jade, ['html2js']);
-  gulp.watch(paths.less, ['less']);
+  gulp.watch(paths.less.concat('**/*.less'), ['less']);
   gulp.watch(paths.scripts, ['scripts']);
 });
 

@@ -1,5 +1,12 @@
 (function() {
-  var workout = angular.module('undeadlifts.user.workout', []);
+  var workout = angular.module('undeadlifts.user.workout',
+    [
+      'undeadlifts.user.workout.lift',
+      'undeadlifts.user.workout.rest-timer',
+      'undeadlifts.user.workout.change-date',
+      'undeadlifts.user.workout.change-weight'
+    ]
+  );
 
   workout.config(
     [         '$stateProvider',
@@ -136,10 +143,13 @@
             user.history[$scope.workout.yyyymmdd] = user.current_workout;
             delete $scope.workout.yyyymmdd;
             delete user.current_workout;
-            user.$save().then(function(ref) {
-              $state.replace('user.index');
-            });
+            user.$save();
+            $state.replace('user.index');
           }
+        };
+
+        $scope.selectNewDate = function(date) {
+          $scope.workout.yyyymmdd = $filter('date')(date, 'yyyyMMdd');
         };
 
         $scope.$on('workout.delete', function() {

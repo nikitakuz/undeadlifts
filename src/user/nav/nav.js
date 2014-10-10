@@ -1,24 +1,28 @@
-undeadlifts.controller('NavController',
-  [         '$window', '$rootScope', '$scope', '$state',
-    function($window,   $rootScope,   $scope,   $state) {
-      $scope.showMenu = false;
-      $scope.now = new Date();
+(function() {
+  var nav = angular.module('undeadlifts.user.nav', []);
 
-      $scope.$on('$stateChangeSuccess', function(e, state) {
+  nav.controller('NavController',
+    [         '$window', '$rootScope', '$scope', '$state',
+      function($window,   $rootScope,   $scope,   $state) {
         $scope.showMenu = false;
-      });
+        $scope.now = new Date();
 
-      $scope.getTitle = function() {
-        return $state.current.name.split('.')[1].replace(/-/g, ' ');
-      };
+        $scope.$on('$stateChangeSuccess', function(e, state) {
+          $scope.showMenu = false;
+        });
 
-      $scope.toggleHistoryMode = function() {
-        // TODO: write and use this function
-      };
+        $scope.getTitle = function() {
+          return $state.current.name.split('.')[1].replace(/-/g, ' ');
+        };
 
-      $scope.deleteWorkout = function() {
-        $rootScope.$broadcast('workout.delete');
-      };
-    }
-  ]
-);
+        $scope.toggleHistoryMode = function() {
+          // TODO: write and use this function
+        };
+
+        $scope.deleteWorkout = function() {
+          $rootScope.$broadcast('workout.delete');
+        };
+      }
+    ]
+  );
+})();

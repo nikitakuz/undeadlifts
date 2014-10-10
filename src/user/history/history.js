@@ -1,5 +1,11 @@
 (function() {
-  var history = angular.module('undeadlifts.user.history', []);
+  var history = angular.module('undeadlifts.user.history',
+    [
+      'undeadlifts.user.history.details',
+      'undeadlifts.user.history.list',
+      'undeadlifts.user.history.month'
+    ]
+  );
 
   history.config(
     [         '$stateProvider',
@@ -9,7 +15,13 @@
             abstract: true,
             url: '/history',
             template: '<div ui-view=""></div>',
-            controller: 'AbstractHistoryController'
+            controller: 'AbstractHistoryController',
+            resolve: {
+              'history': ['firebase', function(firebase) {
+                var uid = firebase.getAuth().uid;
+                return firebase.sync(['users', uid, 'history']).$asObject().$loaded();
+              }]
+            }
           }
         );
       }
@@ -52,9 +64,23 @@
   });
 
   history.controller('AbstractHistoryController',
-    [         '$scope', 'user',
-      function($scope,   user) {
-        $scope.history = user.history;
+    [         '$scope', 'history',
+      function($scope,   history) {
+        history.$bindTo($scope, 'history');
+
+        $scope.$watch('history', function() {
+          buildDateToWorkout();
+        });
+
+        function buildDateToWorkout() {
+          $scope.dateToWorkout = {};
+          for (var i in $scope.history) {
+            if ($scope.history.hasOwnProperty(i)) {
+              var workout = $scope.history[i];
+              $scope.dateToWorkout[i] = workout;
+            }
+          }
+        }
       }
     ]
   );
