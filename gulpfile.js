@@ -7,6 +7,7 @@ var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 
 var karma = require('karma').server;
 
@@ -31,7 +32,14 @@ var paths = {
       '!' + SRC + 'lib/**/*.js',
       '!' + SRC + '**/*_test.js'
   ],
-  lib: SRC + 'lib/**/*',
+  lib: {
+    js: [
+        SRC + 'lib/js/**/*'
+    ],
+    mp3: [
+        SRC + 'lib/mp3/**/*'
+    ]
+  },
   favicon: SRC + 'favicon/**/*'
 };
 
@@ -76,9 +84,20 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('lib', function() {
-  return gulp.src(paths.lib)
-    .pipe(gulp.dest(BUILD + '/lib'))
+gulp.task('lib', ['lib-js', 'lib-mp3']);
+
+gulp.task('lib-js', function() {
+  return gulp.src(paths.lib.js)
+    .pipe(uglify())
+    .pipe(rename(function(path) {
+      path.extname = ".min.js";
+    }))
+    .pipe(gulp.dest(BUILD + '/lib/js'))
+});
+
+gulp.task('lib-mp3', function() {
+  return gulp.src(paths.lib.mp3)
+    .pipe(gulp.dest(BUILD + '/lib/mp3'))
 });
 
 gulp.task('favicon', function() {
