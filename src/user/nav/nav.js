@@ -8,8 +8,8 @@ undeadlifts.controller('NavController',
         $scope.showMenu = false;
       });
 
-      $scope.getTitle = function(stateCurrentName) {
-        return stateCurrentName.split('.')[1].replace(/-/g, ' ');
+      $scope.getTitle = function() {
+        return $state.current.name.split('.')[1].replace(/-/g, ' ');
       };
 
       $scope.toggleHistoryMode = function() {
@@ -18,25 +18,6 @@ undeadlifts.controller('NavController',
 
       $scope.deleteWorkout = function() {
         $rootScope.$broadcast('workout.delete');
-      };
-
-      $scope.back = function() {
-        var historySupport = $window.history && $window.history.back;
-
-        if (historySupport) {
-          $window.history.back();
-          return;
-        }
-
-        switch ($state.current.name) {
-          case 'user.history.details':
-            delete $state.params.day;
-            $state.go('user.history.month', $state.params);
-            break;
-          default:
-            $state.go('user.index');
-            break;
-        }
       };
     }
   ]

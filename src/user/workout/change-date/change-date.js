@@ -19,7 +19,7 @@ undeadlifts.controller('WorkoutChangeDateController',
         if (date !== $scope.current_date) {
           $scope.workout.yyyymmdd = $filter('date')(date, 'yyyyMMdd');
         }
-        window.history.back();
+        $state.back();
       };
     }
   ]

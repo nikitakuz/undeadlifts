@@ -16,11 +16,13 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js',
-      'https://cdn.firebase.com/js/client/1.0.21/firebase.js',
+      'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-mocks.js',
+      'https://cdn.firebase.com/js/client/1.1.0/firebase.js',
       'https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js',
-      'src/lib/js/angular-ui-router-0.2.10.js',
-      'src/user/user.js',
-      'src/**/*.js'
+      'build/lib/js/angular-ui-router-0.2.10.js',
+      'build/undeadlifts.js',
+      'build/templates.js',
+      'src/**/*_test.js'
     ],
 
 

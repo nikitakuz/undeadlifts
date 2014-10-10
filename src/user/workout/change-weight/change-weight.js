@@ -44,11 +44,11 @@ undeadlifts.controller('ChangeWeightController',
             lifts[i].weight = $scope.weight;
           }
         }
-        window.history.back();
+        $state.back();
       };
 
       $scope.cancelChanges = function() {
-        window.history.back();
+        $state.back();
       };
 
       function calculatePlates() {

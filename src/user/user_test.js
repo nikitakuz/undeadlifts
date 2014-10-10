@@ -1,6 +1,10 @@
-describe('Undead Lifts', function () {
-  it('should be defined', function () {
-    var undeadlifts = angular.module('undeadlifts');
-    expect(undeadlifts).toBeDefined();
-  });
+describe('Logged out user redirect', function() {
+  beforeEach(module('undeadlifts'));
+
+  it('if there is no user, user.index state should transition to login state', inject(function ($rootScope, $state, firebase) {
+      $state.go('user.index');
+      $rootScope.$digest();
+      expect($state.current.name).toEqual('login');
+    }
+  ));
 });

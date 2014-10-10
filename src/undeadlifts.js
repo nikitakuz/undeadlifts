@@ -1,32 +1,40 @@
-var undeadlifts = angular.module('undeadlifts', ['firebase', 'ui.router']);
-
-(function() {
-  var FBURL = 'https://undeadlifts.firebaseio.com';
-  var FBREF = new Firebase(FBURL);
-  undeadlifts.constant('FBURL', FBURL);
-  undeadlifts.constant('FBREF', FBREF);
-})();
+var undeadlifts = angular.module('undeadlifts',
+  [
+    'firebase',
+    'ui.router',
+    'undeadlifts.constant',
+    'undeadlifts.util',
+    'undeadlifts.firebase',
+    'undeadlifts.login',
+    'undeadlifts.signup',
+    'undeadlifts.user'
+  ]
+);
 
 undeadlifts.constant('log', function(msg) {
   console.log(msg);
 });
 
 undeadlifts.run(
-  [         '$rootScope', '$state', '$stateParams', 'replaceState',
-    function($rootScope,   $state,   $stateParams,   replaceState) {
+  [         '$window', '$rootScope', '$state', '$stateParams',
+    function($window,   $rootScope,   $state,   $stateParams) {
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
-      $rootScope.replaceState = replaceState;
 
-/*
-      FBREF.onAuth(function(auth) {
-        if (auth && !$state.includes('user')) {
-          replaceState('user.index');
-        } else if (!auth && $state.includes('user')) {
-          replaceState('login');
+      $state.replace = function(name, params) {
+        $state.transitionTo(name, params || {}, {location: 'replace'});
+      };
+
+      $state.back = function() {
+        var historySupport = $window.history && $window.history.back;
+
+        if (historySupport) {
+          $window.history.back();
+        } else {
+          // TODO: handle special cases. e.g. change-date and change-weight
+          $state.go('user.index');
         }
-      });
-*/
+      };
 
       // The following controls whether the back button will replace the current state with 'user.index' or use history.back()
       $rootScope.initialState = true;

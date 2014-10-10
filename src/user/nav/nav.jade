@@ -1,16 +1,16 @@
 nav#nav(ng-controller="NavController")
   .content
     .w25.tal
-      .h2-font-size(ng-if="state.is('user.index')")
+      .h2-font-size(ng-if="$state.is('user.index')")
         .nbsp!="&nbsp;"
         .icon
           include ../../jade-svg/zombie-head
-      a(ng-if="initialState && !state.is('user.index')", ng-click="replaceState('user.index')")
+      a(ng-if="initialState && !$state.is('user.index')", ng-click="$state.replace('user.index')")
         .h2-font-size
           .lsaquo!="&lsaquo;"
           .icon
             include ../../jade-svg/zombie-head
-      a(ng-if="!initialState && !state.is('user.index')", ng-click="back()")
+      a(ng-if="!initialState && !$state.is('user.index')", ng-click="$state.back()")
         .h2-font-size
           .lsaquo!="&lsaquo;"
           .icon
@@ -20,17 +20,17 @@ nav#nav(ng-controller="NavController")
       .h2-font-size(ng-switch='' on='$state.current.name')
         span(ng-switch-when="user.index")!="Undead Lifts"
         span(ng-switch-when="user.create-routine.add-lift")!="Add Lift"
-        span(ng-switch-default="")!="{{ getTitle(state.currentName()) }}"
+        span(ng-switch-default="")!="{{ getTitle() }}"
     .w25.tar
-      .ib.h2-font-size(ng-if="state.is('user.history.month')")
+      .ib.h2-font-size(ng-if="$state.is('user.history.month')")
         a.icon(ui-sref="user.history.list")
           include ../../jade-svg/list
         .nbsp!="&nbsp;"
-      .ib.h2-font-size(ng-if="state.is('user.history.list')")
+      .ib.h2-font-size(ng-if="$state.is('user.history.list')")
         a.icon(ui-sref="user.history.month({ year: now.getFullYear(), month: now.getMonth() + 1 })")
           include ../../jade-svg/calendar
         .nbsp!="&nbsp;"
-      .ib.h2-font-size(ng-if="state.includes('user.select-routine')")
+      .ib.h2-font-size(ng-if="$state.includes('user.select-routine')")
         a.icon(ui-sref="user.create-routine.index")
           include ../../jade-svg/plus
         .nbsp!="&nbsp;"
@@ -41,7 +41,7 @@ nav#nav(ng-controller="NavController")
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
         .top-position-helper.h2-font-size!="&nbsp;"
-        a.h3-font-size(ng-if="state.includes('user.workout') || state.includes('user.history.details')", ng-click="deleteWorkout()")
+        a.h3-font-size(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')", ng-click="deleteWorkout()")
           !="Delete Workout"
         a.h3-font-size(ui-sref="user.settings")
           !="Settings"
