@@ -27,10 +27,12 @@ var paths = {
   ],
   lib: {
     js: [
-        SRC + 'lib/js/**/*'
+      SRC + 'lib/js/angular-ui-router-0.2.10.js',
+      SRC + 'lib/js/angularfire-0.8.2.js',
+      SRC + 'lib/js/howler-1.1.25.js'
     ],
     mp3: [
-        SRC + 'lib/mp3/**/*'
+      SRC + 'lib/mp3/**/*'
     ]
   },
   favicon: SRC + 'favicon/**/*'
@@ -70,10 +72,8 @@ gulp.task('lib', ['lib-js', 'lib-mp3']);
 gulp.task('lib-js', function() {
   return gulp.src(paths.lib.js)
     .pipe(uglify())
-    .pipe(rename(function(path) {
-      path.extname = ".min.js";
-    }))
-    .pipe(gulp.dest(BUILD + '/lib/js'))
+    .pipe(concat('lib.min.js'))
+    .pipe(gulp.dest(BUILD))
 });
 
 gulp.task('lib-mp3', function() {
