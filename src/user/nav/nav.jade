@@ -32,8 +32,8 @@ nav#nav(ng-controller="NavController")
         .nbsp!="&nbsp;"
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
-        .top-position-helper!="&nbsp;"
-        a(ng-if="$state.includes('user.select-routine')", ui-sref="user.create-routine")
+        //.top-position-helper!="&nbsp;"
+        a(ng-if="$state.includes('user.select-routine')", ui-sref="user.create-routine.index")
           !="Create Routine"
           .nbsp!="&nbsp;"
         a(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')", ng-click="deleteWorkout()")
