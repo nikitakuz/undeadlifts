@@ -30,8 +30,8 @@
   );
 
   workout.controller('WorkoutController',
-    [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'log', 'user', 'workout', 'lifts',
-      function($rootScope,   $scope,   $state,  $filter,   firebase,   util,   log,   user,   workout,   lifts) {
+    [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'log', 'user', 'workout', 'liftService',
+      function($rootScope,   $scope,   $state,   $filter,   firebase,   util,   log,   user,   workout,   liftService) {
         $scope.restTimerTimeout = null;
         $scope.restTimerInterval = null;
         $scope.showRestTimer = false;
@@ -73,7 +73,7 @@
               if (user.working_weight[lift.name]) {
                 lift.weight = user.working_weight[lift.name];
               } else {
-                lift.weight = lifts.getStartingWeight(lift.name);
+                lift.weight = liftService.getStartingWeight(lift.name);
               }
               $scope.lifts.$save(i);
             }

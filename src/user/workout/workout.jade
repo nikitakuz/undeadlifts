@@ -11,7 +11,7 @@
           .routine-name
             | {{ workout.routine.name }}
       .routine
-        article(ng-repeat="lift in lifts")
+        article(ng-repeat="lift in workout.routine.lifts")
           .lift(ng-class="classname", ng-controller="LiftController")
             .name-and-weight.tar
               .name.tal!="{{ lift.name }}"

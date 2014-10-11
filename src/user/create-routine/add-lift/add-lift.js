@@ -16,12 +16,12 @@
   );
 
   addLift.controller('AddLiftController',
-    [         '$window', '$state', '$scope', 'lifts',
-      function($window,   $state,   $scope,   lifts) {
-        var BARBELL = lifts.BARBELL;
-        var DUMBELL = lifts.DUMBELL;
-        var CABLE = lifts.CABLE;
-        var OTHER = lifts.OTHER;
+    [         '$window', '$state', '$scope', 'liftService',
+      function($window,   $state,   $scope,   liftService) {
+        var BARBELL = liftService.BARBELL;
+        var DUMBELL = liftService.DUMBELL;
+        var CABLE = liftService.CABLE;
+        var OTHER = liftService.OTHER;
 
         $scope.types = [
           { name: 'All Lifts', type: -1 },

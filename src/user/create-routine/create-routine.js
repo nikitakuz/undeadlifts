@@ -29,8 +29,8 @@
   );
 
   createRoutine.controller('AbstractCreateRoutineController',
-    [         '$state', '$scope', 'lifts',
-      function($state,   $scope, lifts) {
+    [         '$state', '$scope', 'liftService',
+      function($state,   $scope,   liftService) {
         $scope.MIN_SETS = 1;
         $scope.MAX_SETS = 5;
         $scope.MIN_REPS = 1;
@@ -45,7 +45,7 @@
          */
         $scope.selected = $scope.selected || [];
 
-        $scope.lifts = lifts.ORDERED;
+        $scope.lifts = liftService.ORDERED;
 
         $scope.routine = {
           name: ''

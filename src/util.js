@@ -44,7 +44,7 @@
     ]
   );
 
-  util.service('lifts', [
+  util.service('liftService', [
     function() {
       var BARBELL = 0;
       var DUMBELL = 1;
