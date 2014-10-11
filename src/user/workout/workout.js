@@ -21,6 +21,11 @@
                 if (!user.current_workout) { return false; }
                 var path = ['workouts', user.current_workout];
                 return firebase.sync(path).$asObject().$loaded();
+              }],
+              'lifts': ['firebase', 'user', function(firebase, user) {
+                if (!user.current_workout) { return false; }
+                var path = ['workouts', user.current_workout, 'routine', 'lifts'];
+                return firebase.sync(path).$asArray().$loaded();
               }]
             }
           }
@@ -30,8 +35,8 @@
   );
 
   workout.controller('WorkoutController',
-    [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'log', 'user', 'workout', 'liftService',
-      function($rootScope,   $scope,   $state,   $filter,   firebase,   util,   log,   user,   workout,   liftService) {
+    [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'liftService', 'user', 'workout', 'lifts',
+      function($rootScope,   $scope,   $state,   $filter,   firebase,   util,   liftService,   user,   workout,   lifts) {
         $scope.restTimerTimeout = null;
         $scope.restTimerInterval = null;
         $scope.showRestTimer = false;
@@ -63,24 +68,21 @@
           }
         });
 
-        var path = ['workouts', workout.$id, 'routine', 'lifts'];
-        $scope.lifts = firebase.sync(path).$asArray();
-        $scope.lifts.$loaded().then(function() {
-          for (var i = 0; i < $scope.lifts.length; i++) {
-            var lift = $scope.lifts[i];
-            if (!lift.weight) {
-              user.working_weight = user.working_weight || {};
-              if (user.working_weight[lift.name]) {
-                lift.weight = user.working_weight[lift.name];
-              } else {
-                lift.weight = liftService.getStartingWeight(lift.name);
-              }
-              $scope.lifts.$save(i);
+        $scope.lifts = lifts;
+        for (var i = 0; i < $scope.lifts.length; i++) {
+          var lift = $scope.lifts[i];
+          if (!lift.weight) {
+            user.working_weight = user.working_weight || {};
+            if (user.working_weight[lift.name]) {
+              lift.weight = user.working_weight[lift.name];
+            } else {
+              lift.weight = liftService.getStartingWeight(lift.name);
             }
-
-            $scope.$watch('lifts[' + i + ']', onLiftChange, true);
+            $scope.lifts.$save(i);
           }
-        });
+
+          $scope.$watch('lifts[' + i + ']', onLiftChange, true);
+        }
 
         function onLiftChange(newVal, oldVal) {
           $scope.lifts.$save(newVal);
@@ -99,9 +101,9 @@
             }
           }
 
-          if (startTimer) {
+          if ($rootScope.restTimer && startTimer) {
             $rootScope.restTimer.start(target, completed);
-          } else {
+          } else if ($rootScope.restTimer) {
             $rootScope.restTimer.clear();
           }
 

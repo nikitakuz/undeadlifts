@@ -14,13 +14,13 @@
     .date, .routine-name {
       display: inline-block;
       box-sizing: border-box;
-      padding: 0.5em;
       text-align: center;
       vertical-align: bottom;
     }
 
     .date {
       width: 40%;
+      padding: 0.5em;
       background-color: @darker_green;
       font-family: monospace;
 
@@ -35,6 +35,8 @@
 
     .routine-name {
       width: 60%;
+      padding: 0.25em;
+      font-size: 1.333em;
       line-height: 1.25em;
       font-family: @finger_paint;
       text-overflow: ellipsis;
@@ -157,21 +159,27 @@
   color: white;
   font-family: sans-serif;
 
-  .heading, .content { text-align: center; }
+  .heading, .content { padding: 0.25em 0; text-align: center; }
+
+  .heading { font-family: @finger_paint; }
+
+  .content { position: relative; }
 
   .time {
-    position: relative;
+    padding: 0.5em 0 0;
+    font-family: monospace;
+    font-size: 1.5em;
+  }
 
-    .dismiss {
-      position: absolute;
-      top: 0;
-      right: 0.667em;
-      font-size: 1.5em;
-      color: @neon_green;
+  .dismiss {
+    position: absolute;
+    bottom: 0.125em;
+    right: 0.5em;
+    color: @neon_green;
+    font-size: 2em;
 
-      &:hover {
-        color: @blood_red;
-      }
+    &:hover {
+      color: @blood_red;
     }
   }
 }

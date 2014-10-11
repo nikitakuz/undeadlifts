@@ -11,7 +11,7 @@
           .routine-name
             | {{ workout.routine.name }}
       .routine
-        article(ng-repeat="lift in workout.routine.lifts")
+        article(ng-repeat="lift in lifts")
           .lift(ng-class="classname", ng-controller="LiftController")
             .name-and-weight.tar
               .name.tal!="{{ lift.name }}"
@@ -42,14 +42,15 @@
           button.p1em(ng-if="$state.includes('user.history.details')", ng-click="updateWorkout()")!="Update Workout"
 .rest-timer(ng-if="$state.includes('user.workout')", ng-controller="RestTimerController", ng-show="showRestTimer")
   section
-    .heading
-      h3
-        | {{ rest_message_1 }}
+    .heading.h3-font-size
+      | {{ rest_message_1 }}
     .content
-      p
-        | {{ rest_message_2 }}
-      .time.h3-font-size
-        | {{ restTime | date:'m' }}m {{ restTime | date:'s' }}s
-        a.dismiss(ng-click="restTimer.clear()")
-          | &times;
+      | {{ rest_message_2 }}
+      .time
+        span(ng-if='restTime > 59999')
+          | {{ restTime | date:'m' }}m&nbsp;
+        span
+          | {{ restTime | date:'s' }}s
+      a.dismiss(ng-click="restTimer.clear()")
+        | &times;
 div(ui-view="")
