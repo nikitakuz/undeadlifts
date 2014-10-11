@@ -26,6 +26,14 @@
         }
 
         $scope.selectRoutine = function(routine) {
+          if (user.current_workout) {
+            if (confirm('Selecting a new routine will override your current workout. Would you like to continue?')) {
+              firebase.sync(['workouts', user.current_workout]).$remove();
+              delete user.current_workout;
+            } else {
+              return;
+            }
+          }
           log('User selected a routine.');
           log('Routine chosen: ' + routine.name);
           // Remove firebase properties($id, $priority) and protect against unintentional modification.
