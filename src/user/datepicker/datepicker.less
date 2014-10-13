@@ -20,10 +20,6 @@ datepicker {
     }
   }
 
-  td {
-    padding: 3px;
-  }
-
   a {
     display: inline-block; box-sizing: border-box;
     width: 100%;
@@ -55,7 +51,11 @@ datepicker {
 
 .date-picker {
   td {
-    padding: 3px;
+    padding: 0px;
+
+    @media (min-width: 22.5em) {
+      padding: 3px;
+    }
   }
 
   .btn {

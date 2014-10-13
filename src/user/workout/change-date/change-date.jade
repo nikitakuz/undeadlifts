@@ -1,6 +1,8 @@
 .modal-background
-  .modal-gutter
-  .modal-dialog
-    .date-picker
-      datepicker(date="date", min-date="minDate", show-weeks="false", on-cancel="$state.back()", on-submit="changeDate(date)")
-  .modal-gutter
+  section
+    .content
+      .modal-gutter
+      .modal-dialog
+        .date-picker
+          datepicker(date="date", min-date="minDate", show-weeks="false", on-cancel="$state.back()", on-submit="changeDate(date)")
+      .modal-gutter
