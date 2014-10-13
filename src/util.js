@@ -86,7 +86,6 @@
         { name: 'Pull Up',                  type: OTHER,    sets: 3, reps: 10 },
         { name: 'Reverse Crunches',         type: OTHER,    sets: 3, reps: 10 },
         { name: 'Reverse Wrist Curls',      type: BARBELL,  sets: 3, reps: 10 },
-        { name: 'Smith Machine Squats',     type: NOPE,     sets: 0, reps: 0 }, // Happy Easter
         { name: 'Squat Rack Curls',         type: NOPE,     sets: 0, reps: 0 }, // Happy Easter
         { name: 'Tricep Extensions',        type: DUMBELL,  sets: 3, reps: 8 },
         { name: 'Tricep Pulldowns',         type: CABLE,    sets: 3, reps: 8 },

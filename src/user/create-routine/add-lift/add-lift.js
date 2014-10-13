@@ -52,7 +52,7 @@
 
         $scope.addLift = function(lift) {
           if (lift.type === liftService.NOPE) {
-            alert('No.');
+            $scope.alert('Curls are not allowed in the squat rack.');
             return;
           }
           if ($scope.selected.indexOf(lift) === -1) {

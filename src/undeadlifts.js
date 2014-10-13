@@ -51,6 +51,42 @@
           }
         });
 
+
+        // Alert Modal
+        $rootScope.alertModal = {
+          show: false,
+          message: '',
+          clear: function() {
+            this.show = false;
+            this.message = '';
+          }
+        };
+
+        $rootScope.alert = function(message) {
+          $rootScope.alertModal.show = true;
+          $rootScope.alertModal.message = message;
+        };
+
+
+        // Confirm Modal
+        $rootScope.confirmModal = {
+          show: false,
+          message: '',
+          clear: function() {
+            this.show = false;
+            this.message = '';
+            this.cancelText = '';
+            this.confirmText = '';
+          }
+        };
+
+        $rootScope.confirm = function(options) {
+          $rootScope.confirmModal.show = true;
+          $rootScope.confirmModal.message = options.message || 'Are you sure?';
+          $rootScope.confirmModal.cancelText = options.cancelText || 'No';
+          $rootScope.confirmModal.confirmText = options.confirmText || 'Yes';
+        };
+
         $rootScope.getNumber = function(num) {
           return new Array(Number(parseInt(num)));
         };
