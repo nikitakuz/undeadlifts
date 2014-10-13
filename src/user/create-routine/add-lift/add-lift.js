@@ -16,8 +16,8 @@
   );
 
   addLift.controller('AddLiftController',
-    [         '$window', '$state', '$scope', 'liftService',
-      function($window,   $state,   $scope,   liftService) {
+    [         '$window', '$state', '$scope', '$filter', 'liftService',
+      function($window,   $state,   $scope,   $filter,   liftService) {
         var BARBELL = liftService.BARBELL;
         var DUMBELL = liftService.DUMBELL;
         var CABLE = liftService.CABLE;
@@ -33,6 +33,19 @@
 
         $scope.type = $scope.types[0];
 
+        $scope.filtered = [];
+        angular.copy($scope.lifts, $scope.filtered);
+
+        $scope.$watch('type', filterLifts);
+
+        $scope.$watch('search', filterLifts);
+
+        function filterLifts(newVal, oldVal) {
+          if (newVal === oldVal) { return; }
+          $scope.filtered = $filter('filter')($scope.lifts, $scope.isLiftTypeFilter($scope.type));
+          $scope.filtered = $filter('filter')($scope.filtered, $scope.search);
+        }
+
         $scope.addLift = function(lift) {
           if (lift.type === liftService.NOPE) {
             alert('No.');
@@ -45,6 +58,40 @@
             $window.history.back();
           } else {
             $state.transitionTo('user.create-routine.index', {}, { location: 'replace' });
+          }
+        };
+
+        $scope.clickSelect = function() {
+          document.getElementById('type_select').click();
+        };
+
+        var shortNameLength = 15;
+        $scope.getLiftClassName = function(lift) {
+          //debugger;
+          var lifts = $scope.filtered;
+          var ix = lifts.indexOf(lift);
+          var prev = lifts[ix - 1];
+          var next = lifts[ix + 1];
+          if (lift.name.length <= shortNameLength) {
+            var consecutiveCount = getConsecutiveCount(ix);
+            if (consecutiveCount % 2 === 1 && next && next.name.length <= shortNameLength) {
+              return 'adapt50';
+            } else if (consecutiveCount % 2 === 0 && prev && prev.name.length <= shortNameLength) {
+              return 'adapt50';
+            }
+          }
+          return {};
+
+          function getConsecutiveCount(ix) {
+            var count = 0;
+            for (var i = ix; i > -1; i--) {
+              if (lifts[i].name.length <= shortNameLength) {
+                count++;
+              } else {
+                break;
+              }
+            }
+            return count;
           }
         };
 

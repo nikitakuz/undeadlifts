@@ -43,6 +43,8 @@
     position: relative;
 
     select {
+      -webkit-appearance: button; -moz-appearance: button;
+      -webkit-user-select: none; -moz-user-select: none;
       position: absolute; left: 0; top: 0; right: 0; bottom: 0; width: 100%;
       opacity: 0;
     }
@@ -74,42 +76,39 @@
       text-align: center;
     }
   }
-
-  .lifts {
-    padding-bottom: 0.25em;
-    text-align: left;
-    background-color: rgba(255, 255, 255, 0.25);
-  }
 }
 
 .add-lift {
   text-align: left;
+  padding: 0.125em 0;
+
+  .lifts {
+    padding: 0 0.125em 0.5em 0.125em;
+    text-align: center;
+  }
 
   .lift {
-    box-sizing: border-box; display: inline-block; line-height: 1.25em;
+    box-sizing: border-box; display: inline-block;
 
-    width: 50%;
-    &:nth-child(odd) { padding-right: 0.25em; }
-    &:nth-child(even) { padding-left: 0.25em; }
-    @media(min-width: 30em) {
-      width: 33.3%;
-      &:nth-child(3n + 1) { padding-left: 0; padding-right: 0.25em; }
-      &:nth-child(3n + 2) { padding-left: 0.25em; padding-right: 0.25em; }
-      &:nth-child(3n + 3) { padding-left: 0.25em; padding-right: 0; }
-    }
+    width: 100%;/* max-width: 20em; */padding: 0.375em;
 
-    text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+    line-height: 1.25em;
+
+    @media(min-width: 22.5em) { &.adapt50 { width: 50%; } }
+    @media(min-width: 32em)   { width: 50%; }
+
 
     button {
-      font-size: 0.9375em;
       box-sizing: border-box; width: 100%;
-      line-height: 1.25em; padding: 0.25em;
+      line-height: 1.25em; padding: 0.5em;
       border-radius: 4px;
 
       background-color: @lightest_green;
       background-image: -webkit-linear-gradient(top, @lightest_green, darken(@lightest_green, 10%));
       background-image:         linear-gradient(to bottom, @lightest_green, darken(@lightest_green, 10%));
       color: @darker_green;
+
+      text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
 
       &:disabled {
         opacity: 0.5;
