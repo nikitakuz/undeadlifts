@@ -50,6 +50,7 @@
       var DUMBELL = 1;
       var CABLE = 2;
       var OTHER = 3;
+      var NOPE = 4;
 
       var ORDERED = [
         { name: 'Squat',                    type: BARBELL,  sets: 5, reps: 5 },
@@ -85,6 +86,8 @@
         { name: 'Pull Up',                  type: OTHER,    sets: 3, reps: 10 },
         { name: 'Reverse Crunches',         type: OTHER,    sets: 3, reps: 10 },
         { name: 'Reverse Wrist Curls',      type: BARBELL,  sets: 3, reps: 10 },
+        { name: 'Smith Machine Squats',     type: NOPE,     sets: 0, reps: 0 }, // Happy Easter
+        { name: 'Squat Rack Curls',         type: NOPE,     sets: 0, reps: 0 }, // Happy Easter
         { name: 'Tricep Extensions',        type: DUMBELL,  sets: 3, reps: 8 },
         { name: 'Tricep Pulldowns',         type: CABLE,    sets: 3, reps: 8 },
         { name: 'Wrist Curls',              type: BARBELL,  sets: 3, reps: 10 },
@@ -95,6 +98,7 @@
         DUMBELL: DUMBELL,
         CABLE: CABLE,
         OTHER: OTHER,
+        NOPE: NOPE,
         ORDERED: ORDERED,
         getType: function(name) {
           for (var i = 0; i < ORDERED.length; i++) {

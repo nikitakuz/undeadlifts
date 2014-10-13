@@ -34,6 +34,10 @@
         $scope.type = $scope.types[0];
 
         $scope.addLift = function(lift) {
+          if (lift.type === liftService.NOPE) {
+            alert('No.');
+            return;
+          }
           if ($scope.selected.indexOf(lift) === -1) {
             $scope.selected.push(lift);
           }
