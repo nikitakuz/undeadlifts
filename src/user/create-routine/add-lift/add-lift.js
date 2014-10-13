@@ -16,8 +16,12 @@
   );
 
   addLift.controller('AddLiftController',
-    [         '$window', '$state', '$scope', '$filter', 'liftService',
-      function($window,   $state,   $scope,   $filter,   liftService) {
+    [         '$window', '$state', '$rootScope', '$scope', '$filter', 'liftService',
+      function($window,   $state,   $rootScope,   $scope,   $filter,   liftService) {
+        if ($rootScope.initialState) {
+          $state.replace('user.create-routine.index');
+          return;
+        }
         var BARBELL = liftService.BARBELL;
         var DUMBELL = liftService.DUMBELL;
         var CABLE = liftService.CABLE;
@@ -57,8 +61,17 @@
           if ($window.history && $window.history.back) {
             $window.history.back();
           } else {
-            $state.transitionTo('user.create-routine.index', {}, { location: 'replace' });
+            $state.replace('user.create-routine.index');
           }
+        };
+
+        $scope.isLiftSelected = function(lift) {
+          for (var i = 0; i < $scope.selected.length; i++) {
+            if ($scope.selected[i].name === lift.name) {
+              return true;
+            }
+          }
+          return false;
         };
 
         $scope.clickSelect = function() {

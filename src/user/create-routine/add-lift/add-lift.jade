@@ -13,5 +13,5 @@ section.add-lift
   // article(ng-repeat="lift in lifts | filter:search | filter:isLiftSelectedFilter() | filter:isLiftTypeFilter()")
   .content.lifts
     article.lift(ng-show="type !== -2", ng-repeat="lift in filtered | filter:search | filter:isLiftTypeFilter(type)", ng-class="getLiftClassName(lift)")
-      button(ng-click="addLift(lift)", ng-disabled="selected.indexOf(lift) > -1")
+      button(ng-click="addLift(lift)", ng-disabled="isLiftSelected(lift)")
         | {{ lift.name }}
