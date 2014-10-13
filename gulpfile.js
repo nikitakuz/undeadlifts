@@ -26,6 +26,7 @@ var paths = {
   ],
   lib: {
     js: [
+      SRC + 'lib/js/angular-sanitize-1.2.21.js',
       SRC + 'lib/js/angular-ui-router-0.2.10.js',
       SRC + 'lib/js/angularfire-0.8.2.js',
       SRC + 'lib/js/howler-1.1.25.js'
