@@ -25,15 +25,23 @@
           $scope.routines = [];
         }
 
-        $scope.selectRoutine = function(routine) {
-          if (user.current_workout) {
-            if (confirm('Selecting a new routine will override your current workout. Would you like to continue?')) {
+        $scope.showConfirm = function(routine) {
+          $scope.confirm({
+            message:
+              '<div class="h3-font-size">Current workout exists.</div>' +
+              '<div>Selecting a new routine will override your current workout.</div>' +
+              '<div>Would you like to continue?</div>',
+            cancelText: 'Cancel',
+            confirmText: 'Override',
+            confirmCallback: function() {
               firebase.sync(['workouts', user.current_workout]).$remove();
               delete user.current_workout;
-            } else {
-              return;
+              $scope.selectRoutine(routine);
             }
-          }
+          });
+        };
+
+        $scope.selectRoutine = function(routine) {
           log('User selected a routine.');
           log('Routine chosen: ' + routine.name);
           // Remove firebase properties($id, $priority) and protect against unintentional modification.

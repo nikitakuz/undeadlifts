@@ -2,7 +2,7 @@ section.select-routine
   .content
     .tac
       article(ng-repeat="routine in routines.slice().reverse()")
-        .routine(ng-click="selectRoutine(routine)")
+        .routine(ng-click="user.current_workout ? showConfirm(routine) : selectRoutine(routine)")
           .name.h3-font-size!="{{routine.name}}"
           .lifts
             .lift(ng-repeat="lift in routine.lifts")

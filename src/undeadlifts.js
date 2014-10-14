@@ -1,6 +1,7 @@
 (function() {
   var undeadlifts = angular.module('undeadlifts',
     [
+      'ngSanitize',
       'firebase',
       'ui.router',
       'undeadlifts.constant',
@@ -83,8 +84,9 @@
         $rootScope.confirm = function(options) {
           $rootScope.confirmModal.show = true;
           $rootScope.confirmModal.message = options.message || 'Are you sure?';
-          $rootScope.confirmModal.cancelText = options.cancelText || 'No';
-          $rootScope.confirmModal.confirmText = options.confirmText || 'Yes';
+          $rootScope.confirmModal.cancelText = options.cancelText || 'Cancel';
+          $rootScope.confirmModal.confirmText = options.confirmText || 'Confirm';
+          $rootScope.confirmModal.confirmCallback = options.confirmCallback;
         };
 
         $rootScope.getNumber = function(num) {

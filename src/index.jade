@@ -21,15 +21,19 @@ html(ng-app="undeadlifts")
         include svg/zombie-head
       .main(ui-view="", ng-show="appInitialized")
       .modal-background(ng-show="alertModal.show || confirmModal.show")
-        .modal-gutter
-        .modal-dialog(ng-show="alertModal.show")
-          .alert-message(ng-bind="alertModal.message")
-          button.clear(ng-click="alertModal.clear()")!="OK"
-        .modal-dialog(ng-show="confirmModal.show")
-          .confirm-message(ng-bind="confirmModal.message")
-          button.cancel(ng-bind="confirmModal.cancelText")
-          button.confirm(ng-bind="confirmModal.confirmText")
-        .modal-gutter
+        section
+          .content
+            .modal-gutter
+            .modal-dialog(ng-show="alertModal.show")
+              .alert-message(ng-bind-html="alertModal.message")
+              button.clear(ng-click="alertModal.clear()")!="OK"
+            .modal-dialog(ng-show="confirmModal.show")
+              .confirm-message(ng-bind-html="confirmModal.message")
+              .cancel.ib.w33.pr05em
+                button.w100(ng-bind="confirmModal.cancelText", ng-click="confirmModal.clear()")
+              .confirm.ib.w66.pl05em
+                button.w100(ng-bind="confirmModal.confirmText", ng-click="confirmCallback()")
+            .modal-gutter
     .footer
       block footer
         a(href="http://icons8.com/icons/#!/5150/zombie")!="Zombie"
