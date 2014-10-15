@@ -47,14 +47,14 @@
   util.service('liftService', [
     function() {
       var BARBELL = 0;
-      var DUMBELL = 1;
+      var DUMBBELL = 1;
       var CABLE = 2;
       var OTHER = 3;
       var NOPE = 4;
 
       var ORDERED = [
         { name: 'Squat',                    type: BARBELL,  sets: 5, reps: 5 },
-        { name: 'Arnold Press',             type: DUMBELL,  sets: 5, reps: 5 },
+        { name: 'Arnold Press',             type: DUMBBELL, sets: 5, reps: 5 },
         { name: 'Barbell Bench',            type: BARBELL,  sets: 5, reps: 5 },
         { name: 'Barbell Curl',             type: BARBELL,  sets: 3, reps: 8 },
         { name: 'Bench Press',              type: BARBELL,  sets: 5, reps: 5 },
@@ -64,21 +64,29 @@
         { name: 'Cable Row',                type: CABLE,    sets: 5, reps: 5 },
         { name: 'Chin Up',                  type: OTHER,    sets: 5, reps: 5 },
         { name: 'Close-Grip Bench Press',   type: BARBELL,  sets: 3, reps: 8 },
-        { name: 'Close-Grip DB Press',      type: DUMBELL,  sets: 3, reps: 8 },
+        { name: 'Close-Grip DB Press',      type: DUMBBELL, sets: 3, reps: 8 },
         { name: 'Deadlift',                 type: BARBELL,  sets: 1, reps: 5 },
-        { name: 'Dips',                     type: OTHER,    sets: 5, reps: 5 },
-        { name: 'DB Bench',                 type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'DB Curl',                  type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'DB Flys',                  type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'DB Press',                 type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'DB Row',                   type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'DB Shrug',                 type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'DB Reverse Wrist Curls',   type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'DB Wrist Curls',           type: DUMBELL,  sets: 5, reps: 5 },
-        { name: 'Goblet Squat',             type: DUMBELL,  sets: 5, reps: 5 },
+        { name: 'Decline Press',            type: BARBELL,  sets: 5, reps: 5 },
+        { name: 'Dips',                     type: OTHER,    sets: 3, reps: 10 },
+        { name: 'DB Bench',                 type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Curl',                  type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Decline Press',         type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Decline Fly',           type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Fly',                   type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Incline Press',         type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Incline Fly',           type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Press',                 type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Reverse Fly',           type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Reverse Wrist Curls',   type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Row',                   type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Shrug',                 type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'DB Wrist Curls',           type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'Goblet Squat',             type: DUMBBELL, sets: 3, reps: 8 },
         { name: 'Hyperextensions',          type: OTHER,    sets: 2, reps: 10 },
+        { name: 'Incline Press',            type: BARBELL,  sets: 5, reps: 5 },
         { name: 'Power Clean',              type: BARBELL,  sets: 5, reps: 5 },
-        { name: 'Lateral Raises',           type: DUMBELL,  sets: 3, reps: 8 },
+        { name: 'Lateral Raises',           type: DUMBBELL, sets: 3, reps: 8 },
+        { name: 'Overhead Press',           type: BARBELL,  sets: 5, reps: 5 },
         { name: 'Pistol Squats',            type: OTHER,    sets: 5, reps: 5 },
         { name: 'Power Clean',              type: BARBELL,  sets: 5, reps: 5 },
         { name: 'Push Up',                  type: OTHER,    sets: 3, reps: 10 },
@@ -87,14 +95,14 @@
         { name: 'Reverse Crunches',         type: OTHER,    sets: 3, reps: 10 },
         { name: 'Reverse Wrist Curls',      type: BARBELL,  sets: 3, reps: 10 },
         { name: 'Squat Rack Curls',         type: NOPE,     sets: 0, reps: 0 }, // Happy Easter
-        { name: 'Tricep Extensions',        type: DUMBELL,  sets: 3, reps: 8 },
+        { name: 'Tricep Extensions',        type: DUMBBELL, sets: 3, reps: 8 },
         { name: 'Tricep Pulldowns',         type: CABLE,    sets: 3, reps: 8 },
         { name: 'Wrist Curls',              type: BARBELL,  sets: 3, reps: 10 },
       ];
 
       return {
         BARBELL: BARBELL,
-        DUMBELL: DUMBELL,
+        DUMBELL: DUMBBELL,
         CABLE: CABLE,
         OTHER: OTHER,
         NOPE: NOPE,
@@ -112,7 +120,7 @@
           var type = this.getType(name);
           if (type === BARBELL) {
             return 45;
-          } else if (type === DUMBELL) {
+          } else if (type === DUMBBELL) {
             return 5;
           } else if (type === CABLE) {
             return 10;
