@@ -1,5 +1,11 @@
 section
   .content
+    article
+      .setting.tal
+        .name-and-control(ng-if="auth.provider === 'password'")
+          | You are logged in with your email: {{ auth.email }}
+        .name-and-control(ng-if="auth.provider === 'facebook'")
+          | You are logged in with you facebook account: {{ auth.facebook.displayName }}
     article(ng-repeat="id in setting_ids")
       .setting
         .name-and-control

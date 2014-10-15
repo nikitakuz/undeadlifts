@@ -26,8 +26,10 @@
               firebase: ['firebase', function(firebase) {
                 return firebase.getInitPromise();
               }],
-              user: ['$state', 'firebase', function($state, firebase) {
-                var auth = firebase.getAuth();
+              auth: ['firebase', function(firebase) {
+                return firebase.getAuth();
+              }],
+              user: ['$state', 'auth', 'firebase', function($state, auth, firebase) {
                 if (!auth || !auth.uid) {
                   $state.replaceWithLogin();
                   return;
@@ -42,8 +44,9 @@
   );
 
   user.controller('AbstractUserController',
-    [         '$scope', '$state', 'firebase', 'user',
-      function($scope,   $state,   firebase,   user) {
+    [         '$scope', '$state', 'firebase', 'auth', 'user',
+      function($scope,   $state,   firebase,   auth,   user) {
+        $scope.auth = auth;
         $scope.user = user;
 
         $scope.logout = function() {
