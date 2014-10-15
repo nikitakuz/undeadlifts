@@ -33,6 +33,12 @@
           $state.transitionTo(name, params || {}, {location: 'replace'});
         };
 
+        $state.replaceWithLogin = function() {
+          var back = (window.location.hash || '').replace('#', '');
+          var params = back === '/' ? {} : {b: back};
+          $state.replace('login', params);
+        };
+
         $state.back = function() {
           var historySupport = $window.history && $window.history.back;
 

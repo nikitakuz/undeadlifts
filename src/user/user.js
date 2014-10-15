@@ -29,8 +29,7 @@
               user: ['$state', 'firebase', function($state, firebase) {
                 var auth = firebase.getAuth();
                 if (!auth || !auth.uid) {
-                  var back = (window.location.hash || '').replace('#', '');
-                  $state.replace('login', {b: back});
+                  $state.replaceWithLogin();
                   return;
                 }
                 return firebase.sync(['users', auth.uid]).$asObject().$loaded();
@@ -49,8 +48,7 @@
 
         $scope.logout = function() {
           firebase.unauth();
-          var b = (location.hash || '').replace('#', '');
-          $state.replace('login', {b: b});
+          $state.replaceWithLogin();
         };
       }
     ]

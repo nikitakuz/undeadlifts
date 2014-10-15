@@ -39,6 +39,18 @@
             return FBREF.authWithPassword(credentials, onComplete);
           },
 
+          authWithFacebook: function(onComplete) {
+            FBREF.authWithOAuthPopup('facebook', function(error, authData) {
+              if (!error) {
+                onComplete(error, authData);
+              } else if (error.code === 'TRANSPORT_UNAVAILABLE') {
+                FBREF.authWithOAuthRedirect('facebook', onComplete);
+              } else {
+                alert(error.code);
+              }
+            });
+          },
+
           getAuth: function() {
             return FBREF.getAuth();
           },

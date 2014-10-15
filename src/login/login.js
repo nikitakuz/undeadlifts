@@ -38,19 +38,32 @@
         $scope.login = function() {
           $scope.loginButtonText = 'Logging in...';
           var credentials = { email: $scope.email, password: $scope.password };
-          firebase.authWithPassword(credentials, function(error, user) {
-            if (error) {
-              $scope.handleError(error);
-            } else if (user) {
-              if ($state.params.b) {
-                $location.url($state.params.b);
-              }
-              $state.replace('user.index');
-            } else {
-              log('Unexpected state. No error and no user.');
-            }
-          });
+          firebase.authWithPassword(credentials, onLoginComplete);
         };
+
+        $scope.loginWithFacebook = function() {
+          firebase.authWithFacebook(onLoginComplete);
+        };
+
+        function onLoginComplete(error, user) {
+          if (error) {
+            $scope.handleError(error);
+          } else if (user) {
+            redirect();
+          } else {
+            log('Unexpected state. No error and no user.');
+          }
+        }
+
+        function redirect() {
+          if ($state.params.b) {
+            $scope.$apply(function() {
+              $location.url($state.params.b);
+            });
+          } else {
+            $state.replace('user.index');
+          }
+        }
 
         $scope.handleError = function(error) {
           $scope.loginButtonText = 'Login to my account';
