@@ -6,7 +6,9 @@ button, input, .fake-select {
 }
 
 button {
+  width: 100%;
   border: 0;
+  padding: 0.5em;
 
   background: none;
   cursor: pointer;
@@ -20,27 +22,44 @@ button {
   }
 
   &.dark {
-    background-color: @darker_green;
+    @bgc: @darker_green;
+    background-color: @bgc;
+    background-image: -webkit-linear-gradient(top, @bgc, darken(@bgc, 10%));
+    background-image:         linear-gradient(to bottom, @bgc, darken(@bgc, 10%));
     color: @lightest_green;
 
-    &:hover {
-      background-color: @neon_green;
+    &:hover:not(:disabled) {
+      @bgc: @neon_green;
+      background-color: @bgc;
+      background-image: -webkit-linear-gradient(top, @bgc, darken(@bgc, 10%));
+      background-image:         linear-gradient(to bottom, @bgc, darken(@bgc, 10%));
       color: @blood_red;
     }
   }
 
   &.light {
-    background-color: @lightest_green;
+    @bgc: @lightest_green;
+    background-color: @bgc;
+    background-image: -webkit-linear-gradient(top, @bgc, darken(@bgc, 10%));
+    background-image:         linear-gradient(to bottom, @bgc, darken(@bgc, 10%));
     color: @darker_green;
 
-    &:hover {
-      background-color: @blood_red;
+    &:hover:not(:disabled) {
+      @bgc: @blood_red;
+      background-color: @bgc;
+      background-image: -webkit-linear-gradient(top, @bgc, darken(@bgc, 10%));
+      background-image:         linear-gradient(to bottom, @bgc, darken(@bgc, 10%));
       color: @neon_green;
     }
   }
 
   &.large {
     padding: 1em;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 

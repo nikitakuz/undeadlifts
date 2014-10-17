@@ -17,7 +17,7 @@ section.filters
 section.add-lift
   .content(ng-show="!type")
     article.ib.w50.p1em(ng-repeat="type in types")
-      button.w100.p1em(ng-click="setType(type)", ng-bind="type.name")
+      button.light.large(ng-click="setType(type)", ng-bind="type.name")
 
   // article(ng-repeat="lift in lifts | filter:search | filter:isLiftSelectedFilter() | filter:isLiftTypeFilter()")
   .content.lifts(ng-show="type")

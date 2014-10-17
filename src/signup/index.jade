@@ -25,7 +25,7 @@ section.signup
         .input-wrapper(ng-class="{error: passwordError}")
           input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
       article.submit
-        button(ng-click="signup()", ng-disabled="form.$invalid", ng-bind="signupButtonText")!="Create my free account"
+        button.dark(ng-click="signup()", ng-disabled="form.$invalid", ng-bind="signupButtonText")!="Create my free account"
 
     article.sign-in
       a(ui-sref="login")!="Login to your account"

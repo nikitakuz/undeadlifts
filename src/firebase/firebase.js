@@ -2,8 +2,8 @@
   var firebase = angular.module('undeadlifts.firebase', ['firebase']);
 
   firebase.service('firebase',
-    [         '$q', '$rootScope', '$firebase', 'FBREF',
-      function($q,   $rootScope,   $firebase,   FBREF) {
+    [         '$q', '$rootScope', '$firebase', '$location', 'FBREF',
+      function($q,   $rootScope,   $firebase,   $location,   FBREF) {
         var deferredInit = $q.defer();
 
         var firebase = {

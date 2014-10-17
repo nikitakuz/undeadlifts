@@ -75,21 +75,14 @@
   }
 
   .buttons {
-    button {
-      width: 100%; padding: 0.5em;
-
-      &:disabled {
-        opacity: 0.5;
-        color: white;
-      }
-    }
-
-    .add-lift, .create-routine { box-sizing: border-box; display: inline-block; width: 100%; padding: 0.25em 0; }
+    .add-lift, .edit-lifts { box-sizing: border-box; display: inline-block; width: 100%; }
+    .add-lift, .edit-lifts, .create-routine { padding: 0.25em 0; }
+    .divider { height: 1px; background: @dark_green; margin: 0.25em 0; }
 
     @media(min-width: 30em) {
-      .add-lift, .create-routine { width: 50%; }
+      .add-lift, .edit-lifts { width: 50%; }
       .add-lift { padding-right: 0.25em; }
-      .create-routine { padding-left: 0.25em; }
+      .edit-lifts { padding-left: 0.25em; }
     }
   }
 }
