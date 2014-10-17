@@ -84,7 +84,7 @@
           document.getElementById('type_select').click();
         };
 
-        var shortNameLength = 15;
+        var shortNameLength = 14;
         $scope.getLiftClassName = function(lift) {
           //debugger;
           var lifts = $scope.filtered;

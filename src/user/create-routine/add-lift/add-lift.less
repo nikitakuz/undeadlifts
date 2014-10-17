@@ -92,13 +92,13 @@
   .lift {
     box-sizing: border-box; display: inline-block;
 
-    width: 100%;/* max-width: 20em; */padding: 0.375em;
+    width: 100%; padding: 0.375em;
 
     line-height: 1.25em;
 
-    @media(min-width: 22.5em) { &.adapt50 { width: 50%; } }
-    @media(min-width: 32em)   { width: 50%; }
+    &.adapt50 { width: 50%; }
 
+    @media(min-width: 30em) { width: 50%; }
 
     button {
       box-sizing: border-box; width: 100%;
