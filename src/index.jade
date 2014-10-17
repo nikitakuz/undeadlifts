@@ -26,13 +26,13 @@ html(ng-app="undeadlifts")
             .modal-gutter
             .modal-dialog(ng-show="alertModal.show")
               .alert-message(ng-bind-html="alertModal.message")
-              button.clear(ng-click="alertModal.clear()")!="OK"
+              button.dark.clear(ng-click="alertModal.clear()")!="OK"
             .modal-dialog(ng-show="confirmModal.show")
               .confirm-message(ng-bind-html="confirmModal.message")
               .cancel.ib.w33.pr05em
-                button.w100(ng-bind="confirmModal.cancelText", ng-click="confirmModal.clear()")
+                button.dark.w100(ng-bind="confirmModal.cancelText", ng-click="confirmModal.clear()")
               .confirm.ib.w66.pl05em
-                button.w100(ng-bind="confirmModal.confirmText", ng-click="confirmCallback()")
+                button.dark.w100(ng-bind="confirmModal.confirmText", ng-click="confirmCallback()")
             .modal-gutter
     .footer
       block footer

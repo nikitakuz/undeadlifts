@@ -2,18 +2,18 @@ table
   thead
     tr
       th
-        a(ng-click="prev()")!="&lsaquo;"
+        button.dark(ng-click="prev()")!="&lsaquo;"
       th(colspan="5")!="{{ date | date:'MMMM yyyy' }}"
       th
-        a(ng-click="next()")!="&rsaquo;"
+        button.dark(ng-click="next()")!="&rsaquo;"
     tr.days-of-the-week
       th(ng-repeat="day in DAYS_IN_WEEK")!="{{ day|date:'EEE' }}"
   tbody
     tr(ng-repeat="week in weeks")
       td(ng-repeat="day in week")
-        a(ng-if="date.getMonth() === day.getMonth()", ng-class="{'active': isSameDay(day)}", ng-click="setDate(day)", ng-bind="day.getDate()")
+        button(ng-if="date.getMonth() === day.getMonth()", ng-class="{'active': isSameDay(day)}", ng-click="setDate(day)", ng-bind="day.getDate()")
 .buttons
   .cancel.ib.w33.pr05em
-    button.w100(ng-click="cancel()")="Cancel"
+    button.dark.w100(ng-click="cancel()")="Cancel"
   .change.ib.w66.pl05em
-    button.w100(ng-click="submit()")="Change Date"
+    button.dark.w100(ng-click="submit()")="Change Date"

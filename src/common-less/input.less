@@ -1,7 +1,52 @@
+@import "util";
+@import "../constant";
+
+button, input, .fake-select {
+  border-radius: 0.25em;
+}
+
+button {
+  border: 0;
+
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  .user-select-none();
+
+  font-family: monospace;
+
+  &.box-shadow {
+    box-shadow: @box_shadow;
+  }
+
+  &.dark {
+    background-color: @darker_green;
+    color: @lightest_green;
+
+    &:hover {
+      background-color: @neon_green;
+      color: @blood_red;
+    }
+  }
+
+  &.light {
+    background-color: @lightest_green;
+    color: @darker_green;
+
+    &:hover {
+      background-color: @blood_red;
+      color: @neon_green;
+    }
+  }
+
+  &.large {
+    padding: 1em;
+  }
+}
+
 input, .fake-select {
   box-sizing: border-box; width: 100%;
   line-height: 1.25em; padding: 0.25em;
-  border-radius: 4px;
 }
 
 .custom-select {
