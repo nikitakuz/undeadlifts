@@ -3,13 +3,15 @@
 .filters {
   @placeholder_color: @dark_green;
 
-  padding: 0.25em 0; border-bottom: 1px solid @light_green;
+  padding: 0.25em 0;
   background-color: @darker_green;
 
-  input, .fake-select {
-    box-sizing: border-box; width: 100%;
-    line-height: 1.25em; padding: 0.25em;
-    border-radius: 4px;
+  .select-lift-type {
+    padding: 0.25em 0;
+    color: @lightest_green;
+    font-family: monospace;
+//    font-size: 1.125em;
+    transform: scale(1, 1.2);
   }
 
   input, .fake-select {
@@ -27,40 +29,39 @@
     display: inline-block; box-sizing: border-box; vertical-align: top;
     -webkit-transition: width 0.1s linear; transition: width 0.1s linear;
     color: @darker_green;
+
+    @media(min-width: 22.5em) { font-size: 1.05em; }
+    @media(min-width: 25em) { font-size: 1.1em; }
+    @media(min-width: 27.5em) { font-size: 1.15em; }
+    @media(min-width: 30em) { font-size: 1.2em; }
+    @media(min-width: 32.5em) { font-size: 1.25em; }
   }
 
 
-  .type-filter { width: 41.6%; padding-right: 0.25em; }
-  .name-filter { width: 58.3%; padding-left: 0.25em; }
+  .type-filter { width: 45%; padding-right: 0.25em; }
+  .name-filter { width: 55%; padding-left: 0.25em; }
 
-  @media(min-width: 22.5em) { .type-filter { width: 40%; }    .name-filter { width: 60%; } }
-  @media(min-width: 25em)   { .type-filter { width: 38.3%; }  .name-filter { width: 61.6%; } }
-  @media(min-width: 27.5em) { .type-filter { width: 36.6%; }  .name-filter { width: 63.3%; } }
-  @media(min-width: 30em)   { .type-filter { width: 35%; }    .name-filter { width: 65%; } }
-  @media(min-width: 32.5em) { .type-filter { width: 33.3%; }  .name-filter { width: 66.6%; } }
+  @media(min-width: 25em)   { .type-filter { width: 42.5%; }    .name-filter { width: 57.5%; } }
+  @media(min-width: 30em)   { .type-filter { width: 40%; }  .name-filter { width: 60%; } }
+/*
+  @media(min-width: 35em) { .type-filter { width: 37.5%; }  .name-filter { width: 62.5%; } }
+  @media(min-width: 40em)   { .type-filter { width: 35%; }    .name-filter { width: 65%; } }
+  @media(min-width: 45em) { .type-filter { width: 33.3%; }  .name-filter { width: 66.6%; } }
+*/
 
   .type-filter {
     position: relative;
 
-    select {
-      -webkit-appearance: button; -moz-appearance: button;
-      -webkit-user-select: none; -moz-user-select: none;
-      position: absolute; left: 0; top: 0; right: 0; bottom: 0; width: 100%;
-      opacity: 0;
-    }
-
-    .filter, .chevron-arrow-down {
+    .dumbbell, .chevron-arrow-down {
       position: absolute; top: 0.375em; width: 1.5em; height: 1em;
       text-align: center;
     }
 
-    .filter { left: 0; }
+    .dumbbell { left: 0; transform: scale(1, 1.5); }
     .chevron-arrow-down { right: 0; }
 
     .fake-select {
-      position: relative; text-align: left;
-      padding-left: 1.5em;
-      border: 1px solid @dark_green; border-radius: 4px;
+      text-align: center;
     }
   }
 

@@ -1,17 +1,26 @@
 section.filters
   .content
-    article.type-filter
-      .fake-select
-        .filter(ng-include="'svg/filter.html'")
-        .value(ng-bind="type.name")
-        .chevron-arrow-down(ng-include="'svg/chevron-arrow-down.html'")
-      select(ng-model="type", ng-options="type.name for type in types")
-    article.name-filter(ng-show="type !== -2")
+    article.select-lift-type(ng-show="!type")
+      .h3-font-size
+        | Select a lift type
+
+    article.type-filter(ng-show="type")
+      .custom-select
+        .fake-select
+          .dumbbell(ng-include="'svg/dumbell.html'")
+          .value(ng-bind="type.name")
+          .chevron-arrow-down(ng-include="'svg/chevron-arrow-down.html'")
+        select(ng-model="type", ng-options="type.name for type in types")
+    article.name-filter(ng-show="type")
       .search(ng-include="'svg/search.html'")
       input(type="text", ng-model="search", placeholder="Filter by name")
 section.add-lift
+  .content(ng-show="!type")
+    article.ib.w50.p1em(ng-repeat="type in types")
+      button.w100.p1em(ng-click="setType(type)", ng-bind="type.name")
+
   // article(ng-repeat="lift in lifts | filter:search | filter:isLiftSelectedFilter() | filter:isLiftTypeFilter()")
-  .content.lifts
-    article.lift(ng-show="type !== -2", ng-repeat="lift in filtered | filter:search | filter:isLiftTypeFilter(type)", ng-class="getLiftClassName(lift)")
+  .content.lifts(ng-show="type")
+    article.lift(ng-repeat="lift in filtered", ng-class="getLiftClassName(lift)")
       button(ng-click="addLift(lift)", ng-disabled="isLiftSelected(lift)")
         | {{ lift.name }}

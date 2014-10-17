@@ -44,19 +44,7 @@
 
     &.name { width: 50%; text-align: left; }
 
-    &.sets, &.reps, &.remove { text-align: center; }
-
-    &.sets, &.reps {
-      position:relative; width: 20%;
-
-      .value, .plus, .minus { display: inline-block; }
-      .value { width: 50%; }
-      .plus, .minus {
-        width: 25%;
-        cursor: pointer;
-        &.disabled { opacity: 0.5; }
-      }
-    }
+    &.sets-and-reps, &.remove { text-align: center; }
 
     &.remove {
       width: 10%; font-size: 1.5em;
@@ -76,7 +64,14 @@
     border-bottom: 1px solid @dark_green;
   }
 
-  td.name, td.sets, td.reps { font-family: @finger_paint; }
+  td.name, td.sets-and-reps { font-family: @finger_paint; }
+
+  td.sets-and-reps {
+    .custom-select { vertical-align: bottom; padding: 0.125em; border-bottom: 1px dotted @darker_green; }
+    .x { padding: 0.125em 0.5em; }
+    a, select { cursor: pointer; }
+    a { display: inline-block; transform: scale(1.5, 1.5); }
+  }
 
   .buttons {
     button {

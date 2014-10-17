@@ -1,0 +1,21 @@
+input, .fake-select {
+  box-sizing: border-box; width: 100%;
+  line-height: 1.25em; padding: 0.25em;
+  border-radius: 4px;
+}
+
+.custom-select {
+  position: relative;
+
+  .fake-select {
+    position: relative; text-align: left;
+    border: 1px solid @dark_green; border-radius: 4px;
+  }
+
+  select {
+    -webkit-appearance: button; -moz-appearance: button;
+    -webkit-user-select: none; -moz-user-select: none;
+    position: absolute; left: 0; top: 0; right: 0; bottom: 0; width: 100%;
+    opacity: 0;
+  }
+}

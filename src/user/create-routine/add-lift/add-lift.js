@@ -23,39 +23,44 @@
           return;
         }
         var BARBELL = liftService.BARBELL;
-        var DUMBELL = liftService.DUMBELL;
+        var DUMBBELL = liftService.DUMBBELL;
+        var BODYWEIGHT = liftService.BODYWEIGHT;
         var CABLE = liftService.CABLE;
-        var OTHER = liftService.OTHER;
 
         $scope.types = [
-          { name: 'All Lifts', type: -1 },
-          { name: 'Barbell Lifts', type: BARBELL },
-          { name: 'Dumbell Lifts', type: DUMBELL },
-          { name: 'Cable Lifts', type: CABLE },
-          { name: 'Other', type: OTHER }
+          { name: 'Barbell', lifts: BARBELL },
+          { name: 'Dumbbell', lifts: DUMBBELL },
+          { name: 'Bodyweight', lifts: BODYWEIGHT} ,
+          { name: 'Cable', lifts: CABLE }
         ];
 
-        $scope.type = $scope.types[0];
+        $scope.type = false;
+        $scope.search = '';
+
+        $scope.setType = function(type) {
+          $scope.type = type;
+        };
 
         $scope.filtered = [];
         angular.copy($scope.lifts, $scope.filtered);
 
         $scope.$watch('type', filterLifts);
-
         $scope.$watch('search', filterLifts);
 
         function filterLifts(newVal, oldVal) {
           if (newVal === oldVal) { return; }
-          $scope.filtered = $filter('filter')($scope.lifts, $scope.isLiftTypeFilter($scope.type));
+          $scope.filtered = $scope.type.lifts;
+//          $scope.filtered = $filter('filter')($scope.lifts, $scope.isLiftTypeFilter($scope.type));
           $scope.filtered = $filter('filter')($scope.filtered, $scope.search);
         }
 
         $scope.addLift = function(lift) {
-          if (lift.type === liftService.NOPE) {
+          if (lift.name === 'Squat Rack Curls') {
             $scope.alert('Curls are not allowed in the squat rack.');
             return;
           }
           if ($scope.selected.indexOf(lift) === -1) {
+            lift.type = $scope.type.name;
             $scope.selected.push(lift);
           }
           if ($window.history && $window.history.back) {
@@ -67,7 +72,8 @@
 
         $scope.isLiftSelected = function(lift) {
           for (var i = 0; i < $scope.selected.length; i++) {
-            if ($scope.selected[i].name === lift.name) {
+            var selected = $scope.selected[i];
+            if (selected.name === lift.name && selected.type === $scope.type.name) {
               return true;
             }
           }
