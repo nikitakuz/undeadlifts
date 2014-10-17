@@ -1,4 +1,5 @@
 @import "../../constant";
+@import "../../common-less/util";
 
 .create-routine {
   @label_font_family: monospace;
@@ -70,7 +71,7 @@
     .custom-select { vertical-align: bottom; padding: 0.125em; border-bottom: 1px dotted @darker_green; }
     .x { padding: 0.125em 0.5em; }
     a, select { cursor: pointer; }
-    a { display: inline-block; transform: scale(1.5, 1.5); }
+    a { display: inline-block; .scale(1.5, 1.5); }
   }
 
   .buttons {

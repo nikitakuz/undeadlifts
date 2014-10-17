@@ -48,3 +48,9 @@
 
 // ICON
 .icon { display: inline-block; width: 1em; height: 1em; }
+
+.scale(@x, @y) {
+  -webkit-transform: scale(@x, @y);
+      -ms-transform: scale(@x, @y);
+          transform: scale(@x, @y);
+}

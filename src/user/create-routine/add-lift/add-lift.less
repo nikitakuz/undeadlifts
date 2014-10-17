@@ -1,4 +1,5 @@
 @import "../../../constant";
+@import "../../../common-less/util";
 
 .filters {
   @placeholder_color: @dark_green;
@@ -11,7 +12,7 @@
     color: @lightest_green;
     font-family: monospace;
 //    font-size: 1.125em;
-    transform: scale(1, 1.2);
+    .scale(1, 1.2);
   }
 
   input, .fake-select {
@@ -57,7 +58,7 @@
       text-align: center;
     }
 
-    .dumbbell { left: 0; transform: scale(1, 1.5); }
+    .dumbbell { left: 0; .scale(1, 1.5); }
     .chevron-arrow-down { right: 0; }
 
     .fake-select {
