@@ -2,8 +2,8 @@
   var firebase = angular.module('undeadlifts.firebase', ['firebase']);
 
   firebase.service('firebase',
-    [         '$q', '$firebase', 'FBREF',
-      function($q,   $firebase,   FBREF) {
+    [         '$q', '$rootScope', '$firebase', 'FBREF',
+      function($q,   $rootScope,   $firebase,   FBREF) {
         var deferredInit = $q.defer();
 
         var firebase = {
@@ -40,15 +40,19 @@
           },
 
           authWithFacebook: function(onComplete) {
+/*
             FBREF.authWithOAuthPopup('facebook', function(error, authData) {
               if (!error) {
                 onComplete(error, authData);
               } else if (error.code === 'TRANSPORT_UNAVAILABLE') {
+*/
                 FBREF.authWithOAuthRedirect('facebook', onComplete);
+/*
               } else {
                 alert(error.code);
               }
             });
+*/
           },
 
           getAuth: function() {
@@ -65,6 +69,7 @@
         };
 
         FBREF.onAuth(function(auth) {
+          $rootScope.alert('onAuth() callback: (auth === null) = ' + (auth === null));
           deferredInit.resolve(firebase);
         });
 
