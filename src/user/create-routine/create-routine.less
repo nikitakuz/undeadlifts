@@ -6,7 +6,10 @@
 
   .routine-name {
     border: 1px solid @darker_green; padding: 0;
-    background: @darker_green;
+    @bgc: @darker_green;
+    background-color: @bgc;
+    background-image: -webkit-linear-gradient(top, lighten(@bgc, 5%), darken(@bgc, 5%));
+    background-image:   linear-gradient(to bottom, lighten(@bgc, 5%), darken(@bgc, 5%));
 
     label, .value { box-sizing: border-box; display: inline-block; vertical-align: top; font-size: 1.5em;}
 
@@ -18,7 +21,7 @@
 
     .value {
       width: 70%;
-      background: rgba(255, 255, 255, 0.9); color: @darker_green;
+      background: mix(@lightest_green, white, 80%); color: @darker_green;
 
       input {
         border: 0; padding: 0.125em 0.5em;
@@ -36,18 +39,23 @@
   tr:nth-child(odd) { background: rgba(255, 255, 255, 0.1); }
   tr:nth-child(even) { background: rgba(0, 0, 0, 0.1); }
   tr:first-child  {
-    background: @darker_green; color: @lightest_green;
+    @bgc: @darker_green;
+    background-color: @bgc;
+    background-image: -webkit-linear-gradient(top, lighten(@bgc, 5%), darken(@bgc, 5%));
+    background-image:   linear-gradient(to bottom, lighten(@bgc, 5%), darken(@bgc, 5%));
+    color: @lightest_green;
     font-size: 1.5em; font-family: @label_font_family;
   }
 
   th, td {
     padding: 0.25em 0.5em;
 
-    &.name { width: 50%; text-align: left; }
+    &.name { width: 75%; text-align: left; }
 
-    &.sets-and-reps, &.remove { text-align: center; }
+    &.sets-and-reps, &.move, &.remove { text-align: center; }
 
-    &.remove {
+    &.move, &.remove {
+      display: none;
       width: 10%; font-size: 1.5em;
 
       a:hover { width: 100%; color: @blood_red; }
@@ -68,10 +76,18 @@
   td.name, td.sets-and-reps { font-family: @finger_paint; }
 
   td.sets-and-reps {
-    .custom-select { vertical-align: bottom; padding: 0.125em; border-bottom: 1px dotted @darker_green; }
+    .custom-select {
+      vertical-align: bottom; padding: 0.125em; border-bottom: 2px dotted fadeout(@darker_green, 50%);
+      a, select { cursor: pointer; }
+      a { display: inline-block; .scale(1.5, 1.5); }
+
+      &:hover {
+        border-bottom: 2px dotted @blood_red;
+
+        a { color: @blood_red; }
+      }
+    }
     .x { padding: 0.125em 0.5em; }
-    a, select { cursor: pointer; }
-    a { display: inline-block; .scale(1.5, 1.5); }
   }
 
   .buttons {

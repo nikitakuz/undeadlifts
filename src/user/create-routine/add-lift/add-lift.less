@@ -98,14 +98,6 @@
     @media(min-width: 30em) { width: 50%; }
 
     button {
-      box-sizing: border-box; width: 100%;
-      line-height: 1.25em; padding: 0.5em;
-
-      background-color: @lightest_green;
-      background-image: -webkit-linear-gradient(top, @lightest_green, darken(@lightest_green, 10%));
-      background-image:         linear-gradient(to bottom, @lightest_green, darken(@lightest_green, 10%));
-      color: @darker_green;
-
       text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
 
       &:disabled {

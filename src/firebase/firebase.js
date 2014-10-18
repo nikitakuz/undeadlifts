@@ -69,7 +69,7 @@
         };
 
         FBREF.onAuth(function(auth) {
-          $rootScope.alert('onAuth() callback: (auth === null) = ' + (auth === null));
+//          $rootScope.alert('onAuth() callback: (auth === null) = ' + (auth === null));
           deferredInit.resolve(firebase);
         });
 
