@@ -80,10 +80,6 @@
           return false;
         };
 
-        $scope.clickSelect = function() {
-          document.getElementById('type_select').click();
-        };
-
         var shortNameLength = 14;
         $scope.getLiftClassName = function(lift) {
           //debugger;

@@ -36,35 +36,20 @@
         $scope.MIN_REPS = 1;
         $scope.MAX_REPS = 25;
 
-        /*
-         $scope.selected = [
-         {"name":"Cable Crunches","type":2,"sets":5,"reps":5},
-         {"name":"Barbell Press","type":0,"sets":5,"reps":5},
-         {"name":"Power Clean","type":0,"sets":5,"reps":5}
-         ];
-         */
+/*
+        $scope.selected = [
+          { "name": "Cable Crunches",  "type": "cable",    "sets": 5,  "reps": 5 },
+          { "name": "Barbell Press",   "type": "Barbell",  "sets": 5,  "reps": 5 },
+          { "name": "Power Clean",     "type": "Barbell",  "sets": 5,  "reps": 5 }
+        ];
+*/
+
         $scope.selected = $scope.selected || [];
 
         $scope.lifts = liftService.ORDERED;
 
         $scope.routine = {
           name: ''
-        };
-
-        $scope.decreaseSets = function(lift) {
-          lift.sets = Math.max(lift.sets - 1, $scope.MIN_SETS);
-        };
-
-        $scope.increaseSets = function(lift) {
-          lift.sets = Math.min(lift.sets + 1, $scope.MAX_SETS);
-        };
-
-        $scope.decreaseReps = function(lift) {
-          lift.reps = Math.max(lift.reps - 1, $scope.MIN_REPS);
-        };
-
-        $scope.increaseReps = function(lift) {
-          lift.reps = Math.min(lift.reps + 1, $scope.MAX_REPS);
         };
 
         $scope.removeLift = function(lift) {

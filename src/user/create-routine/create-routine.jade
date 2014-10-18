@@ -27,15 +27,6 @@ section.create-routine
             .ib.custom-select
               a.value(ng-bind="lift.reps")
               select(ng-model="lift.reps", ng-options="i for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]")
-            //.value(ng-bind="lift.sets + ' x ' + lift.reps")
-          //td.sets
-            .minus(ng-click="decreaseSets(lift)", ng-class="{'disabled': lift.sets <= MIN_SETS}")!="-"
-            .value(ng-bind="lift.sets")
-            .plus(ng-click="increaseSets(lift)", ng-class="{'disabled': lift.sets >= MAX_SETS}")!="+"
-          //td.reps
-            .minus(ng-click="decreaseReps(lift)", ng-class="{'disabled': lift.reps <= MIN_REPS}")!="-"
-            .value(ng-bind="lift.reps")
-            .plus(ng-click="increaseReps(lift)", ng-class="{'disabled': lift.reps >= MAX_REPS}")!="+"
           td.remove
             a(ng-click="removeLift(lift)")!="&times;"
     article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
