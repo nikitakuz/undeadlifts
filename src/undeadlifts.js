@@ -119,4 +119,18 @@
       };
     }
   );
+
+  undeadlifts.directive('blurOnEnter',
+    function() {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attr) {
+          element.on('keypress', function(e) {
+            if (e.charCode === 13) {
+              element[0].blur();
+            }
+          });
+        }
+      }
+    })
 })();

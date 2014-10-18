@@ -4,7 +4,7 @@ section.create-routine
       .routine-name
         label!="Name"
         .value
-          input.w100(type="text", ng-model="routine.name", placeholder="Name this routine", autofocus="")
+          input.w100(type="text", ng-model="routine.name", placeholder="Name this routine", autofocus="", blur-on-enter="")
     article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
       table.lifts
         tr
