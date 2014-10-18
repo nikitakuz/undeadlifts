@@ -13,7 +13,7 @@ section.login
               | Undead Lifts
       article.tac
         .h3-font-size
-          | Login to your account.
+          | Log in to your account.
       article.email
         label
           | Email Address
@@ -25,9 +25,12 @@ section.login
         .input-wrapper(ng-class="{error: passwordError}")
           input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
       article.submit
-        button.dark(ng-click="login()", ng-disabled="form.$invalid", ng-bind="loginButtonText")!="Login to my account"
+        button.dark(ng-click="logIn()", ng-disabled="form.$invalid", ng-bind="logInButtonText")!="Log in"
+      article.or-divider
+        .divider
+        .or-wrapper
+          .or!="or"
+      article.facebook
+        button.facebook(ng-click="logInWithFacebook()")!="Log in with Facebook"
     article.create-account
       a(ui-sref="signup")!="Create your free account"
-    hr
-    article.create-account
-      a(ng-click="loginWithFacebook()")!="Login using Facebook"

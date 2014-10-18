@@ -72,6 +72,25 @@
     }
   }
 
+  .or-divider {
+    position: relative;
+    margin: 0 -1em;
+
+    @divider_color: @light_green;
+
+    .divider {
+      height: 1px; margin: 1em 0; background: @divider_color;
+    }
+    .or-wrapper {
+      position: absolute; top: 0.75em; left: 0; right: 0; text-align: center;
+    }
+    .or {
+      display: inline-block; height: 1.5em; width: 2em; line-height: 1.375em;
+      border-radius: 100%; border: 1px solid @divider_color; background: @lightest_green;
+      color: @divider_color; font-family: monospace;
+    }
+  }
+
   .create-account, .sign-in {
     text-align: center;
     margin-top: 1em;

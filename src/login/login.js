@@ -39,15 +39,15 @@
         $scope.focusPassword = false;
         $scope.emailError = false;
         $scope.passwordError = false;
-        $scope.loginButtonText = 'Login to my account';
+        $scope.logInButtonText = 'Log in';
 
-        $scope.login = function() {
-          $scope.loginButtonText = 'Logging in...';
+        $scope.logIn = function() {
+          $scope.logInButtonText = 'Logging in...';
           var credentials = { email: $scope.email, password: $scope.password };
           firebase.authWithPassword(credentials, onLoginComplete);
         };
 
-        $scope.loginWithFacebook = function() {
+        $scope.logInWithFacebook = function() {
           sessionStorage.reload = true;
           firebase.authWithFacebook(onLoginComplete);
         };
@@ -73,7 +73,7 @@
         }
 
         $scope.handleError = function(error) {
-          $scope.loginButtonText = 'Login to my account';
+          $scope.logInButtonText = 'Login to my account';
           $scope.emailError = false;
           $scope.passwordError = false;
           /*
