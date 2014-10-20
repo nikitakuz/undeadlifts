@@ -1,6 +1,11 @@
 (function() {
   // mock firebase for unit testing purposes.
-  var firebase = angular.module('undeadlifts.firebase', ['firebase']);
+  var firebase = angular.module('undeadlifts.firebase',
+    [
+      'firebase',
+      'undeadlifts.constant'
+    ]
+  );
 
   var mockData = {
     'users': {
@@ -33,8 +38,6 @@
           sync: function (path) {
             var value = null;
             path = path instanceof Array ? path : [path];
-
-            debugger;
 
             for (var i = 0; i < path.length; i++) {
               value = value ? value[path[i]] : mockData[path[i]];

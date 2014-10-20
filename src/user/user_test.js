@@ -1,5 +1,5 @@
 describe('undeadlifts.user', function() {
-  beforeEach(module('undeadlifts'));
+  beforeEach(module('undeadlifts.user'));
 
   describe('if there is no user', function() {
     it('user.index state should transition to login state.', inject(function($rootScope, $state) {

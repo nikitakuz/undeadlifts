@@ -1,5 +1,12 @@
 (function() {
-  var login = angular.module('undeadlifts.login', ['undeadlifts.firebase']);
+  var login = angular.module('undeadlifts.login',
+    [
+      'ui.router',
+      'undeadlifts.user',
+      'undeadlifts.templates',
+      'undeadlifts.firebase'
+    ]
+  );
 
   login.config(
     [         '$stateProvider',

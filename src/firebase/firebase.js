@@ -1,5 +1,10 @@
 (function() {
-  var firebase = angular.module('undeadlifts.firebase', ['firebase']);
+  var firebase = angular.module('undeadlifts.firebase',
+    [
+      'firebase',
+      'undeadlifts.constant'
+    ]
+  );
 
   firebase.service('firebase',
     [         '$q', '$rootScope', '$firebase', '$location', 'FBREF',

@@ -1,6 +1,10 @@
 (function() {
   var user = angular.module('undeadlifts.user',
     [
+      'ui.router',
+      'undeadlifts.login',
+      'undeadlifts.decorators',
+      'undeadlifts.templates',
       'undeadlifts.firebase',
       'undeadlifts.user.nav',
       'undeadlifts.user.index',
