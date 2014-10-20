@@ -102,7 +102,7 @@ gulp.task('watch', ['build'], function() {
   gulp.watch([SRC + '**/*.less'], ['less']);
 });
 
-gulp.task('test', function (done) {
+gulp.task('test', ['build'], function (done) {
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: false
