@@ -22,24 +22,6 @@
           $state.replace('user.create-routine.index');
           return;
         }
-        var BARBELL = liftService.BARBELL;
-        var DUMBBELL = liftService.DUMBBELL;
-        var BODYWEIGHT = liftService.BODYWEIGHT;
-        var CABLE = liftService.CABLE;
-
-        $scope.types = [
-          { name: 'Barbell', lifts: BARBELL },
-          { name: 'Dumbbell', lifts: DUMBBELL },
-          { name: 'Bodyweight', lifts: BODYWEIGHT} ,
-          { name: 'Cable', lifts: CABLE }
-        ];
-
-        $scope.type = false;
-        $scope.search = '';
-
-        $scope.setType = function(type) {
-          $scope.type = type;
-        };
 
         $scope.filtered = [];
         angular.copy($scope.lifts, $scope.filtered);
@@ -53,22 +35,6 @@
 //          $scope.filtered = $filter('filter')($scope.lifts, $scope.isLiftTypeFilter($scope.type));
           $scope.filtered = $filter('filter')($scope.filtered, $scope.search);
         }
-
-        $scope.addLift = function(lift) {
-          if (lift.name === 'Squat Rack Curls') {
-            $scope.alert('Curls are not allowed in the squat rack.');
-            return;
-          }
-          if ($scope.selected.indexOf(lift) === -1) {
-            lift.type = $scope.type.name;
-            $scope.selected.push(lift);
-          }
-          if ($window.history && $window.history.back) {
-            $window.history.back();
-          } else {
-            $state.replace('user.create-routine.index');
-          }
-        };
 
         $scope.isLiftSelected = function(lift) {
           for (var i = 0; i < $scope.selected.length; i++) {

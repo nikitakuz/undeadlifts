@@ -1,6 +1,9 @@
 (function() {
   var createRoutine = angular.module('undeadlifts.user.create-routine',
     [
+      'ui.router',
+      'undeadlifts.decorators',
+      'undeadlifts.util',
       'undeadlifts.user.create-routine.add-lift'
     ]
   );
@@ -29,12 +32,22 @@
   );
 
   createRoutine.controller('AbstractCreateRoutineController',
-    [         '$state', '$scope', 'liftService',
-      function($state,   $scope,   liftService) {
+    [         '$window', '$state', '$scope', 'liftService', 'user',
+      function($window,   $state,   $scope,   liftService,   user) {
         $scope.MIN_SETS = 1;
         $scope.MAX_SETS = 5;
         $scope.MIN_REPS = 1;
         $scope.MAX_REPS = 25;
+
+
+        $scope.types = liftService.TYPES;
+
+        $scope.type = false;
+        $scope.search = '';
+
+        $scope.setType = function(type) {
+          $scope.type = type;
+        };
 
 /*
         $scope.selected = [
@@ -54,6 +67,22 @@
           name: ''
         };
 
+        $scope.addLift = function(lift) {
+          if (lift.name === 'Squat Rack Curls') {
+            $scope.alert('Curls are not allowed in the squat rack.');
+            return;
+          }
+          if ($scope.selected.indexOf(lift) === -1) {
+            lift.type = $scope.type.name;
+            $scope.selected.push(lift);
+          }
+          if ($window.history && $window.history.back) {
+            $window.history.back();
+          } else {
+            $state.replace('user.create-routine.index');
+          }
+        };
+
         $scope.editLifts = function() {
           $scope.showMoveControls = true;
         };
@@ -64,16 +93,21 @@
         };
 
         $scope.createRoutine = function() {
-          $scope.user.routines = $scope.user.routines || [];
-          var routines = $scope.user.routines;
+          var routine = $scope.routine;
+          var selected = $scope.selected;
+          if (!routine.name || selected.length < 1) {
+            return;
+          }
+          user.routines = user.routines || [];
+          var routines = user.routines;
           for (var i = 0; i < routines.length; i++) {
+            debugger;
             if (routines[i].name === $scope.routine.name) {
-              alert('A routine with the this name already exists.');
+              $scope.alert('A routine with the this name already exists.');
               return;
             }
           }
 
-          var routine = $scope.routine;
           routine.lifts = JSON.parse(JSON.stringify($scope.selected));
 
           for (var j = 0; j < routine.lifts.length; j++) {
@@ -88,8 +122,8 @@
             };
           }
           routines.push(routine);
-          $scope.user.$save();
-          $state.transitionTo('user.select-routine', {}, {location: 'replace'});
+          user.$save();
+          $state.replace('user.select-routine');
         };
       }
     ]

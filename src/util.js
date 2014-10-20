@@ -112,6 +112,12 @@
       }
 
       return {
+        TYPES: [
+          { name: 'Barbell', lifts: BARBELL },
+          { name: 'Dumbbell', lifts: DUMBBELL },
+          { name: 'Bodyweight', lifts: BODYWEIGHT} ,
+          { name: 'Cable', lifts: CABLE }
+        ],
         BARBELL: BARBELL,
         DUMBBELL: DUMBBELL,
         BODYWEIGHT: BODYWEIGHT,
