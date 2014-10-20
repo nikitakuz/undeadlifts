@@ -16,9 +16,9 @@
             .name-and-weight.tar
               .name.tal!="{{ lift.name }}"
               a.weight(ng-if="$state.includes('user.workout')", ui-sref="user.workout.change-weight({ lift: lift.name })")
-                | {{ lift.weight }} {{ weight_unit }}
+                | {{ lift.weight }} {{ user.weight_unit }}
               a.weight(ng-if="$state.includes('user.history.details')", ui-sref="user.history.details.change-weight({ lift: lift.name })")
-                | {{ lift.weight }} {{ weight_unit }}
+                | {{ lift.weight }} {{ user.weight_unit }}
             .status
               .sets(ng-style="getStyle('sets')")
                 .vah

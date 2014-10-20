@@ -6,7 +6,7 @@
       function() {
         return {
           restrict: 'E',
-          templateUrl: 'components/datepicker/datepicker.html',
+          templateUrl: 'components/datepicker/datepicker-directive.html',
           scope: {
             date: '=',
             cancel: '&onCancel',

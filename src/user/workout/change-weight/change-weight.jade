@@ -1,4 +1,4 @@
-.modal-background(ng-click="$state.back()")
+.modal-background
   section
     .content
       .modal-gutter
@@ -8,16 +8,18 @@
           | If your bar weighs {{ weight_unit === 'kg' ? 20 : 45 }}{{ weight_unit }}, {{ weight }}{{ weight_unit }} means you add {{ (weight - 45) / 2 }}{{ weight_unit }} on each side.
         br
         .tac
-          button(ng-click="decreaseWeight()")!="-"
+          .ib
+            button.light(ng-click="decreaseWeight()")!="-"
           span.h2-font-size.monospace
-            | &nbsp;&nbsp;{{ weight }}{{ weight_unit }}&nbsp;&nbsp;
-          button(ng-click="increaseWeight()")!="+"
+            | &nbsp;&nbsp;{{ weight }}{{ user.weight_unit }}&nbsp;&nbsp;
+          .ib
+            button.light(ng-click="increaseWeight()")!="+"
         br
         .tac
           .ib.w50.pr05em
-            button.w100(ng-click="cancelChanges()")!="Cancel"
+            button.dark(ng-click="cancelChanges()")!="Cancel"
           .ib.w50.pl05em
-            button.w100(ng-click="saveWeight()")!="OK"
+            button.dark(ng-click="saveWeight()")!="OK"
         .plates
           br
           h3!="Plate Calculator"
