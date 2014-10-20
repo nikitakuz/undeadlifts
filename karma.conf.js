@@ -21,6 +21,7 @@ module.exports = function(config) {
       'build/lib.min.js',
       'build/undeadlifts.js',
       'build/templates.js',
+      'src/**/*_mock.js',
       'src/**/*_test.js'
     ],
 

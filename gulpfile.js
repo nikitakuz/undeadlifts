@@ -22,6 +22,7 @@ var paths = {
       SRC + 'undeadlifts.js',
       SRC + '**/*.js',
       '!' + SRC + 'lib/**/*.js',
+      '!' + SRC + '**/*_mock.js',
       '!' + SRC + '**/*_test.js'
   ],
   lib: {
