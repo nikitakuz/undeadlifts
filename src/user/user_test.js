@@ -11,11 +11,22 @@ describe('undeadlifts.user', function() {
   });
 
   describe('if there is a user', function() {
-    it('user.index state should load', inject(function($rootScope, $state, firebase) {
-      firebase.authWithPassword({foo: 'bar'}, function() {});
-      $state.go('user.index');
-      $rootScope.$digest();
-      expect($state.current.name).toEqual('user.index');
-    }));
-  })
+    describe('user should be able to navigate to', function() {
+      testState('user.index');
+      testState('user.create-routine.index');
+      testState('user.select-routine');
+      testState('user.history.month', {year: 2014, month: 10});
+      testState('user.settings');
+    });
+
+    function testState(name, params) {
+      var should =  name + (params ? '(' + JSON.stringify(params) + ')' : '');
+      it(should, inject(function($rootScope, $state, firebase) {
+        firebase.authWithPassword({foo: 'bar'}, function() {});
+        $state.go(name, params);
+        $rootScope.$digest();
+        expect($state.current.name).toEqual(name);
+      }));
+    }
+  });
 });
