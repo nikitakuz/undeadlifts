@@ -48,7 +48,7 @@ gulp.task('templates', function() {
   return gulp.src(paths.templates)
     .pipe(jade())
     .pipe(ngHtml2Js({
-      moduleName: 'undeadlifts'
+      moduleName: 'undeadlifts.templates'
     }))
     .pipe(concat('templates.js'))
     .pipe(gulp.dest(BUILD));

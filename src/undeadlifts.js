@@ -5,6 +5,8 @@
       'firebase',
       'ui.router',
       'undeadlifts.constant',
+      'undeadlifts.decorators',
+      'undeadlifts.templates',
       'undeadlifts.util',
       'undeadlifts.datepicker',
       'undeadlifts.firebase',
@@ -28,27 +30,6 @@
         $timeout(function() {
           $rootScope.appInitialized = true;
         }, 1);
-
-        $state.replace = function(name, params) {
-          $state.transitionTo(name, params || {}, {location: 'replace'});
-        };
-
-        $state.replaceWithLogin = function() {
-          var back = (window.location.hash || '').replace('#', '');
-          var params = back === '/' ? {} : {b: back};
-          $state.replace('login', params);
-        };
-
-        $state.back = function() {
-          var historySupport = $window.history && $window.history.back;
-
-          if (historySupport) {
-            $window.history.back();
-          } else {
-            // TODO: handle special cases. e.g. change-date and change-weight
-            $state.go('user.index');
-          }
-        };
 
         // The following controls whether the back button will replace the current state with 'user.index' or use history.back()
         $rootScope.initialState = true;
@@ -131,6 +112,6 @@
             }
           });
         }
-      }
-    })
+      };
+    });
 })();
