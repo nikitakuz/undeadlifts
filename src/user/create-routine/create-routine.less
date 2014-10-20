@@ -34,6 +34,14 @@
     width: 100%; background: @lightest_green;
     border-top: 1px solid @dark_green;
     border-left: 1px solid @dark_green;
+
+    &.edit {
+      th, td {
+        &.move, &.remove {
+          display: inline-block;
+        }
+      }
+    }
   }
 
   tr:nth-child(odd) { background: rgba(255, 255, 255, 0.1); }

@@ -6,7 +6,7 @@ section.create-routine
         .value
           input.w100(type="text", ng-model="routine.name", placeholder="Name this routine", autofocus="", blur-on-enter="")
     article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
-      table.lifts
+      table.lifts(ng-class="{'edit': showMoveControls}")
         tr
           th.name!="Lift"
           //th.sets!="Sets"
@@ -34,7 +34,7 @@ section.create-routine
         .add-lift
           button.dark(ng-disabled="routine.name.length === 0", ui-sref="user.create-routine.add-lift")!="Add Lift"
         .edit-lifts
-          button.dark(ng-disabled="true")!="Edit Lifts"
+          button.dark(ng-disabled="selected.length === 0", ng-click="editLifts()")!="Edit Lifts"
         .divider
         .create-routine
           button.dark(ng-disabled="routine.name.length === 0 || selected.length === 0", ng-click="createRoutine()")!="Create Routine"

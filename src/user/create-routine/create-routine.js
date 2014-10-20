@@ -46,10 +46,16 @@
 
         $scope.selected = $scope.selected || [];
 
+        $scope.showMoveControls = false;
+
         $scope.lifts = liftService.ORDERED;
 
         $scope.routine = {
           name: ''
+        };
+
+        $scope.editLifts = function() {
+          $scope.showMoveControls = true;
         };
 
         $scope.removeLift = function(lift) {
