@@ -16,24 +16,22 @@
   );
 
   addLift.controller('AddLiftController',
-    [         '$window', '$state', '$rootScope', '$scope', '$filter', 'liftService',
-      function($window,   $state,   $rootScope,   $scope,   $filter,   liftService) {
+    [         '$window', '$state', '$rootScope', '$scope', '$filter',
+      function($window,   $state,   $rootScope,   $scope,   $filter) {
         if ($rootScope.initialState) {
-          $state.replace('user.create-routine.index');
+          $state.replace('user.create-routine');
           return;
         }
 
         $scope.filtered = [];
-        angular.copy($scope.lifts, $scope.filtered);
+        $scope.setType(false);
 
         $scope.$watch('type', filterLifts);
         $scope.$watch('search', filterLifts);
 
         function filterLifts(newVal, oldVal) {
           if (newVal === oldVal) { return; }
-          $scope.filtered = $scope.type.lifts;
-//          $scope.filtered = $filter('filter')($scope.lifts, $scope.isLiftTypeFilter($scope.type));
-          $scope.filtered = $filter('filter')($scope.filtered, $scope.search);
+          $scope.filtered = $filter('filter')($scope.type.lifts, $scope.search);
         }
 
         $scope.isLiftSelected = function(lift) {

@@ -1,40 +1,42 @@
-section.create-routine
-  .content
-    article
-      .routine-name
-        label!="Name"
-        .value
-          input.w100(type="text", ng-model="routine.name", placeholder="Name this routine", autofocus="", blur-on-enter="")
-    article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
-      table.lifts(ng-class="{'edit': showMoveControls}")
-        tr
-          th.name!="Lift"
-          //th.sets!="Sets"
-          //th.reps!="Reps"
-          th.sets-and-reps!="Sets"
-          th.remove
-        tr.lift(ng-if="selected.length === 0")
-          td(colspan="4").name!="No lifts selected."
-        tr.lift(ng-repeat="lift in selected")
-          td.name
-            span(ng-show="lift.type === 'Dumbbell' && lift.ambigiousName")!='Dumbell '
-            span(ng-bind="lift.name")
-          td.sets-and-reps
-            .ib.custom-select
-              a.value(ng-bind="lift.sets")
-              select(ng-model="lift.sets", ng-options="i for i in [1,2,3,4,5]")
-            .ib.x!=' x '
-            .ib.custom-select
-              a.value(ng-bind="lift.reps")
-              select(ng-model="lift.reps", ng-options="i for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]")
-          td.remove
-            a(ng-click="removeLift(lift)")!="&times;"
-    article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
-      .buttons
-        .add-lift
-          button.dark(ng-disabled="routine.name.length === 0", ui-sref="user.create-routine.add-lift")!="Add Lift"
-        .edit-lifts
-          button.dark(ng-disabled="selected.length === 0", ng-click="editLifts()")!="Edit Lifts"
-        .divider
-        .create-routine
-          button.dark(ng-disabled="routine.name.length === 0 || selected.length === 0", ng-click="createRoutine()")!="Create Routine"
+.create-routine(ng-show="$state.is('user.create-routine')")
+  section
+    .content
+      article
+        .routine-name
+          label!="Name"
+          .value
+            input.w100(type="text", ng-model="routine.name", placeholder="Name this routine", autofocus="", blur-on-enter="")
+      article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
+        table.lifts(ng-class="{'edit': showMoveControls}")
+          tr
+            th.name!="Lift"
+            //th.sets!="Sets"
+            //th.reps!="Reps"
+            th.sets-and-reps!="Sets"
+            th.remove
+          tr.lift(ng-if="selected.length === 0")
+            td(colspan="4").name!="No lifts selected."
+          tr.lift(ng-repeat="lift in selected")
+            td.name
+              span(ng-show="lift.type === 'Dumbbell' && lift.ambigiousName")!='Dumbell '
+              span(ng-bind="lift.name")
+            td.sets-and-reps
+              .ib.custom-select
+                a.value(ng-bind="lift.sets")
+                select(ng-model="lift.sets", ng-options="i for i in [1,2,3,4,5]")
+              .ib.x!=' x '
+              .ib.custom-select
+                a.value(ng-bind="lift.reps")
+                select(ng-model="lift.reps", ng-options="i for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]")
+            td.remove
+              a(ng-click="removeLift(lift)")!="&times;"
+      article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
+        .buttons
+          .add-lift
+            button.dark(ng-disabled="routine.name.length === 0", ui-sref="user.create-routine.add-lift")!="Add Lift"
+          .edit-lifts
+            button.dark(ng-disabled="selected.length === 0", ng-click="editLifts()")!="Edit Lifts"
+          .divider
+          .create-routine
+            button.dark(ng-disabled="routine.name.length === 0 || selected.length === 0", ng-click="createRoutine()")!="Create Routine"
+.add-lifts(ui-view="")

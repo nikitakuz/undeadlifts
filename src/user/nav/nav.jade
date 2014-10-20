@@ -33,7 +33,7 @@ nav#nav(ng-controller="NavController")
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
         //.top-position-helper!="&nbsp;"
-        a(ng-if="$state.includes('user.select-routine')", ui-sref="user.create-routine.index")
+        a(ng-if="$state.includes('user.select-routine')", ui-sref="user.create-routine")
           !="Create Routine"
           .nbsp!="&nbsp;"
         a(ng-if="$state.includes('user.workout')", ui-sref="user.select-routine")

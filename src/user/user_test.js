@@ -13,7 +13,7 @@ describe('undeadlifts.user', function() {
   describe('if there is a user', function() {
     describe('user should be able to navigate to', function() {
       testState('user.index');
-      testState('user.create-routine.index');
+      testState('user.create-routine');
       testState('user.select-routine');
       testState('user.history.month', {year: 2014, month: 10});
       testState('user.settings');

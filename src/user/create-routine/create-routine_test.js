@@ -21,7 +21,7 @@ describe('undeadlifts.user.create-routine', function() {
     $controller = _$controller_;
     liftService = _liftService_;
 
-    $controller('AbstractCreateRoutineController', {$state: $state, $scope: $scope, liftService: liftService, user: user});
+    $controller('CreateRoutineController', {$state: $state, $scope: $scope, liftService: liftService, user: user});
 
     spyOn(user, '$save');
     spyOn($state, 'replace');

@@ -13,16 +13,7 @@
       function($stateProvider) {
         $stateProvider.state('user.create-routine',
           {
-            abstract: true,
             url: '/create-routine',
-            template: '<div><ui-view class="create-routine"/></div>',
-            controller: 'AbstractCreateRoutineController'
-          }
-        );
-
-        $stateProvider.state('user.create-routine.index',
-          {
-            url: '',
             templateUrl: 'user/create-routine/create-routine.html',
             controller: 'CreateRoutineController'
           }
@@ -31,7 +22,7 @@
     ]
   );
 
-  createRoutine.controller('AbstractCreateRoutineController',
+  createRoutine.controller('CreateRoutineController',
     [         '$window', '$state', '$scope', 'liftService', 'user',
       function($window,   $state,   $scope,   liftService,   user) {
         $scope.MIN_SETS = 1;
@@ -75,11 +66,12 @@
           if ($scope.selected.indexOf(lift) === -1) {
             lift.type = $scope.type.name;
             $scope.selected.push(lift);
+            $scope.type = false;
           }
           if ($window.history && $window.history.back) {
             $window.history.back();
           } else {
-            $state.replace('user.create-routine.index');
+            $state.replace('user.create-routine');
           }
         };
 
@@ -101,7 +93,6 @@
           user.routines = user.routines || [];
           var routines = user.routines;
           for (var i = 0; i < routines.length; i++) {
-            debugger;
             if (routines[i].name === $scope.routine.name) {
               $scope.alert('A routine with the this name already exists.');
               return;
@@ -126,12 +117,6 @@
           $state.replace('user.select-routine');
         };
       }
-    ]
-  );
-
-  createRoutine.controller('CreateRoutineController',
-    [
-      function() {}
     ]
   );
 })();
