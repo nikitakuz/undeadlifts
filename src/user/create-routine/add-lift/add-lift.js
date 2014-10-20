@@ -37,7 +37,7 @@
         $scope.isLiftSelected = function(lift) {
           for (var i = 0; i < $scope.selected.length; i++) {
             var selected = $scope.selected[i];
-            if (selected.name === lift.name && selected.type === $scope.type.name) {
+            if (selected.name === lift.name && selected.type === $scope.type.NAME) {
               return true;
             }
           }

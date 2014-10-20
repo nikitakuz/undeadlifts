@@ -1,7 +1,7 @@
 describe('undeadlifts.user.create-routine', function() {
   beforeEach(module('undeadlifts.user.create-routine'));
 
-  var $state, $controller;
+  var $state, $controller, LIFTS, SQUAT, ARNOLD_PRESS;
   var $scope = {
     alert: function() {}
   };
@@ -15,9 +15,12 @@ describe('undeadlifts.user.create-routine', function() {
     $save: function() {}
   };
 
-  beforeEach(inject(function(_$state_, _$controller_) {
+  beforeEach(inject(function(_$state_, _$controller_, _LIFTS_) {
     $state = _$state_;
     $controller = _$controller_;
+    LIFTS = _LIFTS_;
+    SQUAT = LIFTS.BARBELL.LIFTS[0];
+    ARNOLD_PRESS = LIFTS.DUMBBELL.LIFTS[0];
 
     $controller('CreateRoutineController', {$scope: $scope, user: user});
 
@@ -44,7 +47,7 @@ describe('undeadlifts.user.create-routine', function() {
   describe('if a routine with the same name already exists', function() {
     it('createRoutine() should call $scope.alert() and shouldn\'t call user.$save()', function() {
       $scope.routine.name = user.routines[0].name;
-      $scope.selected = [{name: 'Test Lift', sets: 1, reps: 1}];
+      $scope.addLift(SQUAT);
       $scope.createRoutine();
       expect($scope.alert).toHaveBeenCalledWith('A routine with the this name already exists.');
       expect(user.$save).not.toHaveBeenCalled();
@@ -54,10 +57,30 @@ describe('undeadlifts.user.create-routine', function() {
   describe('if a routine has a unique name but and at least one lift is selected', function() {
     it('createRoutine() should call user.$save() and the state should be replaced with user.select-routine', function() {
       $scope.routine.name = 'Unique Name';
-      $scope.selected = [{name: 'Test Lift', sets: 1, reps: 1}];
+      $scope.addLift(SQUAT);
       $scope.createRoutine();
       expect(user.$save).toHaveBeenCalled();
       expect($state.replace).toHaveBeenCalledWith('user.select-routine');
+    });
+  });
+
+  describe('if a lift is already selected', function() {
+    it('shouldn\'t be possible to select it again', function() {
+      $scope.routine.name = 'Unique Name';
+      $scope.addLift(SQUAT);
+      $scope.addLift(ARNOLD_PRESS);
+      $scope.addLift(SQUAT);
+      $scope.addLift(ARNOLD_PRESS);
+      expect($scope.selected.length).toEqual(2);
+    });
+  });
+
+  describe('selected lifts', function() {
+    it('should have type defined', function() {
+      $scope.addLift(SQUAT);
+      expect($scope.selected[0].type).toEqual('Barbell');
+      $scope.addLift(ARNOLD_PRESS);
+      expect($scope.selected[1].type).toEqual('Dumbbell');
     });
   });
 });

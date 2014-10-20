@@ -69,6 +69,16 @@
       },
       CABLE: {
         NAME: 'Cable', LIFTS: CABLE_LIFTS, STARTING_WEIGHT: 10
+      },
+      getTypeName: function(lift) {
+        var types = [this.BARBELL, this.DUMBBELL, this.BODYWEIGHT, this.CABLE];
+        for (var i = 0; i < types.length; i++) {
+          var TYPE = types[i];
+          var LIFTS = TYPE.LIFTS;
+          if (LIFTS.indexOf(lift) > -1) {
+            return TYPE.NAME;
+          }
+        }
       }
     }
   );

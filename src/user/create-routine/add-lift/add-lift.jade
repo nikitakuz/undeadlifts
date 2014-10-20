@@ -22,5 +22,5 @@ section.add-lift
   // article(ng-repeat="lift in lifts | filter:search | filter:isLiftSelectedFilter() | filter:isLiftTypeFilter()")
   .content.lifts(ng-show="type")
     article.lift(ng-repeat="lift in filtered", ng-class="getLiftClassName(lift)")
-      button.light(ng-click="addLift(lift)", ng-disabled="isLiftSelected(lift)")
+      button.light(ng-click="addLift(lift, type.NAME)", ng-disabled="isLiftSelected(lift)")
         | {{ lift.name }}

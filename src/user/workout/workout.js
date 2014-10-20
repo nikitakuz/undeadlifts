@@ -76,7 +76,7 @@
             if (user.working_weight[lift.name]) {
               lift.weight = user.working_weight[lift.name];
             } else {
-              lift.weight = LIFTS[lift.name.toUpperCase()].STARTING_WEIGHT;
+              lift.weight = LIFTS[lift.type.toUpperCase()].STARTING_WEIGHT;
             }
             $scope.lifts.$save(i);
           }

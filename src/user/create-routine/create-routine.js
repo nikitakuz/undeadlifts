@@ -68,7 +68,7 @@
             return;
           }
           if ($scope.selected.indexOf(lift) === -1) {
-            lift.type = $scope.type.name;
+            lift.type = LIFTS.getTypeName(lift);
             $scope.selected.push(lift);
             $scope.type = false;
           }
@@ -113,6 +113,7 @@
             }
             routine.lifts[j] = {
               name: lift.name,
+              type: lift.type,
               sets: sets
             };
           }
