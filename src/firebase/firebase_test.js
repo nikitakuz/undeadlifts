@@ -2,17 +2,22 @@
   // mock firebase for unit testing purposes.
   var firebase = angular.module('undeadlifts.firebase', ['firebase']);
 
+  var mockData = {
+    'users': {
+      'fubar': {
+        // blank user
+      }
+    }
+  };
+
   firebase.service('firebase',
     [  '$q', '$firebase', 'FBREF',
       function($q, $firebase, FBREF) {
-        var deferredInit = $q.defer();
-
         var mockFirebase = {
           auth: null,
 
           getInitPromise: function () {
             return this;
-//            return deferredInit.promise;
           },
 
           ref: function (path) {
@@ -26,19 +31,35 @@
 
 
           sync: function (path) {
-            if (path[0] === 'users') {
+            var value = null;
+            path = path instanceof Array ? path : [path];
+
+            debugger;
+
+            for (var i = 0; i < path.length; i++) {
+              value = value ? value[path[i]] : mockData[path[i]];
+            }
+
+            return {
+              $asObject: $asObject,
+              $asArray: $asArray
+            };
+
+            function $asObject() {
               return {
-                $asObject: function() {
-                  return {
-                    $loaded: function() {
-                      debugger;
-                    }
-                  }
+                $loaded: function() {
+                  return value;
                 }
               }
             }
-            var ref = this.ref(path);
-            return $firebase(ref);
+
+            function $asArray() {
+              return {
+                $loaded: function() {
+                  return value;
+                }
+              }
+            }
           },
 
           authWithPassword: function(credentials, onComplete) {
@@ -48,14 +69,8 @@
 
           getAuth: function () {
             return this.auth;
-          },
-
-          setAuth: function (auth) {
-            this.auth = auth;
           }
         };
-
-        deferredInit.resolve(mockFirebase);
 
         return mockFirebase
       }
