@@ -3,7 +3,7 @@
     [
       'ui.router',
       'undeadlifts.login',
-      'undeadlifts.decorators',
+      'undeadlifts.state-decorator',
       'undeadlifts.templates',
       'undeadlifts.firebase',
       'undeadlifts.user.nav',

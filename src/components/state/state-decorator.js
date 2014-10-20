@@ -1,5 +1,5 @@
 (function() {
-  var decorators = angular.module('undeadlifts.decorators',
+  var decorators = angular.module('undeadlifts.state-decorator',
     [
       'ui.router'
     ]

@@ -2,7 +2,7 @@
   var createRoutine = angular.module('undeadlifts.user.create-routine',
     [
       'ui.router',
-      'undeadlifts.decorators',
+      'undeadlifts.state-decorator',
       'undeadlifts.util',
       'undeadlifts.user.create-routine.add-lift'
     ]

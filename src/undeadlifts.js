@@ -5,7 +5,7 @@
       'firebase',
       'ui.router',
       'undeadlifts.constant',
-      'undeadlifts.decorators',
+      'undeadlifts.state-decorator',
       'undeadlifts.templates',
       'undeadlifts.util',
       'undeadlifts.datepicker',
