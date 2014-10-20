@@ -10,6 +10,10 @@
             .icon(ng-include="'svg/dumbell.html'")
             .h3-font-size!="Continue Workout"
         article
+          button.light.large(ui-sref="user.routines")
+            .icon(ng-include="'svg/clipboard.html'")
+            .h3-font-size.monospace!="Routines"
+        article
           button.light.large(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
             .icon(ng-include="'svg/calendar.html'")
             .h3-font-size.monospace!="History"

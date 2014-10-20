@@ -11,6 +11,7 @@
       'undeadlifts.user.create-routine',
       'undeadlifts.user.select-routine',
       'undeadlifts.user.workout',
+      'undeadlifts.user.routines',
       'undeadlifts.user.history',
       'undeadlifts.user.settings'
     ]
