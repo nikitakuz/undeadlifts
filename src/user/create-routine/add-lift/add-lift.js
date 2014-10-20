@@ -31,7 +31,7 @@
 
         function filterLifts(newVal, oldVal) {
           if (newVal === oldVal) { return; }
-          $scope.filtered = $filter('filter')($scope.type.lifts, $scope.search);
+          $scope.filtered = $filter('filter')($scope.type.LIFTS, $scope.search);
         }
 
         $scope.isLiftSelected = function(lift) {

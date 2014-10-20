@@ -3,6 +3,7 @@
     [
       'ui.router',
       'undeadlifts.state-decorator',
+      'undeadlifts.lifts-constant',
       'undeadlifts.util',
       'undeadlifts.user.create-routine.add-lift'
     ]
@@ -23,15 +24,20 @@
   );
 
   createRoutine.controller('CreateRoutineController',
-    [         '$window', '$state', '$scope', 'liftService', 'user',
-      function($window,   $state,   $scope,   liftService,   user) {
+    [         '$window', '$state', '$scope', 'user', 'LIFTS',
+      function($window,   $state,   $scope,   user,   LIFTS) {
         $scope.MIN_SETS = 1;
         $scope.MAX_SETS = 5;
         $scope.MIN_REPS = 1;
         $scope.MAX_REPS = 25;
 
 
-        $scope.types = liftService.TYPES;
+        $scope.types = [
+          LIFTS.BARBELL,
+          LIFTS.DUMBBELL,
+          LIFTS.BODYWEIGHT,
+          LIFTS.CABLE
+        ];
 
         $scope.type = false;
         $scope.search = '';
@@ -51,8 +57,6 @@
         $scope.selected = $scope.selected || [];
 
         $scope.showMoveControls = false;
-
-        $scope.lifts = liftService.ORDERED;
 
         $scope.routine = {
           name: ''

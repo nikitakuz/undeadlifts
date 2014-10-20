@@ -1,7 +1,7 @@
 describe('undeadlifts.user.create-routine', function() {
   beforeEach(module('undeadlifts.user.create-routine'));
 
-  var $window, $state, $controller, liftService;
+  var $state, $controller;
   var $scope = {
     alert: function() {}
   };
@@ -15,13 +15,11 @@ describe('undeadlifts.user.create-routine', function() {
     $save: function() {}
   };
 
-  beforeEach(inject(function(_$window_, _$state_, _$controller_, _liftService_) {
-    $window = _$window_;
+  beforeEach(inject(function(_$state_, _$controller_) {
     $state = _$state_;
     $controller = _$controller_;
-    liftService = _liftService_;
 
-    $controller('CreateRoutineController', {$state: $state, $scope: $scope, liftService: liftService, user: user});
+    $controller('CreateRoutineController', {$scope: $scope, user: user});
 
     spyOn(user, '$save');
     spyOn($state, 'replace');

@@ -16,13 +16,13 @@
   );
 
   changeWeight.controller('ChangeWeightController',
-    [         '$scope', '$state', '$stateParams', 'workout', 'liftService',
-      function($scope,   $state,   $stateParams,   workout,   liftService) {
+    [         '$scope', '$state', '$stateParams', 'workout', 'LIFTS',
+      function($scope,   $state,   $stateParams,   workout,   LIFTS) {
         $scope.lift = $stateParams.lift;
         $scope.lifts = lifts;
         $scope.user.working_weight = $scope.user.working_weight || {};
         $scope.weight = Number($scope.user.working_weight[$scope.lift]);
-        $scope.weight = $scope.weight || liftService.getStartingWeight($scope.lift);
+        $scope.weight = $scope.weight || LIFTS[$scope.lift.toUpperCase()].STARTING_WEIGHT;
         $scope.plates = {};
 
         calculatePlates();
