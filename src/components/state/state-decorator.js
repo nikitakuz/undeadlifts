@@ -1,11 +1,11 @@
 (function() {
-  var decorators = angular.module('undeadlifts.state-decorator',
+  var stateDecorator = angular.module('undeadlifts.state-decorator',
     [
       'ui.router'
     ]
   );
 
-  decorators.config(
+  stateDecorator.config(
     [         '$provide',
       function($provide) {
         $provide.decorator('$state',
