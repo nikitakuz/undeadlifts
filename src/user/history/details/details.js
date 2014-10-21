@@ -1,6 +1,7 @@
 (function() {
   var details = angular.module('undeadlifts.user.history.details',
     [
+      'ui.router',
       'undeadlifts.user.workout'
     ]
   );
@@ -16,7 +17,7 @@
         }
         $stateProvider.state('user.history.details',
           {
-            url: '/{year:[0-9]{4}}/{month:[0-9]{1,2}}/{day:[0-9]{1,2}}',
+            url: '/{day:[0-9]{1,2}}',
             templateUrl: 'user/workout/workout.html',
             controller: 'HistoryWorkoutController',
             resolve: {
@@ -114,11 +115,7 @@
         });
 
         function replaceStateWithUserHistoryMonth() {
-          $state.transitionTo(
-            'user.history.month',
-            { year: $stateParams.year, month: $stateParams.month },
-            { location: 'replace' }
-          );
+          $state.replace('user.history', { year: $stateParams.year, month: $stateParams.month });
         }
       }
     ]

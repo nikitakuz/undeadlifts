@@ -49,8 +49,8 @@
   );
 
   user.controller('AbstractUserController',
-    [         '$scope', '$state', 'firebase', 'auth', 'user',
-      function($scope,   $state,   firebase,   auth,   user) {
+    [         '$rootScope', '$scope', '$state', 'firebase', 'auth', 'user',
+      function($rootScope,   $scope,   $state,   firebase,   auth,   user) {
         $scope.auth = auth;
         $scope.user = user;
 
@@ -58,6 +58,12 @@
           firebase.unauth();
           $state.replaceWithLogin();
         };
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+          if (toState.name === 'user.history' && fromState.name === 'user.index') {
+            $rootScope.historyView = 'calendar';
+          }
+        });
       }
     ]
   );

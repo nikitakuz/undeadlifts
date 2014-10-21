@@ -1,9 +1,8 @@
 (function() {
   var history = angular.module('undeadlifts.user.history',
     [
+      'ui.router',
       'undeadlifts.user.history.details',
-      'undeadlifts.user.history.list',
-      'undeadlifts.user.history.month'
     ]
   );
 
@@ -12,10 +11,9 @@
       function($stateProvider) {
         $stateProvider.state('user.history',
           {
-            abstract: true,
-            url: '/history',
-            template: '<div ui-view=""></div>',
-            controller: 'AbstractHistoryController',
+            url: '/history/{year:[0-9]{4}}/{month:[0-9]{1,2}}',
+            templateUrl: 'user/history/history.html',
+            controller: 'HistoryController',
             resolve: {
               'history': ['firebase', function(firebase) {
                 var uid = firebase.getAuth().uid;
@@ -63,9 +61,28 @@
     };
   });
 
-  history.controller('AbstractHistoryController',
-    [         '$scope', 'history',
-      function($scope,   history) {
+  history.controller('HistoryController',
+    [         '$rootScope', '$scope', '$state', '$filter', 'firebase', 'util', 'user', 'history', 'MONTH_NAMES',
+      function($rootScope,   $scope,   $state,   $filter,   firebase,   util,   user,   history,   MONTH_NAMES) {
+        $rootScope.historyView = $rootScope.historyView || 'calendar';
+        $rootScope.toggleHistoryViewIcon = $rootScope.historyView === 'calendar' ? 'svg/list.html' : 'svg/calendar.html';
+        $rootScope.toggleHistoryView = function() {
+          var currentView = $rootScope.historyView;
+          $rootScope.historyView = currentView === 'calendar' ? 'list' : 'calendar';
+          $rootScope.toggleHistoryViewIcon = currentView === 'calendar' ? 'svg/calendar.html' : 'svg/list.html';
+        };
+
+        $scope.now = new Date();
+        $scope.year = parseInt($state.params.year);
+        $scope.month = parseInt($state.params.month);
+        $scope.startOfThisMonth = new Date($scope.year, $scope.month - 1);
+        $scope.startOfNextMonth = new Date($scope.year, $scope.month);
+        $scope.month_full_name = MONTH_NAMES[$state.params.month];
+        $scope.enablePrev = false;
+        $scope.enableNext = false;
+        var MS_IN_DAY = 1000 * 60 * 60 * 24;
+        $scope.DAYS_IN_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
         history.$bindTo($scope, 'history');
 
         $scope.$watch('history', function() {
@@ -81,6 +98,67 @@
             }
           }
         }
+
+
+        function getDates(firstDate, length) {
+          var dates = new Array(length);
+          dates[0] = firstDate;
+          var firstTime = firstDate.getTime();
+          for (var i = 1; i < dates.length; i++) {
+            dates[i] = new Date(firstTime + i * MS_IN_DAY);
+          }
+          return dates;
+        }
+
+        function getCalendarWeeks(year, month) {
+          var firstDayInMonth = new Date(year, month, 1);
+          var firstDayOnCalendar = new Date(firstDayInMonth.getTime() - (firstDayInMonth.getDay() * MS_IN_DAY));
+          var dates = getDates(firstDayOnCalendar, 42);
+          var weeks = new Array(6);
+          for (var j = 0; j < weeks.length; j++) {
+            weeks[j] = dates.slice(j * 7, j * 7 + 7);
+          }
+          return weeks;
+        }
+
+        $scope.weeks = getCalendarWeeks($scope.year, $scope.month - 1);
+
+        $scope.formatDate = function(format, date) {
+          return $filter('date')(date, format);
+        };
+
+        $scope.getDayOfWeek = function(time) {
+          var d = new Date(time).getDay();
+          return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d];
+        };
+
+        $scope.list = [];
+        for (var yyyyMmDd in user.history) {
+          var date = util.parseYyyyMmDd(yyyyMmDd);
+          if (date.getFullYear() === $scope.year && date.getMonth() + 1 === $scope.month) {
+            loadWorkout(yyyyMmDd, date);
+          }
+          if (date.getTime() < $scope.startOfThisMonth.getTime()) {
+            $scope.enablePrev = true;
+          }
+          if (date.getTime() > $scope.startOfNextMonth.getTime()) {
+            $scope.enableNext = true;
+          }
+
+        }
+
+        function loadWorkout(yyyyMmDd, date) {
+          var wid = user.history[yyyyMmDd];
+          var workout = firebase.sync(['workouts', wid]).$asObject();
+          $scope.list.push(workout);
+          workout.$loaded().then(function() {
+            workout.date = date;
+          });
+        }
+
+        $scope.prettyMonth = function(month) {
+          return MONTH_NAMES[month];
+        };
       }
     ]
   );

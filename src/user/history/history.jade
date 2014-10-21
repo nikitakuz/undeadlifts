@@ -1,0 +1,41 @@
+.history(ng-show="$state.is('user.history')")
+  section
+    .heading
+      table
+        tr
+          th.prev
+            a(ng-show="enablePrev", ng-click="$state.replace('user.history', {year: month === 1 ? year - 1 : year, month: month === 1 ? 12 : month - 1})")
+              | &larr;
+          th(colspan="5")
+            h2
+              | {{ month_full_name }} {{ year }}
+          th.next
+            a(ng-show="enableNext", ng-click="$state.replace('user.history', {year: month === 12 ? year + 1 : year, month: month === 12 ? 1 : month + 1})")
+              | &rarr;
+    .content.calendar(ng-show="historyView === 'calendar'")
+      table
+        tr.days-of-the-week
+          th(ng-repeat="DAY in DAYS_IN_WEEK track by $index")!="{{ DAY }}"
+        tr.week(ng-repeat="week in weeks track by $index")
+          td(ng-repeat="date in week track by $index")
+            .date(ng-if="date.getMonth() + 1 === month")
+              span(ng-if="!dateToWorkout[formatDate('yyyyMMdd', date)]")!="{{ date.getDate() }}"
+              a.details(ng-if="dateToWorkout[formatDate('yyyyMMdd', date)]", ui-sref="user.history.details({year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()})")!="{{ date.getDate() }}"
+    .content.list(ng-show="historyView === 'list'")
+      table
+        tr.day(ng-repeat="workout in list | orderObjectBy:'day'")
+          td.date
+            a(ui-sref="user.history.details({year: year, month: month, day: workout.date.getDate()})")
+              .day
+                | {{ workout.date.getDate() }}
+              .day-of-week
+                | {{ getDayOfWeek(workout.date.getTime()) }}
+          td.workout
+            h3.routine-name
+              | {{ workout.routine.name }}
+            table.lifts
+              tr.lift(ng-repeat="lift in workout.routine.lifts")
+                td.lift-name="{{ lift.name }}"
+                td.weight="{{ lift.weight }}{{ weight_unit }}"
+                td.reps-completed="{{ lift.sets | setsCompleted }}"
+div(ui-view="")

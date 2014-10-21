@@ -14,7 +14,7 @@
             .icon(ng-include="'svg/suitcases.html'", style="transform: scale(1.25, 1.25)")
             .h3-font-size.monospace!="Routines"
         article
-          button.light.large(ui-sref="user.history.month({year: now.getFullYear(), month: now.getMonth() + 1})")
+          button.light.large(ui-sref="user.history({year: now.getFullYear(), month: now.getMonth() + 1})")
             .icon(ng-include="'svg/calendar.html'")
             .h3-font-size.monospace!="History"
         article

@@ -15,7 +15,7 @@ describe('undeadlifts.user', function() {
       testState('user.index');
       testState('user.create-routine');
       testState('user.select-routine');
-      testState('user.history.month', {year: 2014, month: 10});
+      testState('user.history', {year: 2014, month: 10});
       testState('user.settings');
     });
 

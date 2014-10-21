@@ -1,110 +1,112 @@
 @import "../../constant";
 
-a.calendar-link,
-a.recent-workouts-link {
-  position: absolute;
-  right: 0.5em;
-  top: 0.25em;
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-}
-
-.calendar {
+.history {
   table {
     width: 100%;
     border: 0;
-  }
 
-  th, td {
-    width: 2.5em;
-    text-align: center;
-    line-height: 2.5em;
-  }
-
-  .date {
-    background: @lightest_green;
-    border: 1px solid mix(@light_green, black, 75%);
-    margin: 0.125em;
-  }
-
-  a.prev, a.next { font-size: 2em; }
-
-  tr.days-of-the-week { font-size: 0.875em; }
-
-  a.details {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    background: @blood_red;
-    color: @lightest_green;
-    text-decoration: none;
-
-    &:hover {
-      color: @neon_green;
+    td, th {
+//      width: 100% / 7;
     }
   }
-}
 
-.recent-workouts {
-
-  table {
-    width: 100%;
+  .heading {
+    .prev, .next {
+      width: 100% / 7;
+      a { font-size: 2em; }
+    }
   }
 
-  tr {
-    background: @lightest_green;
-  }
+  .calendar {
 
-  td.date, td.workouts {
-    padding: 0.5em;
-  }
+    th, td {
+      width: 2.5em;
+      text-align: center;
+      line-height: 2.5em;
+    }
 
-  td.date {
-    width: 20%;
+    .date {
+      background: @lightest_green;
+      border: 1px solid mix(@light_green, black, 75%);
+      margin: 0.125em;
+    }
 
-    text-align: center;
-    vertical-align: top;
+    tr.days-of-the-week { font-size: 0.875em; }
 
-    a {
+    a.details {
       display: inline-block;
-      box-sizing: border-box;
       width: 100%;
-      background: @light_green;
-      padding: 0.5em;
-
-      border-radius: 0.5em;
-      background: @light_green;
-      color: @darker_green;
+      height: 100%;
+      background: @blood_red;
+      color: @lightest_green;
       text-decoration: none;
 
       &:hover {
-        background: @blood_red;
         color: @neon_green;
       }
     }
-
-    .day {
-      font-size: 2em;
-    }
   }
 
-  td.workouts {
-    .routine-name {
-      margin: 0;
+  .list {
+
+    table {
+      width: 100%;
     }
 
-    tr.lift {
-      &:nth-child(odd) { background: rgba(0, 0, 0, 0.1); }
-      &:nth-child(even) { background: rgba(255, 255, 255, 0.1); }
+    tr {
+      background: @lightest_green;
+    }
 
-      td.lift-name {
-        width: 50%;
+    td.date, td.workouts {
+      padding: 0.5em;
+    }
+
+    td.date {
+      width: 20%;
+
+      text-align: center;
+      vertical-align: top;
+
+      a {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100%;
+        background: @light_green;
+        padding: 0.5em;
+
+        border-radius: 0.5em;
+        background: @light_green;
+        color: @darker_green;
+        text-decoration: none;
+
+        &:hover {
+          background: @blood_red;
+          color: @neon_green;
+        }
       }
 
-      td.weight, td.reps-completed {
-        width: 25%;
-        text-align: center;
+      .day {
+        font-size: 2em;
+      }
+    }
+
+    td.workouts {
+      .routine-name {
+        margin: 0;
+      }
+
+      tr.lift {
+        &:nth-child(odd) { background: rgba(0, 0, 0, 0.1); }
+        &:nth-child(even) { background: rgba(255, 255, 255, 0.1); }
+
+        td.lift-name {
+          width: 50%;
+        }
+
+        td.weight, td.reps-completed {
+          width: 25%;
+          text-align: center;
+        }
       }
     }
   }
