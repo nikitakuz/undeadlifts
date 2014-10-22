@@ -5,19 +5,19 @@
         article
           button.light.large(ng-if="!user.current_workout", ui-sref="user.select-routine")
             .icon(ng-include="'svg/dumbell.html'")
-            .h3-font-size!="New Workout"
+            .value.h3-font-size!="New Workout"
           button.light.large(ng-if="user.current_workout", ui-sref="user.workout")
             .icon(ng-include="'svg/dumbell.html'")
-            .h3-font-size!="Continue Workout"
+            .value.h3-font-size!="Continue Workout"
         article
           button.light.large(ui-sref="user.routines")
             .icon(ng-include="'svg/suitcases.html'", style="transform: scale(1.25, 1.25)")
-            .h3-font-size.monospace!="Routines"
+            .value.h3-font-size!="Routines"
         article
           button.light.large(ui-sref="user.history({year: now.getFullYear(), month: now.getMonth() + 1})")
             .icon(ng-include="'svg/calendar.html'")
-            .h3-font-size.monospace!="History"
+            .value.h3-font-size!="History"
         article
           button.light.large(ui-sref="user.settings")
             .icon(ng-include="'svg/gear.html'")
-            .h3-font-size.monospace!="Settings"
+            .h3-font-size!="Settings"

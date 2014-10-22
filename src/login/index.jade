@@ -26,12 +26,15 @@ section.login
           .input-wrapper(ng-class="{error: passwordError}")
             input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
         article.submit
-          button.dark(ng-click="logIn()", ng-disabled="form.$invalid", ng-bind="logInButtonText")!="Log in"
+          button.dark(ng-click="logIn()", ng-disabled="form.$invalid")
+            .value(ng-bind="logInButtonText")!="Log in"
       article.or-divider
         .divider
         .or-wrapper
           .or!="||"
       article.facebook
-        button.facebook(ng-click="logInWithFacebook()")!="Log in with Facebook"
+        button.facebook(ng-click="logInWithFacebook()")
+          .value!="Log in with Facebook"
     article.create-account
-      a(ui-sref="signup")!="Create your free account"
+      button(ui-sref="signup")
+        .value!="Create your free account"

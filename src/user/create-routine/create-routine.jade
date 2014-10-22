@@ -33,10 +33,13 @@
       article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
         .buttons
           .add-lift
-            button.dark(ng-disabled="routine.name.length === 0", ui-sref="user.create-routine.add-lift")!="Add Lift"
+            button.dark(ng-disabled="routine.name.length === 0", ui-sref="user.create-routine.add-lift")
+              .value!="Add Lift"
           .edit-lifts
-            button.dark(ng-disabled="selected.length === 0", ng-click="editLifts()")!="Edit Lifts"
+            button.dark(ng-disabled="selected.length === 0", ng-click="editLifts()")
+              .value!="Edit Lifts"
           .divider
           .create-routine
-            button.dark(ng-disabled="routine.name.length === 0 || selected.length === 0", ng-click="createRoutine()")!="Create Routine"
+            button.dark(ng-disabled="routine.name.length === 0 || selected.length === 0", ng-click="createRoutine()")
+              .value!="Create Routine"
 .add-lifts(ui-view="")

@@ -17,9 +17,11 @@
         br
         .tac
           .ib.w50.pr05em
-            button.dark(ng-click="cancelChanges()")!="Cancel"
+            button.dark(ng-click="cancelChanges()")
+              .value!="Cancel"
           .ib.w50.pl05em
-            button.dark(ng-click="saveWeight()")!="OK"
+            button.dark(ng-click="saveWeight()")
+              .value!="OK"
         .plates
           br
           h3!="Plate Calculator"

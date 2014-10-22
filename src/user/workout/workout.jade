@@ -38,8 +38,10 @@
                 a.dismiss!="&times;"
       article
         .finish-workout.tac
-          button.dark.large(ng-if="$state.includes('user.workout')", ng-click="finishWorkout()")!="Finish Workout"
-          button.dark.large(ng-if="$state.includes('user.history.details')", ng-click="updateWorkout()")!="Update Workout"
+          button.dark.large(ng-if="$state.includes('user.workout')", ng-click="finishWorkout()")
+            .value!="Finish Workout"
+          button.dark.large(ng-if="$state.includes('user.history.details')", ng-click="updateWorkout()")
+            .value!="Update Workout"
 .rest-timer(ng-if="$state.includes('user.workout')", ng-controller="RestTimerController", ng-show="showRestTimer")
   section
     .heading.h3-font-size

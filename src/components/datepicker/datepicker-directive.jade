@@ -14,6 +14,8 @@ table
         button(ng-if="date.getMonth() === day.getMonth()", ng-class="{'active': isSameDay(day)}", ng-click="setDate(day)", ng-bind="day.getDate()")
 .buttons
   .cancel.ib.w33.pr05em
-    button.dark.w100(ng-click="cancel()")="Cancel"
+    button.dark.w100(ng-click="cancel()")
+      .value="Cancel"
   .change.ib.w66.pl05em
-    button.dark.w100(ng-click="submit()")="Change Date"
+    button.dark.w100(ng-click="submit()")
+      .value="Change Date"

@@ -4,28 +4,31 @@ section.signup
     .quote!="Space monkey."
     .rdquo!="&rdquo;"
   .content
-    form(name="form")
-      article
-        .h3-font-size.tac
-          .brand
-            .icon.vam(ng-include="'svg/zombie-head.html'")
-            .ib.vam.creepster
-              | Undead Lifts
-      article.tac
-        .h3-font-size
-          | Create your free account.
-      article.email
-        label
-          | Email Address
-        .input-wrapper(ng-class="{error: emailError}")
-          input(type="email", name="email", ng-model="email", ng-required="true", focus="focusEmail")
-      article.password
-        label
-          | Create Password
-        .input-wrapper(ng-class="{error: passwordError}")
-          input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
-      article.submit
-        button.dark(ng-click="signup()", ng-disabled="form.$invalid", ng-bind="signupButtonText")!="Create my free account"
+    .form-wrapper
+      form(name="form")
+        article
+          .h3-font-size.tac
+            .brand
+              .icon.vam(ng-include="'svg/zombie-head.html'")
+              .ib.vam.creepster
+                | Undead Lifts
+        article.tac
+          .h3-font-size
+            | Create your free account.
+        article.email
+          label
+            | Email Address
+          .input-wrapper(ng-class="{error: emailError}")
+            input(type="email", name="email", ng-model="email", ng-required="true", focus="focusEmail")
+        article.password
+          label
+            | Create Password
+          .input-wrapper(ng-class="{error: passwordError}")
+            input(type="password", name="password", ng-model="password", ng-required="true", focus="focusPassword")
+        article.submit
+          button.dark
+            .value(ng-click="signup()", ng-disabled="form.$invalid", ng-bind="signupButtonText")!="Create my free account"
 
     article.sign-in
-      a(ui-sref="login")!="Login to your account"
+      button(ui-sref="login")
+        .value!="Login to your account"
