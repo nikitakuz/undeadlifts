@@ -94,7 +94,7 @@ gulp.task('scripts', ['lint'], function() {
     .pipe(gulp.dest(BUILD))
 });
 
-gulp.task('build', ['index', 'lib', 'scripts', 'templates', 'less']);
+gulp.task('build', ['index', 'favicon', 'lib', 'scripts', 'templates', 'less']);
 
 gulp.task('watch', ['build'], function() {
   gulp.watch(paths.scripts, ['scripts']);
