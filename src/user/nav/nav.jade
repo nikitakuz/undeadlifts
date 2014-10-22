@@ -19,11 +19,13 @@ nav#nav(ng-controller="NavController")
     .w20.tar.h3-font-size
       // TODO: Clean up the following. Move some of the logic to controller?
       div
+        a(ng-show="$state.is('user.index') || $state.is('user.settings')", ng-click="logout()")
+          .icon(ng-include="'svg/sign-out.html'")
         a(ng-show="$state.is('user.routines')", ui-sref="user.create-routine")
           .icon(ng-include="'svg/medkit.html'")
         a(ng-show="$state.is('user.history')", ng-click="toggleHistoryView()")
           .icon(ng-include="toggleHistoryViewIcon")
-        a(ng-show="!$state.is('user.routines') && !$state.is('user.history')", ng-click="showMenu = true;")
+        a(ng-show="!$state.is('user.index') && !$state.is('user.settings') && !$state.is('user.routines') && !$state.is('user.history')", ng-click="showMenu = true;")
           .icon(ng-include="'svg/drops.html'")
         .nbsp!="&nbsp;"
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
