@@ -1,13 +1,13 @@
 (function() {
-  var addLift = angular.module('undeadlifts.user.create-routine.add-lift', []);
+  var addLift = angular.module('undeadlifts.user.routines.create.add-lift', []);
 
   addLift.config(
     [         '$stateProvider',
       function($stateProvider) {
-        $stateProvider.state('user.create-routine.add-lift',
+        $stateProvider.state('user.routines.create.add-lift',
           {
             url: '/add-lift',
-            templateUrl: 'user/create-routine/add-lift/add-lift.html',
+            templateUrl: 'user/routines/create/add-lift/add-lift.html',
             controller: 'AddLiftController'
           }
         );
@@ -19,7 +19,7 @@
     [         '$window', '$state', '$rootScope', '$scope', '$filter',
       function($window,   $state,   $rootScope,   $scope,   $filter) {
         if ($rootScope.initialState) {
-          $state.replace('user.create-routine');
+          $state.replace('user.routines.create');
           return;
         }
 

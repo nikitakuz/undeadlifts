@@ -8,7 +8,6 @@
       'undeadlifts.firebase',
       'undeadlifts.user.nav',
       'undeadlifts.user.index',
-      'undeadlifts.user.create-routine',
       'undeadlifts.user.select-routine',
       'undeadlifts.user.workout',
       'undeadlifts.user.routines',

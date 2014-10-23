@@ -1,5 +1,10 @@
 (function() {
-  var routines = angular.module('undeadlifts.user.routines', []);
+  var routines = angular.module('undeadlifts.user.routines',
+    [
+      'ui.router',
+      'undeadlifts.user.routines.create'
+    ]
+  );
 
   routines.config(
     [         '$stateProvider',
@@ -27,5 +32,5 @@
 
       }
     ]
-  )
+  );
 })();

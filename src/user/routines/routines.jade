@@ -1,9 +1,10 @@
-.routines(ng-show="$state.is('user.routines')")
-  section
+.routines
+  section(ng-show="$state.is('user.routines')")
     .content
-      article.routine.tal(ng-repeat="routine in routines")
-        .name.h3-font-size!="{{routine.name}}"
-        .lifts
-          .lift.ib(ng-repeat="lift in routine.lifts")
-            | {{ lift.name }} {{ lift.sets.length }}x{{ lift.sets[0].target }}{{ !$last ? ',&nbsp;' : '' }}
-div(ui-view="")
+      article(ng-repeat="routine in routines")
+        .routine
+          .name.h3-font-size!="{{routine.name}}"
+          .lifts
+            .lift.ib(ng-repeat="lift in routine.lifts")
+              | {{ lift.name }} {{ lift.sets.length }}x{{ lift.sets[0].target }}{{ !$last ? ',&nbsp;' : '' }}
+  div(ui-view="")

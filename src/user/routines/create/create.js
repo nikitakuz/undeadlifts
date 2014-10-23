@@ -1,21 +1,21 @@
 (function() {
-  var createRoutine = angular.module('undeadlifts.user.create-routine',
+  var create = angular.module('undeadlifts.user.routines.create',
     [
       'ui.router',
       'undeadlifts.state-decorator',
       'undeadlifts.lifts-constant',
       'undeadlifts.util',
-      'undeadlifts.user.create-routine.add-lift'
+      'undeadlifts.user.routines.create.add-lift'
     ]
   );
 
-  createRoutine.config(
+  create.config(
     [         '$stateProvider',
       function($stateProvider) {
-        $stateProvider.state('user.create-routine',
+        $stateProvider.state('user.routines.create',
           {
-            url: '/create-routine',
-            templateUrl: 'user/create-routine/create-routine.html',
+            url: '/create',
+            templateUrl: 'user/routines/create/create.html',
             controller: 'CreateRoutineController'
           }
         );
@@ -23,7 +23,7 @@
     ]
   );
 
-  createRoutine.controller('CreateRoutineController',
+  create.controller('CreateRoutineController',
     [         '$window', '$state', '$scope', 'user', 'LIFTS',
       function($window,   $state,   $scope,   user,   LIFTS) {
         $scope.MIN_SETS = 1;
@@ -75,7 +75,7 @@
           if ($window.history && $window.history.back) {
             $window.history.back();
           } else {
-            $state.replace('user.create-routine');
+            $state.replace('user.routines.create');
           }
         };
 
