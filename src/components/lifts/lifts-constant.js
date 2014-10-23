@@ -10,10 +10,16 @@
     { name: 'Close-Grip Bench Press', sets: 3, reps: 5 },
     { name: 'Deadlift',               sets: 1, reps: 5 },
     { name: 'Decline Press',          sets: 5, reps: 5 },
+    { name: 'Hang Clean',             sets: 5, reps: 5 },
+    { name: 'Hang Clean and Press',   sets: 5, reps: 5 },
     { name: 'Incline Press',          sets: 5, reps: 5 },
     { name: 'Overhead Press',         sets: 5, reps: 5 },
     { name: 'Power Clean',            sets: 5, reps: 5 },
+    { name: 'Power Clean and Press',  sets: 5, reps: 5 },
+    { name: 'Push Press',             sets: 5, reps: 5 },
     { name: 'Reverse Wrist Curls',    sets: 5, reps: 5 },
+    { name: 'Split Clean',            sets: 5, reps: 5 },
+    { name: 'Squat Clean',            sets: 5, reps: 5 },
     { name: 'Squat Rack Curls',       sets: 0, reps: 0 }, // Happy Easter
     { name: 'Wrist Curls',            sets: 5, reps: 5 }
   ];
