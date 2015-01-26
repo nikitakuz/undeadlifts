@@ -6,7 +6,7 @@
       function($stateProvider) {
         $stateProvider.state('user.workout.change-weight',
           {
-            url: '/change-weight/:lift',
+            url: '/change-weight/:index',
             templateUrl: 'user/workout/change-weight/change-weight.html',
             controller: 'ChangeWeightController'
           }
@@ -18,10 +18,8 @@
   changeWeight.controller('ChangeWeightController',
     [         '$scope', '$state', '$stateParams', 'workout', 'LIFTS',
       function($scope,   $state,   $stateParams,   workout,   LIFTS) {
-        $scope.lift = $stateParams.lift;
-        $scope.user.working_weight = $scope.user.working_weight || {};
-        $scope.weight = Number($scope.user.working_weight[$scope.lift]);
-        $scope.weight = $scope.weight || LIFTS[$scope.lift.toUpperCase()].STARTING_WEIGHT;
+        $scope.lift = $scope.lifts[$stateParams.index];
+        $scope.weight = $scope.lift.weight;
         $scope.plates = {};
 
         calculatePlates();
@@ -37,16 +35,7 @@
         };
 
         $scope.saveWeight = function() {
-          if ($state.includes('user.workout')) {
-            $scope.user.working_weight[$scope.lift] = $scope.weight;
-            $scope.user.$save();
-          }
-          var lifts = $scope.workout.routine.lifts;
-          for (var i = 0; i < lifts.length; i++) {
-            if (lifts[i].name === $scope.lift) {
-              lifts[i].weight = $scope.weight;
-            }
-          }
+          $scope.lift.weight = $scope.weight;
           $state.back();
         };
 

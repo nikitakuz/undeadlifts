@@ -39,7 +39,7 @@
         );
         $stateProvider.state('user.history.details.change-weight',
           {
-            url: '/change-weight/:lift',
+            url: '/change-weight/:type/:name',
             templateUrl: 'user/workout/change-weight/change-weight.html',
             controller: 'ChangeWeightController'
           }
@@ -81,6 +81,15 @@
           } else {
             saveWorkout();
           }
+
+          $scope.getWeight = function(lift) {
+            for (var i = 0; i < $scope.lifts.length; i++) {
+              if ($scope.lifts[i].type === lift.type && $scope.lifts[i].name === lift.name) {
+                return $scope.lifts[i].weight;
+              }
+            }
+            return 0;
+          };
 
           function changeWorkoutDate(yyyymmdd) {
             user.history[yyyymmdd] = $scope.workout.$id;

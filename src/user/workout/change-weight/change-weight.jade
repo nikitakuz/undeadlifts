@@ -3,7 +3,7 @@
     .content
       .modal-gutter
       .modal-dialog
-        h3!="Change {{ lift }} Weight"
+        h3!="Change {{ lift.name }} Weight"
         .tal
           | If your bar weighs {{ weight_unit === 'kg' ? 20 : 45 }}{{ weight_unit }}, {{ weight }}{{ weight_unit }} means you add {{ (weight - 45) / 2 }}{{ weight_unit }} on each side.
         br

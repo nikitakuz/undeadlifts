@@ -73,11 +73,7 @@
           var lift = $scope.lifts[i];
           if (!lift.weight) {
             user.working_weight = user.working_weight || {};
-            if (user.working_weight[lift.name]) {
-              lift.weight = user.working_weight[lift.name];
-            } else {
-              lift.weight = LIFTS[lift.type.toUpperCase()].STARTING_WEIGHT;
-            }
+            lift.weight = user.working_weight[lift.name] || 0;
             $scope.lifts.$save(i);
           }
 
