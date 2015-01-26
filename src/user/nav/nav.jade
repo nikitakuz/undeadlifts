@@ -14,23 +14,23 @@ nav#nav(ng-controller="NavController")
     .w60.state-title.h3-font-size
       div(ng-switch='' on='$state.current.name')
         span(ng-switch-when="user.index")!="Undead Lifts"
-        span(ng-switch-when="user.routines.create.add-lift")!="Add Lift"
+        span(ng-switch-when="user.routine.create.add-lift")!="Add Lift"
         span(ng-switch-default="")!="{{ getTitle() }}"
     .w20.tar.h3-font-size
       // TODO: Clean up the following. Move some of the logic to controller?
       div
         a(ng-show="$state.is('user.index') || $state.is('user.settings')", ng-click="logout()")
           .icon(ng-include="'svg/sign-out.html'")
-        a(ng-show="$state.is('user.routines')", ui-sref="user.routines.create")
+        a(ng-show="$state.is('user.routine.list')", ui-sref="user.routine.create")
           .icon(ng-include="'svg/medkit.html'")
         a(ng-show="$state.is('user.history')", ng-click="toggleHistoryView()")
           .icon(ng-include="toggleHistoryViewIcon")
-        a(ng-show="!$state.is('user.index') && !$state.is('user.settings') && !$state.is('user.routines') && !$state.is('user.history')", ng-click="showMenu = true;")
+        a(ng-show="!$state.is('user.index') && !$state.is('user.settings') && !$state.is('user.routine.list') && !$state.is('user.history')", ng-click="showMenu = true;")
           .icon(ng-include="'svg/drops.html'")
         .nbsp!="&nbsp;"
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
-        a(ng-if="$state.includes('user.select-routine')", ui-sref="user.routines.create")
+        a(ng-if="$state.includes('user.select-routine')", ui-sref="user.routine.create")
           !="Create Routine"
           .nbsp!="&nbsp;"
         a(ng-if="$state.includes('user.workout')", ui-sref="user.select-routine")

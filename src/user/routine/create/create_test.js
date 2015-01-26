@@ -1,5 +1,5 @@
-describe('undeadlifts.user.routines.create', function() {
-  beforeEach(module('undeadlifts.user.routines.create'));
+describe('undeadlifts.user.routine.create', function() {
+  beforeEach(module('undeadlifts.user.routine.create'));
 
   var $state, $controller, LIFTS, SQUAT, ARNOLD_PRESS;
   var $scope = {

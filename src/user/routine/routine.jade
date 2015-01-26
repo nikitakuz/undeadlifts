@@ -1,4 +1,4 @@
-.create(ng-show="$state.is('user.routines.create')")
+.routine(ng-show="$state.is('user.routine.create')")
   section
     .content
       article
@@ -33,7 +33,7 @@
       article(ng-style="routine.name.length === 0 ? {opacity: 0.333} : {}")
         .buttons
           .add-lift
-            button.dark(ng-disabled="routine.name.length === 0", ui-sref="user.routines.create.add-lift")
+            button.dark(ng-disabled="routine.name.length === 0", ui-sref="user.routine.create.add-lift")
               .value!="Add Lift"
           .edit-lifts
             button.dark(ng-disabled="selected.length === 0", ng-click="editLifts()")

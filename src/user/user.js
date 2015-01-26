@@ -10,7 +10,7 @@
       'undeadlifts.user.index',
       'undeadlifts.user.select-routine',
       'undeadlifts.user.workout',
-      'undeadlifts.user.routines',
+      'undeadlifts.user.routine',
       'undeadlifts.user.history',
       'undeadlifts.user.settings'
     ]
