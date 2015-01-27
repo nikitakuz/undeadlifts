@@ -3,6 +3,7 @@
     [
       'ngSanitize',
       'monospaced.elastic',
+      'angucomplete-alt',
       'firebase',
       'ui.router',
       'undeadlifts.constant',
@@ -91,13 +92,22 @@
     function() {
       return {
         restrict: 'A',
-        scope: { focus: '=focus' },
         link: function(scope, element, attrs) {
-          scope.$watch('focus', function(newVal, oldVal) {
-            if (scope.focus) {
+          var focus = attrs.focus; // the value to watch on the scope
+          var split = focus.split('.'); // may be a nested value
+          scope.$watch(attrs.focus, function(newVal, oldVal) {
+            if (newVal) {
               element[0].focus();
               element[0].select();
-              scope.focus = false;
+              // find the (nested) value in the scope and set to false
+              var object = scope;
+              for (var i = 0; i < split.length; i++) {
+                if (i < split.length - 1) {
+                  object = object[split[i]];
+                } else {
+                  object[split[i]] = false;
+                }
+              }
             }
           });
         }
