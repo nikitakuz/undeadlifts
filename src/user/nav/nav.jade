@@ -30,10 +30,10 @@ nav#nav(ng-controller="NavController")
         .nbsp!="&nbsp;"
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
-        a(ng-if="$state.includes('user.select-routine')", ui-sref="user.routine.create")
+        a(ng-if="$state.includes('user.routine.select')", ui-sref="user.routine.create")
           !="Create Routine"
           .nbsp!="&nbsp;"
-        a(ng-if="$state.includes('user.workout')", ui-sref="user.select-routine")
+        a(ng-if="$state.includes('user.workout')", ui-sref="user.routine.select")
           !="Change Routine"
         a(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')", ng-click="deleteWorkout()")
           !="Delete Workout"

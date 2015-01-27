@@ -7,7 +7,15 @@
         $stateProvider.state('user.routine.create.add-lift',
           {
             url: '/add-lift',
-            templateUrl: 'user/routines/create/add-lift/add-lift.html',
+            templateUrl: 'user/routine/add-lift/add-lift.html',
+            controller: 'AddLiftController'
+          }
+        );
+
+        $stateProvider.state('user.routine.edit.add-lift',
+          {
+            url: '/add-lift',
+            templateUrl: 'user/routine/add-lift/add-lift.html',
             controller: 'AddLiftController'
           }
         );

@@ -1,13 +1,13 @@
 (function() {
-  var selectRoutine = angular.module('undeadlifts.user.select-routine', []);
+  var selectRoutine = angular.module('undeadlifts.user.routine.select', []);
 
   selectRoutine.config(
     [         '$stateProvider',
       function($stateProvider) {
-        $stateProvider.state('user.select-routine',
+        $stateProvider.state('user.routine.select',
           {
             url: '/select-routine',
-            templateUrl: 'user/select-routine/select-routine.html',
+            templateUrl: 'user/routine/select/select.html',
             controller: 'SelectRoutineController'
           }
         );
@@ -48,7 +48,10 @@
           var routine_copy = { name: routine.name, lifts: angular.copy(routine.lifts) };
           var now = new Date();
           var workout = {
-            routine: routine_copy,
+            routine: {
+              name: routine.name,
+              lifts: routineLiftsToWorkoutLifts(routine.lifts)
+            },
             timestamp: now.getTime(),
             yyyymmdd: $filter('date')(now, 'yyyyMMdd')
           };
@@ -62,6 +65,24 @@
             }
           });
         };
+
+        function routineLiftsToWorkoutLifts(routineLifts) {
+          var lifts = [];
+          for (var i = 0; i < routineLifts.length; i++) {
+            var lift = routineLifts[i];
+            var sets = [];
+            for (var j = 0; j < lift.sets; j++) {
+              sets.push({ target: lift.reps });
+            }
+            lifts.push({
+              name: lift.name,
+              type: lift.type || 'Bodyweight',
+              weight: lift.weight || 0,
+              sets: sets
+            });
+          }
+          return lifts;
+        }
       }
     ]
   );

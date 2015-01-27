@@ -36,7 +36,7 @@ html(ng-app="undeadlifts")
                 button.dark.w100(ng-click="confirmModal.clear()")
                   .value(ng-bind="confirmModal.cancelText")
               .confirm.ib.w66.pl05em
-                button.dark.w100(ng-click="confirmCallback()")
+                button.dark.w100(ng-click="confirmModal.confirmCallbackAndClear()")
                   .value(ng-bind="confirmModal.confirmText")
             .modal-gutter
     .footer

@@ -5,5 +5,30 @@
     ]
   );
 
+  edit.config(
+    [         '$stateProvider',
+      function ($stateProvider) {
+        $stateProvider.state('user.routine.edit',
+          {
+            url: '/routine/edit/:id',
+            templateUrl: 'user/routine/routine.html',
+            controller: 'EditRoutineController',
+            resolve: {
+              routine: ['$stateParams', 'auth', 'firebase', function($stateParams, auth, firebase) {
+                return firebase.sync(['users', auth.uid, 'routines', $stateParams.id]).$asObject().$loaded();
+              }]
+            }
+          }
+        );
+      }
+    ]
+  );
 
+  edit.controller('EditRoutineController',
+    [         '$window', '$state', '$scope', 'user', 'routine',
+      function($window, $state, $scope, user, routine) {
+        $scope.routine = routine;
+      }
+    ]
+  );
 })();

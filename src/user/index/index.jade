@@ -3,7 +3,7 @@
     .content
       .index
         article
-          button.light.large(ng-if="!user.current_workout", ui-sref="user.select-routine")
+          button.light.large(ng-if="!user.current_workout", ui-sref="user.routine.select")
             .icon(ng-include="'svg/dumbell.html'")
             .value.h3-font-size!="New Workout"
           button.light.large(ng-if="user.current_workout", ui-sref="user.workout")

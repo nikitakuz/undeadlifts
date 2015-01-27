@@ -73,7 +73,10 @@
           $rootScope.confirmModal.message = options.message || 'Are you sure?';
           $rootScope.confirmModal.cancelText = options.cancelText || 'Cancel';
           $rootScope.confirmModal.confirmText = options.confirmText || 'Confirm';
-          $rootScope.confirmModal.confirmCallback = options.confirmCallback;
+          $rootScope.confirmModal.confirmCallbackAndClear = function() {
+            options.confirmCallback();
+            $rootScope.confirmModal.clear();
+          }
         };
 
         $rootScope.getNumber = function(num) {

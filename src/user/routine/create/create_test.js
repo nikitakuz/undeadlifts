@@ -55,12 +55,12 @@ describe('undeadlifts.user.routine.create', function() {
   });
 
   describe('if a routine has a unique name but and at least one lift is selected', function() {
-    it('createRoutine() should call user.$save() and the state should be replaced with user.select-routine', function() {
+    it('createRoutine() should call user.$save() and the state should be replaced with user.routine.select', function() {
       $scope.routine.name = 'Unique Name';
       $scope.addLift(SQUAT);
       $scope.createRoutine();
       expect(user.$save).toHaveBeenCalled();
-      expect($state.replace).toHaveBeenCalledWith('user.select-routine');
+      expect($state.replace).toHaveBeenCalledWith('user.routine.select');
     });
   });
 

@@ -1,5 +1,5 @@
 describe('undeadlifts.user', function() {
-  beforeEach(module('undeadlifts.user.select-routine'));
+  beforeEach(module('undeadlifts.user.routine.select'));
 
 /*
   describe('true should equal true', function() {

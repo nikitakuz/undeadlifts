@@ -43,14 +43,14 @@
         $scope.restTime = 0;
 
         if (!workout || !workout.routine) {
-          $state.transitionTo('user.select-routine', {}, { location: 'replace' });
+          $state.transitionTo('user.routine.select', {}, { location: 'replace' });
           return;
         }
 
         workout.$bindTo($scope, 'workout').then(function() {
           var valid = validateWorkout($scope.workout);
           if (!valid) {
-            $state.replace('user.select-routine');
+            $state.replace('user.routine.select');
             return;
           }
           $scope.date = util.parseYyyyMmDd($scope.workout.yyyymmdd);
@@ -64,7 +64,7 @@
 
         $scope.$watch('user.current_workout', function(newVal, oldVal) {
           if (!newVal) {
-            $state.replace('user.select-routine');
+            $state.replace('user.routine.select');
           }
         });
 

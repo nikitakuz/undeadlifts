@@ -14,7 +14,7 @@
       function($stateProvider) {
         $stateProvider.state('user.routine.create',
           {
-            url: '/create',
+            url: '/create-routine',
             templateUrl: 'user/routine/routine.html',
             controller: 'CreateRoutineController'
           }
@@ -30,7 +30,6 @@
         $scope.MAX_SETS = 5;
         $scope.MIN_REPS = 1;
         $scope.MAX_REPS = 25;
-
 
         $scope.types = [
           LIFTS.BARBELL,
@@ -59,9 +58,11 @@
         $scope.showMoveControls = false;
 
         $scope.routine = {
-          name: ''
+          name: '',
+          lifts: []
         };
 
+/*
         $scope.addLift = function(lift) {
           if (lift.name === 'Squat Rack Curls') {
             $scope.alert('Curls are not allowed in the squat rack.');
@@ -78,48 +79,34 @@
             $state.replace('user.routine.create');
           }
         };
+*/
 
         $scope.editLifts = function() {
           $scope.showMoveControls = true;
         };
 
         $scope.removeLift = function(lift) {
-          var index = $scope.selected.indexOf(lift);
-          $scope.selected.splice(index, 1);
+          var index = $scope.routine.lifts.indexOf(lift);
+          $scope.routine.lifts.splice(index, 1);
         };
 
         $scope.createRoutine = function() {
           var routine = $scope.routine;
-          var selected = $scope.selected;
-          if (!routine.name || selected.length < 1) {
+          if (!routine.name || routine.lifts.length < 1) {
             return;
           }
           user.routines = user.routines || [];
           var routines = user.routines;
           for (var i = 0; i < routines.length; i++) {
             if (routines[i].name === $scope.routine.name) {
-              $scope.alert('A routine with the this name already exists.');
+              $scope.alert('A routine with this name already exists.');
               return;
             }
           }
 
-          routine.lifts = JSON.parse(JSON.stringify($scope.selected));
-
-          for (var j = 0; j < routine.lifts.length; j++) {
-            var lift = routine.lifts[j];
-            var sets = [];
-            for (var k = 0; k < lift.sets; k++) {
-              sets.push({ target: lift.reps });
-            }
-            routine.lifts[j] = {
-              name: lift.name,
-              type: lift.type,
-              sets: sets
-            };
-          }
           routines.push(routine);
           user.$save();
-          $state.replace('user.select-routine');
+          $state.replace('user.routine.select');
         };
       }
     ]
