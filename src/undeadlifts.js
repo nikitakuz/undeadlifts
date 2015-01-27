@@ -3,7 +3,6 @@
     [
       'ngSanitize',
       'monospaced.elastic',
-      'angucomplete-alt',
       'firebase',
       'ui.router',
       'undeadlifts.constant',
