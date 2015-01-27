@@ -2,6 +2,7 @@
   var undeadlifts = angular.module('undeadlifts',
     [
       'ngSanitize',
+      'monospaced.elastic',
       'firebase',
       'ui.router',
       'undeadlifts.constant',
@@ -116,5 +117,6 @@
           });
         }
       };
-    });
+    }
+  );
 })();

@@ -1,5 +1,5 @@
-@import "../../../constant";
-@import "../../../common-less/mixin";
+@import "../../constant";
+@import "../../common-less/mixin";
 
 .routine {
   @label_font_family: monospace;
@@ -82,6 +82,15 @@
   }
 
   td.name, td.sets-and-reps { font-family: @finger_paint; }
+
+  td.name {
+    textarea {
+      width: 100%;
+      background: none;
+      border: 0;
+      resize: none;
+    }
+  }
 
   td.sets-and-reps {
     .custom-select {
