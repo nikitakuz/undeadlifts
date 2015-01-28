@@ -89,30 +89,23 @@
   );
 
   undeadlifts.directive('focus',
-    function() {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-          var focus = attrs.focus; // the value to watch on the scope
-          var split = focus.split('.'); // may be a nested value
-          scope.$watch(attrs.focus, function(newVal, oldVal) {
-            if (newVal) {
-              element[0].focus();
-              element[0].select();
-              // find the (nested) value in the scope and set to false
-              var object = scope;
-              for (var i = 0; i < split.length; i++) {
-                if (i < split.length - 1) {
-                  object = object[split[i]];
-                } else {
-                  object[split[i]] = false;
-                }
+    [         '$parse',
+      function($parse) {
+        return {
+          restrict: 'A',
+          link: function(scope, element, attrs) {
+            var model = $parse(attrs.focus);
+            scope.$watch(model, function(newVal, oldVal) {
+              if (newVal) {
+                element[0].focus();
+                element[0].select();
+                model.assign(scope, false);
               }
-            }
-          });
-        }
-      };
-    }
+            });
+          }
+        };
+      }
+    ]
   );
 
   undeadlifts.directive('blurOnEnter',
