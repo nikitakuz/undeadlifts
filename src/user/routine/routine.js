@@ -24,16 +24,25 @@
   );
 
   routine.controller('AbstractRoutineController',
-    [         '$state', '$scope',
-      function($state,   $scope) {
+    [         '$state', '$scope', 'LIFTS',
+      function($state,   $scope,   LIFTS) {
+        $scope.LIFTS = [
+          { name: 'Squats' },
+          { name: 'Bench Press' },
+          { name: 'Barbell Row' },
+          { name: 'Push-ups' },
+          { name: 'Pull-ups' }
+        ];
+
+        $scope.lifts = LIFTS;
+
         $scope.addLift = function(routine) {
-          var lift = { name: 'New Lift', sets: 3, reps: 7, isNew: true };
+          var lift = { name: 'New Lift', sets: 3, reps: 7, isNew: { really: { really: { really: true } } } };
           routine.lifts.push(lift);
           setTimeout(function() {
             delete lift.isNew;
           }, 1);
         };
-        // DO NOTHING, JUST EXIST
       }
     ]
   );

@@ -24,19 +24,12 @@
   );
 
   create.controller('CreateRoutineController',
-    [         '$window', '$state', '$scope', 'user', 'LIFTS',
-      function($window,   $state,   $scope,   user,   LIFTS) {
+    [         '$window', '$state', '$scope', 'user',
+      function($window,   $state,   $scope,   user) {
         $scope.MIN_SETS = 1;
         $scope.MAX_SETS = 5;
         $scope.MIN_REPS = 1;
         $scope.MAX_REPS = 25;
-
-        $scope.types = [
-          LIFTS.BARBELL,
-          LIFTS.DUMBBELL,
-          LIFTS.BODYWEIGHT,
-          LIFTS.CABLE
-        ];
 
         $scope.type = false;
         $scope.search = '';
@@ -61,25 +54,6 @@
           name: '',
           lifts: []
         };
-
-/*
-        $scope.addLift = function(lift) {
-          if (lift.name === 'Squat Rack Curls') {
-            $scope.alert('Curls are not allowed in the squat rack.');
-            return;
-          }
-          if ($scope.selected.indexOf(lift) === -1) {
-            lift.type = LIFTS.getTypeName(lift);
-            $scope.selected.push(lift);
-            $scope.type = false;
-          }
-          if ($window.history && $window.history.back) {
-            $window.history.back();
-          } else {
-            $state.replace('user.routine.create');
-          }
-        };
-*/
 
         $scope.editLifts = function() {
           $scope.showMoveControls = true;

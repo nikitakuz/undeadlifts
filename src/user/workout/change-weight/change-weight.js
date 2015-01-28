@@ -16,8 +16,8 @@
   );
 
   changeWeight.controller('ChangeWeightController',
-    [         '$scope', '$state', '$stateParams', 'workout', 'LIFTS',
-      function($scope,   $state,   $stateParams,   workout,   LIFTS) {
+    [         '$scope', '$state', '$stateParams', 'workout',
+      function($scope,   $state,   $stateParams,   workout) {
         $scope.lift = $scope.lifts[$stateParams.index];
         $scope.weight = $scope.lift.weight;
         $scope.plates = {};

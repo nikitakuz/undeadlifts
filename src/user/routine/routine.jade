@@ -18,8 +18,7 @@
             td(colspan="4").name!="No lifts selected."
           tr.lift(ng-repeat="lift in routine.lifts")
             td.name
-              span(ng-show="lift.type === 'Dumbbell' && lift.ambigiousName")!='Dumbell '
-              textarea(rows="1", msd-elastic="", ng-model="lift.name", focus="lift.isNew")
+              textarea(rows="1", msd-elastic="", ng-model="lift.name", focus="lift.isNew", typeahead="name for name in lifts | filter:$viewValue | limitTo:8")
             td.sets-and-reps
               .ib.custom-select
                 a.value(ng-bind="lift.sets")

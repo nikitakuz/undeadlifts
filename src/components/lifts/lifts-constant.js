@@ -73,24 +73,83 @@
     { type: CABLE, name: 'Tricep Pulldowns',       sets: 3, reps: 8 }
   ];
 
+  var array = [];
+
+  for (var i = 0; i < LIFTS.length; i++) {
+    array.push(LIFTS[i].name);
+  }
+
   liftsConstant.constant('LIFTS',
-    {
-      TYPES: {
-        BARBELL: BARBELL,
-        DUMBBELL: DUMBBELL,
-        BODYWEIGHT: BODYWEIGHT,
-        CABLE: CABLE
-      },
-      getTypeName: function(lift) {
-        var types = [this.BARBELL, this.DUMBBELL, this.BODYWEIGHT, this.CABLE];
-        for (var i = 0; i < types.length; i++) {
-          var TYPE = types[i];
-          var LIFTS = TYPE.LIFTS;
-          if (LIFTS.indexOf(lift) > -1) {
-            return TYPE.NAME;
+    ["Arnold Press",
+      "Barbell Curl",
+      "Barbell Row",
+      "Barbell Shrug",
+      "Barbell Wrist Curls",
+      "Bench Press",
+      "Cable Crunches",
+      "Cable Curls",
+      "Cable Row",
+      "Chin Up",
+      "Close-Grip Bench Press",
+      "Close-Grip Dumbbell Press",
+      "Deadlift",
+      "Decline Dumbbell Press",
+      "Decline Fly",
+      "Decline Press",
+      "Dips",
+      "Dumbbell Bench Press",
+      "Dumbbell Curl",
+      "Dumbbell Fly",
+      "Dumbbell Reverse Wrist Curls",
+      "Dumbbell Row",
+      "Dumbbell Shoulder Press",
+      "Dumbbell Shrug",
+      "Dumbbell Wrist Curls",
+      "Goblet Squat", "Hang Clean",
+      "Hang Clean and Press",
+      "Hyperextensions",
+      "Incline Dumbbell Press",
+      "Incline Fly",
+      "Incline Press",
+      "Lateral Raises",
+      "Overhead Press",
+      "Pistol Squat",
+      "Power Clean",
+      "Power Clean and Press",
+      "Pull Over",
+      "Pull Up",
+      "Push Press",
+      "Push Up",
+      "Reverse Barbell Curl",
+      "Reverse Barbell Wrist Curls",
+      "Reverse Cable Curls",
+      "Reverse Crunches",
+      "Reverse Fly",
+      "Split Clean",
+      "Squat",
+      "Squat Clean",
+      "Squat Rack Curls",
+      "Tricep Extensions",
+      "Tricep Pulldowns"]
+    /*
+      {
+        TYPES: {
+          BARBELL: BARBELL,
+          DUMBBELL: DUMBBELL,
+          BODYWEIGHT: BODYWEIGHT,
+          CABLE: CABLE
+        },
+        getTypeName: function(lift) {
+          var types = [this.BARBELL, this.DUMBBELL, this.BODYWEIGHT, this.CABLE];
+          for (var i = 0; i < types.length; i++) {
+            var TYPE = types[i];
+            var LIFTS = TYPE.LIFTS;
+            if (LIFTS.indexOf(lift) > -1) {
+              return TYPE.NAME;
+            }
           }
         }
       }
-    }
+    */
   );
 })();

@@ -5,6 +5,7 @@
       'monospaced.elastic',
       'firebase',
       'ui.router',
+      'ui.bootstrap',
       'undeadlifts.constant',
       'undeadlifts.state-decorator',
       'undeadlifts.templates',
