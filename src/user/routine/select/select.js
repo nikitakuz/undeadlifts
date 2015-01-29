@@ -6,6 +6,7 @@
       function($stateProvider) {
         $stateProvider.state('user.routine.select',
           {
+            title: 'Select Routine',
             url: '/select-routine',
             templateUrl: 'user/routine/select/select.html',
             controller: 'SelectRoutineController'

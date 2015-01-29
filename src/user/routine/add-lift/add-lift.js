@@ -6,6 +6,7 @@
       function($stateProvider) {
         $stateProvider.state('user.routine.create.add-lift',
           {
+            title: 'Add Lift',
             url: '/add-lift',
             templateUrl: 'user/routine/add-lift/add-lift.html',
             controller: 'AddLiftController'
@@ -14,6 +15,7 @@
 
         $stateProvider.state('user.routine.edit.add-lift',
           {
+            title: 'Add Lift',
             url: '/add-lift',
             templateUrl: 'user/routine/add-lift/add-lift.html',
             controller: 'AddLiftController'

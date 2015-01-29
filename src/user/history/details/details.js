@@ -17,6 +17,7 @@
         }
         $stateProvider.state('user.history.details',
           {
+            title: 'History',
             url: '/{day:[0-9]{1,2}}',
             templateUrl: 'user/workout/workout.html',
             controller: 'HistoryWorkoutController',

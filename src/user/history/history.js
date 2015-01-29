@@ -11,6 +11,7 @@
       function($stateProvider) {
         $stateProvider.state('user.history',
           {
+            title: 'History',
             url: '/history/{year:[0-9]{4}}/{month:[0-9]{1,2}}',
             templateUrl: 'user/history/history.html',
             controller: 'HistoryController',

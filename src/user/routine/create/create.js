@@ -14,6 +14,7 @@
       function($stateProvider) {
         $stateProvider.state('user.routine.create',
           {
+            title: 'Create Routine',
             url: '/create-routine',
             templateUrl: 'user/routine/routine.html',
             controller: 'CreateRoutineController'

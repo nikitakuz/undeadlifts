@@ -11,10 +11,6 @@
           $scope.showMenu = false;
         });
 
-        $scope.getTitle = function() {
-          return $state.current.name.split('.')[1].replace(/-/g, ' ');
-        };
-
         $scope.toggleHistoryMode = function() {
           // TODO: write and use this function
         };

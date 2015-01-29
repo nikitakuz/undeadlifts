@@ -10,6 +10,7 @@
       function ($stateProvider) {
         $stateProvider.state('user.routine.edit',
           {
+            title: 'Edit Routine',
             url: '/routine/edit/:id',
             templateUrl: 'user/routine/routine.html',
             controller: 'EditRoutineController',

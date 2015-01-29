@@ -11,6 +11,7 @@
       function ($stateProvider) {
         $stateProvider.state('user.routine.list',
           {
+            title: 'Routines',
             url: '/routines',
             templateUrl: 'user/routine/list/list.html',
             controller: 'RoutineListController',

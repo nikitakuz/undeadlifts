@@ -13,6 +13,7 @@
       function($stateProvider) {
         $stateProvider.state('user.workout',
           {
+            title: 'Workout',
             url: '/workout',
             templateUrl: 'user/workout/workout.html',
             controller: 'WorkoutController',
