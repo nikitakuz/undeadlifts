@@ -5,7 +5,6 @@
       'undeadlifts.state-decorator',
       'undeadlifts.lifts-constant',
       'undeadlifts.util',
-      'undeadlifts.user.routine.create.add-lift'
     ]
   );
 

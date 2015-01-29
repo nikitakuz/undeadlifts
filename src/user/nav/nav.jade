@@ -14,7 +14,6 @@ nav#nav(ng-controller="NavController")
     .w60.state-title.h3-font-size
       div(ng-switch='' on='$state.current.name')
         span(ng-switch-when="user.index")!="Undead Lifts"
-        span(ng-switch-when="user.routine.create.add-lift")!="Add Lift"
         span(ng-switch-default="")!="{{ $state.$current.title || 'Untitled' }}"
     .w20.tar.h3-font-size
       // TODO: Clean up the following. Move some of the logic to controller?
