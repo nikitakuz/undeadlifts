@@ -26,6 +26,30 @@
   create.controller('CreateRoutineController',
     [         '$window', '$state', '$scope', 'user',
       function($window,   $state,   $scope,   user) {
+        $scope.routine = {
+          name: '',
+          lifts: []
+        };
+
+        $scope.nav.menuItems = [ {
+          text: 'Discard Routine',
+          callback: function() {
+            if ($scope.routine.name.length === 0 && $scope.routine.lifts.length === 0) {
+              $state.transitionTo('user.routine.list', {}, {});
+            } else {
+              $scope.confirm({
+                message:
+                  '<div>Are you sure you want to discard this routine?</div>',
+                cancelText: 'Cancel',
+                confirmText: 'Discard',
+                confirmCallback: function() {
+                  $state.transitionTo('user.routine.list', {}, {});
+                }
+              });
+            }
+          }
+        } ];
+
         $scope.MIN_SETS = 1;
         $scope.MAX_SETS = 5;
         $scope.MIN_REPS = 1;
@@ -49,11 +73,6 @@
         $scope.selected = $scope.selected || [];
 
         $scope.showMoveControls = false;
-
-        $scope.routine = {
-          name: '',
-          lifts: []
-        };
 
         $scope.editLifts = function() {
           $scope.showMoveControls = true;
