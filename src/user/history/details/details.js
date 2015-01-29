@@ -109,19 +109,28 @@
           }
         };
 
-        $scope.$on('workout.delete', function() {
-          if (confirm('Are you sure you want to delete this workout?')) {
-            firebase.sync(['workouts', $scope.workout.$id]).$remove();
-            delete user.history[$filter('date')($scope.date, 'yyyyMMdd')];
-            user.$save().then(function() {
-              if ($window.history && $window.history.back) {
-                $window.history.back();
-              } else {
-                replaceStateWithUserHistoryMonth();
+        $scope.nav.menuItems = [ {
+          text: 'Delete Workout',
+          callback: function() {
+            $scope.confirm({
+              message:
+                '<div>Are you sure you want to delete this workout?</div>',
+              cancelText: 'Cancel',
+              confirmText: 'Delete',
+              confirmCallback: function() {
+                firebase.sync(['workouts', $scope.workout.$id]).$remove();
+                delete user.history[$filter('date')($scope.date, 'yyyyMMdd')];
+                user.$save().then(function() {
+                  if ($window.history && $window.history.back) {
+                    $window.history.back();
+                  } else {
+                    replaceStateWithUserHistoryMonth();
+                  }
+                });
               }
             });
           }
-        });
+        } ];
 
         function replaceStateWithUserHistoryMonth() {
           $state.replace('user.history', { year: $stateParams.year, month: $stateParams.month });

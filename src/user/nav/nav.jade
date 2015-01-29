@@ -35,8 +35,6 @@ nav#nav(ng-controller="NavController")
           !="Create Routine"
         a(ng-if="$state.includes('user.workout')", ui-sref="user.routine.select")
           !="Change Routine"
-        a(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')", ng-click="deleteWorkout()")
-          !="Delete Workout"
         a(ui-sref="user.settings")
           !="Settings"
         a(ng-click="logout()")

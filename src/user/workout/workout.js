@@ -150,15 +150,24 @@
           $scope.workout.yyyymmdd = $filter('date')(date, 'yyyyMMdd');
         };
 
-        $scope.$on('workout.delete', function() {
-          if (confirm('Are you sure you want to delete this workout?')) {
-            delete user.current_workout;
-            firebase.sync(['workouts', $scope.workout.$id]).$remove();
-            user.$save().then(function(ref) {
-              $state.replace('user.index');
+        $scope.nav.menuItems = [ {
+          text: 'Delete Workout',
+          callback: function() {
+            $scope.confirm({
+              message:
+                '<div>Are you sure you want to delete this workout?</div>',
+              cancelText: 'Cancel',
+              confirmText: 'Delete',
+              confirmCallback: function() {
+                delete user.current_workout;
+                firebase.sync(['workouts', $scope.workout.$id]).$remove();
+                user.$save().then(function(ref) {
+                  $state.replace('user.index');
+                });
+              }
             });
           }
-        });
+        } ];
       }
     ]
   );
