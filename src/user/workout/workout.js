@@ -154,7 +154,8 @@
         $scope.nav.menuItems = [ {
           text: 'Change Routine',
           callback: function() {
-            $state.transitionTo('user.routine.create', {}, {});
+            // TODO: Change routine should be its own psuedo-state.
+            $state.transitionTo('user.routine.select', {}, {});
           }
         }, {
           text: 'Delete Workout',
