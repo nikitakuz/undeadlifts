@@ -151,6 +151,11 @@
         };
 
         $scope.nav.menuItems = [ {
+          text: 'Change Routine',
+          callback: function() {
+            $state.transitionTo('user.routine.create', {}, {});
+          }
+        }, {
           text: 'Delete Workout',
           callback: function() {
             $scope.confirm({

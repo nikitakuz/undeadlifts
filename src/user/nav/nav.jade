@@ -31,10 +31,6 @@ nav#nav(ng-controller="NavController")
       .hide-menu(ng-show="showMenu", ng-click="showMenu = false;")
       .menu(ng-show="showMenu")
         a(ng-repeat="item in nav.menuItems", ng-bind="item.text", ng-click="item.callback()")
-        a(ng-if="$state.includes('user.routine.select')", ui-sref="user.routine.create")
-          !="Create Routine"
-        a(ng-if="$state.includes('user.workout')", ui-sref="user.routine.select")
-          !="Change Routine"
         a(ui-sref="user.settings")
           !="Settings"
         a(ng-click="logout()")

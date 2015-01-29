@@ -25,6 +25,13 @@
           $scope.routines = [];
         }
 
+        $scope.nav.menuItems = [ {
+          text: 'Create Routine',
+          callback: function() {
+            $state.transitionTo('user.routine.create', {}, {});
+          }
+        } ];
+
         $scope.showConfirm = function(routine) {
           $scope.confirm({
             message:
