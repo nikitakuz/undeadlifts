@@ -28,6 +28,13 @@
     [         '$window', '$state', '$scope', 'user', 'routine',
       function($window, $state, $scope, user, routine) {
         $scope.routine = routine;
+
+        $scope.updateRoutine = function() {
+          var results = $scope.validateRoutine($scope.routine);
+          if (results.valid) {
+            $scope.routine.$save();
+          }
+        }
       }
     ]
   );

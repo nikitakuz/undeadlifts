@@ -43,6 +43,23 @@
             delete lift.isNew;
           }, 1);
         };
+
+        $scope.validateRoutine = function(routine) {
+          var valid = true;
+          var errors = { lifts: new Array(routine.lifts.length) };
+          for (var i = 0; i < routine.lifts.length; i++) {
+            if (routine.lifts[i].name.length < 1) {
+              valid = false;
+              errors.lifts[i] = true;
+            } else {
+              errors.lifts[i] = false;
+            }
+          }
+          return {
+            valid: valid,
+            errors: errors
+          };
+        }
       }
     ]
   );

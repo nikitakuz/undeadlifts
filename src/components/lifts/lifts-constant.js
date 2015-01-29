@@ -73,14 +73,9 @@
     { type: CABLE, name: 'Tricep Pulldowns',       sets: 3, reps: 8 }
   ];
 
-  var array = [];
-
-  for (var i = 0; i < LIFTS.length; i++) {
-    array.push(LIFTS[i].name);
-  }
-
   liftsConstant.constant('LIFTS',
-    ["Arnold Press",
+    [
+      "Arnold Press",
       "Barbell Curl",
       "Barbell Row",
       "Barbell Shrug",
@@ -105,6 +100,7 @@
       "Dumbbell Shoulder Press",
       "Dumbbell Shrug",
       "Dumbbell Wrist Curls",
+      "Face Pulls",
       "Goblet Squat", "Hang Clean",
       "Hang Clean and Press",
       "Hyperextensions",
@@ -130,26 +126,7 @@
       "Squat Clean",
       "Squat Rack Curls",
       "Tricep Extensions",
-      "Tricep Pulldowns"]
-    /*
-      {
-        TYPES: {
-          BARBELL: BARBELL,
-          DUMBBELL: DUMBBELL,
-          BODYWEIGHT: BODYWEIGHT,
-          CABLE: CABLE
-        },
-        getTypeName: function(lift) {
-          var types = [this.BARBELL, this.DUMBBELL, this.BODYWEIGHT, this.CABLE];
-          for (var i = 0; i < types.length; i++) {
-            var TYPE = types[i];
-            var LIFTS = TYPE.LIFTS;
-            if (LIFTS.indexOf(lift) > -1) {
-              return TYPE.NAME;
-            }
-          }
-        }
-      }
-    */
+      "Tricep Pulldowns"
+    ]
   );
 })();
