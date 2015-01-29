@@ -46,6 +46,12 @@
           menuItems: []
         };
 
+        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+          $rootScope.nav = {
+            menuItems: []
+          }
+        });
+
         // Alert Modal
         $rootScope.alertModal = {
           show: false,
