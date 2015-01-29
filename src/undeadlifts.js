@@ -41,6 +41,10 @@
           }
         });
 
+        // Nav object for setting state-dependent menuItems
+        $rootScope.nav = {
+          menuItems: []
+        };
 
         // Alert Modal
         $rootScope.alertModal = {
