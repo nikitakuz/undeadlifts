@@ -33,8 +33,6 @@ nav#nav(ng-controller="NavController")
         a(ng-repeat="item in nav.menuItems", ng-bind="item.text", ng-click="item.callback()")
         a(ng-if="$state.includes('user.routine.select')", ui-sref="user.routine.create")
           !="Create Routine"
-        a(ng-if="$state.includes('user.routine.edit')", ng-click="$broadcast('routine.delete')")
-          !="Delete Routine"
         a(ng-if="$state.includes('user.workout')", ui-sref="user.routine.select")
           !="Change Routine"
         a(ng-if="$state.includes('user.workout') || $state.includes('user.history.details')", ng-click="deleteWorkout()")

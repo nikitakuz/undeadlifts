@@ -29,6 +29,25 @@
       function($window, $state, $scope, user, routine) {
         $scope.routine = routine;
 
+        $scope.nav.menuItems = [ {
+          text: 'Delete Routine',
+          callback: function() {
+            $scope.confirm({
+              message:
+                '<div>Are you sure you want to delete this routine?</div>',
+              cancelText: 'Cancel',
+              confirmText: 'Delete',
+              confirmCallback: function() {
+                $scope.routine.$remove().then(function(ref) {
+                  $state.transitionTo('user.routine.list', {}, {});
+                }, function(err) {
+                  $scope.alert(err);
+                });
+              }
+            });
+          }
+        } ];
+
         $scope.updateRoutine = function() {
           var results = $scope.validateRoutine($scope.routine);
           if (results.valid) {
