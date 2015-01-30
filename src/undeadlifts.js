@@ -27,6 +27,7 @@
       function($window,   $rootScope,   $state,   $stateParams,   $timeout) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
+        $rootScope.sessionStorage = sessionStorage;
 
         $rootScope.appInitialized = false;
         $timeout(function() {

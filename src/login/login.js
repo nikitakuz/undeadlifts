@@ -36,11 +36,11 @@
   login.controller('LoginController',
     [         '$scope', '$state', '$location', 'firebase', 'user',
       function($scope,   $state,   $location,   firebase,   user) {
-        if (sessionStorage.reload) {
-          delete sessionStorage.reload;
+        if (sessionStorage.authenticatingWithFacebook) {
           setTimeout(function() {
+            delete sessionStorage.authenticatingWithFacebook;
             location.reload();
-          }, 1000);
+          }, 1300);
         }
         $scope.focusEmail = false;
         $scope.focusPassword = false;
@@ -55,7 +55,7 @@
         };
 
         $scope.logInWithFacebook = function() {
-          sessionStorage.reload = true;
+          sessionStorage.authenticatingWithFacebook = true;
           firebase.authWithFacebook(onLoginComplete);
         };
 

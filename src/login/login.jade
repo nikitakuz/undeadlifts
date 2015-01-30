@@ -3,7 +3,16 @@ section.login
     .ldquo!="&ldquo;"
     .quote!="You ain't dead yet."
     .rdquo!="&rdquo;"
-  .content
+  .content(ng-show="sessionStorage.authenticatingWithFacebook")
+    .form-wrapper
+      form.tac
+        article
+          .h3-font-size
+            | Authenticating with Facebook.
+        article.tac
+          .h3-font-size
+            | Please wait...
+  .content(ng-hide="sessionStorage.authenticatingWithFacebook")
     .form-wrapper
       form(name="form")
         article
