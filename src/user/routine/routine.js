@@ -59,7 +59,7 @@
             valid: valid,
             errors: errors
           };
-        }
+        };
       }
     ]
   );

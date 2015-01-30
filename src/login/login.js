@@ -14,7 +14,7 @@
         $stateProvider.state('login',
           {
             url: '/login?b',
-            templateUrl: 'login/index.html',
+            templateUrl: 'login/login.html',
             controller: 'LoginController',
             resolve: {
               firebase: ['firebase', function(firebase) {
@@ -40,7 +40,7 @@
           delete sessionStorage.reload;
           setTimeout(function() {
             location.reload();
-          }, 1000)
+          }, 1000);
         }
         $scope.focusEmail = true;
         $scope.focusPassword = false;

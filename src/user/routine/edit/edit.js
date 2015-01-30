@@ -54,7 +54,7 @@
           if (results.valid) {
             $scope.routine.$save();
           }
-        }
+        };
       }
     ]
   );

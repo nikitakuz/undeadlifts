@@ -7,7 +7,7 @@
         $stateProvider.state('signup',
           {
             url: '/signup',
-            templateUrl: 'signup/index.html',
+            templateUrl: 'signup/signup.html',
             controller: 'SignupController',
             resolve: {
               firebase: ['firebase', function(firebase) {

@@ -49,7 +49,7 @@
         $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
           $rootScope.nav = {
             menuItems: []
-          }
+          };
         });
 
         // Alert Modal
@@ -88,7 +88,7 @@
           $rootScope.confirmModal.confirmCallbackAndClear = function() {
             options.confirmCallback();
             $rootScope.confirmModal.clear();
-          }
+          };
         };
 
         $rootScope.getNumber = function(num) {
