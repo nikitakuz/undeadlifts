@@ -42,7 +42,7 @@
             location.reload();
           }, 1000);
         }
-        $scope.focusEmail = true;
+        $scope.focusEmail = false;
         $scope.focusPassword = false;
         $scope.emailError = false;
         $scope.passwordError = false;
