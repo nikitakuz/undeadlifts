@@ -1,23 +1,41 @@
 .index
   section
     .content
-      .index
-        article
-          button.light.large(ng-if="!user.current_workout", ui-sref="user.routine.select")
+      article
+        .link-wrapper(ng-if="!user.current_workout")
+          a.icon-and-text(ui-sref="user.routine.select")
             .icon(ng-include="'svg/dumbell.html'")
-            .value.h3-font-size!="New Workout"
-          button.light.large(ng-if="user.current_workout", ui-sref="user.workout")
+            .text
+              .h2-font-size!="New Workout"
+              .h3-font-size!="Get to down to business."
+          a.options.disabled(ng-include="'svg/drops.html'")
+        .link-wrapper
+          a.icon-and-text(ng-if="user.current_workout", ui-sref="user.workout")
             .icon(ng-include="'svg/dumbell.html'")
-            .value.h3-font-size!="Continue Workout"
-        article
-          button.light.large(ui-sref="user.routine.list")
-            .icon(ng-include="'svg/suitcases.html'", style="transform: scale(1.25, 1.25)")
-            .value.h3-font-size!="Routines"
-        article
-          button.light.large(ui-sref="user.history({year: now.getFullYear(), month: now.getMonth() + 1})")
+            .text
+              .h2-font-size!="Continue Workout"
+              .h3-font-size!="Finish what you started."
+          a.options.disabled(ng-include="'svg/drops.html'")
+        .link-wrapper
+          a.icon-and-text(ui-sref="user.routine.list")
+            .icon(ng-include="'svg/suitcases.html'", style="transform: scale(1.1, 1.1)")
+            .text
+              .h2-font-size!="Routines"
+              .h3-font-size!="Sequences of actions."
+          a.options.disabled(ng-include="'svg/drops.html'")
+        .link-wrapper
+          a.icon-and-text(ui-sref="user.history({year: now.getFullYear(), month: now.getMonth() + 1})")
             .icon(ng-include="'svg/calendar.html'")
-            .value.h3-font-size!="History"
-        article
-          button.light.large(ui-sref="user.settings")
+            .text
+              .h2-font-size!="History"
+              .h3-font-size!="Back to the past."
+          a.options.disabled(ng-include="'svg/drops.html'")
+        .link-wrapper
+          a.icon-and-text(ui-sref="user.settings")
             .icon(ng-include="'svg/gear.html'")
-            .value.h3-font-size!="Settings"
+            .text
+              .h2-font-size!="Settings"
+              .h3-font-size!="Flip a switch or two."
+          a.options.disabled(ng-include="'svg/drops.html'")
+
+
